@@ -10,14 +10,18 @@
 		5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F69B7382992297D003BB9D6 /* AppDelegate.swift */; };
 		5F69B7422992297E003BB9D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F69B7412992297E003BB9D6 /* Assets.xcassets */; };
 		5F69B7452992297E003BB9D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F69B7432992297E003BB9D6 /* LaunchScreen.storyboard */; };
+		ED4204610385B8225B63C90A /* Pods_Baqlajon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05E6A6E13017E6627A4C00B /* Pods_Baqlajon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.release.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.release.xcconfig"; sourceTree = "<group>"; };
 		5F69B7352992297D003BB9D6 /* Baqlajon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baqlajon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F69B7382992297D003BB9D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F69B7412992297E003BB9D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F69B7442992297E003BB9D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F69B7462992297E003BB9D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A05E6A6E13017E6627A4C00B /* Pods_Baqlajon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Baqlajon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF11D6A7C1D7864A59EB2E16 /* Pods-Baqlajon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.debug.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED4204610385B8225B63C90A /* Pods_Baqlajon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,6 +41,8 @@
 			children = (
 				5F69B7372992297D003BB9D6 /* Baqlajon */,
 				5F69B7362992297D003BB9D6 /* Products */,
+				D9D11E8F364B770B55D94D63 /* Pods */,
+				99485BC48923A628CEA0FAED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +65,24 @@
 			path = Baqlajon;
 			sourceTree = "<group>";
 		};
+		99485BC48923A628CEA0FAED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A05E6A6E13017E6627A4C00B /* Pods_Baqlajon.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D9D11E8F364B770B55D94D63 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DF11D6A7C1D7864A59EB2E16 /* Pods-Baqlajon.debug.xcconfig */,
+				4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -65,6 +90,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F69B7492992297E003BB9D6 /* Build configuration list for PBXNativeTarget "Baqlajon" */;
 			buildPhases = (
+				254DB502DD35F02B908D0873 /* [CP] Check Pods Manifest.lock */,
 				5F69B7312992297D003BB9D6 /* Sources */,
 				5F69B7322992297D003BB9D6 /* Frameworks */,
 				5F69B7332992297D003BB9D6 /* Resources */,
@@ -122,6 +148,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		254DB502DD35F02B908D0873 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Baqlajon-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5F69B7312992297D003BB9D6 /* Sources */ = {
@@ -262,6 +313,7 @@
 		};
 		5F69B74A2992297E003BB9D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF11D6A7C1D7864A59EB2E16 /* Pods-Baqlajon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -291,6 +343,7 @@
 		};
 		5F69B74B2992297E003BB9D6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
