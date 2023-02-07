@@ -28,6 +28,11 @@
 		5F9753EF29927E6700DC6667 /* BNTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9753EE29927E6700DC6667 /* BNTextField.swift */; };
 		5F9753F129927FCF00DC6667 /* Ex+UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9753F029927FCF00DC6667 /* Ex+UIStackView.swift */; };
 		5F9753F32992816700DC6667 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9753F22992816700DC6667 /* HomeVC.swift */; };
+		5FB51FE229928FE7005E4FDA /* NET.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE129928FE7005E4FDA /* NET.swift */; };
+		5FB51FE429928FF3005E4FDA /* TEMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE329928FF3005E4FDA /* TEMP.swift */; };
+		5FB51FE629929001005E4FDA /* TEMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE529929001005E4FDA /* TEMP.swift */; };
+		5FB51FE82992900A005E4FDA /* TEMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE72992900A005E4FDA /* TEMP.swift */; };
+		5FB51FEA29929012005E4FDA /* TEMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE929929012005E4FDA /* TEMP.swift */; };
 		ED4204610385B8225B63C90A /* Pods_Baqlajon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05E6A6E13017E6627A4C00B /* Pods_Baqlajon.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +61,11 @@
 		5F9753EE29927E6700DC6667 /* BNTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BNTextField.swift; sourceTree = "<group>"; };
 		5F9753F029927FCF00DC6667 /* Ex+UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex+UIStackView.swift"; sourceTree = "<group>"; };
 		5F9753F22992816700DC6667 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		5FB51FE129928FE7005E4FDA /* NET.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NET.swift; sourceTree = "<group>"; };
+		5FB51FE329928FF3005E4FDA /* TEMP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEMP.swift; sourceTree = "<group>"; };
+		5FB51FE529929001005E4FDA /* TEMP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEMP.swift; sourceTree = "<group>"; };
+		5FB51FE72992900A005E4FDA /* TEMP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEMP.swift; sourceTree = "<group>"; };
+		5FB51FE929929012005E4FDA /* TEMP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEMP.swift; sourceTree = "<group>"; };
 		A05E6A6E13017E6627A4C00B /* Pods_Baqlajon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Baqlajon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF11D6A7C1D7864A59EB2E16 /* Pods-Baqlajon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.debug.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +140,7 @@
 		5F9753C72992641800DC6667 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5FB51FE329928FF3005E4FDA /* TEMP.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -137,6 +148,7 @@
 		5F9753C82992642200DC6667 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5FB51FE529929001005E4FDA /* TEMP.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -144,6 +156,7 @@
 		5F9753C92992642700DC6667 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				5FB51FE72992900A005E4FDA /* TEMP.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -168,6 +181,7 @@
 		5F9753CC2992644800DC6667 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				5FB51FE929929012005E4FDA /* TEMP.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -203,6 +217,7 @@
 		5F9753CF2992698700DC6667 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				5FB51FE129928FE7005E4FDA /* NET.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -351,12 +366,17 @@
 				5F9753E92992778B00DC6667 /* Ex+UIColor.swift in Sources */,
 				5F9753E7299273C000DC6667 /* Ex+UIFont.swift in Sources */,
 				5F9753F129927FCF00DC6667 /* Ex+UIStackView.swift in Sources */,
+				5FB51FEA29929012005E4FDA /* TEMP.swift in Sources */,
+				5FB51FE82992900A005E4FDA /* TEMP.swift in Sources */,
+				5FB51FE629929001005E4FDA /* TEMP.swift in Sources */,
 				5F9753F32992816700DC6667 /* HomeVC.swift in Sources */,
 				5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */,
 				5F9753D129926A1E00DC6667 /* Ex+ChangeViewController.swift in Sources */,
 				5F9753ED29927E3F00DC6667 /* BNButton.swift in Sources */,
+				5FB51FE229928FE7005E4FDA /* NET.swift in Sources */,
 				5F9753EF29927E6700DC6667 /* BNTextField.swift in Sources */,
 				5F9753EB29927DC700DC6667 /* Ex+Label.swift in Sources */,
+				5FB51FE429928FF3005E4FDA /* TEMP.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
