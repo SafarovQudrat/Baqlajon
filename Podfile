@@ -6,5 +6,6 @@ target 'Baqlajon' do
   use_frameworks!
 
   # Pods for Baqlajon
+  pod 'SnapKit'
 
 end
