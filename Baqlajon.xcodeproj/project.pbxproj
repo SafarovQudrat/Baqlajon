@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		413D13A82992460200E9BC2D /* IntroduceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413D13A72992460200E9BC2D /* IntroduceVC.swift */; };
+		413D13AA299259FB00E9BC2D /* SignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413D13A9299259FB00E9BC2D /* SignVC.swift */; };
+		413D13AC29925A3900E9BC2D /* SignVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413D13AB29925A3900E9BC2D /* SignVModel.swift */; };
 		5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F69B7382992297D003BB9D6 /* AppDelegate.swift */; };
 		5F69B7422992297E003BB9D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F69B7412992297E003BB9D6 /* Assets.xcassets */; };
 		5F69B7452992297E003BB9D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F69B7432992297E003BB9D6 /* LaunchScreen.storyboard */; };
@@ -14,14 +17,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.release.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.release.xcconfig"; sourceTree = "<group>"; };
+		413D13A72992460200E9BC2D /* IntroduceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroduceVC.swift; sourceTree = "<group>"; };
+		413D13A9299259FB00E9BC2D /* SignVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignVC.swift; sourceTree = "<group>"; };
+		413D13AB29925A3900E9BC2D /* SignVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignVModel.swift; sourceTree = "<group>"; };
 		5F69B7352992297D003BB9D6 /* Baqlajon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baqlajon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F69B7382992297D003BB9D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F69B7412992297E003BB9D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F69B7442992297E003BB9D6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F69B7462992297E003BB9D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A05E6A6E13017E6627A4C00B /* Pods_Baqlajon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Baqlajon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DF11D6A7C1D7864A59EB2E16 /* Pods-Baqlajon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.debug.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.debug.xcconfig"; sourceTree = "<group>"; };
+		B825F864231A8FC87E1AA8B5 /* Pods-Baqlajon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.release.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.release.xcconfig"; sourceTree = "<group>"; };
+		C12AA02386A967C9E0A62839 /* Pods-Baqlajon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.debug.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,13 +42,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		413D13A3299245C000E9BC2D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		413D13A4299245D700E9BC2D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				413D13AB29925A3900E9BC2D /* SignVModel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		413D13A5299245DE00E9BC2D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		413D13A6299245EF00E9BC2D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				413D13A72992460200E9BC2D /* IntroduceVC.swift */,
+				413D13A9299259FB00E9BC2D /* SignVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		5F69B72C2992297D003BB9D6 = {
 			isa = PBXGroup;
 			children = (
 				5F69B7372992297D003BB9D6 /* Baqlajon */,
 				5F69B7362992297D003BB9D6 /* Products */,
-				D9D11E8F364B770B55D94D63 /* Pods */,
 				99485BC48923A628CEA0FAED /* Frameworks */,
+				EEC63948580674558FE79607 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +95,10 @@
 			isa = PBXGroup;
 			children = (
 				5F69B7382992297D003BB9D6 /* AppDelegate.swift */,
+				413D13A6299245EF00E9BC2D /* Controller */,
+				413D13A5299245DE00E9BC2D /* ViewModel */,
+				413D13A4299245D700E9BC2D /* View */,
+				413D13A3299245C000E9BC2D /* Model */,
 				5F69B7412992297E003BB9D6 /* Assets.xcassets */,
 				5F69B7432992297E003BB9D6 /* LaunchScreen.storyboard */,
 				5F69B7462992297E003BB9D6 /* Info.plist */,
@@ -73,13 +114,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D9D11E8F364B770B55D94D63 /* Pods */ = {
+		EEC63948580674558FE79607 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DF11D6A7C1D7864A59EB2E16 /* Pods-Baqlajon.debug.xcconfig */,
-				4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */,
+				C12AA02386A967C9E0A62839 /* Pods-Baqlajon.debug.xcconfig */,
+				B825F864231A8FC87E1AA8B5 /* Pods-Baqlajon.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -121,7 +161,7 @@
 				};
 			};
 			buildConfigurationList = 5F69B7302992297D003BB9D6 /* Build configuration list for PBXProject "Baqlajon" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -197,7 +237,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				413D13A82992460200E9BC2D /* IntroduceVC.swift in Sources */,
+				413D13AA299259FB00E9BC2D /* SignVC.swift in Sources */,
 				5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */,
+				413D13AC29925A3900E9BC2D /* SignVModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,13 +374,13 @@
 		};
 		5F69B74A2992297E003BB9D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DF11D6A7C1D7864A59EB2E16 /* Pods-Baqlajon.debug.xcconfig */;
+			baseConfigurationReference = C12AA02386A967C9E0A62839 /* Pods-Baqlajon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L4PP343Y28;
+				DEVELOPMENT_TEAM = P3NU6RQYN3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Baqlajon/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -361,13 +404,13 @@
 		};
 		5F69B74B2992297E003BB9D6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */;
+			baseConfigurationReference = B825F864231A8FC87E1AA8B5 /* Pods-Baqlajon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L4PP343Y28;
+				DEVELOPMENT_TEAM = P3NU6RQYN3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Baqlajon/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
