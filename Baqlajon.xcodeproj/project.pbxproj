@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		520DFC652994F379001372C7 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520DFC642994F379001372C7 /* CustomAlert.swift */; };
 		520DFC6729951FBF001372C7 /* PaymentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520DFC6629951FBF001372C7 /* PaymentsVC.swift */; };
 		52198FB2299262FD00D7FFE0 /* MyCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52198FB1299262FD00D7FFE0 /* MyCourses.swift */; };
 		52198FB42992785200D7FFE0 /* MyCourseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52198FB32992785200D7FFE0 /* MyCourseTVC.swift */; };
@@ -40,7 +39,6 @@
 
 /* Begin PBXFileReference section */
 		4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.release.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.release.xcconfig"; sourceTree = "<group>"; };
-		520DFC642994F379001372C7 /* CustomAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		520DFC6629951FBF001372C7 /* PaymentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsVC.swift; sourceTree = "<group>"; };
 		52198FB1299262FD00D7FFE0 /* MyCourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCourses.swift; sourceTree = "<group>"; };
 		52198FB32992785200D7FFE0 /* MyCourseTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCourseTVC.swift; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 			isa = PBXGroup;
 			children = (
 				5FB51FE72992900A005E4FDA /* TEMP.swift */,
-				520DFC642994F379001372C7 /* CustomAlert.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -379,7 +376,6 @@
 				5F9753F32992816700DC6667 /* HomeVC.swift in Sources */,
 				5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */,
 				5228A20A2994C97000833165 /* Ex+NavigationController.swift in Sources */,
-				520DFC652994F379001372C7 /* CustomAlert.swift in Sources */,
 				5F9753D129926A1E00DC6667 /* Ex+ChangeViewController.swift in Sources */,
 				5F9753ED29927E3F00DC6667 /* BNButton.swift in Sources */,
 				5FB51FE229928FE7005E4FDA /* NET.swift in Sources */,
