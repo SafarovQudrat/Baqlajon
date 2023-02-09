@@ -13,7 +13,7 @@ class MyCourses: UIViewController {
         let b = UIButton()
         b.setTitle("All courses", for: .normal)
         b.setTitleColor(.systemGray2, for: .normal)
-        b.titleLabel?.font = UIFont(name: "System", size: 14)
+        b.titleLabel?.font = UIFont(name: "Poppins", size: 14)
         b.layer.borderWidth = 1
         b.layer.cornerRadius = 8
         b.layer.borderColor = UIColor.systemGray2.cgColor
@@ -24,7 +24,7 @@ class MyCourses: UIViewController {
         let b = UIButton()
         b.setTitle("Ongoing", for: .normal)
         b.setTitleColor(.systemGray2, for: .normal)
-        b.titleLabel?.font = UIFont(name: "System", size: 14)
+        b.titleLabel?.font = UIFont(name: "Poppins", size: 14)
         b.layer.borderWidth = 1
         b.layer.cornerRadius = 8
         b.layer.borderColor = UIColor.systemGray2.cgColor
@@ -35,7 +35,7 @@ class MyCourses: UIViewController {
         let b = UIButton()
         b.setTitle("Complate", for: .normal)
         b.setTitleColor(.systemGray2, for: .normal)
-        b.titleLabel?.font = UIFont(name: "System", size: 14)
+        b.titleLabel?.font = UIFont(name: "Poppins", size: 14)
         b.layer.borderWidth = 1
         b.layer.cornerRadius = 8
         b.layer.borderColor = UIColor.systemGray2.cgColor

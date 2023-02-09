@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SnapKit
 class MyCourseTVC: UITableViewCell {
     
     static let identifier = "MyCourseTVC"
@@ -49,7 +49,7 @@ class MyCourseTVC: UITableViewCell {
     }()
     var taskLbl: UILabel = {
        let l = UILabel()
-        l.font = UIFont(name: "System ", size: 11)
+        
         l.text = "10/14"
         return l
     }()
@@ -151,8 +151,9 @@ class MyCourseTVC: UITableViewCell {
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        titleLbl.font = UIFont(name: "System", size: 8)
-        textLbl.font = UIFont(name: "System", size: 12)
+        titleLbl.font = UIFont(name: "Poppins", size: 10)
+        textLbl.font = UIFont(name: "Poppins", size: 14)
+        taskLbl.font = UIFont(name: "Poppins ", size: 14)
         backV.snp.makeConstraints { make in
             make.height.equalTo(12)
             make.width.equalTo(contentView.frame.width/2 - 16)
