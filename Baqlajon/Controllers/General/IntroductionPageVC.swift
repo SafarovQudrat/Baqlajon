@@ -59,6 +59,10 @@ class IntroductionPageVC: UIViewController {
     // MARK: - methods
     
     @objc private func progressDidTap() {
+        if currentIndex == dataModel.count - 1 {
+            ChangeRootViewController.change(with: LoginVC())
+            return
+        }
         let nextIndex = min(currentIndex + 1, dataModel.count - 1)
         let indexPath = IndexPath(item: nextIndex, section: 0)
         currentIndex = nextIndex
@@ -68,8 +72,8 @@ class IntroductionPageVC: UIViewController {
         // progressView Bar indicator animation
         
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        basicAnimation.toValue = 1
-        basicAnimation.duration = 0.25
+        basicAnimation.toValue = 2
+        basicAnimation.duration = 1
         basicAnimation.fillMode = CAMediaTimingFillMode.forwards
         basicAnimation.isRemovedOnCompletion = false
         
@@ -77,15 +81,14 @@ class IntroductionPageVC: UIViewController {
         
         switch currentIndex {
         case 0:
-            print("j")
+            shapeLayer.strokeEnd = CGFloat.pi / 9
         case 1:
-            print("a")
+            shapeLayer.strokeEnd = CGFloat.pi / 5
         case 2:
-            print("b")
+            shapeLayer.strokeEnd = CGFloat.pi / 3
         default:
             break
         }
-        shapeLayer.strokeEnd = CGFloat.pi / 6
         
     }
     
@@ -163,5 +166,35 @@ extension IntroductionPageVC: UICollectionViewDelegate, UICollectionViewDataSour
         let x = targetContentOffset.pointee.x
         
         currentIndex = Int(x / view.frame.width)
+        
+        switch currentIndex {
+        case 0:
+            shapeLayer.strokeEnd = CGFloat.pi / 9
+        case 1:
+            shapeLayer.strokeEnd = CGFloat.pi / 5
+        case 2:
+            shapeLayer.strokeEnd = CGFloat.pi / 3
+        default:
+            break
+        }
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView.collectionViewLayout.invalidateLayout()
+        coordinator.animate { [weak self] _ in
+            self?.collectionView.collectionViewLayout.invalidateLayout()
+            
+            if self?.currentIndex == 0 {
+                self?.collectionView.contentOffset = .zero
+                self?.collectionView.collectionViewLayout.invalidateLayout()
+            } else {
+                self?.collectionView.collectionViewLayout.invalidateLayout()
+                let indexPath = IndexPath(item: self!.currentIndex, section: 0)
+                self?.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            }
+        }
+        
+    }
+    
+    
 }
