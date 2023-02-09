@@ -60,7 +60,7 @@ class IntroductionPageVC: UIViewController {
     
     @objc private func progressDidTap() {
         if currentIndex == dataModel.count - 1 {
-            ChangeRootViewController.change(with: LoginVC())
+            ChangeRootViewController.change(with: MainTabBarController())
             return
         }
         let nextIndex = min(currentIndex + 1, dataModel.count - 1)

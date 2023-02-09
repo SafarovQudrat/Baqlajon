@@ -35,6 +35,7 @@
 		5FB51FE629929001005E4FDA /* IntroductionCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE529929001005E4FDA /* IntroductionCVC.swift */; };
 		5FB51FE82992900A005E4FDA /* TEMP1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE72992900A005E4FDA /* TEMP1.swift */; };
 		5FB51FEA29929012005E4FDA /* IntroductionPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE929929012005E4FDA /* IntroductionPageVC.swift */; };
+		5FF37E8E2994F217000EF015 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF37E8D2994F217000EF015 /* MainTabBarController.swift */; };
 		ED4204610385B8225B63C90A /* Pods_Baqlajon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05E6A6E13017E6627A4C00B /* Pods_Baqlajon.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		5FB51FE529929001005E4FDA /* IntroductionCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionCVC.swift; sourceTree = "<group>"; };
 		5FB51FE72992900A005E4FDA /* TEMP1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEMP1.swift; sourceTree = "<group>"; };
 		5FB51FE929929012005E4FDA /* IntroductionPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionPageVC.swift; sourceTree = "<group>"; };
+		5FF37E8D2994F217000EF015 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		A05E6A6E13017E6627A4C00B /* Pods_Baqlajon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Baqlajon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF11D6A7C1D7864A59EB2E16 /* Pods-Baqlajon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.debug.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				395652A22993AAD800103DBA /* newFiel.swift */,
+				5FF37E8D2994F217000EF015 /* MainTabBarController.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				5F9753EF29927E6700DC6667 /* BNTextField.swift in Sources */,
 				5F9753EB29927DC700DC6667 /* Ex+Label.swift in Sources */,
 				5FB51FE429928FF3005E4FDA /* DataModel.swift in Sources */,
+				5FF37E8E2994F217000EF015 /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
