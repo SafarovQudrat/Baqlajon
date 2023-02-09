@@ -8,16 +8,7 @@
 import UIKit
 import SnapKit
 class HomeVC: UIViewController {
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .appColor(color: .white)
-        
     }
-    
-    
-    
-    
-    
 }
