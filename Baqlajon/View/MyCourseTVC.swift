@@ -71,6 +71,8 @@ class MyCourseTVC: UITableViewCell {
         s.distribution = .fill
         return s
     }()
+    
+    
     lazy var  starImage: UIImageView = {
         let i = UIImageView()
          i.image = UIImage(systemName: "star.fill")
@@ -97,6 +99,8 @@ class MyCourseTVC: UITableViewCell {
         l.text = "6k"
         return l
     }()
+    
+    
     private lazy var starStackV: UIStackView = {
        let s = UIStackView(arrangedSubviews: [starImage,starLbl])
      
@@ -143,6 +147,7 @@ class MyCourseTVC: UITableViewCell {
         s.distribution = .fill
         return s
     }()
+    
     private lazy var myBackV:UIView = {
        let v = UIView()
         v.backgroundColor = .systemBackground

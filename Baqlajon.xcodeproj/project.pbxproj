@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		520DFC652994F379001372C7 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520DFC642994F379001372C7 /* CustomAlert.swift */; };
+		520DFC6729951FBF001372C7 /* PaymentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520DFC6629951FBF001372C7 /* PaymentsVC.swift */; };
 		52198FB2299262FD00D7FFE0 /* MyCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52198FB1299262FD00D7FFE0 /* MyCourses.swift */; };
 		52198FB42992785200D7FFE0 /* MyCourseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52198FB32992785200D7FFE0 /* MyCourseTVC.swift */; };
+		5228A20A2994C97000833165 /* Ex+NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5228A2092994C97000833165 /* Ex+NavigationController.swift */; };
 		5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F69B7382992297D003BB9D6 /* AppDelegate.swift */; };
 		5F69B7422992297E003BB9D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F69B7412992297E003BB9D6 /* Assets.xcassets */; };
 		5F69B7452992297E003BB9D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F69B7432992297E003BB9D6 /* LaunchScreen.storyboard */; };
@@ -37,8 +40,11 @@
 
 /* Begin PBXFileReference section */
 		4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.release.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.release.xcconfig"; sourceTree = "<group>"; };
+		520DFC642994F379001372C7 /* CustomAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		520DFC6629951FBF001372C7 /* PaymentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsVC.swift; sourceTree = "<group>"; };
 		52198FB1299262FD00D7FFE0 /* MyCourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCourses.swift; sourceTree = "<group>"; };
 		52198FB32992785200D7FFE0 /* MyCourseTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCourseTVC.swift; sourceTree = "<group>"; };
+		5228A2092994C97000833165 /* Ex+NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex+NavigationController.swift"; sourceTree = "<group>"; };
 		5F69B7352992297D003BB9D6 /* Baqlajon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baqlajon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F69B7382992297D003BB9D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F69B7412992297E003BB9D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				5FB51FE72992900A005E4FDA /* TEMP.swift */,
+				520DFC642994F379001372C7 /* CustomAlert.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -172,6 +179,7 @@
 			children = (
 				5F9753F22992816700DC6667 /* HomeVC.swift */,
 				52198FB1299262FD00D7FFE0 /* MyCourses.swift */,
+				520DFC6629951FBF001372C7 /* PaymentsVC.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -207,6 +215,7 @@
 				5F9753E82992778B00DC6667 /* Ex+UIColor.swift */,
 				5F9753EA29927DC700DC6667 /* Ex+Label.swift */,
 				5F9753F029927FCF00DC6667 /* Ex+UIStackView.swift */,
+				5228A2092994C97000833165 /* Ex+NavigationController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -365,9 +374,12 @@
 				5F9753E92992778B00DC6667 /* Ex+UIColor.swift in Sources */,
 				5F9753E7299273C000DC6667 /* Ex+UIFont.swift in Sources */,
 				5F9753F129927FCF00DC6667 /* Ex+UIStackView.swift in Sources */,
+				520DFC6729951FBF001372C7 /* PaymentsVC.swift in Sources */,
 				5FB51FE82992900A005E4FDA /* TEMP.swift in Sources */,
 				5F9753F32992816700DC6667 /* HomeVC.swift in Sources */,
 				5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */,
+				5228A20A2994C97000833165 /* Ex+NavigationController.swift in Sources */,
+				520DFC652994F379001372C7 /* CustomAlert.swift in Sources */,
 				5F9753D129926A1E00DC6667 /* Ex+ChangeViewController.swift in Sources */,
 				5F9753ED29927E3F00DC6667 /* BNButton.swift in Sources */,
 				5FB51FE229928FE7005E4FDA /* NET.swift in Sources */,
