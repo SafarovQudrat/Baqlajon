@@ -37,6 +37,16 @@
 		5FB51FE429928FF3005E4FDA /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE329928FF3005E4FDA /* DataModel.swift */; };
 		5FB51FE629929001005E4FDA /* IntroductionCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE529929001005E4FDA /* IntroductionCVC.swift */; };
 		5FB51FEA29929012005E4FDA /* IntroductionPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE929929012005E4FDA /* IntroductionPageVC.swift */; };
+		5FDBE7AF299816EE00F7DB52 /* PaymentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7A8299816EE00F7DB52 /* PaymentsVC.swift */; };
+		5FDBE7B0299816EE00F7DB52 /* ForgotVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7A9299816EE00F7DB52 /* ForgotVC.swift */; };
+		5FDBE7B1299816EE00F7DB52 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7AA299816EE00F7DB52 /* ProfileVC.swift */; };
+		5FDBE7B2299816EE00F7DB52 /* OtpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7AB299816EE00F7DB52 /* OtpVC.swift */; };
+		5FDBE7B3299816EE00F7DB52 /* MyCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7AC299816EE00F7DB52 /* MyCourses.swift */; };
+		5FDBE7B4299816EE00F7DB52 /* IntroduceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7AD299816EE00F7DB52 /* IntroduceVC.swift */; };
+		5FDBE7B5299816EE00F7DB52 /* SignVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7AE299816EE00F7DB52 /* SignVC.swift */; };
+		5FDBE7B72998173B00F7DB52 /* MyCourseTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7B62998173B00F7DB52 /* MyCourseTVC.swift */; };
+		5FDBE7BA2998178100F7DB52 /* Ex+NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7B82998178100F7DB52 /* Ex+NavigationController.swift */; };
+		5FDBE7BB2998178100F7DB52 /* Ex+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7B92998178100F7DB52 /* Ex+UITextField.swift */; };
 		5FF37E8E2994F217000EF015 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF37E8D2994F217000EF015 /* MainTabBarController.swift */; };
 		ED4204610385B8225B63C90A /* Pods_Baqlajon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05E6A6E13017E6627A4C00B /* Pods_Baqlajon.framework */; };
 /* End PBXBuildFile section */
@@ -75,6 +85,16 @@
 		5FB51FE329928FF3005E4FDA /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		5FB51FE529929001005E4FDA /* IntroductionCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionCVC.swift; sourceTree = "<group>"; };
 		5FB51FE929929012005E4FDA /* IntroductionPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionPageVC.swift; sourceTree = "<group>"; };
+		5FDBE7A8299816EE00F7DB52 /* PaymentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentsVC.swift; sourceTree = "<group>"; };
+		5FDBE7A9299816EE00F7DB52 /* ForgotVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotVC.swift; sourceTree = "<group>"; };
+		5FDBE7AA299816EE00F7DB52 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		5FDBE7AB299816EE00F7DB52 /* OtpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtpVC.swift; sourceTree = "<group>"; };
+		5FDBE7AC299816EE00F7DB52 /* MyCourses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCourses.swift; sourceTree = "<group>"; };
+		5FDBE7AD299816EE00F7DB52 /* IntroduceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroduceVC.swift; sourceTree = "<group>"; };
+		5FDBE7AE299816EE00F7DB52 /* SignVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignVC.swift; sourceTree = "<group>"; };
+		5FDBE7B62998173B00F7DB52 /* MyCourseTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCourseTVC.swift; sourceTree = "<group>"; };
+		5FDBE7B82998178100F7DB52 /* Ex+NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Ex+NavigationController.swift"; sourceTree = "<group>"; };
+		5FDBE7B92998178100F7DB52 /* Ex+UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Ex+UITextField.swift"; sourceTree = "<group>"; };
 		5FF37E8D2994F217000EF015 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		A05E6A6E13017E6627A4C00B /* Pods_Baqlajon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Baqlajon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF11D6A7C1D7864A59EB2E16 /* Pods-Baqlajon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.debug.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.debug.xcconfig"; sourceTree = "<group>"; };
@@ -157,6 +177,7 @@
 		5F9753C82992642200DC6667 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5FDBE7B62998173B00F7DB52 /* MyCourseTVC.swift */,
 				5FB51FE529929001005E4FDA /* IntroductionCVC.swift */,
 				3943AC18299675B800D6D75F /* CourseDetailsTVC.swift */,
 				39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */,
@@ -181,6 +202,13 @@
 				39A99FFB2994F33D00D4A09D /* CourseDetailsVC.swift */,
 				39A99FFD2994F72D00D4A09D /* VideoDetailsVC.swift */,
 				5F9753F22992816700DC6667 /* HomeVC.swift */,
+				5FDBE7A9299816EE00F7DB52 /* ForgotVC.swift */,
+				5FDBE7AD299816EE00F7DB52 /* IntroduceVC.swift */,
+				5FDBE7AC299816EE00F7DB52 /* MyCourses.swift */,
+				5FDBE7AB299816EE00F7DB52 /* OtpVC.swift */,
+				5FDBE7A8299816EE00F7DB52 /* PaymentsVC.swift */,
+				5FDBE7AA299816EE00F7DB52 /* ProfileVC.swift */,
+				5FDBE7AE299816EE00F7DB52 /* SignVC.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -217,6 +245,8 @@
 				5F9753E82992778B00DC6667 /* Ex+UIColor.swift */,
 				5F9753EA29927DC700DC6667 /* Ex+Label.swift */,
 				5F9753F029927FCF00DC6667 /* Ex+UIStackView.swift */,
+				5FDBE7B82998178100F7DB52 /* Ex+NavigationController.swift */,
+				5FDBE7B92998178100F7DB52 /* Ex+UITextField.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -371,23 +401,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F9753E92992778B00DC6667 /* Ex+UIColor.swift in Sources */,
+				5FDBE7AF299816EE00F7DB52 /* PaymentsVC.swift in Sources */,
 				39A99FFE2994F72D00D4A09D /* VideoDetailsVC.swift in Sources */,
 				5F9753E7299273C000DC6667 /* Ex+UIFont.swift in Sources */,
 				5F9753F129927FCF00DC6667 /* Ex+UIStackView.swift in Sources */,
 				5FB51FEA29929012005E4FDA /* IntroductionPageVC.swift in Sources */,
 				39A99FFC2994F33D00D4A09D /* CourseDetailsVC.swift in Sources */,
 				5FB51FE629929001005E4FDA /* IntroductionCVC.swift in Sources */,
+				5FDBE7BA2998178100F7DB52 /* Ex+NavigationController.swift in Sources */,
+				5FDBE7B0299816EE00F7DB52 /* ForgotVC.swift in Sources */,
+				5FDBE7B72998173B00F7DB52 /* MyCourseTVC.swift in Sources */,
 				5F9753F32992816700DC6667 /* HomeVC.swift in Sources */,
+				5FDBE7BB2998178100F7DB52 /* Ex+UITextField.swift in Sources */,
+				5FDBE7B4299816EE00F7DB52 /* IntroduceVC.swift in Sources */,
 				5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */,
 				5F9753D129926A1E00DC6667 /* Ex+ChangeViewController.swift in Sources */,
+				5FDBE7B3299816EE00F7DB52 /* MyCourses.swift in Sources */,
 				39A99FFA2994EC7F00D4A09D /* LoginVC.swift in Sources */,
+				5FDBE7B2299816EE00F7DB52 /* OtpVC.swift in Sources */,
 				5F9753ED29927E3F00DC6667 /* BNButton.swift in Sources */,
 				5FB51FE229928FE7005E4FDA /* NET.swift in Sources */,
 				5F9753EF29927E6700DC6667 /* BNTextField.swift in Sources */,
 				39C4E5DB299765F0008AF8AB /* CourseDetailsTableHeaderView.swift in Sources */,
 				3943AC19299675B800D6D75F /* CourseDetailsTVC.swift in Sources */,
+				5FDBE7B5299816EE00F7DB52 /* SignVC.swift in Sources */,
 				5F9753EB29927DC700DC6667 /* Ex+Label.swift in Sources */,
 				5FB51FE429928FF3005E4FDA /* DataModel.swift in Sources */,
+				5FDBE7B1299816EE00F7DB52 /* ProfileVC.swift in Sources */,
 				5FF37E8E2994F217000EF015 /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
