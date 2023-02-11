@@ -12,7 +12,7 @@ class PaymentsVC: UIViewController {
     private lazy var containerV:UIView = {
         let containerView = UIView()
         containerView.backgroundColor = .white
-        containerView.layer.cornerRadius = 10
+        containerView.layer.cornerRadius = 8
         containerView.translatesAutoresizingMaskIntoConstraints = false
         return containerView
     }()
@@ -200,10 +200,21 @@ class PaymentsVC: UIViewController {
         return lastStack
     }()
     
+    private lazy var backImageV:UIImageView = {
+       let i = UIImageView(image: UIImage(named: "PaymentsBack"))
+        i.contentMode = .scaleAspectFill
+        return i
+        
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black.withAlphaComponent(0.6)
+        containerV.backgroundColor = .clear
+        containerV.addSubview(backImageV)
+        backImageV.snp.makeConstraints { make in
+            make.top.bottom.left.right.equalTo(0)
+        }
         backV.addSubview(backImg)
         backImg.snp.makeConstraints { make in
             make.top.bottom.left.right.equalTo(0)

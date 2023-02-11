@@ -160,8 +160,6 @@ class MyCourses: UIViewController {
         s.alignment = .leading
         return s
     }()
-    
-   
     var fireLbl: UILabel = {
        let l = UILabel()
         l.font = .appFont(ofSize: 14)
@@ -169,7 +167,6 @@ class MyCourses: UIViewController {
         l.text = "🔥 Sotib olganlar:"
         return l
     }()
-    
     var countLbl: UILabel = {
        let l = UILabel()
         l.font = .appFont(ofSize: 14,weight: .semiBold)
@@ -177,8 +174,6 @@ class MyCourses: UIViewController {
         l.text = "10000"
         return l
     }()
-    
-  
     lazy var yellowStack:UIStackView = {
        let s = UIStackView(arrangedSubviews: [fireLbl,countLbl])
         s.distribution = .fill
@@ -208,6 +203,7 @@ class MyCourses: UIViewController {
         setUpUi()
         myStackV.isHidden = true
 //        myView.isHidden = true
+//        yellowView.isHidden = true
     }
     
     func setUpUi() {
@@ -227,7 +223,6 @@ class MyCourses: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(MyCourseTVC.self, forCellReuseIdentifier: MyCourseTVC.identifier)
-        
         btnView.addSubview(btnStack)
         btnStack.snp.makeConstraints { make in
             make.right.left.equalToSuperview().inset(16)
@@ -338,6 +333,10 @@ class MyCourses: UIViewController {
     
 
 }
+
+
+
+
 //MARK: UITableViewDelegate,UITableViewDataSource
 extension MyCourses:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
