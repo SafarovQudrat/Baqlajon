@@ -12,6 +12,7 @@
 		413D13AC29925A3900E9BC2D /* SignVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413D13AB29925A3900E9BC2D /* SignVModel.swift */; };
 		4151F0B22993A7CA00DF7550 /* OtpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151F0B12993A7CA00DF7550 /* OtpVC.swift */; };
 		4151F0B62994E15800DF7550 /* ForgotVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151F0B52994E15800DF7550 /* ForgotVC.swift */; };
+		4151F0B829962CF500DF7550 /* Ex+UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151F0B729962CF500DF7550 /* Ex+UITextField.swift */; };
 		5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F69B7382992297D003BB9D6 /* AppDelegate.swift */; };
 		5F69B7422992297E003BB9D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F69B7412992297E003BB9D6 /* Assets.xcassets */; };
 		5F69B7452992297E003BB9D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F69B7432992297E003BB9D6 /* LaunchScreen.storyboard */; };
@@ -45,6 +46,7 @@
 		413D13AB29925A3900E9BC2D /* SignVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignVModel.swift; sourceTree = "<group>"; };
 		4151F0B12993A7CA00DF7550 /* OtpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpVC.swift; sourceTree = "<group>"; };
 		4151F0B52994E15800DF7550 /* ForgotVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotVC.swift; sourceTree = "<group>"; };
+		4151F0B729962CF500DF7550 /* Ex+UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex+UITextField.swift"; sourceTree = "<group>"; };
 		5F69B7352992297D003BB9D6 /* Baqlajon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baqlajon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F69B7382992297D003BB9D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F69B7412992297E003BB9D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				5F9753E82992778B00DC6667 /* Ex+UIColor.swift */,
 				5F9753EA29927DC700DC6667 /* Ex+Label.swift */,
 				5F9753F029927FCF00DC6667 /* Ex+UIStackView.swift */,
+				4151F0B729962CF500DF7550 /* Ex+UITextField.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				5FB51FE82992900A005E4FDA /* Temp.swift in Sources */,
 				5F9753F32992816700DC6667 /* HomeVC.swift in Sources */,
 				4151F0B62994E15800DF7550 /* ForgotVC.swift in Sources */,
+				4151F0B829962CF500DF7550 /* Ex+UITextField.swift in Sources */,
 				413D13A82992460200E9BC2D /* IntroduceVC.swift in Sources */,
 				413D13AA299259FB00E9BC2D /* SignVC.swift in Sources */,
 				5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */,

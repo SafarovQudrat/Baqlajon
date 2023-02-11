@@ -237,14 +237,26 @@ class SignVC: UIViewController {
         view.backgroundColor = .systemBackground
         loginCase()
         navSettings()
+        textFieldDelegates()
     }
+    
+    func textFieldDelegates() {
+        nameTF.addDoneButtonOnKeyboard()
+        pnumberTF.addDoneButtonOnKeyboard()
+        refcodeTF.addDoneButtonOnKeyboard()
+        passwordTF.addDoneButtonOnKeyboard()
+    }
+    
+    
     
     //MARK: Navigation Settings
     func navSettings() {
         if isLogin {
             title = "Let's Sign In"
+            navigationItem.backButtonTitle = "Sign In"
         }else {
             title = "Let's Sign Up"
+            navigationItem.backButtonTitle = "Sign Up"
         }
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.appFont(ofSize: 16,weight: FontWeight.medium)]
     }
@@ -405,6 +417,7 @@ class SignVC: UIViewController {
     
     //MARK: signedUpTapped
     @objc func loginTapped() {
+        
         navigationController?.pushViewController(OtpVC(), animated: true)
     }
     
