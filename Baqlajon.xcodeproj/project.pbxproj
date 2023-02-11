@@ -40,7 +40,6 @@
 		5F9753F129927FCF00DC6667 /* Ex+UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9753F029927FCF00DC6667 /* Ex+UIStackView.swift */; };
 		5F9753F32992816700DC6667 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9753F22992816700DC6667 /* HomeVC.swift */; };
 		5FB51FE229928FE7005E4FDA /* NET.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE129928FE7005E4FDA /* NET.swift */; };
-		5FB51FE82992900A005E4FDA /* Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE72992900A005E4FDA /* Temp.swift */; };
 		5FB51FEA29929012005E4FDA /* TEMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE929929012005E4FDA /* TEMP.swift */; };
 		ED4204610385B8225B63C90A /* Pods_Baqlajon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05E6A6E13017E6627A4C00B /* Pods_Baqlajon.framework */; };
 /* End PBXBuildFile section */
@@ -81,7 +80,6 @@
 		5F9753F029927FCF00DC6667 /* Ex+UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex+UIStackView.swift"; sourceTree = "<group>"; };
 		5F9753F22992816700DC6667 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		5FB51FE129928FE7005E4FDA /* NET.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NET.swift; sourceTree = "<group>"; };
-		5FB51FE72992900A005E4FDA /* Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp.swift; sourceTree = "<group>"; };
 		5FB51FE929929012005E4FDA /* TEMP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEMP.swift; sourceTree = "<group>"; };
 		A05E6A6E13017E6627A4C00B /* Pods_Baqlajon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Baqlajon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B825F864231A8FC87E1AA8B5 /* Pods-Baqlajon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.release.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.release.xcconfig"; sourceTree = "<group>"; };
@@ -175,7 +173,6 @@
 		5F9753C92992642700DC6667 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
-				5FB51FE72992900A005E4FDA /* Temp.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -390,9 +387,7 @@
 				4151F0B22993A7CA00DF7550 /* OtpVC.swift in Sources */,
 				5F9753F129927FCF00DC6667 /* Ex+UIStackView.swift in Sources */,
 				520DFC6729951FBF001372C7 /* PaymentsVC.swift in Sources */,
-				5FB51FE82992900A005E4FDA /* Temp.swift in Sources */,
 				5FB51FEA29929012005E4FDA /* TEMP.swift in Sources */,
-				5FB51FE82992900A005E4FDA /* Temp.swift in Sources */,
 				5F9753F32992816700DC6667 /* HomeVC.swift in Sources */,
 				4151F0B62994E15800DF7550 /* ForgotVC.swift in Sources */,
 				4151F0B829962CF500DF7550 /* Ex+UITextField.swift in Sources */,
