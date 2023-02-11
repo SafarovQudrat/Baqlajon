@@ -18,7 +18,7 @@ class BNButton: UIButton {
         self.backgroundColor = .appColor(color: .mainBlue)
         self.titleLabel?.font = .appFont(ofSize: 16, weight: .medium)
         self.layer.cornerRadius = 8
-        self.setTitleColor(.white, for: .normal)
+        self.setTitleColor(.label, for: .normal)
     }
     
 }
