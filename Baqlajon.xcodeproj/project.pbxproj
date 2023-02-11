@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3943AC19299675B800D6D75F /* CourseDetailsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3943AC18299675B800D6D75F /* CourseDetailsTVC.swift */; };
-		395652A32993AAD800103DBA /* newFiel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395652A22993AAD800103DBA /* newFiel.swift */; };
 		39A99FFA2994EC7F00D4A09D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A99FF92994EC7F00D4A09D /* LoginVC.swift */; };
 		39A99FFC2994F33D00D4A09D /* CourseDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A99FFB2994F33D00D4A09D /* CourseDetailsVC.swift */; };
 		39A99FFE2994F72D00D4A09D /* VideoDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A99FFD2994F72D00D4A09D /* VideoDetailsVC.swift */; };
@@ -44,7 +43,6 @@
 
 /* Begin PBXFileReference section */
 		3943AC18299675B800D6D75F /* CourseDetailsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailsTVC.swift; sourceTree = "<group>"; };
-		395652A22993AAD800103DBA /* newFiel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newFiel.swift; sourceTree = "<group>"; };
 		39A99FF92994EC7F00D4A09D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		39A99FFB2994F33D00D4A09D /* CourseDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailsVC.swift; sourceTree = "<group>"; };
 		39A99FFD2994F72D00D4A09D /* VideoDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailsVC.swift; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 				5F9753C6299263FE00DC6667 /* Resources */,
 				5F9753C72992641800DC6667 /* Model */,
 				5F9753C82992642200DC6667 /* View */,
-				5F9753C92992642700DC6667 /* View Model */,
 				5F9753CA2992643600DC6667 /* Controllers */,
 				5F69B7382992297D003BB9D6 /* AppDelegate.swift */,
 				5F9753E42992700700DC6667 /* Colors.xcassets */,
@@ -165,13 +162,6 @@
 				39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		5F9753C92992642700DC6667 /* View Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "View Model";
 			sourceTree = "<group>";
 		};
 		5F9753CA2992643600DC6667 /* Controllers */ = {
@@ -386,7 +376,6 @@
 				5F9753F129927FCF00DC6667 /* Ex+UIStackView.swift in Sources */,
 				5FB51FEA29929012005E4FDA /* IntroductionPageVC.swift in Sources */,
 				39A99FFC2994F33D00D4A09D /* CourseDetailsVC.swift in Sources */,
-				5FB51FE82992900A005E4FDA /* TEMP1.swift in Sources */,
 				5FB51FE629929001005E4FDA /* IntroductionCVC.swift in Sources */,
 				5F9753F32992816700DC6667 /* HomeVC.swift in Sources */,
 				5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */,
