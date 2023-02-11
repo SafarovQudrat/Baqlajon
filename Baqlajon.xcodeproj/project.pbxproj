@@ -131,7 +131,6 @@
 				5F9753C5299263EE00DC6667 /* Manager */,
 				5F9753C6299263FE00DC6667 /* Resources */,
 				5F9753C82992642200DC6667 /* View */,
-				5F9753C92992642700DC6667 /* View Model */,
 				5F9753CA2992643600DC6667 /* Controllers */,
 				5F69B7382992297D003BB9D6 /* AppDelegate.swift */,
 				5F9753E42992700700DC6667 /* Colors.xcassets */,
@@ -168,13 +167,6 @@
 				413D13AB29925A3900E9BC2D /* SignVModel.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		5F9753C92992642700DC6667 /* View Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "View Model";
 			sourceTree = "<group>";
 		};
 		5F9753CA2992643600DC6667 /* Controllers */ = {
