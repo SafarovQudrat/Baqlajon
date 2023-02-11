@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		395652A32993AAD800103DBA /* newFiel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395652A22993AAD800103DBA /* newFiel.swift */; };
 		39A99FFA2994EC7F00D4A09D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A99FF92994EC7F00D4A09D /* LoginVC.swift */; };
 		5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F69B7382992297D003BB9D6 /* AppDelegate.swift */; };
 		5F69B7422992297E003BB9D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F69B7412992297E003BB9D6 /* Assets.xcassets */; };
@@ -33,14 +32,12 @@
 		5FB51FE229928FE7005E4FDA /* NET.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE129928FE7005E4FDA /* NET.swift */; };
 		5FB51FE429928FF3005E4FDA /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE329928FF3005E4FDA /* DataModel.swift */; };
 		5FB51FE629929001005E4FDA /* IntroductionCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE529929001005E4FDA /* IntroductionCVC.swift */; };
-		5FB51FE82992900A005E4FDA /* TEMP1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE72992900A005E4FDA /* TEMP1.swift */; };
 		5FB51FEA29929012005E4FDA /* IntroductionPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE929929012005E4FDA /* IntroductionPageVC.swift */; };
 		5FF37E8E2994F217000EF015 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF37E8D2994F217000EF015 /* MainTabBarController.swift */; };
 		ED4204610385B8225B63C90A /* Pods_Baqlajon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05E6A6E13017E6627A4C00B /* Pods_Baqlajon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		395652A22993AAD800103DBA /* newFiel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newFiel.swift; sourceTree = "<group>"; };
 		39A99FF92994EC7F00D4A09D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.release.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.release.xcconfig"; sourceTree = "<group>"; };
 		5F69B7352992297D003BB9D6 /* Baqlajon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baqlajon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,7 +66,6 @@
 		5FB51FE129928FE7005E4FDA /* NET.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NET.swift; sourceTree = "<group>"; };
 		5FB51FE329928FF3005E4FDA /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		5FB51FE529929001005E4FDA /* IntroductionCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionCVC.swift; sourceTree = "<group>"; };
-		5FB51FE72992900A005E4FDA /* TEMP1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TEMP1.swift; sourceTree = "<group>"; };
 		5FB51FE929929012005E4FDA /* IntroductionPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionPageVC.swift; sourceTree = "<group>"; };
 		5FF37E8D2994F217000EF015 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		A05E6A6E13017E6627A4C00B /* Pods_Baqlajon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Baqlajon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,7 +158,6 @@
 		5F9753C92992642700DC6667 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
-				5FB51FE72992900A005E4FDA /* TEMP1.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -189,7 +184,6 @@
 		5F9753CC2992644800DC6667 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				395652A22993AAD800103DBA /* newFiel.swift */,
 				5FF37E8D2994F217000EF015 /* MainTabBarController.swift */,
 			);
 			path = Core;
@@ -374,10 +368,8 @@
 			files = (
 				5F9753E92992778B00DC6667 /* Ex+UIColor.swift in Sources */,
 				5F9753E7299273C000DC6667 /* Ex+UIFont.swift in Sources */,
-				395652A32993AAD800103DBA /* newFiel.swift in Sources */,
 				5F9753F129927FCF00DC6667 /* Ex+UIStackView.swift in Sources */,
 				5FB51FEA29929012005E4FDA /* IntroductionPageVC.swift in Sources */,
-				5FB51FE82992900A005E4FDA /* TEMP1.swift in Sources */,
 				5FB51FE629929001005E4FDA /* IntroductionCVC.swift in Sources */,
 				5F9753F32992816700DC6667 /* HomeVC.swift in Sources */,
 				5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */,
