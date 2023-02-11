@@ -43,6 +43,12 @@ extension UIColor {
             withcolor = UIColor(named: "green")!
         case .red:
             withcolor = UIColor(named: "red")!
+        case .ellipseBackground:
+            withcolor = UIColor(named: "ellipse background")!
+        case .ellipseBlue:
+            withcolor = UIColor(named: "ellipse blue")!
+        case .navyBlue:
+            withcolor = UIColor(named: "navy blue")!
         }
         return withcolor 
     }
@@ -65,6 +71,9 @@ enum Colors {
     case yellow
     case green
     case red
+    case ellipseBackground
+    case ellipseBlue
+    case navyBlue
 }
 
 
