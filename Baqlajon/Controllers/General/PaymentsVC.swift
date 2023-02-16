@@ -8,7 +8,7 @@
 import UIKit
 
 class PaymentsVC: UIViewController {
-
+//constants
     private lazy var containerV:UIView = {
         let containerView = UIView()
         containerView.backgroundColor = .white
@@ -52,6 +52,7 @@ class PaymentsVC: UIViewController {
         backImage.contentMode = .scaleAspectFill
         return backImage
     }()
+//    course cost
     private lazy var summLbl:UILabel = {
         let messLbl = UILabel()
         messLbl.text = "99.000"
@@ -74,6 +75,7 @@ class PaymentsVC: UIViewController {
         lblStack.distribution = .fill
         return lblStack
     }()
+//    Referal Code text field
     private lazy var tfView:UIView = {
         let txtView = UIView()
         txtView.backgroundColor = #colorLiteral(red: 0.9719608426, green: 0.9722560048, blue: 0.9813567996, alpha: 1)
@@ -89,6 +91,7 @@ class PaymentsVC: UIViewController {
         txtField.backgroundColor = .clear
         return txtField
     }()
+//    Continue Btn
     private lazy var okBtn:UIButton = {
         let okBtn = UIButton()
         okBtn.backgroundColor = .systemBlue
@@ -102,6 +105,7 @@ class PaymentsVC: UIViewController {
         }
         return okBtn
     }()
+//    Payments Method
     private lazy var paymeV:UIView = {
        let v = UIView()
         v.backgroundColor = #colorLiteral(red: 0.9719608426, green: 0.9722560048, blue: 0.9813567996, alpha: 1)
@@ -157,6 +161,7 @@ class PaymentsVC: UIViewController {
         
         return s
     }()
+//    Payment selection Btn
     private var isPayme:UIButton = {
        let b = UIButton()
         b.addTarget(.none, action: #selector(isPaymeTapped), for: .touchUpInside)
@@ -199,14 +204,14 @@ class PaymentsVC: UIViewController {
       lastStack.axis = .vertical
         return lastStack
     }()
-    
+//    background Image
     private lazy var backImageV:UIImageView = {
        let i = UIImageView(image: UIImage(named: "cornerBack"))
         i.contentMode = .scaleAspectFill
         return i
         
     }()
-    
+//    ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black.withAlphaComponent(0.6)
@@ -261,7 +266,7 @@ class PaymentsVC: UIViewController {
         }
         
     }
-    
+//    Select payments Method btn
     @objc func isPaymeTapped() {
         paymeSIM.image = UIImage(named: "true")
         clickSIM.image = UIImage(named: "false")
@@ -272,13 +277,13 @@ class PaymentsVC: UIViewController {
         clickSIM.image = UIImage(named: "true")
     }
         
-    
+//    Continue Tapped
     @objc func okTapped() {
 
         self.dismiss(animated: false)
         
     }
-    
+//    X tapped
     @objc func cancelTapped() {
         
         self.dismiss(animated: false)

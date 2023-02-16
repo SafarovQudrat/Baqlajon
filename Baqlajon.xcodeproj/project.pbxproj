@@ -12,6 +12,9 @@
 		39A99FFC2994F33D00D4A09D /* CourseDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A99FFB2994F33D00D4A09D /* CourseDetailsVC.swift */; };
 		39A99FFE2994F72D00D4A09D /* VideoDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A99FFD2994F72D00D4A09D /* VideoDetailsVC.swift */; };
 		39C4E5DB299765F0008AF8AB /* CourseDetailsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */; };
+		52770B43299A109C00187F27 /* ProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B42299A109C00187F27 /* ProfileTVC.swift */; };
+		52770B45299A10AD00187F27 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B44299A10AD00187F27 /* ProfileVC.swift */; };
+		52770B47299A19B400187F27 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B46299A19B400187F27 /* EditProfileVC.swift */; };
 		5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F69B7382992297D003BB9D6 /* AppDelegate.swift */; };
 		5F69B7422992297E003BB9D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F69B7412992297E003BB9D6 /* Assets.xcassets */; };
 		5F69B7452992297E003BB9D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F69B7432992297E003BB9D6 /* LaunchScreen.storyboard */; };
@@ -39,7 +42,6 @@
 		5FB51FEA29929012005E4FDA /* IntroductionPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB51FE929929012005E4FDA /* IntroductionPageVC.swift */; };
 		5FDBE7AF299816EE00F7DB52 /* PaymentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7A8299816EE00F7DB52 /* PaymentsVC.swift */; };
 		5FDBE7B0299816EE00F7DB52 /* ForgotVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7A9299816EE00F7DB52 /* ForgotVC.swift */; };
-		5FDBE7B1299816EE00F7DB52 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7AA299816EE00F7DB52 /* ProfileVC.swift */; };
 		5FDBE7B2299816EE00F7DB52 /* OtpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7AB299816EE00F7DB52 /* OtpVC.swift */; };
 		5FDBE7B3299816EE00F7DB52 /* MyCourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7AC299816EE00F7DB52 /* MyCourses.swift */; };
 		5FDBE7B4299816EE00F7DB52 /* IntroduceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDBE7AD299816EE00F7DB52 /* IntroduceVC.swift */; };
@@ -58,6 +60,9 @@
 		39A99FFD2994F72D00D4A09D /* VideoDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailsVC.swift; sourceTree = "<group>"; };
 		39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailsTableHeaderView.swift; sourceTree = "<group>"; };
 		4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.release.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.release.xcconfig"; sourceTree = "<group>"; };
+		52770B42299A109C00187F27 /* ProfileTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTVC.swift; sourceTree = "<group>"; };
+		52770B44299A10AD00187F27 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		52770B46299A19B400187F27 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		5F69B7352992297D003BB9D6 /* Baqlajon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baqlajon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F69B7382992297D003BB9D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F69B7412992297E003BB9D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,7 +92,6 @@
 		5FB51FE929929012005E4FDA /* IntroductionPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionPageVC.swift; sourceTree = "<group>"; };
 		5FDBE7A8299816EE00F7DB52 /* PaymentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentsVC.swift; sourceTree = "<group>"; };
 		5FDBE7A9299816EE00F7DB52 /* ForgotVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotVC.swift; sourceTree = "<group>"; };
-		5FDBE7AA299816EE00F7DB52 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		5FDBE7AB299816EE00F7DB52 /* OtpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtpVC.swift; sourceTree = "<group>"; };
 		5FDBE7AC299816EE00F7DB52 /* MyCourses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCourses.swift; sourceTree = "<group>"; };
 		5FDBE7AD299816EE00F7DB52 /* IntroduceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroduceVC.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				5FDBE7B62998173B00F7DB52 /* MyCourseTVC.swift */,
+				52770B42299A109C00187F27 /* ProfileTVC.swift */,
 				5FB51FE529929001005E4FDA /* IntroductionCVC.swift */,
 				3943AC18299675B800D6D75F /* CourseDetailsTVC.swift */,
 				39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */,
@@ -207,7 +212,8 @@
 				5FDBE7AC299816EE00F7DB52 /* MyCourses.swift */,
 				5FDBE7AB299816EE00F7DB52 /* OtpVC.swift */,
 				5FDBE7A8299816EE00F7DB52 /* PaymentsVC.swift */,
-				5FDBE7AA299816EE00F7DB52 /* ProfileVC.swift */,
+				52770B44299A10AD00187F27 /* ProfileVC.swift */,
+				52770B46299A19B400187F27 /* EditProfileVC.swift */,
 				5FDBE7AE299816EE00F7DB52 /* SignVC.swift */,
 			);
 			path = General;
@@ -400,6 +406,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52770B45299A10AD00187F27 /* ProfileVC.swift in Sources */,
 				5F9753E92992778B00DC6667 /* Ex+UIColor.swift in Sources */,
 				5FDBE7AF299816EE00F7DB52 /* PaymentsVC.swift in Sources */,
 				39A99FFE2994F72D00D4A09D /* VideoDetailsVC.swift in Sources */,
@@ -415,6 +422,7 @@
 				5FDBE7BB2998178100F7DB52 /* Ex+UITextField.swift in Sources */,
 				5FDBE7B4299816EE00F7DB52 /* IntroduceVC.swift in Sources */,
 				5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */,
+				52770B43299A109C00187F27 /* ProfileTVC.swift in Sources */,
 				5F9753D129926A1E00DC6667 /* Ex+ChangeViewController.swift in Sources */,
 				5FDBE7B3299816EE00F7DB52 /* MyCourses.swift in Sources */,
 				39A99FFA2994EC7F00D4A09D /* LoginVC.swift in Sources */,
@@ -427,7 +435,7 @@
 				5FDBE7B5299816EE00F7DB52 /* SignVC.swift in Sources */,
 				5F9753EB29927DC700DC6667 /* Ex+Label.swift in Sources */,
 				5FB51FE429928FF3005E4FDA /* DataModel.swift in Sources */,
-				5FDBE7B1299816EE00F7DB52 /* ProfileVC.swift in Sources */,
+				52770B47299A19B400187F27 /* EditProfileVC.swift in Sources */,
 				5FF37E8E2994F217000EF015 /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

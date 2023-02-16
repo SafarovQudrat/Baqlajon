@@ -7,6 +7,7 @@
 
 import UIKit
 
+@available(iOS 13.4, *)
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -16,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        let vc = UINavigationController(rootViewController: MyCourses())
+        let vc = UINavigationController(rootViewController: EditProfileVC())
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
 

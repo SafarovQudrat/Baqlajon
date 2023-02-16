@@ -12,6 +12,7 @@ class MyCourses: UIViewController {
     
     
 //VARIABLES
+//    category btns
     private var allBtn: UIButton = {
         let b = UIButton()
         b.setTitle("All courses", for: .normal)
@@ -45,6 +46,7 @@ class MyCourses: UIViewController {
         b.addTarget(.none, action: #selector(complTapped), for: .touchUpInside)
         return b
     }()
+//    constants
     private lazy var stackV: UIStackView = {
        let s = UIStackView(arrangedSubviews: [allBtn,onBtn,compBtn])
         s.spacing = 16
@@ -83,6 +85,7 @@ class MyCourses: UIViewController {
         v.backgroundColor = .clear
         return v
     }()
+//    course payment view
     private lazy var imageV:UIImageView = {
        let i = UIImageView(image: UIImage(named: "Background 1"))
         i.contentMode = .scaleAspectFill
@@ -272,7 +275,7 @@ class MyCourses: UIViewController {
 //    SetNavController
     func setNavController() {
         navigationController?.navigationBar.update(backgroundColor: .clear,font: .appFont(ofSize: 16,weight: .medium))
-        let leftBtn = UIBarButtonItem(title: "My courses", style: .done, target: self, action: #selector(leftTapped))
+        let leftBtn = UIBarButtonItem(title: "My courses", style: .done, target: self, action: .none)
         let rightButton = UIBarButtonItem(image:UIImage(named: "alert"), style: .done, target: self, action: #selector(alertTapped))
         navigationItem.rightBarButtonItem = rightButton
         navigationItem.leftBarButtonItem = leftBtn
@@ -280,13 +283,11 @@ class MyCourses: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.2039215686, alpha: 1)
         
     }
-    @objc func leftTapped() {
-        
-    }
+    
     @objc func alertTapped() {
         
     }
-//    Btns
+//    select category btns
     @objc func allTapped() {
         allBtn.layer.borderWidth = 0
         allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
