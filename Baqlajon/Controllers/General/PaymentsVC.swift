@@ -14,6 +14,10 @@ class PaymentsVC: UIViewController {
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 8
         containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.snp.makeConstraints { make in
+            make.height.equalTo(360)
+            make.width.equalTo(344)
+        }
         return containerView
     }()
     private lazy var paymentLbl:UILabel = {
@@ -257,8 +261,8 @@ class PaymentsVC: UIViewController {
         view.addSubview(containerV)
         containerV.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.left.equalTo(16)
-            make.right.equalTo(-16)
+//            make.left.equalTo(16)
+//            make.right.equalTo(-16)
         }
         containerV.transform = .init(scaleX: 0, y: 0)
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.3, options: [.curveEaseOut]) { [self] in

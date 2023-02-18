@@ -12,6 +12,7 @@
 		39A99FFC2994F33D00D4A09D /* CourseDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A99FFB2994F33D00D4A09D /* CourseDetailsVC.swift */; };
 		39A99FFE2994F72D00D4A09D /* VideoDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A99FFD2994F72D00D4A09D /* VideoDetailsVC.swift */; };
 		39C4E5DB299765F0008AF8AB /* CourseDetailsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */; };
+		521AF05D299F3F9F000A2F83 /* BalanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521AF05C299F3F9F000A2F83 /* BalanceVC.swift */; };
 		52770B43299A109C00187F27 /* ProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B42299A109C00187F27 /* ProfileTVC.swift */; };
 		52770B45299A10AD00187F27 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B44299A10AD00187F27 /* ProfileVC.swift */; };
 		52770B47299A19B400187F27 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B46299A19B400187F27 /* EditProfileVC.swift */; };
@@ -60,6 +61,7 @@
 		39A99FFD2994F72D00D4A09D /* VideoDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailsVC.swift; sourceTree = "<group>"; };
 		39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailsTableHeaderView.swift; sourceTree = "<group>"; };
 		4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.release.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.release.xcconfig"; sourceTree = "<group>"; };
+		521AF05C299F3F9F000A2F83 /* BalanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceVC.swift; sourceTree = "<group>"; };
 		52770B42299A109C00187F27 /* ProfileTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTVC.swift; sourceTree = "<group>"; };
 		52770B44299A10AD00187F27 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		52770B46299A19B400187F27 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				52770B44299A10AD00187F27 /* ProfileVC.swift */,
 				52770B46299A19B400187F27 /* EditProfileVC.swift */,
 				5FDBE7AE299816EE00F7DB52 /* SignVC.swift */,
+				521AF05C299F3F9F000A2F83 /* BalanceVC.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				5FB51FEA29929012005E4FDA /* IntroductionPageVC.swift in Sources */,
 				39A99FFC2994F33D00D4A09D /* CourseDetailsVC.swift in Sources */,
 				5FB51FE629929001005E4FDA /* IntroductionCVC.swift in Sources */,
+				521AF05D299F3F9F000A2F83 /* BalanceVC.swift in Sources */,
 				5FDBE7BA2998178100F7DB52 /* Ex+NavigationController.swift in Sources */,
 				5FDBE7B0299816EE00F7DB52 /* ForgotVC.swift in Sources */,
 				5FDBE7B72998173B00F7DB52 /* MyCourseTVC.swift in Sources */,
