@@ -18,6 +18,7 @@
 		52770B47299A19B400187F27 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B46299A19B400187F27 /* EditProfileVC.swift */; };
 		52EDD92829A3534400FDE2D5 /* Ex + URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD92729A3534400FDE2D5 /* Ex + URL.swift */; };
 		52EDD92A29A359EC00FDE2D5 /* CongratulationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD92929A359EC00FDE2D5 /* CongratulationVC.swift */; };
+		52EDD92C29A383C000FDE2D5 /* ShareReferalCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD92B29A383C000FDE2D5 /* ShareReferalCodeVC.swift */; };
 		5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F69B7382992297D003BB9D6 /* AppDelegate.swift */; };
 		5F69B7422992297E003BB9D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F69B7412992297E003BB9D6 /* Assets.xcassets */; };
 		5F69B7452992297E003BB9D6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F69B7432992297E003BB9D6 /* LaunchScreen.storyboard */; };
@@ -69,6 +70,7 @@
 		52770B46299A19B400187F27 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		52EDD92729A3534400FDE2D5 /* Ex + URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex + URL.swift"; sourceTree = "<group>"; };
 		52EDD92929A359EC00FDE2D5 /* CongratulationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulationVC.swift; sourceTree = "<group>"; };
+		52EDD92B29A383C000FDE2D5 /* ShareReferalCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareReferalCodeVC.swift; sourceTree = "<group>"; };
 		5F69B7352992297D003BB9D6 /* Baqlajon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baqlajon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F69B7382992297D003BB9D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F69B7412992297E003BB9D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				52770B46299A19B400187F27 /* EditProfileVC.swift */,
 				5FDBE7AE299816EE00F7DB52 /* SignVC.swift */,
 				521AF05C299F3F9F000A2F83 /* BalanceVC.swift */,
+				52EDD92B29A383C000FDE2D5 /* ShareReferalCodeVC.swift */,
 				52EDD92929A359EC00FDE2D5 /* CongratulationVC.swift */,
 			);
 			path = General;
@@ -419,6 +422,7 @@
 				5F9753E92992778B00DC6667 /* Ex+UIColor.swift in Sources */,
 				5FDBE7AF299816EE00F7DB52 /* PaymentsVC.swift in Sources */,
 				39A99FFE2994F72D00D4A09D /* VideoDetailsVC.swift in Sources */,
+				52EDD92C29A383C000FDE2D5 /* ShareReferalCodeVC.swift in Sources */,
 				5F9753E7299273C000DC6667 /* Ex+UIFont.swift in Sources */,
 				5F9753F129927FCF00DC6667 /* Ex+UIStackView.swift in Sources */,
 				5FB51FEA29929012005E4FDA /* IntroductionPageVC.swift in Sources */,

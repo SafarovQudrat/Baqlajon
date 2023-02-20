@@ -256,6 +256,7 @@ class BalanceVC: UIViewController {
         l.font = .appFont(ofSize: 13)
         l.textColor = .white
         l.text = "30 coins for registration"
+        l.numberOfLines = 0
         return l
     }()
     private lazy var rStack: UIStackView = {
@@ -290,6 +291,7 @@ class BalanceVC: UIViewController {
             l.font = .appFont(ofSize: 13)
             l.textColor = .white
             l.text = "60 coins for buying courses"
+            l.numberOfLines = 0
             return l
         }()
         private lazy var cStack: UIStackView = {
@@ -324,6 +326,7 @@ class BalanceVC: UIViewController {
             l.font = .appFont(ofSize: 13)
             l.textColor = .white
             l.text = "30 coins for invite friends"
+            l.numberOfLines = 0
             return l
         }()
         private lazy var fStack: UIStackView = {
@@ -482,9 +485,10 @@ class BalanceVC: UIViewController {
         s.axis = .vertical
         s.distribution = .fill
         s.alignment = .fill
-        s.spacing = 40
+        s.spacing = 24
         return s
     }()
+  
 //    ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -548,6 +552,8 @@ class BalanceVC: UIViewController {
         self.present(vc, animated: false)
     }
     @objc func shareBtnTapped() {
-        
+        self.navigationItem.backButtonTitle = ""
+        navigationItem.backBarButtonItem?.tintColor = .appColor(color: .black1)
+        self.navigationController?.pushViewController(ShareReferalCodeVC(), animated: true)
     }
 }
