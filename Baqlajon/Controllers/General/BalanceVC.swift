@@ -58,7 +58,6 @@ class BalanceVC: UIViewController {
         }
         return v
     }()
-   
     private lazy var stackV: UIStackView = {
         let s = UIStackView(arrangedSubviews: [titleLbl,btnBackV])
         s.spacing = 16
@@ -109,7 +108,6 @@ class BalanceVC: UIViewController {
         }
         return v
     }()
-    
     //    secondLbl
         private lazy var secondImg: UIImageView = {
            let i = UIImageView()
@@ -144,7 +142,6 @@ class BalanceVC: UIViewController {
             }
             return v
         }()
-    
     //    thirdLbl
         private lazy var thirdImg: UIImageView = {
            let i = UIImageView()
@@ -184,13 +181,304 @@ class BalanceVC: UIViewController {
        let s = UIStackView(arrangedSubviews: [lbl,firstV,secondV,thirdV])
         s.spacing = 16
         s.alignment = .fill
-        s.distribution = .fillEqually
+        s.distribution = .fill
         s.axis = .vertical
         return s
     }()
+    private lazy var lblBackV:UIView = {
+       let v = UIView()
+        v.backgroundColor = .white
+        v.layer.cornerRadius = 8
+        v.addSubview(lblStackV)
+        lblStackV.snp.makeConstraints { make in
+            make.top.left.bottom.right.equalToSuperview().inset(16)
+        }
+        return v
+    }()
+//    CoinsV
+    private lazy var coinBackImageV:UIImageView = {
+       let i = UIImageView()
+        i.image = UIImage(named: "coinsbackImage")
+        return i
+    }()
+//    coinimg
+    private lazy var coinImg: UIImageView = {
+       let v = UIImageView()
+        v.backgroundColor = .clear
+        v.image = UIImage(named: "coin")
+        return v
+    }()
+    lazy var coinLbl: UILabel = {
+       let l = UILabel()
+        l.font = .appFont(ofSize: 18,weight: .medium)
+        l.textColor = .white
+        l.text = "120 coins"
+        return l
+    }()
+    private lazy var coinStack:UIStackView = {
+       let s = UIStackView(arrangedSubviews: [coinImg,coinLbl])
+        s.spacing = 16
+        s.alignment = .fill
+        s.distribution = .fill
+        s.axis = .vertical
+        return s
+    }()
+    private lazy var coinV:UIView = {
+       let v = UIView()
+        v.backgroundColor = .clear
+        v.addSubview(coinStack)
+        coinStack.snp.makeConstraints { make in
+            make.top.left.bottom.right.equalTo(0)
+        }
+        return v
+    }()
+//    rLbl
+    private lazy var rV: UIView = {
+       let v = UIView()
+        v.backgroundColor = #colorLiteral(red: 0.9998322129, green: 0.6800814271, blue: 0.1177380309, alpha: 1)
+        v.snp.makeConstraints { make in
+            make.width.height.equalTo(4)
+        }
+        v.layer.cornerRadius = 2
+        return v
+    }()
+    private lazy var rV2:UIView = {
+       let v = UIView()
+        v.backgroundColor = .clear
+        v.addSubview(rV)
+        rV.snp.makeConstraints { make in
+            make.centerX.centerY.equalTo(v.center)
+        }
+        return v
+    }()
+    private lazy var rLbl: UILabel = {
+       let l = UILabel()
+        l.font = .appFont(ofSize: 13)
+        l.textColor = .white
+        l.text = "30 coins for registration"
+        return l
+    }()
+    private lazy var rStack: UIStackView = {
+       let s = UIStackView(arrangedSubviews: [rV2,rLbl])
+        s.axis = .horizontal
+        s.distribution = .fill
+        s.alignment = .center
+        s.spacing = 4
+        return s
+    }()
+    //    cLbl
+        private lazy var cV: UIView = {
+           let v = UIView()
+            v.backgroundColor = #colorLiteral(red: 0.9998322129, green: 0.6800814271, blue: 0.1177380309, alpha: 1)
+            v.snp.makeConstraints { make in
+                make.width.height.equalTo(4)
+            }
+            v.layer.cornerRadius = 2
+            return v
+        }()
+    private lazy var cV2:UIView = {
+       let v = UIView()
+        v.backgroundColor = .clear
+        v.addSubview(cV)
+        cV.snp.makeConstraints { make in
+            make.center.equalTo(v.center)
+        }
+        return v
+    }()
+        private lazy var cLbl: UILabel = {
+           let l = UILabel()
+            l.font = .appFont(ofSize: 13)
+            l.textColor = .white
+            l.text = "60 coins for buying courses"
+            return l
+        }()
+        private lazy var cStack: UIStackView = {
+           let s = UIStackView(arrangedSubviews: [cV2,cLbl])
+            s.axis = .horizontal
+            s.distribution = .fill
+            s.alignment = .center
+            s.spacing = 4
+            return s
+        }()
+    //    fLbl
+        private lazy var fV: UIView = {
+           let v = UIView()
+            v.backgroundColor = #colorLiteral(red: 0.9998322129, green: 0.6800814271, blue: 0.1177380309, alpha: 1)
+            v.snp.makeConstraints { make in
+                make.width.height.equalTo(4)
+            }
+            v.layer.cornerRadius = 2
+            return v
+        }()
+    private lazy var fV2:UIView = {
+       let v = UIView()
+        v.backgroundColor = .clear
+        v.addSubview(fV)
+        fV.snp.makeConstraints { make in
+            make.center.equalTo(v.center)
+        }
+        return v
+    }()
+        private lazy var fLbl: UILabel = {
+           let l = UILabel()
+            l.font = .appFont(ofSize: 13)
+            l.textColor = .white
+            l.text = "30 coins for invite friends"
+            return l
+        }()
+        private lazy var fStack: UIStackView = {
+           let s = UIStackView(arrangedSubviews: [fV,fLbl])
+            s.axis = .horizontal
+            s.distribution = .fill
+            s.alignment = .center
+            s.spacing = 4
+            return s
+        }()
+    //    btnThings
+        private lazy var buyTBtn: UIButton = {
+            let b = UIButton()
+            b.backgroundColor = .white
+            b.setTitle("To'lov qilish", for: .normal)
+            b.setTitleColor(.appColor(color: .mainBlue), for: .normal)
+            b.titleLabel?.font = .appFont(ofSize: 14)
+            b.addTarget(.none, action: #selector(buyBtnTapped), for: .touchUpInside)
+            return b
+        }()
+        private lazy var btnTBackV: UIView = {
+           let v = UIView()
+            v.backgroundColor = .white
+            v.addSubview(buyTBtn)
+            v.layer.cornerRadius = 6
+            v.snp.makeConstraints { make in
+                make.height.equalTo(30)
+            }
+            buyTBtn.snp.makeConstraints { make in
+                make.top.equalTo(4)
+                make.bottom.equalTo(-4)
+                make.right.equalTo(-12)
+                make.left.equalTo(12)
+            }
+            return v
+        }()
+//  Stack Views
+    private lazy var cLblStack:UIStackView = {
+       let s = UIStackView(arrangedSubviews: [rStack,cStack,fStack,btnTBackV])
+        s.spacing = 10
+        s.alignment = .leading
+        s.distribution = .fill
+        s.axis = .vertical
+        return s
+    }()
+    private lazy var lastCoinStack:UIStackView = {
+       let s = UIStackView(arrangedSubviews: [coinV,cLblStack])
+        s.axis = .horizontal
+        s.distribution = .fill
+        s.alignment = .fill
+        s.spacing  = 37
+        return s
+    }()
+    private lazy var coinBackV: UIView = {
+       let v = UIView()
+        v.backgroundColor = .clear
+       
+        v.snp.makeConstraints { make in
+            make.height.equalTo(167)
+        }
+       
+
+        return v
+    }()
+//    ShareStackV
+    private lazy var shareTLbl: UILabel = {
+        let l = UILabel()
+        l.textColor = #colorLiteral(red: 0, green: 0.6406018734, blue: 0.9510455728, alpha: 1)
+        l.font = .appFont(ofSize: 16,weight: .medium)
+        l.text = "Share and get coins"
+        l.textAlignment = .center
+        return l
+    }()
+    private lazy var shareLbl: UILabel = {
+       let l = UILabel()
+        l.textAlignment = .center
+        l.text = "Share your referral link and earn 5 coins"
+        l.font = .appFont(ofSize: 14)
+        l.textColor = .appColor(color: .black3)
+        return l
+    }()
+    private lazy var shareStack: UIStackView = {
+       let s = UIStackView(arrangedSubviews: [shareTLbl,shareLbl])
+        s.spacing = 8
+        s.alignment = .center
+        s.distribution = .fill
+        s.axis = .vertical
+        return s
+    }()
+//    shareCodeLblV
+    private lazy var docImgBtn: UIButton = {
+       let i = UIButton()
+        i.setImage(UIImage(named: "docImg"), for: .normal)
+        i.tintColor = .appColor(color: .gray3)
+        return i
+    }()
+    private lazy var codeLbl: UILabel = {
+       let l = UILabel()
+        l.textColor = .appColor(color: .black3)
+        l.font = .appFont(ofSize: 14)
+        l.text = "fhdjfkfkfkfllflfl".uppercased()
+        return l
+    }()
+    private lazy var shareBtn:UIButton = {
+       let b = UIButton()
+        b.setTitle("Share", for: .normal)
+        b.titleLabel?.font = .appFont(ofSize: 14,weight: .medium)
+        b.setTitleColor(.systemBlue, for: .normal)
+        b.addTarget(.none, action: #selector(shareBtnTapped), for: .touchUpInside)
+        return b
+    }()
+    private lazy var shareCStack: UIStackView = {
+       let s = UIStackView(arrangedSubviews: [docImgBtn,codeLbl,shareBtn])
+        s.axis = .horizontal
+        s.distribution = .equalCentering
+        s.alignment = .fill
+        s.spacing = 0
+        return s
+    }()
+    private lazy var shareBackV:UIView = {
+       let v = UIView()
+        v.layer.borderColor = UIColor.systemGray5.cgColor
+        v.layer.borderWidth = 1
+        v.layer.cornerRadius = 8
+        v.addSubview(shareCStack)
+        shareCStack.snp.makeConstraints { make in
+            make.top.equalTo(8)
+            make.bottom.equalTo(-8)
+            make.left.equalTo(14)
+            make.right.equalTo(-14)
+        }
+        return v
+    }()
+//    ShareBackV
+    private lazy var shareLastSV: UIStackView = {
+       let s = UIStackView(arrangedSubviews: [shareStack,shareBackV])
+        s.spacing = 24
+        s.alignment = .fill
+        s.distribution = .fill
+        s.axis = .vertical
+        return s
+    }()
+    private lazy var shareBView:UIView = {
+       let v = UIView()
+        v.backgroundColor = .white
+        v.layer.cornerRadius = 8
+        v.snp.makeConstraints { make in
+            make.height.equalTo(150)
+        }
+       
+        return v
+    }()
 //    LastStackV
     private lazy var lastStack: UIStackView = {
-       let s = UIStackView(arrangedSubviews: [backV,lblStackV])
+       let s = UIStackView(arrangedSubviews: [backV,coinBackV,shareBView,lblBackV])
         s.axis = .vertical
         s.distribution = .fill
         s.alignment = .fill
@@ -200,11 +488,34 @@ class BalanceVC: UIViewController {
 //    ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpUI()
+        setNavController()
+        backV.isHidden = true
     }
 //    SetUpUi
     func setUpUI() {
         self.view.backgroundColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
+        coinBackV.addSubview(coinBackImageV)
+        coinBackImageV.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(0)
+        }
+        coinBackV.addSubview(lastCoinStack)
+        lastCoinStack.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(24)
+            make.left.right.equalToSuperview().inset(20)
+
+        }
+        shareBView.addSubview(shareLastSV)
+        shareLastSV.snp.makeConstraints { make in
+            make.top.left.equalTo(16)
+            make.bottom.right.equalTo(-16)
+        }
+        view.addSubview(coinBackV)
+        coinBackV.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(24)
+            make.right.left.equalToSuperview().inset(16)
+        }
         backV.addSubview(backImage)
         backImage.snp.makeConstraints { make in
             make.top.left.right.bottom.equalTo(0)
@@ -220,9 +531,9 @@ class BalanceVC: UIViewController {
             make.right.left.equalToSuperview().inset(16)
             
         }
-        setNavController()
+        
+        
     }
-    
 //    setNavController
     func setNavController() {
         navigationController?.navigationBar.update(backgroundColor: .white,font: .appFont(ofSize: 16,weight: .medium))
@@ -231,13 +542,12 @@ class BalanceVC: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.2039215686, alpha: 1)
         
     }
-    
-    
     @objc func buyBtnTapped() {
         let vc = PaymentsVC()
        vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: false)
     }
-    
-
+    @objc func shareBtnTapped() {
+        
+    }
 }
