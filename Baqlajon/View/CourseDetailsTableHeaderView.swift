@@ -7,19 +7,29 @@
 
 import UIKit
 
+protocol CourseDetailsTableHeaderViewDelegate: AnyObject {
+    func videosButtonDidTap()
+    func reviewsButtonDidTap()
+}
+
 class CourseDetailsTableHeaderView: UIView {
     
     private var screenSize: CGRect { UIScreen.main.bounds }
     
+    weak var delegate: CourseDetailsTableHeaderViewDelegate?
+    
+    // MARK: - Properties
+    
     private let courseImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "courseImage")
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "3D Design Illustration"
         label.font = UIFont.appFont(ofSize: 20, weight: FontWeight.medium)
@@ -30,7 +40,8 @@ class CourseDetailsTableHeaderView: UIView {
         return label
     }()
     
-    let descriptionLabel: UILabel = {
+    
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "This course will help others. Excepteur sint occaecat cupidatat non More..."
         label.font = UIFont.appFont(ofSize: 16, weight: FontWeight.regular)
@@ -168,8 +179,7 @@ class CourseDetailsTableHeaderView: UIView {
     private lazy var courseMiniInfoStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [videoStackView, courseHoursStackView, reviewsStackView])
         stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -204,8 +214,12 @@ class CourseDetailsTableHeaderView: UIView {
     
     
     private lazy var videosButton: UIButton = {
-        let button = BNButton(title: "Videos")
-        button.configure()
+        let button = UIButton()
+        button.layer.cornerRadius = 8
+        button.titleLabel?.font = .appFont(ofSize: 16, weight: .medium)
+        button.backgroundColor = UIColor.appColor(color: Colors.mainBlue)
+        button.setTitle("Videos", for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(videosButtonDidTap), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -213,10 +227,10 @@ class CourseDetailsTableHeaderView: UIView {
     
     
     private lazy var reviewsButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
         button.setTitle("Reviews", for: .normal)
         button.layer.cornerRadius = 8
-        button.backgroundColor = .systemBackground
+        button.backgroundColor = UIColor.appColor(color: Colors.background)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.appColor(color: Colors.gray2).cgColor
         button.setTitleColor(UIColor.appColor(color: Colors.gray2), for: .normal)
@@ -237,24 +251,52 @@ class CourseDetailsTableHeaderView: UIView {
     }()
     
     
+    
+    // MARK: - Methods
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemBackground
+        backgroundColor = UIColor.appColor(color: Colors.background)
         configureConstraints()
         
     }
     
     
     @objc private func videosButtonDidTap() {
+        videosButton.setTitleColor(.white, for: .normal)
+        videosButton.backgroundColor = UIColor.appColor(color: Colors.mainBlue)
+        videosButton.layer.borderWidth = 0
         
+        reviewsButton.setTitleColor(.appColor(color: Colors.gray2), for: .normal)
+        reviewsButton.backgroundColor = UIColor.appColor(color: Colors.background)
+        reviewsButton.layer.borderWidth = 1
+        reviewsButton.layer.borderColor = UIColor.appColor(color: Colors.gray2).cgColor
+        
+        delegate?.videosButtonDidTap()
     }
     
     
     @objc private func reviewsButtonDidTap() {
+        reviewsButton.setTitleColor(.white, for: .normal)
+        reviewsButton.backgroundColor = UIColor.appColor(color: Colors.mainBlue)
+        reviewsButton.layer.borderWidth = 0
         
+        videosButton.setTitleColor(.appColor(color: Colors.gray2), for: .normal)
+        videosButton.backgroundColor = UIColor.appColor(color: Colors.background)
+        videosButton.layer.borderWidth = 1
+        videosButton.layer.borderColor = UIColor.appColor(color: Colors.gray2).cgColor
+        
+        delegate?.reviewsButtonDidTap()
     }
     
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Setup Layout
     
     private func configureConstraints() {
         
@@ -263,7 +305,7 @@ class CourseDetailsTableHeaderView: UIView {
             courseImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             courseImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             courseImageView.widthAnchor.constraint(equalToConstant: screenSize.width - 32),
-            courseImageView.heightAnchor.constraint(equalToConstant: (screenSize.width - 32) / 16 * 9)
+            courseImageView.heightAnchor.constraint(equalToConstant: (screenSize.width) / 16 * 9)
         ])
         addSubview(courseImageView)
         NSLayoutConstraint.activate([
@@ -323,11 +365,5 @@ class CourseDetailsTableHeaderView: UIView {
         ])
         
     }
-    
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     
 }

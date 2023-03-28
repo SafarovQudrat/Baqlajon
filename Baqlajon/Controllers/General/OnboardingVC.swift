@@ -68,16 +68,14 @@ class OnboardingVC: UIViewController {
     }
     
     @objc func loginTapped() {
-        let vc = SignVC()
-        vc.isLogin = true
-        self.navigationController?.pushViewController(SignVC(), animated: true)
+        
+        self.navigationController?.pushViewController(LoginVC(), animated: true)
         
     }
 
     @objc func signUpTapped() {
-        let vc = SignVC()
-        vc.isLogin = false
-        self.navigationController?.pushViewController(SignVC(), animated: true)
+       
+        self.navigationController?.pushViewController(SignUpVC(), animated: true)
         
     }
 

@@ -216,4 +216,20 @@ extension ProfileVC:UITableViewDataSource,UITableViewDelegate {
         
         return cell
     }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == self.tableView {
+            if indexPath.row == 0 {
+                navigationController?.pushViewController(PaymentHistoryViewController(), animated: true)
+            } else if indexPath.row == 1 {
+                navigationController?.pushViewController(ChangeLanguageViewController(), animated: true)
+            } 
+        } else {
+            if indexPath.row == 0 {
+                navigationController?.pushViewController(AboutUsViewController(), animated: true)
+            }
+        }
+    }
+    
 }

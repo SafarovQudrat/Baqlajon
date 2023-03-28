@@ -98,12 +98,19 @@ class ProfileTVC: UITableViewCell {
         img.image = data.img
         lbl.text = data.title
         textLbl.text = data.text ?? ""
+        
         if  data.isSwitchON  {
             mySwitch.isHidden = false
             btn.isHidden = true
         } else {
             mySwitch.isHidden = true
             btn.isHidden = false
+        }
+        if mySwitch.isOn {
+            
+            
+        } else {
+           
         }
        
     }

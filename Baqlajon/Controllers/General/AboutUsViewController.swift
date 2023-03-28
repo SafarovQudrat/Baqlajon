@@ -1,0 +1,63 @@
+//
+//  AboutUsViewController.swift
+//  Baqlajon
+//
+//  Created by  Abdurahmon on 18/02/23.
+//
+
+import UIKit
+
+class AboutUsViewController: UIViewController {
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "About us"
+        label.font = UIFont.appFont(ofSize: 16, weight: .medium)
+        label.textColor = UIColor.appColor(color: Colors.black1)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
+    private let textLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus.\nMaecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus."
+        label.textColor = UIColor.appColor(color: Colors.black2)
+        label.font = UIFont.appFont(ofSize: 16, weight: FontWeight.regular)
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.backgroundColor = UIColor.appColor(color: Colors.background)
+        
+        configureConstraints()
+        configureNavigationBar()
+        
+    }
+    
+
+    private func configureNavigationBar() {
+        title = "About us"
+    }
+
+    
+    private func configureConstraints() {
+        view.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15)
+        ])
+        
+        view.addSubview(textLabel)
+        NSLayoutConstraint.activate([
+            textLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            textLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            textLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25)
+        ])
+    }
+}

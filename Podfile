@@ -8,6 +8,6 @@ target 'Baqlajon' do
   # Pods for Baqlajon
   pod 'SnapKit'
   pod 'OTPFieldView'
-
+  pod 'PhoneNumberKit'
 
 end
