@@ -168,7 +168,8 @@ class CourseDetailsTableHeaderView: UIView {
     private lazy var courseMiniInfoStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [videoStackView, courseHoursStackView, reviewsStackView])
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()

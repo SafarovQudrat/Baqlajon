@@ -13,9 +13,9 @@ class ProfileVC: UIViewController {
     var profileImage:UIImageView = {
        let i = UIImageView(image: UIImage(named: "avatarImage"))
         i.snp.makeConstraints { make in
-            make.width.height.equalTo(100)
+            make.width.height.equalTo(90)
         }
-        i.layer.cornerRadius = 50
+        i.layer.cornerRadius = 45
         return i
     }()
     
@@ -59,13 +59,13 @@ class ProfileVC: UIViewController {
     let l = UILabel()
     l.font = .appFont(ofSize: 16)
     l.textColor = UIColor(named: "gray 1")
-        l.text = "+99893 865 98 99"
+        l.text = "+998 93 865 98 99"
     return l
 }()
     private lazy var lblStackV:UIStackView = {
        let s = UIStackView(arrangedSubviews: [nameLbl,numberLbl])
         s.alignment = .center
-        s.spacing = 8
+        s.spacing = 0
         s.distribution = .fill
         s.axis = .vertical
         return s
@@ -74,7 +74,7 @@ class ProfileVC: UIViewController {
        let s = UIStackView(arrangedSubviews: [imgBackView,lblStackV])
         s.axis = .vertical
         s.distribution = .fill
-        s.spacing = 16
+        s.spacing = 6
         s.alignment = .center
         return s
     }()
@@ -89,7 +89,7 @@ class ProfileVC: UIViewController {
         v.backgroundColor = .white
         v.layer.cornerRadius = 12
         v.snp.makeConstraints { make in
-            make.height.equalTo(170)
+            make.height.equalTo(160)
         }
         return v
     }()
@@ -98,7 +98,7 @@ class ProfileVC: UIViewController {
         v.backgroundColor = .white
         v.layer.cornerRadius = 12
         v.snp.makeConstraints { make in
-            make.height.equalTo(170)
+            make.height.equalTo(160)
         }
         return v
     }()
@@ -107,6 +107,7 @@ class ProfileVC: UIViewController {
 //    Payments history ,Language,DarkMode
     lazy var tableView:UITableView = {
        let t = UITableView()
+        t.isScrollEnabled = false
         return t
     }()
     
@@ -114,6 +115,7 @@ class ProfileVC: UIViewController {
 //    About us,Share,Help
     lazy var ttableView:UITableView = {
        let t = UITableView()
+        t.isScrollEnabled = false
         return t
     }()
     private lazy var lastStack:UIStackView = {
@@ -127,9 +129,9 @@ class ProfileVC: UIViewController {
     
 //    Payments history ,Language,DarkMode
     let arr1:[MyData] = [
-        MyData(img: UIImage(systemName: "creditcard")!, title: "Payments history", isSwitchON: false),
-        MyData(img: UIImage(systemName: "globe")!, title: "Language",text: "English", isSwitchON: false),
-        MyData(img: UIImage(systemName: "moon")!, title: "Dark mode", isSwitchON: true)
+        MyData(img: UIImage(named: "payment")!, title: "Payments history", isSwitchON: false),
+        MyData(img: UIImage(named: "lang")!, title: "Language",text: "English", isSwitchON: false),
+        MyData(img: UIImage(named: "darkM")!, title: "Dark mode", isSwitchON: true)
     
     ]
     

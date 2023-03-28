@@ -12,7 +12,7 @@ class SignVC: UIViewController {
     
     var isLogin = true
     
-    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGesture))
+    let tapGestureRecognizer = UITapGestureRecognizer(target: .none, action: #selector(tapGesture))
     
     //MARK: SignIn View Details:
     lazy var loginView: UIView = {
@@ -74,7 +74,7 @@ class SignVC: UIViewController {
         let btn = UIButton()
         btn.setTitle("Forgot Password", for: .normal)
         btn.setTitleColor(.systemBlue, for: .normal)
-        btn.addTarget(self, action: #selector(forgotTapped), for: .touchUpInside)
+        btn.addTarget(.none, action: #selector(forgotTapped), for: .touchUpInside)
         btn.titleLabel?.font = UIFont.appFont(ofSize: 14,weight: FontWeight.medium)
         return btn
     }()
@@ -148,7 +148,7 @@ class SignVC: UIViewController {
         btn.backgroundColor = .appColor(color: .mainBlue)
         btn.layer.cornerRadius = 8
         btn.titleLabel?.font = UIFont.appFont(ofSize: 16,weight: FontWeight.medium)
-        btn.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
+        btn.addTarget(.none, action: #selector(loginTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -164,7 +164,8 @@ class SignVC: UIViewController {
         let btn = UIButton()
         btn.setTitle("Sign Up", for: .normal)
         btn.setTitleColor( .systemBlue, for: .normal)
-        btn.addTarget(self, action: #selector(goSignUpTapped), for: .touchUpInside)
+        btn.titleLabel?.font = .appFont(ofSize: 14)
+        btn.addTarget(.none, action: #selector(goSignUpTapped), for: .touchUpInside)
         return btn
     }()
     
@@ -238,6 +239,15 @@ class SignVC: UIViewController {
         loginCase()
         navSettings()
         textFieldDelegates()
+        if isLogin {
+            loginCase()
+            switchSignUpBtn.setTitle("Sign Up", for: .normal)
+            
+        }else {
+            signUpCase()
+            switchSignUpBtn.setTitle("Login", for: .normal)
+            
+        }
     }
     
     func textFieldDelegates() {
@@ -258,6 +268,9 @@ class SignVC: UIViewController {
             title = "Let's Sign Up"
             navigationItem.backButtonTitle = "Sign Up"
         }
+        navigationItem.hidesBackButton = true
+        let backBtn = UIBarButtonItem(image: UIImage(named: "backBtn"), style: .done, target: self, action: #selector(backtapped))
+        navigationItem.leftBarButtonItem = backBtn
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.appFont(ofSize: 16,weight: FontWeight.medium)]
     }
     
@@ -391,7 +404,10 @@ class SignVC: UIViewController {
     
     
     //MARK: -Buttons-
-    
+//    back Button
+    @objc func backtapped(){
+        self.navigationController?.popViewController(animated: true)
+    }
     
     //MARK: forgotPassword Btn Tapped
     @objc func forgotTapped() {
@@ -417,8 +433,9 @@ class SignVC: UIViewController {
     
     //MARK: signedUpTapped
     @objc func loginTapped() {
-        
-        navigationController?.pushViewController(OtpVC(), animated: true)
+        let vc = OtpVC()
+        vc.number = pnumberTF.text!
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -427,11 +444,11 @@ class SignVC: UIViewController {
     @objc func goSignUpTapped() {
         if isLogin {
             signUpCase()
-            switchSignUpBtn.setTitle("Sign Up", for: .normal)
+            switchSignUpBtn.setTitle("Login", for: .normal)
             isLogin = false
         }else {
             loginCase()
-            switchSignUpBtn.setTitle("Sign In", for: .normal)
+            switchSignUpBtn.setTitle("Sign Up", for: .normal)
             isLogin = true
         }
         navSettings()

@@ -204,9 +204,9 @@ class MyCourses: UIViewController {
         self.view.backgroundColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
         setNavController()
         setUpUi()
-        myStackV.isHidden = true
-//        myView.isHidden = true
-//        yellowView.isHidden = true
+//        myStackV.isHidden = true
+        myView.isHidden = true
+        yellowView.isHidden = true
     }
     
     func setUpUi() {
@@ -225,6 +225,7 @@ class MyCourses: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+    
         tableView.register(MyCourseTVC.self, forCellReuseIdentifier: MyCourseTVC.identifier)
         btnView.addSubview(btnStack)
         btnStack.snp.makeConstraints { make in
@@ -262,15 +263,6 @@ class MyCourses: UIViewController {
         }
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 //    SetNavController
     func setNavController() {
@@ -340,6 +332,11 @@ class MyCourses: UIViewController {
 
 //MARK: UITableViewDelegate,UITableViewDataSource
 extension MyCourses:UITableViewDelegate,UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = CourseDetailsVC()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         3
     }

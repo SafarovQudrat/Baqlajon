@@ -17,8 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        let vc = UINavigationController(rootViewController: BalanceVC())
-        window?.rootViewController = vc
+      
+        if cache.bool(forKey: "isTabbar") {
+            let vc = MainTabBarController()
+            window?.rootViewController = vc
+        }else{
+            let vc = UINavigationController(rootViewController: IntroductionPageVC())
+            window?.rootViewController = vc
+        }
         window?.makeKeyAndVisible()
 
         return true

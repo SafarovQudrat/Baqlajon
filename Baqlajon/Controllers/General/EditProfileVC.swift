@@ -82,6 +82,7 @@ class EditProfileVC: UIViewController {
         b.backgroundColor = .clear
         b.setTitle("Change", for: .normal)
         b.setTitleColor(.systemBlue, for: .normal)
+        b.titleLabel?.font = .appFont(ofSize: 14)
         b.addTarget(.none, action: #selector(changeNumTapped), for: .touchUpInside)
         return b
     }()
@@ -201,6 +202,7 @@ class EditProfileVC: UIViewController {
         b.backgroundColor = .clear
         b.setTitle("Change Password", for: .normal)
         b.setTitleColor(.systemBlue, for: .normal)
+        b.titleLabel?.font = .appFont(ofSize: 14)
         b.addTarget(.none, action: #selector(changeNumTapped), for: .touchUpInside)
         return b
     }()

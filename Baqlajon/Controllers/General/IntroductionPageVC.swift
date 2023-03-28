@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-
+let cache = UserDefaults.standard
 class IntroductionPageVC: UIViewController {
     
     private var sizeForItem: CGSize { CGSize(width: view.frame.width, height: 300) }
@@ -60,7 +60,7 @@ class IntroductionPageVC: UIViewController {
     
     @objc private func progressDidTap() {
         if currentIndex == dataModel.count - 1 {
-            ChangeRootViewController.change(with: MainTabBarController())
+            ChangeRootViewController.change(with: UINavigationController(rootViewController: OnboardingVC()))
             return
         }
         let nextIndex = min(currentIndex + 1, dataModel.count - 1)
@@ -89,7 +89,7 @@ class IntroductionPageVC: UIViewController {
         default:
             break
         }
-        
+        cache.set(false, forKey: "isTabbar")
     }
     
     

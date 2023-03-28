@@ -52,7 +52,7 @@ class PaymentsVC: UIViewController {
         return backV
     }()
     private lazy var backImg: UIImageView = {
-        let backImage = UIImageView(image: UIImage(named: "paymentsBack"))
+        let backImage = UIImageView(image: UIImage(named: "PaymentsBack"))
         backImage.contentMode = .scaleAspectFill
         return backImage
     }()

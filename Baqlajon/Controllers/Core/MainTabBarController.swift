@@ -21,9 +21,9 @@ class MainTabBarController: UITabBarController {
         
         
         let vc1 = UINavigationController(rootViewController: HomeVC())
-        let vc2 = UINavigationController(rootViewController: HomeVC())
-        let vc3 = UINavigationController(rootViewController: HomeVC())
-        let vc4 = UINavigationController(rootViewController: HomeVC())
+        let vc2 = UINavigationController(rootViewController: MyCourses())
+        let vc3 = UINavigationController(rootViewController: BalanceVC())
+        let vc4 = UINavigationController(rootViewController: ProfileVC())
         
         vc1.title = "Home"
         vc2.title = "My Courses"
@@ -31,10 +31,10 @@ class MainTabBarController: UITabBarController {
         vc4.title = "Profile"
         
         
-        vc1.tabBarItem.image = UIImage(systemName: "house")
-        vc2.tabBarItem.image = UIImage(systemName: "book")
-        vc3.tabBarItem.image = UIImage(systemName: "bitcoinsign.square")
-        vc4.tabBarItem.image = UIImage(systemName: "person")
+        vc1.tabBarItem.image = UIImage(named: "home 1")
+        vc2.tabBarItem.image = UIImage(named: "book 1")
+        vc3.tabBarItem.image = UIImage(named: "wallet 1")
+        vc4.tabBarItem.image = UIImage(named: "profile 1")
         
         tabBar.tintColor = .appColor(color: .mainBlue)
         

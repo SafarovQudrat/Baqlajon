@@ -13,6 +13,9 @@
 		39A99FFE2994F72D00D4A09D /* VideoDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A99FFD2994F72D00D4A09D /* VideoDetailsVC.swift */; };
 		39C4E5DB299765F0008AF8AB /* CourseDetailsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */; };
 		521AF05D299F3F9F000A2F83 /* BalanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521AF05C299F3F9F000A2F83 /* BalanceVC.swift */; };
+		5236F81429D21B0100B07FE6 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5236F81329D21B0100B07FE6 /* OnboardingVC.swift */; };
+		523BA9C829D2E97A005996DD /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BA9C729D2E97A005996DD /* ResetPasswordVC.swift */; };
+		523BA9CA29D2EA30005996DD /* ReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BA9C929D2EA2F005996DD /* ReviewVC.swift */; };
 		52770B43299A109C00187F27 /* ProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B42299A109C00187F27 /* ProfileTVC.swift */; };
 		52770B45299A10AD00187F27 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B44299A10AD00187F27 /* ProfileVC.swift */; };
 		52770B47299A19B400187F27 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B46299A19B400187F27 /* EditProfileVC.swift */; };
@@ -65,6 +68,9 @@
 		39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailsTableHeaderView.swift; sourceTree = "<group>"; };
 		4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.release.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.release.xcconfig"; sourceTree = "<group>"; };
 		521AF05C299F3F9F000A2F83 /* BalanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceVC.swift; sourceTree = "<group>"; };
+		5236F81329D21B0100B07FE6 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
+		523BA9C729D2E97A005996DD /* ResetPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
+		523BA9C929D2EA2F005996DD /* ReviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewVC.swift; sourceTree = "<group>"; };
 		52770B42299A109C00187F27 /* ProfileTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTVC.swift; sourceTree = "<group>"; };
 		52770B44299A10AD00187F27 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		52770B46299A19B400187F27 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
@@ -211,21 +217,24 @@
 			isa = PBXGroup;
 			children = (
 				5FB51FE929929012005E4FDA /* IntroductionPageVC.swift */,
+				5236F81329D21B0100B07FE6 /* OnboardingVC.swift */,
 				39A99FF92994EC7F00D4A09D /* LoginVC.swift */,
+				5FDBE7AE299816EE00F7DB52 /* SignVC.swift */,
+				5FDBE7AB299816EE00F7DB52 /* OtpVC.swift */,
+				5FDBE7A9299816EE00F7DB52 /* ForgotVC.swift */,
+				523BA9C729D2E97A005996DD /* ResetPasswordVC.swift */,
+				5F9753F22992816700DC6667 /* HomeVC.swift */,
 				39A99FFB2994F33D00D4A09D /* CourseDetailsVC.swift */,
 				39A99FFD2994F72D00D4A09D /* VideoDetailsVC.swift */,
-				5F9753F22992816700DC6667 /* HomeVC.swift */,
-				5FDBE7A9299816EE00F7DB52 /* ForgotVC.swift */,
 				5FDBE7AD299816EE00F7DB52 /* IntroduceVC.swift */,
 				5FDBE7AC299816EE00F7DB52 /* MyCourses.swift */,
-				5FDBE7AB299816EE00F7DB52 /* OtpVC.swift */,
 				5FDBE7A8299816EE00F7DB52 /* PaymentsVC.swift */,
 				52770B44299A10AD00187F27 /* ProfileVC.swift */,
 				52770B46299A19B400187F27 /* EditProfileVC.swift */,
-				5FDBE7AE299816EE00F7DB52 /* SignVC.swift */,
 				521AF05C299F3F9F000A2F83 /* BalanceVC.swift */,
 				52EDD92B29A383C000FDE2D5 /* ShareReferalCodeVC.swift */,
 				52EDD92929A359EC00FDE2D5 /* CongratulationVC.swift */,
+				523BA9C929D2EA2F005996DD /* ReviewVC.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -419,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52770B45299A10AD00187F27 /* ProfileVC.swift in Sources */,
+				5236F81429D21B0100B07FE6 /* OnboardingVC.swift in Sources */,
 				5F9753E92992778B00DC6667 /* Ex+UIColor.swift in Sources */,
 				5FDBE7AF299816EE00F7DB52 /* PaymentsVC.swift in Sources */,
 				39A99FFE2994F72D00D4A09D /* VideoDetailsVC.swift in Sources */,
@@ -434,6 +444,7 @@
 				52EDD92A29A359EC00FDE2D5 /* CongratulationVC.swift in Sources */,
 				5FDBE7B72998173B00F7DB52 /* MyCourseTVC.swift in Sources */,
 				5F9753F32992816700DC6667 /* HomeVC.swift in Sources */,
+				523BA9C829D2E97A005996DD /* ResetPasswordVC.swift in Sources */,
 				5FDBE7BB2998178100F7DB52 /* Ex+UITextField.swift in Sources */,
 				5FDBE7B4299816EE00F7DB52 /* IntroduceVC.swift in Sources */,
 				5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */,
@@ -442,6 +453,7 @@
 				5FDBE7B3299816EE00F7DB52 /* MyCourses.swift in Sources */,
 				39A99FFA2994EC7F00D4A09D /* LoginVC.swift in Sources */,
 				5FDBE7B2299816EE00F7DB52 /* OtpVC.swift in Sources */,
+				523BA9CA29D2EA30005996DD /* ReviewVC.swift in Sources */,
 				5F9753ED29927E3F00DC6667 /* BNButton.swift in Sources */,
 				5FB51FE229928FE7005E4FDA /* NET.swift in Sources */,
 				5F9753EF29927E6700DC6667 /* BNTextField.swift in Sources */,
@@ -592,7 +604,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L4PP343Y28;
+				DEVELOPMENT_TEAM = Q62DRQKB69;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Baqlajon/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -621,7 +633,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L4PP343Y28;
+				DEVELOPMENT_TEAM = Q62DRQKB69;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Baqlajon/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -28,6 +28,10 @@ class CourseDetailsVC: UIViewController {
     
     private func configureNavigationBar() {
         title = "Course details"
+        navigationItem.hidesBackButton = true
+        let backBtn = UIBarButtonItem(image: UIImage(named: "backBtn"), style: .done, target: self, action: #selector(backtapped))
+        navigationItem.leftBarButtonItem = backBtn
+        navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white))
     }
     
     
@@ -35,6 +39,10 @@ class CourseDetailsVC: UIViewController {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
     }
+    //    back Button
+        @objc func backtapped(){
+            self.navigationController?.popViewController(animated: true)
+        }
 }
 
 
@@ -56,7 +64,7 @@ extension CourseDetailsVC: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 200
+//    }
 }

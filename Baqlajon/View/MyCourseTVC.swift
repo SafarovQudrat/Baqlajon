@@ -13,7 +13,7 @@ class MyCourseTVC: UITableViewCell {
 
    lazy var  image: UIImageView = {
        let i = UIImageView()
-        i.image = UIImage(named: "example")
+        i.image = UIImage(named: "courseImage")
        i.clipsToBounds = true
        i.layer.maskedCorners = [.layerMinXMinYCorner,.layerMinXMaxYCorner]
        i.layer.cornerRadius = 8
@@ -154,6 +154,10 @@ class MyCourseTVC: UITableViewCell {
         v.layer.cornerRadius = 8
         return v
     }()
+    
+    
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         titleLbl.font = UIFont(name: "Poppins", size: 10)
@@ -182,7 +186,7 @@ class MyCourseTVC: UITableViewCell {
         myBackV.snp.makeConstraints { make in
             make.top.bottom.left.right.equalToSuperview().inset(5)
         }
-        
+        contentView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
     }
     
     required init?(coder: NSCoder) {
