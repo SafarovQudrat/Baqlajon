@@ -104,14 +104,14 @@ class HomeVC: UIViewController {
         var fireLbl: UILabel = {
            let l = UILabel()
             l.font = .appFont(ofSize: 14)
-            
+            l.textColor = .black
             l.text = "🔥 Sotib olganlar:"
             return l
         }()
         var countLbl: UILabel = {
            let l = UILabel()
             l.font = .appFont(ofSize: 14,weight: .semiBold)
-            
+            l.textColor = .black
             l.text = "10000"
             return l
         }()
@@ -138,7 +138,7 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
+        self.view.backgroundColor = .appColor(color: .background)
         setNavController()
         setUpUI()
     }
@@ -185,13 +185,13 @@ class HomeVC: UIViewController {
     
     //    SetNavController
         func setNavController() {
-            navigationController?.navigationBar.update(backgroundColor: .clear,font: .appFont(ofSize: 16,weight: .medium))
+            navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),font: .appFont(ofSize: 16,weight: .medium))
             let leftBtn = UIBarButtonItem(title: "Home", style: .done, target: self, action: .none)
             let rightButton = UIBarButtonItem(image:UIImage(named: "alert"), style: .done, target: self, action: #selector(alertTapped))
             navigationItem.rightBarButtonItem = rightButton
             navigationItem.leftBarButtonItem = leftBtn
-            navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.4156862745, alpha: 1)
-            navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.2039215686, alpha: 1)
+            navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
+            navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
             
         }
     

@@ -15,7 +15,7 @@ class CourseDetailsReviewsTableViewCell: UITableViewCell {
     private let backgroundedView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 16
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .appColor(color: .background)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

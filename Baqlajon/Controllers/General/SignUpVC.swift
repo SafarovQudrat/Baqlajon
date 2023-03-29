@@ -36,9 +36,9 @@ class SignUpVC: UIViewController {
     
     
     //name textField
-    let fullnameTF: UITextField = {
+    let nameTF: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Full name*"
+        tf.placeholder = "First name*"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
         tf.backgroundColor = .appColor(color: .gray7)
@@ -55,7 +55,26 @@ class SignUpVC: UIViewController {
         tf.leftView = lview
         return tf
     }()
-    
+    //name textField
+    let surnameTF: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Last name*"
+        tf.layer.cornerRadius = 8
+        tf.textColor = .label
+        tf.backgroundColor = .appColor(color: .gray7)
+        tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
+        tf.borderStyle = .none
+        tf.leftViewMode = .always
+        let lview: UIView = {
+            let lv = UIView()
+            return lv
+        }()
+        lview.snp.makeConstraints { make in
+            make.width.equalTo(15)
+        }
+        tf.leftView = lview
+        return tf
+    }()
     
     
     //TextField's StackView
@@ -177,7 +196,8 @@ class SignUpVC: UIViewController {
     
     //MARK: adds "Done" button to textFields
     func textFieldsDoneButton() {
-        fullnameTF.addDoneButtonOnKeyboard()
+        nameTF.addDoneButtonOnKeyboard()
+        surnameTF.addDoneButtonOnKeyboard()
         phoneNumberTFView.addDoneButtonOnKeyboard()
         referalCodeTF.addDoneButtonOnKeyboard()
     }
@@ -187,9 +207,7 @@ class SignUpVC: UIViewController {
     //MARK: Navigation Settings
     func navSettings() {
         title = "Let's Sign Up"
-        
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.appFont(ofSize: 16,weight: FontWeight.medium)]
-        
         navigationItem.hidesBackButton = true
         let backBtn = UIBarButtonItem(image: UIImage(named: "backBtn"), style: .done, target: self, action: #selector(backtapped))
         navigationItem.leftBarButtonItem = backBtn
@@ -212,10 +230,6 @@ class SignUpVC: UIViewController {
     
 }
 
-
-
-
-
 extension SignUpVC {
     
     //MARK: -SignUp view UI settings-
@@ -235,7 +249,8 @@ extension SignUpVC {
             make.top.equalTo(titleLbl.snp.bottom).offset(36)
         }
         
-        textFieldStackView.addArrangedSubview(fullnameTF)
+        textFieldStackView.addArrangedSubview(nameTF)
+        textFieldStackView.addArrangedSubview(surnameTF)
         textFieldStackView.addArrangedSubview(phoneNumberTFView)
         textFieldStackView.addArrangedSubview(referalCodeTF)
         referalCodeTF.snp.makeConstraints { $0.height.equalTo(48)}
@@ -268,10 +283,6 @@ extension SignUpVC {
     
 }
 
-
-
-
-
 //MARK: -Buttons-
 extension SignUpVC {
     
@@ -298,5 +309,29 @@ extension SignUpVC {
         let vc = OtpVC()
         //        vc.dataLbl = PhoneNumberTextField.text
         navigationController?.pushViewController(vc, animated: true)
+        signUpRegister()
+    }
+}
+
+extension SignUpVC {
+    func signUpRegister(){
+        let param:[String:Any] = [
+            "firstName": self.nameTF.text!,
+            "lastName": surnameTF.text!,
+            "password": referalCodeTF.text!,
+            "phoneNumber": phoneNumberTFView.text!
+            
+            
+        ]
+        
+        
+        Net.req(urlAPI: "https://baqlajonapi.roundedteam.uz/user", method: .post, params: param) { data in
+            if let data = data {
+                let token = data["data"]["token"].stringValue
+                cache.set(token, forKey: "TOKEN")
+                print("Login Data = ",data)
+            }
+        }
+        
     }
 }

@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = vc
         }
         window?.makeKeyAndVisible()
-        window?.overrideUserInterfaceStyle = .light
+        
         return true
     }
 }

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3943AC19299675B800D6D75F /* CourseDetailsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3943AC18299675B800D6D75F /* CourseDetailsTVC.swift */; };
 		39A99FFA2994EC7F00D4A09D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A99FF92994EC7F00D4A09D /* LoginVC.swift */; };
 		39A99FFC2994F33D00D4A09D /* CourseDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A99FFB2994F33D00D4A09D /* CourseDetailsVC.swift */; };
 		39C4E5DB299765F0008AF8AB /* CourseDetailsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */; };
@@ -27,6 +26,8 @@
 		52770B43299A109C00187F27 /* ProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B42299A109C00187F27 /* ProfileTVC.swift */; };
 		52770B45299A10AD00187F27 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B44299A10AD00187F27 /* ProfileVC.swift */; };
 		52770B47299A19B400187F27 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B46299A19B400187F27 /* EditProfileVC.swift */; };
+		52A55B6429D448AC002994F4 /* Reachibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A55B6329D448AC002994F4 /* Reachibility.swift */; };
+		52A55B6629D448CC002994F4 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A55B6529D448CC002994F4 /* Loader.swift */; };
 		52EDD92829A3534400FDE2D5 /* Ex + URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD92729A3534400FDE2D5 /* Ex + URL.swift */; };
 		52EDD92A29A359EC00FDE2D5 /* CongratulationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD92929A359EC00FDE2D5 /* CongratulationVC.swift */; };
 		52EDD92C29A383C000FDE2D5 /* ShareReferalCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD92B29A383C000FDE2D5 /* ShareReferalCodeVC.swift */; };
@@ -68,7 +69,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3943AC18299675B800D6D75F /* CourseDetailsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailsTVC.swift; sourceTree = "<group>"; };
 		39A99FF92994EC7F00D4A09D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		39A99FFB2994F33D00D4A09D /* CourseDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailsVC.swift; sourceTree = "<group>"; };
 		39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailsTableHeaderView.swift; sourceTree = "<group>"; };
@@ -89,6 +89,8 @@
 		52770B42299A109C00187F27 /* ProfileTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTVC.swift; sourceTree = "<group>"; };
 		52770B44299A10AD00187F27 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		52770B46299A19B400187F27 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		52A55B6329D448AC002994F4 /* Reachibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachibility.swift; sourceTree = "<group>"; };
+		52A55B6529D448CC002994F4 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		52EDD92729A3534400FDE2D5 /* Ex + URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex + URL.swift"; sourceTree = "<group>"; };
 		52EDD92929A359EC00FDE2D5 /* CongratulationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulationVC.swift; sourceTree = "<group>"; };
 		52EDD92B29A383C000FDE2D5 /* ShareReferalCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareReferalCodeVC.swift; sourceTree = "<group>"; };
@@ -213,7 +215,6 @@
 				5FDBE7B62998173B00F7DB52 /* MyCourseTVC.swift */,
 				52770B42299A109C00187F27 /* ProfileTVC.swift */,
 				5FB51FE529929001005E4FDA /* IntroductionCVC.swift */,
-				3943AC18299675B800D6D75F /* CourseDetailsTVC.swift */,
 				39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */,
 				525798A929D31878005A93AC /* CourseDetailsVideoTableViewCell.swift */,
 				525798AB29D31936005A93AC /* CourseDetailsReviewsTableViewCell.swift */,
@@ -303,6 +304,8 @@
 			isa = PBXGroup;
 			children = (
 				5FB51FE129928FE7005E4FDA /* NET.swift */,
+				52A55B6329D448AC002994F4 /* Reachibility.swift */,
+				52A55B6529D448CC002994F4 /* Loader.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -471,8 +474,10 @@
 				525798B429D31AD5005A93AC /* ChangeLanguageViewController.swift in Sources */,
 				5FDBE7BB2998178100F7DB52 /* Ex+UITextField.swift in Sources */,
 				5F69B7392992297D003BB9D6 /* AppDelegate.swift in Sources */,
+				52A55B6429D448AC002994F4 /* Reachibility.swift in Sources */,
 				52770B43299A109C00187F27 /* ProfileTVC.swift in Sources */,
 				5F9753D129926A1E00DC6667 /* Ex+ChangeViewController.swift in Sources */,
+				52A55B6629D448CC002994F4 /* Loader.swift in Sources */,
 				5FDBE7B3299816EE00F7DB52 /* MyCourses.swift in Sources */,
 				525798B229D31A7B005A93AC /* VideoDetailsViewController.swift in Sources */,
 				39A99FFA2994EC7F00D4A09D /* LoginVC.swift in Sources */,
@@ -483,7 +488,6 @@
 				5F9753EF29927E6700DC6667 /* BNTextField.swift in Sources */,
 				525798AE29D319F5005A93AC /* PaymentHistoryViewController.swift in Sources */,
 				39C4E5DB299765F0008AF8AB /* CourseDetailsTableHeaderView.swift in Sources */,
-				3943AC19299675B800D6D75F /* CourseDetailsTVC.swift in Sources */,
 				5FDBE7B5299816EE00F7DB52 /* SignUpVC.swift in Sources */,
 				5F9753EB29927DC700DC6667 /* Ex+Label.swift in Sources */,
 				525798AC29D31936005A93AC /* CourseDetailsReviewsTableViewCell.swift in Sources */,

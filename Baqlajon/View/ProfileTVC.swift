@@ -73,7 +73,7 @@ class ProfileTVC: UITableViewCell {
     
     private lazy var backView:UIView = {
        let v = UIView()
-        v.backgroundColor = .systemBackground
+        v.backgroundColor = .appColor(color: .white)
         return v
     }()
     
@@ -84,6 +84,7 @@ class ProfileTVC: UITableViewCell {
         lastStack.snp.makeConstraints { make in
             make.top.left.right.bottom.equalToSuperview().inset(10)
         }
+        contentView.backgroundColor = .appColor(color: .white)
         contentView.addSubview(backView)
         backView.snp.makeConstraints { make in
             make.left.right.bottom.top.equalTo(0)

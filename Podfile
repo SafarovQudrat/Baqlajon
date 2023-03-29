@@ -9,5 +9,7 @@ target 'Baqlajon' do
   pod 'SnapKit'
   pod 'OTPFieldView'
   pod 'PhoneNumberKit'
-
+  pod 'Alamofire'
+  pod 'SwiftyJSON'
+  pod 'lottie-ios', '3.5'
 end

@@ -13,7 +13,7 @@ class BalanceVC: UIViewController {
        let v = UIView()
         v.backgroundColor = .clear
         v.snp.makeConstraints { make in
-            make.height.equalTo(167)
+            make.height.equalTo(157)
         }
         return v
     }()
@@ -113,7 +113,7 @@ class BalanceVC: UIViewController {
            let i = UIImageView()
             i.image = UIImage(named: "imageLbl")
             i.snp.makeConstraints { make in
-                make.width.height.equalTo(32)
+                make.width.height.equalTo(30)
             }
             return i
         }()
@@ -187,7 +187,7 @@ class BalanceVC: UIViewController {
     }()
     private lazy var lblBackV:UIView = {
        let v = UIView()
-        v.backgroundColor = .white
+        v.backgroundColor = .appColor(color: .white)
         v.layer.cornerRadius = 8
         v.addSubview(lblStackV)
         lblStackV.snp.makeConstraints { make in
@@ -385,7 +385,7 @@ class BalanceVC: UIViewController {
         v.backgroundColor = .clear
        
         v.snp.makeConstraints { make in
-            make.height.equalTo(167)
+            make.height.equalTo(157)
         }
        
 
@@ -471,10 +471,10 @@ class BalanceVC: UIViewController {
     }()
     private lazy var shareBView:UIView = {
        let v = UIView()
-        v.backgroundColor = .white
+        v.backgroundColor = .appColor(color: .white)
         v.layer.cornerRadius = 8
         v.snp.makeConstraints { make in
-            make.height.equalTo(150)
+            make.height.equalTo(140)
         }
        
         return v
@@ -485,7 +485,7 @@ class BalanceVC: UIViewController {
         s.axis = .vertical
         s.distribution = .fill
         s.alignment = .fill
-        s.spacing = 24
+        s.spacing = 16
         return s
     }()
   
@@ -499,7 +499,7 @@ class BalanceVC: UIViewController {
     }
 //    SetUpUi
     func setUpUI() {
-        self.view.backgroundColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
+        self.view.backgroundColor = .appColor(color: .background)
         coinBackV.addSubview(coinBackImageV)
         coinBackImageV.snp.makeConstraints { make in
             make.top.left.right.bottom.equalTo(0)
@@ -540,10 +540,11 @@ class BalanceVC: UIViewController {
     }
 //    setNavController
     func setNavController() {
-        navigationController?.navigationBar.update(backgroundColor: .white,font: .appFont(ofSize: 16,weight: .medium))
+        navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),font: .appFont(ofSize: 16,weight: .medium))
         let leftBtn = UIBarButtonItem(title: "Balance", style: .done, target: self, action: .none)
         navigationItem.leftBarButtonItem = leftBtn
-        navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.2039215686, alpha: 1)
+        navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
+        navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
         
     }
     @objc func buyBtnTapped() {

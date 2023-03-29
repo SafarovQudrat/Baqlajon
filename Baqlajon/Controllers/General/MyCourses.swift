@@ -201,7 +201,7 @@ class MyCourses: UIViewController {
         allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
         allBtn.setTitleColor(.white, for: .normal)
        
-        self.view.backgroundColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
+        self.view.backgroundColor = .appColor(color: .background)
         setNavController()
         setUpUi()
 //        myStackV.isHidden = true
@@ -266,13 +266,13 @@ class MyCourses: UIViewController {
     
 //    SetNavController
     func setNavController() {
-        navigationController?.navigationBar.update(backgroundColor: .clear,font: .appFont(ofSize: 16,weight: .medium))
+        navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),font: .appFont(ofSize: 16,weight: .medium))
         let leftBtn = UIBarButtonItem(title: "My courses", style: .done, target: self, action: .none)
         let rightButton = UIBarButtonItem(image:UIImage(named: "alert"), style: .done, target: self, action: #selector(alertTapped))
         navigationItem.rightBarButtonItem = rightButton
         navigationItem.leftBarButtonItem = leftBtn
-        navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.2901960784, green: 0.2901960784, blue: 0.4156862745, alpha: 1)
-        navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.2039215686, alpha: 1)
+        navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
+        navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
         
     }
     

@@ -98,7 +98,7 @@ class CourseDetailsVideoTableViewCell: UITableViewCell {
     
     private let backgroundLockView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.appColor(color: Colors.lockBackground)
+        view.backgroundColor = UIColor.appColor(color: Colors.background)
         view.layer.cornerRadius = 20
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -109,7 +109,7 @@ class CourseDetailsVideoTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "lockImageCourseDetails")
         imageView.tintColor = UIColor.appColor(color: Colors.gray1)
-        imageView.backgroundColor = UIColor.appColor(color: Colors.lockBackground)
+        imageView.backgroundColor = UIColor.appColor(color: Colors.background)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

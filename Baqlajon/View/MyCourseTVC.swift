@@ -150,7 +150,7 @@ class MyCourseTVC: UITableViewCell {
     
     private lazy var myBackV:UIView = {
        let v = UIView()
-        v.backgroundColor = .systemBackground
+        v.backgroundColor = .appColor(color: .white)
         v.layer.cornerRadius = 8
         return v
     }()
@@ -186,7 +186,7 @@ class MyCourseTVC: UITableViewCell {
         myBackV.snp.makeConstraints { make in
             make.top.bottom.left.right.equalToSuperview().inset(5)
         }
-        contentView.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9490196078, blue: 0.9490196078, alpha: 1)
+        contentView.backgroundColor = .appColor(color: .background)
     }
     
     required init?(coder: NSCoder) {

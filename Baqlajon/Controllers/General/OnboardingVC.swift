@@ -51,7 +51,7 @@ class OnboardingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .appColor(color: .white)
         view.addSubview(image)
         image.snp.makeConstraints { make in
             make.centerX.equalTo(view.center.x)

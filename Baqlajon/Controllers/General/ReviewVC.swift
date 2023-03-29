@@ -138,7 +138,7 @@ class ReviewVC: UIViewController {
     //MARK: -viewDidLoad-
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .appColor(color: .background)
         setUpUI()
     }
     

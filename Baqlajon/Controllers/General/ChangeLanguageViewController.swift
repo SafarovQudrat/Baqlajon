@@ -38,6 +38,15 @@ class ChangeLanguageViewController: UIViewController {
     
     private func configureNavigationBar() {
         title = "Change language"
+        navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),titleColor: .appColor(color: .black1))
+        let leftBtn = UIBarButtonItem(image:UIImage(systemName: "chevron.left"), style: .done, target:self , action: #selector(backBtnTapped) )
+        navigationItem.leftBarButtonItem = leftBtn
+        navigationItem.hidesBackButton = true
+        navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
+        navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
+    }
+    @objc func backBtnTapped(){
+        self.navigationController?.popViewController(animated: true)
     }
 
     

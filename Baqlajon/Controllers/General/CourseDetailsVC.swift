@@ -28,7 +28,7 @@ class CourseDetailsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = .appColor(color: .background)
         configureTableView()
         configureNavigationBar()
         configureConstraints()
@@ -52,8 +52,10 @@ class CourseDetailsVC: UIViewController {
         title = "Course details"
         navigationItem.hidesBackButton = true
         navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white))
-        let backBtn = UIBarButtonItem(image: UIImage(named: "backBtn"), style: .done, target: self, action: #selector(backtapped))
-        navigationItem.leftBarButtonItem = backBtn
+        let leftBtn = UIBarButtonItem(image:UIImage(systemName: "chevron.left"), style: .done, target:self , action: #selector(backtapped) )
+        navigationItem.leftBarButtonItem = leftBtn
+        navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
+        navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
     }
     //    back Button
         @objc func backtapped(){

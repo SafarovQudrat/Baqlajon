@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class ProfileVC: UIViewController {
     
 //    profile Image
@@ -25,6 +26,7 @@ class ProfileVC: UIViewController {
         b.backgroundColor = #colorLiteral(red: 0, green: 0.6406018734, blue: 0.9510455728, alpha: 1)
         b.tintColor = .white
         b.setImage(UIImage(named: "pencil"), for: .normal)
+        b.addTarget(.none, action: #selector(editTapped), for: .touchUpInside)
         b.snp.makeConstraints { make in
             make.width.height.equalTo(30)
         }
@@ -80,13 +82,13 @@ class ProfileVC: UIViewController {
     }()
     private lazy var backBackV:UIView = {
        let v = UIView()
-        v.backgroundColor = .white
+        v.backgroundColor = .appColor(color: .white)
         v.layer.cornerRadius = 12
         return v
     }()
     private let tBackV:UIView = {
        let v = UIView()
-        v.backgroundColor = .white
+        v.backgroundColor = .appColor(color: .white)
         v.layer.cornerRadius = 12
         v.snp.makeConstraints { make in
             make.height.equalTo(160)
@@ -95,7 +97,7 @@ class ProfileVC: UIViewController {
     }()
     private let ttBackV:UIView = {
        let v = UIView()
-        v.backgroundColor = .white
+        v.backgroundColor = .appColor(color: .white)
         v.layer.cornerRadius = 12
         v.snp.makeConstraints { make in
             make.height.equalTo(160)
@@ -116,6 +118,7 @@ class ProfileVC: UIViewController {
     lazy var ttableView:UITableView = {
        let t = UITableView()
         t.isScrollEnabled = false
+        
         return t
     }()
     private lazy var lastStack:UIStackView = {
@@ -147,12 +150,20 @@ class ProfileVC: UIViewController {
 //    ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .appColor(color: .background)
         setUpUi()
+    }
+//    edit Tapped
+    @objc func editTapped(){
+        let vc = EditProfileVC()
+        navigationItem.hidesBackButton = true
+        self.navigationController?.pushViewController(vc, animated: true)
+       
     }
     
 //    SetUpUI - didload da yoziladigan funksiyalar
     func setUpUi() {
-        self.view.backgroundColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
+       
         backBackV.addSubview(stackV)
         stackV.snp.makeConstraints { make in
             make.top.bottom.right.left.equalToSuperview().inset(16)
@@ -191,14 +202,17 @@ class ProfileVC: UIViewController {
     
 //    setNavigation Controller
     func setNavController() {
-        navigationController?.navigationBar.update(backgroundColor: .white,font: .appFont(ofSize: 16,weight: .medium))
+        navigationController?.navigationBar.update(backgroundColor:.appColor(color: .white),titleColor: .appColor(color: .black1),font: .appFont(ofSize: 16,weight: .medium))
         let leftBtn = UIBarButtonItem(title: "Profile", style: .done, target: .none, action: .none )
         navigationItem.leftBarButtonItem = leftBtn
-        navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.2039215686, alpha: 1)
+        navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
+        navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
+        navigationItem.backBarButtonItem?.tintColor  = .appColor(color: .black1)
     }
 
 }
 //MARK: - UITableViewDataSource,UITableViewDelegate
+
 extension ProfileVC:UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {
@@ -222,12 +236,18 @@ extension ProfileVC:UITableViewDataSource,UITableViewDelegate {
         if tableView == self.tableView {
             if indexPath.row == 0 {
                 navigationController?.pushViewController(PaymentHistoryViewController(), animated: true)
+                navigationItem.backButtonTitle = ""
+                navigationItem.backBarButtonItem?.tintColor = .appColor(color: .black1)
             } else if indexPath.row == 1 {
                 navigationController?.pushViewController(ChangeLanguageViewController(), animated: true)
-            } 
+                navigationItem.backButtonTitle = ""
+                navigationItem.backBarButtonItem?.tintColor = .appColor(color: .black1)
+            }
         } else {
             if indexPath.row == 0 {
                 navigationController?.pushViewController(AboutUsViewController(), animated: true)
+                navigationItem.backButtonTitle = ""
+                
             }
         }
     }

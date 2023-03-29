@@ -48,7 +48,7 @@ class ShareReferalCodeVC: UIViewController {
     private lazy var btn: BNButton = {
        let b = BNButton()
         b.setTitle("Share referral code", for: .normal)
-        b.setTitleColor(.appColor(color: .white), for: .normal)
+        b.setTitleColor(.white, for: .normal)
         b.backgroundColor = .appColor(color: .mainBlue)
         b.snp.makeConstraints { make in
             make.height.equalTo(50)
@@ -59,9 +59,9 @@ class ShareReferalCodeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
+        self.view.backgroundColor = .appColor(color: .background)
         setNavigationController()
-//        qrImage.image = generateQRCode(from: "fhdjfkfkfkfllflfl".uppercased())
+
         guard let qrURLImage = URL(string: "fhdjfkfkfkfllflfl".uppercased())?.qrImage(using: #colorLiteral(red: 0.1450980392, green: 0.6078431373, blue: 0.9450980392, alpha: 1)) else { return }
             
             qrImage.image = qrURLImage

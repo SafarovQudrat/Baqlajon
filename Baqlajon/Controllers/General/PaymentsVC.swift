@@ -8,6 +8,7 @@
 import UIKit
 
 class PaymentsVC: UIViewController {
+    
 //constants
     private lazy var containerV:UIView = {
         let containerView = UIView()
@@ -54,6 +55,8 @@ class PaymentsVC: UIViewController {
     private lazy var backImg: UIImageView = {
         let backImage = UIImageView(image: UIImage(named: "PaymentsBack"))
         backImage.contentMode = .scaleAspectFill
+        backImage.backgroundColor = .black
+        backImage.tintColor = .black
         return backImage
     }()
 //    course cost
@@ -93,6 +96,7 @@ class PaymentsVC: UIViewController {
         let txtField = UITextField()
         txtField.placeholder = "Referral code"
         txtField.backgroundColor = .clear
+        txtField.textColor = .black
         return txtField
     }()
 //    Continue Btn
@@ -218,7 +222,7 @@ class PaymentsVC: UIViewController {
 //    ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black.withAlphaComponent(0.6)
+        view.backgroundColor = .appColor(color: .background)
         containerV.backgroundColor = .clear
         containerV.addSubview(backImageV)
         backImageV.snp.makeConstraints { make in
@@ -268,7 +272,12 @@ class PaymentsVC: UIViewController {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.3, options: [.curveEaseOut]) { [self] in
             containerV.transform = .identity
         }
+        self.view.addGestureRecognizer (UITapGestureRecognizer(target: self, action: #selector (hideKeyboard)))
         
+    }
+    //MARK: -  hide keyboard
+    @objc private func hideKeyboard() {
+        self.view.endEditing(true)
     }
 //    Select payments Method btn
     @objc func isPaymeTapped() {

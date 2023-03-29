@@ -8,7 +8,7 @@
 import UIKit
 
 
-@available(iOS 13.4, *)
+
 class EditProfileVC: UIViewController {
     
     //    profile Image
@@ -269,7 +269,7 @@ class EditProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavController()
-        self.view.backgroundColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
+        self.view.backgroundColor = .appColor(color: .background)
         self.view.addSubview(lastStack)
         lastStack.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(16)
@@ -286,7 +286,11 @@ class EditProfileVC: UIViewController {
     }
     
     func setDataPicker() {
-        datePicker.preferredDatePickerStyle = .wheels
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        } else {
+            // Fallback on earlier versions
+        }
         datePicker.datePickerMode = .date
         
         datePicker.locale = Locale(identifier: "uz_UZ")
@@ -373,8 +377,16 @@ class EditProfileVC: UIViewController {
     
     //    setNavigation Controller
     func setNavController() {
-        navigationController?.navigationBar.update(backgroundColor: .white,font: .appFont(ofSize: 16,weight: .medium))
+        navigationController?.navigationBar.update(backgroundColor:.appColor(color: .white),titleColor: .appColor(color: .black1),font: .appFont(ofSize: 16,weight: .medium))
         navigationItem.title = "Edit profile"
+        let leftBtn = UIBarButtonItem(image:UIImage(systemName: "chevron.left"), style: .done, target:self , action: #selector(backBtnTapped) )
+        navigationItem.leftBarButtonItem = leftBtn
+        navigationItem.hidesBackButton = true
+        navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
+        navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
+    }
+    @objc func backBtnTapped(){
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func changeNumTapped() {
@@ -400,7 +412,7 @@ class EditProfileVC: UIViewController {
 }
 //MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 
-@available(iOS 13.4, *)
+
 extension EditProfileVC:UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
