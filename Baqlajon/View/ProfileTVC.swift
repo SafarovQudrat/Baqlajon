@@ -35,6 +35,7 @@ class ProfileTVC: UITableViewCell {
     lazy var mySwitch:UISwitch = {
        let s = UISwitch()
         s.setOn(false, animated: true)
+        s.addTarget(.none, action: #selector(switchTapped), for: .touchUpInside)
         return s
     }()
     lazy var btn:UIButton = {
@@ -77,7 +78,7 @@ class ProfileTVC: UITableViewCell {
         return v
     }()
     
-    
+    var isTapped = true
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backView.addSubview(lastStack)
@@ -107,16 +108,29 @@ class ProfileTVC: UITableViewCell {
             mySwitch.isHidden = true
             btn.isHidden = false
         }
-        if mySwitch.isOn {
-            
-            
-        } else {
-           
-        }
-       
+        let appDelegate = UIApplication.shared.windows
+        mySwitch.isOn =  cache.bool(forKey: "isDark")
+        
     }
     
-    
-    
-    
+    @objc func switchTapped() {
+        isTapped = !isTapped
+        cache.set(isTapped, forKey: "isDark")
+        let appDelegate = UIApplication.shared.windows
+       
+        if mySwitch.isOn {
+            for i in appDelegate {
+                i.overrideUserInterfaceStyle = .dark
+            }
+            return
+            
+        } else {
+            for i in appDelegate {
+                i.overrideUserInterfaceStyle = .light
+            }
+            return
+            
+        }
+        
+    }
 }

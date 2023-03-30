@@ -7,6 +7,7 @@
 
 import UIKit
 import PhoneNumberKit
+import Alamofire
 
 class LoginVC: UIViewController {
     
@@ -295,8 +296,19 @@ extension LoginVC {
     //Login Tapped
     @objc func loginTapped() {
         let vc = OtpVC()
-        //        vc.dataLbl = phoneNumberTFView.text!
-        navigationController?.pushViewController(vc, animated: true)
+        Loader.start()
+        getLogin { data in
+            Loader.stop()
+            print("kelgan malumot = ",data)
+            if data.success {
+                self.navigationController?.pushViewController(vc, animated: true)
+                self.sendOtp()
+                vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
+            } else {
+                
+            }
+        }
+       
     }
     
     //Opens ForgotVC Tapped
@@ -309,4 +321,18 @@ extension LoginVC {
         ChangeRootViewController.change(with: UINavigationController(rootViewController: SignUpVC()))
     }
     
+}
+
+//API connect
+extension LoginVC {
+    func getLogin(complation:@escaping (LoginDM)->Void){
+        API.getLogin(number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!, password: passwordTF.text!) { data in
+            complation(data)
+        }
+    }
+    func sendOtp(){
+        API.sendOtp(number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!) { data in
+//
+        }
+    }
 }

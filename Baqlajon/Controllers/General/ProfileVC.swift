@@ -52,7 +52,7 @@ class ProfileVC: UIViewController {
     let l = UILabel()
     l.font = .appFont(ofSize: 18,weight: .medium)
     l.textColor = UIColor(named: "black 1")
-        l.text = "Qudrat Safarov"
+        l.text = cache.string(forKey: "USER_NAME")
     return l
 }()
     
@@ -61,7 +61,7 @@ class ProfileVC: UIViewController {
     let l = UILabel()
     l.font = .appFont(ofSize: 16)
     l.textColor = UIColor(named: "gray 1")
-        l.text = "+998 93 865 98 99"
+        l.text = cache.string(forKey: "USER_PHONE_NUMBER")
     return l
 }()
     private lazy var lblStackV:UIStackView = {

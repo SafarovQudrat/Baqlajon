@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import PhoneNumberKit
+import Alamofire
 
 class SignUpVC: UIViewController {
     
@@ -307,31 +308,35 @@ extension SignUpVC {
     
     @objc func signUpTapped() {
         let vc = OtpVC()
-        //        vc.dataLbl = PhoneNumberTextField.text
-        navigationController?.pushViewController(vc, animated: true)
-        signUpRegister()
+        Loader.start()
+        signUpRegister { data in
+            Loader.stop()
+            if data.success {
+                self.navigationController?.pushViewController(vc, animated: true)
+                self.sendOtp()
+                vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
+            } else {
+                
+            }
+        }
+        
+        
+        
     }
 }
 
 extension SignUpVC {
-    func signUpRegister(){
-        let param:[String:Any] = [
-            "firstName": self.nameTF.text!,
-            "lastName": surnameTF.text!,
-            "password": referalCodeTF.text!,
-            "phoneNumber": phoneNumberTFView.text!
-            
-            
-        ]
+    func signUpRegister( compilation: @escaping (LoginDM)->Void){
         
-        
-        Net.req(urlAPI: "https://baqlajonapi.roundedteam.uz/user", method: .post, params: param) { data in
-            if let data = data {
-                let token = data["data"]["token"].stringValue
-                cache.set(token, forKey: "TOKEN")
-                print("Login Data = ",data)
-            }
+        API.register(lastName: self.surnameTF.text!, firstName: self.nameTF.text!, number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!, password: referalCodeTF.text!) { data in
+            compilation(data)
+            
         }
         
+    }
+    func sendOtp(){
+        API.sendOtp(number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!) { data in
+            //
+        }
     }
 }

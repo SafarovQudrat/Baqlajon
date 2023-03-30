@@ -56,7 +56,7 @@ class LoaderView: UIView {
         
         animationView.clipsToBounds = true
         animationView.layer.cornerRadius = 12
-        animationView.backgroundColor = #colorLiteral(red: 0.7843137255, green: 0.7843137255, blue: 0.7843137255, alpha: 1)
+        animationView.backgroundColor = .appColor(color: .gray7)
         self.addSubview(animationView)
         animationView.translatesAutoresizingMaskIntoConstraints = false
         animationView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true

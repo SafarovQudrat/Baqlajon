@@ -13,6 +13,20 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
 
         setUPTabbar()
+        let appDelegate = UIApplication.shared.windows
+        if !cache.bool(forKey: "isDark") {
+            for i in appDelegate {
+                i.overrideUserInterfaceStyle = .dark
+            }
+            return
+            
+        } else {
+            for i in appDelegate {
+                i.overrideUserInterfaceStyle = .light
+            }
+            return
+            
+        }
     }
     
     

@@ -12,6 +12,7 @@ class OtpVC: UIViewController {
     
     var otpIsCorrect = false
      var number:String = ""
+    var otp:String = ""
     let lbl: UILabel = {
         let lbl = UILabel()
         lbl.textColor = .label
@@ -64,7 +65,7 @@ class OtpVC: UIViewController {
     //MARK: set textFieldView
     func setupOtpView() {
         otpView.backgroundColor = .clear
-        otpView.fieldsCount = 4
+        otpView.fieldsCount = 6
         otpView.filledBackgroundColor = .systemGray6
         otpView.defaultBackgroundColor = .systemGray6
         otpView.defaultBorderColor = UIColor.clear
@@ -72,8 +73,8 @@ class OtpVC: UIViewController {
         otpView.cursorColor = UIColor.systemBlue
         otpView.displayType = .roundedCorner
         otpView.fieldBorderWidth = 3
-        otpView.fieldSize = 48
-        otpView.separatorSpace = 10
+        otpView.fieldSize = 36
+        otpView.separatorSpace = 6
         otpView.layer.shadowColor = UIColor.red.cgColor
         otpView.shouldAllowIntermediateEditing = true
         otpView.delegate = self
@@ -96,10 +97,19 @@ class OtpVC: UIViewController {
     
 //    confirmBtn Tapped
     @objc func confirmTapped(){
-        cache.set(true, forKey: "isTabbar")
-        let vc = MainTabBarController()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true)
+        Loader.start()
+        checkOtp { data in
+            Loader.stop()
+            
+            if data.success {
+                cache.set(true, forKey: "isTabbar")
+                let vc = MainTabBarController()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }
+        }
+        
+       
         
        
     }
@@ -122,8 +132,8 @@ class OtpVC: UIViewController {
         }
         otpView.snp.makeConstraints { make in
             make.top.equalTo(lbl).inset(70)
-            make.left.equalTo(80)
-            make.right.equalTo(-80)
+            make.left.equalTo(70)
+            make.right.equalTo(-70)
             make.height.equalTo(50)
         }
         otpViewController.addSubview(confirmBtn)
@@ -151,11 +161,8 @@ extension OtpVC: OTPFieldViewDelegate {
     func enteredOTP(otp: String) {
         print("yes")
         print("OTPString: \(otp)")
-        if otp.count == 4 /*, otpString == "sms code"*/ {
-            otpIsCorrect = true
-        }else {
-            otpIsCorrect = false
-        }
+        
+        self.otp = otp
     }
     
     func hasEnteredAllOTP(hasEnteredAll: Bool) -> Bool {
@@ -163,4 +170,12 @@ extension OtpVC: OTPFieldViewDelegate {
         return false
     }
     
+}
+//API
+extension OtpVC {
+    func checkOtp(complation:@escaping(LoginDM)->Void) {
+        API.checkOtp(number: number, otp: otp) { data in
+            complation(data)
+        }
+    }
 }

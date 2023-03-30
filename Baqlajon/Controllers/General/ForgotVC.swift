@@ -125,9 +125,24 @@ class ForgotVC: UIViewController {
 extension ForgotVC {
     
     @objc func sendCodeTapped() {
-        let vc = ResetPasswordVC()
-        navigationController?.pushViewController(vc, animated: true)
+        Loader.start()
+        putData { data in
+            Loader.stop()
+            if data.success {
+                let vc = ResetPasswordVC()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+        
     }
     
     
+}
+//MARK: -API
+extension ForgotVC {
+    func putData(complation:@escaping(LoginDM)->Void){
+        API.forgetPass(number: (phoneNumberTF.text?.replacingOccurrences(of: " ", with: ""))!) { data in
+            complation(data)
+        }
+    }
 }
