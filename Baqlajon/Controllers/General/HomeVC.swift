@@ -130,21 +130,112 @@ class HomeVC: UIViewController {
             return v
         }()
     
+    //    category btns
+        private var allBtn: UIButton = {
+            let b = UIButton()
+            b.setTitle("All courses", for: .normal)
+            b.setTitleColor(.appColor(color: .gray2), for: .normal)
+            b.titleLabel?.font = UIFont(name: "Poppins", size: 14)
+            b.layer.borderWidth = 1
+            b.layer.cornerRadius = 8
+            b.layer.borderColor = UIColor.systemGray3.cgColor
+            b.addTarget(.none, action: #selector(allTapped), for: .touchUpInside)
+            return b
+        }()
+        private var onBtn: UIButton = {
+            let b = UIButton()
+            b.setTitle("Popular", for: .normal)
+            b.setTitleColor(.systemGray2, for: .normal)
+            b.titleLabel?.font = UIFont(name: "Poppins", size: 14)
+            b.layer.borderWidth = 1
+            b.layer.cornerRadius = 8
+            b.layer.borderColor = UIColor.systemGray3.cgColor
+            b.addTarget(.none, action: #selector(onTapped), for: .touchUpInside)
+            return b
+        }()
+        private var compBtn: UIButton = {
+            let b = UIButton()
+            b.setTitle("Newest", for: .normal)
+            b.setTitleColor(.systemGray2, for: .normal)
+            b.titleLabel?.font = UIFont(name: "Poppins", size: 14)
+            b.layer.borderWidth = 1
+            b.layer.cornerRadius = 8
+            b.layer.borderColor = UIColor.systemGray3.cgColor
+            b.addTarget(.none, action: #selector(complTapped), for: .touchUpInside)
+            return b
+        }()
+    //    constants
+        private lazy var stackV: UIStackView = {
+           let s = UIStackView(arrangedSubviews: [allBtn,onBtn,compBtn])
+            s.spacing = 16
+            s.axis = .horizontal
+            s.alignment = .fill
+            s.distribution = .fillEqually
+            s.snp.makeConstraints { make in
+                make.height.equalTo(34)
+            }
+            return s
+        }()
     
     
     
+    
+//    search Bar
+    private lazy var searchV:UIView = {
+       let v = UIView()
+        v.backgroundColor = .appColor(color: .white)
+        v.layer.cornerRadius = 8
+        v.addSubview(searchTF)
+        searchTF.snp.makeConstraints { make in
+            make.top.left.equalTo(10)
+            make.bottom.right.equalTo(-10)
+        }
+        return v
+    }()
+    private lazy var searchTF:UITextField = {
+        let t = UITextField()
+        t.textColor = .appColor(color: .black1)
+        t.placeholder = "Search"
+        t.font = .appFont(ofSize: 16)
+        t.addTarget(.none, action: #selector(searchTapped), for: .touchUpInside)
+        return t
+    }()
+    
+//    Collectionviews
+    
+    private lazy var collectionView:UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(CoursesCVC.self, forCellWithReuseIdentifier: "CoursesCVC")
+        collectionView.isPagingEnabled = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .clear
+        return collectionView
+    }()
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .appColor(color: .background)
+        allBtn.layer.borderWidth = 0
+        allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
+        allBtn.setTitleColor(.white, for: .normal)
         setNavController()
         setUpUI()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+       
     }
 //setUpUI
     func setUpUI(){
-        
+        view.addSubview(searchV)
+        searchV.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(16)
+            make.left.right.equalToSuperview().inset(16)
+            make.height.equalTo(50)
+        }
         btnView.addSubview(btnStack)
         btnStack.snp.makeConstraints { make in
             make.right.left.equalToSuperview().inset(16)
@@ -158,7 +249,7 @@ class HomeVC: UIViewController {
         view.addSubview(myView)
         myView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(16)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(16)
+            make.top.equalTo(searchV.snp_bottomMargin).inset(-16)
         }
         myView.addSubview(imageV)
         imageV.snp.makeConstraints { make in
@@ -179,6 +270,19 @@ class HomeVC: UIViewController {
             make.right.equalToSuperview().inset(30)
             make.top.equalTo(myView.snp_bottomMargin).inset(0)
         }
+        view.addSubview(stackV)
+        stackV.snp.makeConstraints { make in
+            make.top.equalTo(yellowView.snp_bottomMargin).inset(-24)
+            make.left.equalTo(16)
+            make.right.equalTo(-16)
+        }
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(stackV.snp_bottomMargin).inset(-16)
+            make.left.right.bottom.equalToSuperview().inset(16)
+            
+        }
+        
     }
     
     
@@ -204,6 +308,61 @@ class HomeVC: UIViewController {
         let vc = PaymentsVC()
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc, animated: false)
+    }
+    @objc func searchTapped(){
+        
+    }
+    
+    //    select category btns
+        @objc func allTapped() {
+            allBtn.layer.borderWidth = 0
+            allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
+            allBtn.setTitleColor(.white, for: .normal)
+            onBtn.setTitleColor(.appColor(color: .gray2), for: .normal)
+           compBtn.setTitleColor(.appColor(color: .gray2), for: .normal)
+            onBtn.backgroundColor = .clear
+            onBtn.layer.borderWidth = 1
+          
+            compBtn.backgroundColor = .clear
+            compBtn.layer.borderWidth = 1
+        }
+        @objc func onTapped() {
+            onBtn.layer.borderWidth = 0
+            onBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
+            onBtn.setTitleColor(.white, for: .normal)
+           allBtn.setTitleColor(.appColor(color: .gray2), for: .normal)
+          compBtn.setTitleColor(.appColor(color: .gray2), for: .normal)
+            allBtn.backgroundColor = .clear
+            allBtn.layer.borderWidth = 1
+            compBtn.backgroundColor = .clear
+            compBtn.layer.borderWidth = 1
+        }
+        @objc func complTapped() {
+            compBtn.layer.borderWidth = 0
+            compBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
+           compBtn.setTitleColor(.white, for: .normal)
+             onBtn.setTitleColor(.appColor(color: .gray2), for: .normal)
+            allBtn.setTitleColor(.appColor(color: .gray2), for: .normal)
+            onBtn.backgroundColor = .clear
+            onBtn.layer.borderWidth = 1
+            allBtn.backgroundColor = .clear
+            allBtn.layer.borderWidth = 1
+        }
+        
+  
+}
+extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+      return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoursesCVC", for: indexPath) as? CoursesCVC else {return UICollectionViewCell()}
+        cell.backgroundColor = .blue
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (self.collectionView.frame.width - 16)/2, height: 190)
     }
     
 }

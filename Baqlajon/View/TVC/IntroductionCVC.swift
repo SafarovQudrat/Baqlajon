@@ -11,8 +11,7 @@ import SnapKit
 class IntroductionCVC: UICollectionViewCell {
     
     static let identifier = "IntroductionCVC"
-    
-    
+  
     private let textLabel: UILabel = {
         let label = UILabel()
         label.text = "Our new videos make it easy for you to learn anywhere, there are new videos that will be ready to help you"

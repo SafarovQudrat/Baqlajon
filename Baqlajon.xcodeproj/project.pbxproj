@@ -11,6 +11,7 @@
 		39A99FFC2994F33D00D4A09D /* CourseDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A99FFB2994F33D00D4A09D /* CourseDetailsVC.swift */; };
 		39C4E5DB299765F0008AF8AB /* CourseDetailsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */; };
 		521AF05D299F3F9F000A2F83 /* BalanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521AF05C299F3F9F000A2F83 /* BalanceVC.swift */; };
+		5234CFBE29D6A457006E91BC /* CoursesCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5234CFBD29D6A457006E91BC /* CoursesCVC.swift */; };
 		5236F81429D21B0100B07FE6 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5236F81329D21B0100B07FE6 /* OnboardingVC.swift */; };
 		523BA9C829D2E97A005996DD /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BA9C729D2E97A005996DD /* ResetPasswordVC.swift */; };
 		5257988829D30F4F005A93AC /* OTPFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5257988729D30F4F005A93AC /* OTPFieldView.swift */; };
@@ -77,6 +78,7 @@
 		39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailsTableHeaderView.swift; sourceTree = "<group>"; };
 		4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.release.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.release.xcconfig"; sourceTree = "<group>"; };
 		521AF05C299F3F9F000A2F83 /* BalanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceVC.swift; sourceTree = "<group>"; };
+		5234CFBD29D6A457006E91BC /* CoursesCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesCVC.swift; sourceTree = "<group>"; };
 		5236F81329D21B0100B07FE6 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		523BA9C729D2E97A005996DD /* ResetPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		5257988729D30F4F005A93AC /* OTPFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPFieldView.swift; sourceTree = "<group>"; };
@@ -152,6 +154,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5234CFB929D6A3FE006E91BC /* TVC */ = {
+			isa = PBXGroup;
+			children = (
+				5FDBE7B62998173B00F7DB52 /* MyCourseTVC.swift */,
+				52770B42299A109C00187F27 /* ProfileTVC.swift */,
+				5FB51FE529929001005E4FDA /* IntroductionCVC.swift */,
+				39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */,
+				525798A929D31878005A93AC /* CourseDetailsVideoTableViewCell.swift */,
+				525798AB29D31936005A93AC /* CourseDetailsReviewsTableViewCell.swift */,
+				525798AF29D31A25005A93AC /* PaymentHistoryTableViewCell.swift */,
+				525798B529D31AFA005A93AC /* ChangeLanguageTableViewCell.swift */,
+			);
+			path = TVC;
+			sourceTree = "<group>";
+		};
+		5234CFBA29D6A40F006E91BC /* CVC */ = {
+			isa = PBXGroup;
+			children = (
+				5234CFBD29D6A457006E91BC /* CoursesCVC.swift */,
+			);
+			path = CVC;
+			sourceTree = "<group>";
+		};
 		5F69B72C2992297D003BB9D6 = {
 			isa = PBXGroup;
 			children = (
@@ -219,14 +244,8 @@
 		5F9753C82992642200DC6667 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5FDBE7B62998173B00F7DB52 /* MyCourseTVC.swift */,
-				52770B42299A109C00187F27 /* ProfileTVC.swift */,
-				5FB51FE529929001005E4FDA /* IntroductionCVC.swift */,
-				39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */,
-				525798A929D31878005A93AC /* CourseDetailsVideoTableViewCell.swift */,
-				525798AB29D31936005A93AC /* CourseDetailsReviewsTableViewCell.swift */,
-				525798AF29D31A25005A93AC /* PaymentHistoryTableViewCell.swift */,
-				525798B529D31AFA005A93AC /* ChangeLanguageTableViewCell.swift */,
+				5234CFBA29D6A40F006E91BC /* CVC */,
+				5234CFB929D6A3FE006E91BC /* TVC */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -480,6 +499,7 @@
 				5FDBE7B0299816EE00F7DB52 /* ForgotVC.swift in Sources */,
 				52EDD92A29A359EC00FDE2D5 /* CongratulationVC.swift in Sources */,
 				5FDBE7B72998173B00F7DB52 /* MyCourseTVC.swift in Sources */,
+				5234CFBE29D6A457006E91BC /* CoursesCVC.swift in Sources */,
 				5F9753F32992816700DC6667 /* HomeVC.swift in Sources */,
 				523BA9C829D2E97A005996DD /* ResetPasswordVC.swift in Sources */,
 				525798B429D31AD5005A93AC /* ChangeLanguageViewController.swift in Sources */,
