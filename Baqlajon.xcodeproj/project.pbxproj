@@ -79,6 +79,8 @@
 		4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.release.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.release.xcconfig"; sourceTree = "<group>"; };
 		521AF05C299F3F9F000A2F83 /* BalanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceVC.swift; sourceTree = "<group>"; };
 		5234CFBD29D6A457006E91BC /* CoursesCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesCVC.swift; sourceTree = "<group>"; };
+		5234CFC729D76243006E91BC /* Abdulloh Domla.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Abdulloh Domla.MP4"; sourceTree = "<group>"; };
+		5234CFC829D762E7006E91BC /* video.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.MP4; sourceTree = "<group>"; };
 		5236F81329D21B0100B07FE6 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		523BA9C729D2E97A005996DD /* ResetPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		5257988729D30F4F005A93AC /* OTPFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPFieldView.swift; sourceTree = "<group>"; };
@@ -204,6 +206,8 @@
 				5F9753C82992642200DC6667 /* View */,
 				5F9753CA2992643600DC6667 /* Controllers */,
 				5F69B7382992297D003BB9D6 /* AppDelegate.swift */,
+				5234CFC729D76243006E91BC /* Abdulloh Domla.MP4 */,
+				5234CFC829D762E7006E91BC /* video.MP4 */,
 				5F9753E42992700700DC6667 /* Colors.xcassets */,
 				5F69B7412992297E003BB9D6 /* Assets.xcassets */,
 				5F69B7432992297E003BB9D6 /* LaunchScreen.storyboard */,

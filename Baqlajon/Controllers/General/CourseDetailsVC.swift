@@ -102,7 +102,7 @@ extension CourseDetailsVC: UITableViewDelegate, UITableViewDataSource {
 
         } else {
             let reviewsCell = tableView.dequeueReusableCell(withIdentifier: CourseDetailsReviewsTableViewCell.identifier, for: indexPath)
-
+//            reviewsCell.contentView.backgroundColor = .appColor(color: .white)
             return reviewsCell
         }
 
@@ -155,7 +155,7 @@ extension CourseDetailsVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        navigationController?.pushViewController(VideoDetailsViewController(), animated: true)
+        navigationController?.pushViewController(VideoDetailsViewController(), animated: true)
     }
     
 }
@@ -171,6 +171,7 @@ extension CourseDetailsVC: CourseDetailsTableHeaderViewDelegate {
     
     func reviewsButtonDidTap() {
         videoTableViewCellIsOn = false
+        
         tableView.reloadData()
         
         startLessonAndWriteReviewButton.setTitle("Write a review", for: .normal)

@@ -495,7 +495,9 @@ class BalanceVC: UIViewController {
         
         setUpUI()
         setNavController()
-        backV.isHidden = true
+        backV.isHidden = false
+        coinBackV.isHidden = true
+        shareBView.isHidden = true
     }
 //    SetUpUi
     func setUpUI() {
@@ -548,9 +550,9 @@ class BalanceVC: UIViewController {
         
     }
     @objc func buyBtnTapped() {
-        let vc = PaymentsVC()
-       vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: false)
+        backV.isHidden = false
+        coinBackV.isHidden = true
+        shareBView.isHidden = true
     }
     @objc func shareBtnTapped() {
         self.navigationItem.backButtonTitle = ""

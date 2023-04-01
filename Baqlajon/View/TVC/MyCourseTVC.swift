@@ -63,20 +63,15 @@ class MyCourseTVC: UITableViewCell {
         
         return s
     }()
-    private lazy var mStackV: UIStackView = {
-       let s = UIStackView(arrangedSubviews: [titleLbl,textLbl])
-        s.spacing = 2
-        s.axis = .vertical
-        s.alignment = .fill
-        s.distribution = .fill
-        return s
-    }()
     
     
     lazy var  starImage: UIImageView = {
         let i = UIImageView()
          i.image = UIImage(systemName: "star.fill")
         i.tintColor = #colorLiteral(red: 0.9998322129, green: 0.6800814271, blue: 0.1177380309, alpha: 1)
+        i.snp.makeConstraints { make in
+            make.height.width.equalTo(16)
+        }
          return i
      }()
     var starLbl: UILabel = {
@@ -90,6 +85,9 @@ class MyCourseTVC: UITableViewCell {
         let i = UIImageView()
          i.image = UIImage(systemName: "eye")
         i.tintColor = #colorLiteral(red: 0.4, green: 0.4, blue: 0.5294117647, alpha: 1)
+        i.snp.makeConstraints { make in
+            make.height.width.equalTo(16)
+        }
          return i
      }()
     var eyeLbl: UILabel = {
@@ -131,23 +129,7 @@ class MyCourseTVC: UITableViewCell {
         
         return s
     }()
-    private lazy var nStackV: UIStackView = {
-       let s = UIStackView(arrangedSubviews: [mStackV,stackV,eSstackV])
-        s.spacing = 10
-        s.axis = .vertical
-        s.alignment = .leading
-        s.distribution = .fill
-        return s
-    }()
-    private lazy var fStackV: UIStackView = {
-       let s = UIStackView(arrangedSubviews: [image,nStackV])
-        s.spacing = 12
-        s.axis = .horizontal
-        s.alignment = .center
-        s.distribution = .fill
-        return s
-    }()
-    
+   
     private lazy var myBackV:UIView = {
        let v = UIView()
         v.backgroundColor = .appColor(color: .white)
@@ -160,9 +142,9 @@ class MyCourseTVC: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        titleLbl.font = UIFont(name: "Poppins", size: 10)
-        textLbl.font = UIFont(name: "Poppins", size: 14)
-        taskLbl.font = UIFont(name: "Poppins ", size: 14)
+        titleLbl.font = .appFont(ofSize: 10)
+        textLbl.font = .appFont(ofSize: 14)
+        taskLbl.font = .appFont(ofSize: 14)
         backV.snp.makeConstraints { make in
             make.height.equalTo(12)
             make.width.equalTo(contentView.frame.width/2 - 16)
@@ -171,17 +153,37 @@ class MyCourseTVC: UITableViewCell {
             make.height.equalTo(12)
             make.width.equalTo(110)
         }
+        myBackV.addSubview(image)
         image.snp.makeConstraints { make in
+            make.top.left.bottom.equalTo(0)
             make.width.equalTo(120)
             make.height.equalTo(100)
         }
         backV.addSubview(progressV)
         backV.backgroundColor = #colorLiteral(red: 0.964705646, green: 0.9647061229, blue: 0.9776162505, alpha: 1)
         progressV.backgroundColor = #colorLiteral(red: 0, green: 0.5753021836, blue: 0.9667152762, alpha: 1)
-        myBackV.addSubview(fStackV)
-        fStackV.snp.makeConstraints { make in
-            make.top.bottom.left.right.equalToSuperview().inset(0)
+        myBackV.addSubview(titleLbl)
+        titleLbl.snp.makeConstraints { make in
+            make.top.equalTo(12)
+            make.left.equalTo(image.snp_rightMargin).inset(-12)
         }
+        myBackV.addSubview(textLbl)
+        textLbl.snp.makeConstraints { make in
+            make.top.equalTo(titleLbl.snp_bottomMargin).inset(-10)
+            make.left.equalTo(image.snp_rightMargin).inset(-12)
+        }
+        myBackV.addSubview(stackV)
+        stackV.snp.makeConstraints { make in
+            make.left.equalTo(image.snp_rightMargin).inset(-12)
+            make.top.equalTo(textLbl.snp_bottomMargin).inset(-12)
+        }
+        myBackV.addSubview(eSstackV)
+        eSstackV.snp.makeConstraints { make in
+            make.left.equalTo(image.snp_rightMargin).inset(-12)
+            make.top.equalTo(stackV.snp_bottomMargin).inset(-10)
+        }
+        
+
         self.contentView.addSubview(myBackV)
         myBackV.snp.makeConstraints { make in
             make.top.bottom.left.right.equalToSuperview().inset(5)

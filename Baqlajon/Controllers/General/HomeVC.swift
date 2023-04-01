@@ -213,6 +213,71 @@ class HomeVC: UIViewController {
         collectionView.backgroundColor = .clear
         return collectionView
     }()
+//    profile
+    private lazy var backProfileV:UIView={
+        let v = UIView()
+        v.backgroundColor = .appColor(color: .white)
+        v.addSubview(ILStack)
+        ILStack.snp.makeConstraints { make in
+            make.left.equalTo(12)
+            make.bottom.equalTo(-8)
+        }
+        v.addSubview(alertBtn)
+        alertBtn.snp.makeConstraints { make in
+            make.right.bottom.equalTo(-16)
+            make.height.width.equalTo(24)
+        }
+        return v
+    }()
+    private lazy var imageP:UIImageView = {
+        let i = UIImageView()
+        i.image = UIImage(named: "avatarImage")
+        i.snp.makeConstraints { make in
+            make.width.height.equalTo(40)
+        }
+        return i
+    }()
+    private lazy var hiLbl:UILabel = {
+        let l = UILabel()
+        l.font = .appFont(ofSize: 12)
+        l.textColor = .appColor(color: .gray1)
+        l.text = "Hello!"
+        return l
+    }()
+    private lazy var usernameLbl:UILabel = {
+        let l = UILabel()
+        l.textColor = .appColor(color: .black1)
+        l.font = .appFont(ofSize: 16)
+        l.text = cache.string(forKey: "USER_NAME")
+        return l
+    }()
+    private lazy var lblStackV:UIStackView = {
+        let s = UIStackView(arrangedSubviews: [hiLbl,usernameLbl])
+        s.alignment = .fill
+        s.axis = .vertical
+        s.distribution = .fill
+        s.spacing = 0
+        return s
+    }()
+    private lazy var ILStack:UIStackView = {
+        let s = UIStackView(arrangedSubviews: [imageP,lblStackV])
+        s.spacing = 12
+        s.distribution = .fill
+        s.axis = .horizontal
+        s.alignment = .fill
+        return s
+    }()
+    private lazy var alertBtn:UIButton = {
+        let b = UIButton()
+        b.setImage(UIImage(systemName: "bell"), for: .normal)
+        b.addTarget(.none, action: #selector(alertTapped), for: .touchUpInside)
+        b.tintColor = .appColor(color: .black1)
+            return b
+    }()
+    
+    
+    var arr:[GetCourseDM] = []
+    
     
     
     
@@ -222,11 +287,10 @@ class HomeVC: UIViewController {
         allBtn.layer.borderWidth = 0
         allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
         allBtn.setTitleColor(.white, for: .normal)
-        setNavController()
+        Loader.start()
+        getCourse()
         setUpUI()
-        collectionView.delegate = self
-        collectionView.dataSource = self
-       
+        
     }
 //setUpUI
     func setUpUI(){
@@ -282,22 +346,19 @@ class HomeVC: UIViewController {
             make.left.right.bottom.equalToSuperview().inset(16)
             
         }
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        self.navigationController?.view.addSubview(backProfileV)
+        backProfileV.snp.makeConstraints { make in
+            make.top.left.right.equalTo(0)
+            make.height.equalTo(self.view.frame.height/9)
+            make.width.equalTo(view.frame.width/2)
+        }
         
     }
     
     
     
-    //    SetNavController
-        func setNavController() {
-            navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),font: .appFont(ofSize: 16,weight: .medium))
-            let leftBtn = UIBarButtonItem(title: "Home", style: .done, target: self, action: .none)
-            let rightButton = UIBarButtonItem(image:UIImage(named: "alert"), style: .done, target: self, action: #selector(alertTapped))
-            navigationItem.rightBarButtonItem = rightButton
-            navigationItem.leftBarButtonItem = leftBtn
-            navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
-            navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
-            
-        }
     
     @objc func alertTapped(){
         
@@ -353,16 +414,30 @@ class HomeVC: UIViewController {
 }
 extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return 10
+        print("arararar==",arr)
+        return self.arr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoursesCVC", for: indexPath) as? CoursesCVC else {return UICollectionViewCell()}
-        cell.backgroundColor = .blue
+        cell.backgroundColor = .clear
+        cell.updateCell(course: arr[indexPath.row])
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (self.collectionView.frame.width - 16)/2, height: 190)
     }
     
+}
+
+
+//MARK:
+extension HomeVC{
+    func getCourse() {
+        API.getAllCourse { data in
+            Loader.stop()
+            self.arr = data.data
+            print("dataaa = ",data)
+        }
+    }
 }

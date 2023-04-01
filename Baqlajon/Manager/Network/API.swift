@@ -21,6 +21,7 @@ class API {
     static let sendOtp:String = baseURL + "user/sendOtp"
     static let checkOtp:String = baseURL + "user/checkOtp"
     static let forgetPassword:String = baseURL + "user/forget"
+    static let getAllCourseUrl:String = baseURL + "course"
 //    MARK: -functions
 //    register
     static func register(lastName:String,firstName:String,number:String, password:String, complation:@escaping (LoginDM)->Void) {
@@ -138,6 +139,25 @@ class API {
             complation(LoginDM(json: data))
         }
     }
+    
+//    getAllCourse
+    static func getAllCourse(complation:@escaping (LoginDM)->Void){
+        let headers:HTTPHeaders = [
+            "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
+            "lang":"uz"
+        ]
+     
+        Net.sendRequest(to: getAllCourseUrl, method: .get, headers: headers, param: nil) { data in
+            guard let data = data else {return}
+            print("Json data = ",data)
+            complation(LoginDM(json: data))
+         
+        }
+        
+        
+        
+    }
+    
     
     
 }

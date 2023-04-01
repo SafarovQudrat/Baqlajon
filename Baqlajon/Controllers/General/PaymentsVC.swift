@@ -55,7 +55,7 @@ class PaymentsVC: UIViewController {
     private lazy var backImg: UIImageView = {
         let backImage = UIImageView(image: UIImage(named: "PaymentsBack"))
         backImage.contentMode = .scaleAspectFill
-        backImage.backgroundColor = .black
+        backImage.backgroundColor = .clear
         backImage.tintColor = .black
         return backImage
     }()
@@ -222,7 +222,7 @@ class PaymentsVC: UIViewController {
 //    ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .appColor(color: .background)
+        view.backgroundColor = .black.withAlphaComponent(0.6)
         containerV.backgroundColor = .clear
         containerV.addSubview(backImageV)
         backImageV.snp.makeConstraints { make in

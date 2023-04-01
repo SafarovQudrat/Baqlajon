@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SDWebImage
 class CoursesCVC: UICollectionViewCell {
     
     static let identifier = "CoursesCVC"
@@ -16,6 +17,7 @@ class CoursesCVC: UICollectionViewCell {
         i.clipsToBounds = true
         i.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
         i.layer.cornerRadius = 8
+        i.contentMode = .scaleAspectFill
          return i
      }()
      var titleLbl: UILabel = {
@@ -27,25 +29,18 @@ class CoursesCVC: UICollectionViewCell {
      }()
      var textLbl: UILabel = {
         let l = UILabel()
-         l.font = .appFont(ofSize: 14)
+         l.font = .appFont(ofSize: 12)
          l.text = "Social media marketing"
-         l.numberOfLines = 2
+         l.numberOfLines = 0
          return l
      }()
   
-     private lazy var mStackV: UIStackView = {
-        let s = UIStackView(arrangedSubviews: [titleLbl,textLbl])
-         s.spacing = 2
-         s.axis = .vertical
-         s.alignment = .fill
-         s.distribution = .fill
-         return s
-     }()
-     
-     
      lazy var  starImage: UIImageView = {
          let i = UIImageView()
           i.image = UIImage(systemName: "star.fill")
+         i.snp.makeConstraints { make in
+             make.height.width.equalTo(16)
+         }
          i.tintColor = #colorLiteral(red: 0.9998322129, green: 0.6800814271, blue: 0.1177380309, alpha: 1)
           return i
       }()
@@ -60,6 +55,9 @@ class CoursesCVC: UICollectionViewCell {
          let i = UIImageView()
           i.image = UIImage(systemName: "eye")
          i.tintColor = #colorLiteral(red: 0.4, green: 0.4, blue: 0.5294117647, alpha: 1)
+         i.snp.makeConstraints { make in
+             make.height.width.equalTo(16)
+         }
           return i
       }()
      var eyeLbl: UILabel = {
@@ -69,15 +67,14 @@ class CoursesCVC: UICollectionViewCell {
          l.text = "6k"
          return l
      }()
-     
-     
+ 
      private lazy var starStackV: UIStackView = {
         let s = UIStackView(arrangedSubviews: [starImage,starLbl])
       
          s.spacing = 2
          s.axis = .horizontal
          s.alignment = .fill
-         s.distribution = .fillEqually
+         s.distribution = .fill
          
          return s
      }()
@@ -87,37 +84,21 @@ class CoursesCVC: UICollectionViewCell {
          s.spacing = 2
          s.axis = .horizontal
          s.alignment = .fill
-         s.distribution = .fillEqually
+         s.distribution = .fill
          
          return s
      }()
      private lazy var eSstackV: UIStackView = {
         let s = UIStackView(arrangedSubviews: [starStackV,eyeStackV])
         
-         s.spacing = 18
+         s.spacing = 10
          s.axis = .horizontal
-         s.alignment = .fill
+         s.alignment = .leading
          s.distribution = .fill
          
          return s
      }()
-     private lazy var nStackV: UIStackView = {
-        let s = UIStackView(arrangedSubviews: [mStackV,eSstackV])
-         s.spacing = 6
-         s.axis = .vertical
-         s.alignment = .leading
-         s.distribution = .fill
-         return s
-     }()
-     private lazy var fStackV: UIStackView = {
-        let s = UIStackView(arrangedSubviews: [image,nStackV])
-         s.spacing = 6
-         s.axis = .vertical
-         s.alignment = .leading
-         s.distribution = .fill
-         return s
-     }()
-     
+    
      private lazy var myBackV:UIView = {
         let v = UIView()
          v.backgroundColor = .appColor(color: .white)
@@ -125,10 +106,7 @@ class CoursesCVC: UICollectionViewCell {
          return v
      }()
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        setUI()
-//    }
+
 
     
     override init(frame: CGRect) {
@@ -146,14 +124,25 @@ class CoursesCVC: UICollectionViewCell {
     private func setUI(){
         titleLbl.font = UIFont(name: "Poppins", size: 10)
         textLbl.font = UIFont(name: "Poppins", size: 14)
+        myBackV.addSubview(image)
         image.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview().inset(0)
             make.height.equalTo(90)
         }
-        myBackV.addSubview(fStackV)
-        fStackV.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(0)
+        myBackV.addSubview(titleLbl)
+        titleLbl.snp.makeConstraints { make in
+            make.left.equalTo(6)
+            make.top.equalTo(image.snp_bottomMargin).inset(-10)
+        }
+        myBackV.addSubview(textLbl)
+        textLbl.snp.makeConstraints { make in
+            make.top.equalTo(titleLbl.snp_bottomMargin).inset(-6)
             make.left.right.equalToSuperview().inset(6)
-            make.bottom.equalTo(-8)
+        }
+        myBackV.addSubview(eSstackV)
+        eSstackV.snp.makeConstraints { make in
+            make.top.equalTo(textLbl.snp_bottomMargin).inset(-10)
+            make.left.equalTo(6)
         }
         self.contentView.addSubview(myBackV)
         myBackV.snp.makeConstraints { make in
@@ -161,6 +150,15 @@ class CoursesCVC: UICollectionViewCell {
         }
         contentView.backgroundColor = .appColor(color: .background)
     }
+    
+    func updateCell(course:GetCourseDM) {
+        image.sd_setImage(with: URL(string: course.image))
+        titleLbl.text = course.title
+        textLbl.text = course.desc
+        starLbl.text = "\(course.viewCount)"
+        eyeLbl.text = "\(course.rating)"
+    }
+    
     
     
 }
