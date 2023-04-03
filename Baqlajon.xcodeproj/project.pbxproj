@@ -10,6 +10,9 @@
 		39A99FFA2994EC7F00D4A09D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A99FF92994EC7F00D4A09D /* LoginVC.swift */; };
 		39A99FFC2994F33D00D4A09D /* CourseDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A99FFB2994F33D00D4A09D /* CourseDetailsVC.swift */; };
 		39C4E5DB299765F0008AF8AB /* CourseDetailsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */; };
+		520E7A4F29D988D8001C1336 /* MyCourseDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520E7A4E29D988D8001C1336 /* MyCourseDM.swift */; };
+		520E7A5129DA138F001C1336 /* ShopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520E7A5029DA138F001C1336 /* ShopVC.swift */; };
+		520E7A5329DA1629001C1336 /* ShopTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520E7A5229DA1629001C1336 /* ShopTVC.swift */; };
 		521AF05D299F3F9F000A2F83 /* BalanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521AF05C299F3F9F000A2F83 /* BalanceVC.swift */; };
 		5234CFBE29D6A457006E91BC /* CoursesCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5234CFBD29D6A457006E91BC /* CoursesCVC.swift */; };
 		5236F81429D21B0100B07FE6 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5236F81329D21B0100B07FE6 /* OnboardingVC.swift */; };
@@ -77,10 +80,11 @@
 		39A99FFB2994F33D00D4A09D /* CourseDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailsVC.swift; sourceTree = "<group>"; };
 		39C4E5DA299765F0008AF8AB /* CourseDetailsTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailsTableHeaderView.swift; sourceTree = "<group>"; };
 		4DFB9F73902F371E52E88CD8 /* Pods-Baqlajon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baqlajon.release.xcconfig"; path = "Target Support Files/Pods-Baqlajon/Pods-Baqlajon.release.xcconfig"; sourceTree = "<group>"; };
+		520E7A4E29D988D8001C1336 /* MyCourseDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCourseDM.swift; sourceTree = "<group>"; };
+		520E7A5029DA138F001C1336 /* ShopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopVC.swift; sourceTree = "<group>"; };
+		520E7A5229DA1629001C1336 /* ShopTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTVC.swift; sourceTree = "<group>"; };
 		521AF05C299F3F9F000A2F83 /* BalanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceVC.swift; sourceTree = "<group>"; };
 		5234CFBD29D6A457006E91BC /* CoursesCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesCVC.swift; sourceTree = "<group>"; };
-		5234CFC729D76243006E91BC /* Abdulloh Domla.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Abdulloh Domla.MP4"; sourceTree = "<group>"; };
-		5234CFC829D762E7006E91BC /* video.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.MP4; sourceTree = "<group>"; };
 		5236F81329D21B0100B07FE6 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		523BA9C729D2E97A005996DD /* ResetPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		5257988729D30F4F005A93AC /* OTPFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPFieldView.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 				525798A929D31878005A93AC /* CourseDetailsVideoTableViewCell.swift */,
 				525798AB29D31936005A93AC /* CourseDetailsReviewsTableViewCell.swift */,
 				525798AF29D31A25005A93AC /* PaymentHistoryTableViewCell.swift */,
+				520E7A5229DA1629001C1336 /* ShopTVC.swift */,
 				525798B529D31AFA005A93AC /* ChangeLanguageTableViewCell.swift */,
 			);
 			path = TVC;
@@ -206,8 +211,6 @@
 				5F9753C82992642200DC6667 /* View */,
 				5F9753CA2992643600DC6667 /* Controllers */,
 				5F69B7382992297D003BB9D6 /* AppDelegate.swift */,
-				5234CFC729D76243006E91BC /* Abdulloh Domla.MP4 */,
-				5234CFC829D762E7006E91BC /* video.MP4 */,
 				5F9753E42992700700DC6667 /* Colors.xcassets */,
 				5F69B7412992297E003BB9D6 /* Assets.xcassets */,
 				5F69B7432992297E003BB9D6 /* LaunchScreen.storyboard */,
@@ -241,6 +244,7 @@
 			children = (
 				5FB51FE329928FF3005E4FDA /* DataModel.swift */,
 				529ADA5F29D4B187006B4B20 /* LoginDM.swift */,
+				520E7A4E29D988D8001C1336 /* MyCourseDM.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -277,6 +281,7 @@
 				39A99FFB2994F33D00D4A09D /* CourseDetailsVC.swift */,
 				5FDBE7AC299816EE00F7DB52 /* MyCourses.swift */,
 				521AF05C299F3F9F000A2F83 /* BalanceVC.swift */,
+				520E7A5029DA138F001C1336 /* ShopVC.swift */,
 				52770B44299A10AD00187F27 /* ProfileVC.swift */,
 				525798AD29D319F5005A93AC /* PaymentHistoryViewController.swift */,
 				525798B729D31B27005A93AC /* AboutUsViewController.swift */,
@@ -491,6 +496,7 @@
 				5F9753E92992778B00DC6667 /* Ex+UIColor.swift in Sources */,
 				5FDBE7AF299816EE00F7DB52 /* PaymentsVC.swift in Sources */,
 				52EDD92C29A383C000FDE2D5 /* ShareReferalCodeVC.swift in Sources */,
+				520E7A5129DA138F001C1336 /* ShopVC.swift in Sources */,
 				525798B829D31B27005A93AC /* AboutUsViewController.swift in Sources */,
 				5F9753E7299273C000DC6667 /* Ex+UIFont.swift in Sources */,
 				5F9753F129927FCF00DC6667 /* Ex+UIStackView.swift in Sources */,
@@ -503,6 +509,7 @@
 				5FDBE7B0299816EE00F7DB52 /* ForgotVC.swift in Sources */,
 				52EDD92A29A359EC00FDE2D5 /* CongratulationVC.swift in Sources */,
 				5FDBE7B72998173B00F7DB52 /* MyCourseTVC.swift in Sources */,
+				520E7A4F29D988D8001C1336 /* MyCourseDM.swift in Sources */,
 				5234CFBE29D6A457006E91BC /* CoursesCVC.swift in Sources */,
 				5F9753F32992816700DC6667 /* HomeVC.swift in Sources */,
 				523BA9C829D2E97A005996DD /* ResetPasswordVC.swift in Sources */,
@@ -517,6 +524,7 @@
 				525798B229D31A7B005A93AC /* VideoDetailsViewController.swift in Sources */,
 				39A99FFA2994EC7F00D4A09D /* LoginVC.swift in Sources */,
 				525798B629D31AFA005A93AC /* ChangeLanguageTableViewCell.swift in Sources */,
+				520E7A5329DA1629001C1336 /* ShopTVC.swift in Sources */,
 				5FDBE7B2299816EE00F7DB52 /* OtpVC.swift in Sources */,
 				5F9753ED29927E3F00DC6667 /* BNButton.swift in Sources */,
 				5FB51FE229928FE7005E4FDA /* NET.swift in Sources */,

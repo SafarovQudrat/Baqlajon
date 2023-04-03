@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-import SDWebImage
+
 class CoursesCVC: UICollectionViewCell {
     
     static let identifier = "CoursesCVC"
@@ -152,7 +152,12 @@ class CoursesCVC: UICollectionViewCell {
     }
     
     func updateCell(course:GetCourseDM) {
-        image.sd_setImage(with: URL(string: course.image))
+        
+        let data = try? Data(contentsOf:  URL(string: course.image)!)
+
+        if let imageData = data {
+            self.image.image = UIImage(data: imageData)
+        }
         titleLbl.text = course.title
         textLbl.text = course.desc
         starLbl.text = "\(course.viewCount)"

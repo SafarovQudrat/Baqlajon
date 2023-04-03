@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-
+import IQKeyboardManager
 class ReviewVC: UIViewController {
     
     //main view
@@ -117,6 +117,8 @@ class ReviewVC: UIViewController {
         let tv = UITextView()
         tv.backgroundColor = .appColor(color: .gray7)
         tv.layer.cornerRadius = 10
+        tv.font = .appFont(ofSize: 16)
+        tv.toolbarPlaceholder = "Write here"
         tv.layer.borderColor = UIColor.appColor(color: .gray7).cgColor
         tv.layer.borderWidth = 1
         return tv
@@ -140,6 +142,7 @@ class ReviewVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .appColor(color: .background)
         setUpUI()
+        IQKeyboardManager.shared().isEnabled = true
     }
     
     

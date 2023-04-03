@@ -553,6 +553,7 @@ class BalanceVC: UIViewController {
         backV.isHidden = false
         coinBackV.isHidden = true
         shareBView.isHidden = true
+        navigationController?.pushViewController(ShopVC(), animated: true)
     }
     @objc func shareBtnTapped() {
         self.navigationItem.backButtonTitle = ""

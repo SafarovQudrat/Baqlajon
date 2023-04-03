@@ -17,12 +17,13 @@ class ForgotVC: UIViewController {
     }()
     
     //main description Label
-    let textLbl: UILabel = {
+    var textLbl: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Please enter your registered phone number to reset your password!"
+        
         lbl.numberOfLines = 0
         lbl.textAlignment = .center
         lbl.font = UIFont.appFont(ofSize: 14, weight: .medium)
+        
         lbl.textColor = #colorLiteral(red: 0.4, green: 0.4, blue: 0.5294117647, alpha: 1)
         return lbl
     }()
@@ -36,11 +37,12 @@ class ForgotVC: UIViewController {
         tf.keyboardType = .numberPad
         tf.backgroundColor = .appColor(color: .gray7)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
-        tf.borderStyle = .none
-        tf.leftViewMode = .always
+//        tf.borderStyle = .none
+//        tf.leftViewMode = .always
         
         let lview: UIView = {
             let lv = UIView()
+            
             return lv
         }()
         lview.snp.makeConstraints { make in
@@ -68,15 +70,23 @@ class ForgotVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .appColor(color: .background)
+        view.backgroundColor = .appColor(color: .white)
         navSettings()
         setUIItems()
+        if cache.bool(forKey: "changeNumber") {
+            title = "Change number"
+            textLbl.text = "Please, enter your new phone number"
+        } else {
+       title = "Forgot Password"
+       textLbl.text = "Please enter your registered phone number to reset your password!"
+        }
+        
     }
     
     
     //MARK: Navigation Settings
     func navSettings() {
-        title = "Forgot Password"
+        
         navigationItem.backButtonTitle = ""
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.appFont(ofSize: 16,weight: FontWeight.medium)]
         navigationItem.hidesBackButton = true
@@ -125,15 +135,20 @@ class ForgotVC: UIViewController {
 extension ForgotVC {
     
     @objc func sendCodeTapped() {
-        Loader.start()
-        putData { data in
-            Loader.stop()
-            if data.success {
-                let vc = ResetPasswordVC()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+        if cache.bool(forKey: "changeNumber"){
+            let vc = OtpVC()
+            vc.number = (self.phoneNumberTF.text?.replacingOccurrences(of: " ", with: ""))!
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+//            Loader.start()
+//            putData { data in
+//                Loader.stop()
+//                if data.success {
+                    let vc = ResetPasswordVC()
+                    self.navigationController?.pushViewController(vc, animated: true)
+//                }
+//            }
         }
-        
     }
     
     

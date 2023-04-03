@@ -203,7 +203,7 @@ class EditProfileVC: UIViewController {
         b.setTitle("Change Password", for: .normal)
         b.setTitleColor(.systemBlue, for: .normal)
         b.titleLabel?.font = .appFont(ofSize: 14)
-        b.addTarget(.none, action: #selector(changeNumTapped), for: .touchUpInside)
+        b.addTarget(.none, action: #selector(changePassTapped), for: .touchUpInside)
         return b
     }()
     private lazy var passwordStack:UIStackView = {
@@ -390,6 +390,8 @@ class EditProfileVC: UIViewController {
     }
     
     @objc func changeNumTapped() {
+        cache.set(true, forKey: "changeNumber")
+        self.navigationController?.pushViewController(ForgotVC(), animated: true)
         
     }
     @objc func selectGenderTapped() {
@@ -401,6 +403,8 @@ class EditProfileVC: UIViewController {
         
     }
     @objc func changePassTapped() {
+        
+        self.navigationController?.pushViewController(ResetPasswordVC(), animated: true)
         
     }
     @objc func saveTapped() {

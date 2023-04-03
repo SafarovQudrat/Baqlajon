@@ -176,10 +176,7 @@ class HomeVC: UIViewController {
             }
             return s
         }()
-    
-    
-    
-    
+
 //    search Bar
     private lazy var searchV:UIView = {
        let v = UIView()
@@ -214,7 +211,7 @@ class HomeVC: UIViewController {
         return collectionView
     }()
 //    profile
-    private lazy var backProfileV:UIView={
+     lazy var backProfileV:UIView={
         let v = UIView()
         v.backgroundColor = .appColor(color: .white)
         v.addSubview(ILStack)
@@ -274,13 +271,9 @@ class HomeVC: UIViewController {
         b.tintColor = .appColor(color: .black1)
             return b
     }()
-    
-    
+   
     var arr:[GetCourseDM] = []
-    
-    
-    
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .appColor(color: .background)
@@ -288,9 +281,10 @@ class HomeVC: UIViewController {
         allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
         allBtn.setTitleColor(.white, for: .normal)
         Loader.start()
-        getCourse()
+        getCourse(exUrl: "")
+        collectionView.reloadData()
         setUpUI()
-        
+        searchTF.delegate = self
     }
 //setUpUI
     func setUpUI(){
@@ -348,16 +342,25 @@ class HomeVC: UIViewController {
         }
         collectionView.delegate = self
         collectionView.dataSource = self
-        self.navigationController?.view.addSubview(backProfileV)
-        backProfileV.snp.makeConstraints { make in
-            make.top.left.right.equalTo(0)
-            make.height.equalTo(self.view.frame.height/9)
-            make.width.equalTo(view.frame.width/2)
-        }
-        
+       
+        setNavController()
     }
     
-    
+    //    SetNavController
+        func setNavController() {
+            
+            navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),titleColor: .appColor(color: .black1),font: .appFont(ofSize: 16,weight: .medium))
+            let leftBtn = UIBarButtonItem(image: UIImage(named: "avatarImage"), style: .done, target: self, action: .none)
+            let leftLBtn = UIBarButtonItem(title: cache.string(forKey: "PROFILENAME"), style: .done, target: self, action: .none)
+            let rightButton = UIBarButtonItem(image:UIImage(named: "alert"), style: .done, target: self, action: #selector(alertTapped))
+           
+            navigationItem.rightBarButtonItem = rightButton
+            navigationItem.leftBarButtonItems = [leftBtn,leftLBtn]
+            navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
+            navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
+            
+        }
+
     
     
     @objc func alertTapped(){
@@ -371,6 +374,20 @@ class HomeVC: UIViewController {
         self.present(vc, animated: false)
     }
     @objc func searchTapped(){
+        var arr2:[GetCourseDM] = []
+        for i in arr {
+            if i.desc.lowercased() == searchTF.text?.lowercased() {
+                arr2.append(i)
+            }
+        }
+        if arr2.isEmpty {
+            
+            collectionView.reloadData()
+        }else {
+        arr = arr2
+            collectionView.reloadData()
+        }
+        
         
     }
     
@@ -383,9 +400,13 @@ class HomeVC: UIViewController {
            compBtn.setTitleColor(.appColor(color: .gray2), for: .normal)
             onBtn.backgroundColor = .clear
             onBtn.layer.borderWidth = 1
-          
             compBtn.backgroundColor = .clear
             compBtn.layer.borderWidth = 1
+            Loader.start()
+            getCourse(exUrl: "")
+            collectionView.reloadData()
+            
+            
         }
         @objc func onTapped() {
             onBtn.layer.borderWidth = 0
@@ -397,6 +418,9 @@ class HomeVC: UIViewController {
             allBtn.layer.borderWidth = 1
             compBtn.backgroundColor = .clear
             compBtn.layer.borderWidth = 1
+            Loader.start()
+            getCourse(exUrl: "/popular")
+            collectionView.reloadData()
         }
         @objc func complTapped() {
             compBtn.layer.borderWidth = 0
@@ -408,13 +432,20 @@ class HomeVC: UIViewController {
             onBtn.layer.borderWidth = 1
             allBtn.backgroundColor = .clear
             allBtn.layer.borderWidth = 1
+            Loader.start()
+            getCourse(exUrl: "/newest")
+            collectionView.reloadData()
         }
         
   
 }
 extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.backProfileV.isHidden = true
+        navigationController?.pushViewController(CourseDetailsVC(), animated: true)
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("arararar==",arr)
+        print("arararar==",arr.count)
         return self.arr.count
     }
     
@@ -429,14 +460,29 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectio
     }
     
 }
-
+extension HomeVC:UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        
+        var arr2:[GetCourseDM] = []
+        for i in arr {
+            if i.desc.lowercased().contains((textField.text?.lowercased())!)  {
+                arr2.append(i)
+            }
+        }
+        arr = arr2
+        collectionView.reloadData()
+        
+        
+    }
+}
 
 //MARK:
 extension HomeVC{
-    func getCourse() {
-        API.getAllCourse { data in
+    func getCourse(exUrl:String) {
+        API.getAllCourse(exUrl: exUrl) { data in
             Loader.stop()
             self.arr = data.data
+            self.collectionView.reloadData()
             print("dataaa = ",data)
         }
     }

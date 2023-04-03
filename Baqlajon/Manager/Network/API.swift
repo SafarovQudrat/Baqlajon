@@ -22,6 +22,8 @@ class API {
     static let checkOtp:String = baseURL + "user/checkOtp"
     static let forgetPassword:String = baseURL + "user/forget"
     static let getAllCourseUrl:String = baseURL + "course"
+    static let getMyCourseUrl:String = baseURL + "myCourse/all"
+    static let giftUrl:String = baseURL + "gift"
 //    MARK: -functions
 //    register
     static func register(lastName:String,firstName:String,number:String, password:String, complation:@escaping (LoginDM)->Void) {
@@ -43,7 +45,7 @@ class API {
             cache.set(data["data"]["data"]["_id"].stringValue, forKey: "USER_ID")
             cache.set(data["data"]["data"]["phoneNumber"].stringValue, forKey: "USER_PHONE_NUMBER")
             cache.set(data["data"]["data"]["lastName"].stringValue + " " + data["data"]["data"]["firstName"].stringValue, forKey: "USER_NAME")
-       
+            cache.set(data["data"]["data"]["firstName"].stringValue, forKey: "PROFILENAME")
             
         }
     }
@@ -141,13 +143,13 @@ class API {
     }
     
 //    getAllCourse
-    static func getAllCourse(complation:@escaping (LoginDM)->Void){
+    static func getAllCourse(exUrl:String,complation:@escaping (LoginDM)->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
             "lang":"uz"
         ]
      
-        Net.sendRequest(to: getAllCourseUrl, method: .get, headers: headers, param: nil) { data in
+        Net.sendRequest(to: getAllCourseUrl+exUrl, method: .get, headers: headers, param: nil) { data in
             guard let data = data else {return}
             print("Json data = ",data)
             complation(LoginDM(json: data))
@@ -157,6 +159,34 @@ class API {
         
         
     }
+    
+//    GetMyCourse
+    static func getMyCourse(complation:@escaping([MyCourseDM])->Void){
+        let headers:HTTPHeaders = [
+            "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
+            "lang":"uz"
+        ]
+        Net.sendRequest(to: getMyCourseUrl, method: .get, headers: headers, param: nil) { data in
+            guard let data = data else {return}
+            let info = data.arrayValue.map{MyCourseDM(json: $0)}
+            complation(info)
+                    
+        }
+      
+    }
+    static func getAllGift(complation:@escaping([GetGiftDM])->Void){
+        let headers:HTTPHeaders = [
+            "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
+            "lang":"uz"
+        ]
+        Net.sendRequest(to: giftUrl, method: .get, headers: headers, param: nil) { data in
+            guard let data = data else {return}
+            
+            let info = data["data"].arrayValue.map{GetGiftDM(json: $0)}
+            complation(info)
+        }
+    }
+    
     
     
     

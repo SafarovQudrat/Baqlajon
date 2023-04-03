@@ -12,5 +12,5 @@ target 'Baqlajon' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'lottie-ios', '3.5'
-  pod'SDWebImage'
+  pod 'IQKeyboardManager'
 end

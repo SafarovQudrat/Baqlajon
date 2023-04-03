@@ -22,15 +22,15 @@ class ChangeLanguageTableViewCell: UITableViewCell {
     }()
     
     
-    private let countryImageView: UIImageView = {
+     let countryImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "uzbekChangeLanguage")
+        imageView.image = UIImage(named: "uzb")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     
-    private let languageLabel: UILabel = {
+     let languageLabel: UILabel = {
         let label = UILabel()
         label.text = "O’zbekcha"
         label.textColor = UIColor.appColor(color: Colors.black1)

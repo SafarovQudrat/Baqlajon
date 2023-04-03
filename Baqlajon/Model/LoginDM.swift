@@ -27,12 +27,14 @@ struct GetCourseDM {
     var rating:Int
     var title:String
     var desc:String
+    var videoCount:Int
     init(json:JSON){
         self.image = json["image"].stringValue
         self.viewCount = json["viewCount"].intValue
         self.rating = json["rating"].intValue
         self.title = json["title"].stringValue
         self.desc = json["description"].stringValue
+        self.videoCount = json["videoCount"].intValue
     }
 }
 

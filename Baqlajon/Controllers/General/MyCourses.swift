@@ -191,7 +191,7 @@ class MyCourses: UIViewController {
         v.layer.cornerRadius = 6
         return v
     }()
-    
+    var arr:[MyCourseDM] = []
     
 //    VIEW DIDLOAD
     override func viewDidLoad() {
@@ -338,7 +338,7 @@ extension MyCourses:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        arr.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MyCourseTVC.identifier, for: indexPath) as? MyCourseTVC else {return UITableViewCell()}
@@ -349,4 +349,13 @@ extension MyCourses:UITableViewDelegate,UITableViewDataSource {
 
 }
 
-
+extension MyCourses{
+    func getCourses(){
+        Loader.start()
+        API.getMyCourse { [self] data in
+            Loader.stop()
+            arr = data
+            tableView.reloadData()
+        }
+    }
+}

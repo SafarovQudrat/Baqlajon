@@ -74,7 +74,13 @@ extension ChangeLanguageViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChangeLanguageTableViewCell.identifier, for: indexPath) as? ChangeLanguageTableViewCell else { return UITableViewCell() }
-        
+        if indexPath.section == 1 {
+            cell.countryImageView.image = UIImage(named: "rus")
+            cell.languageLabel.text = "Русский"
+        } else if indexPath.section == 2 {
+            cell.countryImageView.image = UIImage(named: "eng")
+            cell.languageLabel.text = "English"
+        }
         
         
         return cell

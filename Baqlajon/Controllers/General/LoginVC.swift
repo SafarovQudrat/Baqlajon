@@ -313,7 +313,9 @@ extension LoginVC {
     
     //Opens ForgotVC Tapped
     @objc func frogotPasswordTapped() {
+        cache.set(false, forKey: "changeNumber")
         navigationController?.pushViewController(ForgotVC(), animated: true)
+        
     }
     
     //Opens SignUpVC Tapped

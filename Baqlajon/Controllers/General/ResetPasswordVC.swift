@@ -27,6 +27,32 @@ class ResetPasswordVC: UIViewController {
         return lbl
     }()
     
+    private lazy var oldPasswordTF: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Password"
+        tf.layer.cornerRadius = 8
+        tf.textColor = .label
+        tf.backgroundColor = .appColor(color: .gray7)
+        tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
+        tf.leftViewMode = .always
+        tf.rightViewMode = .always
+        let lview: UIView = {
+            let lv = UIView()
+            return lv
+        }()
+        lview.snp.makeConstraints { make in
+            make.width.equalTo(15)
+        }
+        tf.leftView = lview
+        tf.borderStyle = .none
+        tf.isSecureTextEntry = true
+        
+        openNewPasswordBtn.snp.makeConstraints { make in
+            make.height.width.equalTo(48)
+        }
+        tf.rightView = openNewPasswordBtn
+        return tf
+    }()
     
     //new password textField
     private lazy var newPasswordTF: UITextField = {
@@ -104,6 +130,16 @@ class ResetPasswordVC: UIViewController {
         return btn
     }()
     
+    lazy var stackV:UIStackView = {
+        let v = UIStackView(arrangedSubviews: [oldPasswordTF,newPasswordTF,confirmNewPasswordTF])
+        v.spacing = 16
+        v.distribution = .fillEqually
+        v.axis = .horizontal
+        v.alignment = .fill
+        return v
+    }()
+    
+  
     //confirm Button
     let confirmBtn: UIButton = {
         let btn = UIButton()
@@ -115,8 +151,7 @@ class ResetPasswordVC: UIViewController {
         btn.addTarget(.none, action: #selector(confirmTapped), for: .touchUpInside)
         return btn
     }()
-    
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -142,23 +177,29 @@ class ResetPasswordVC: UIViewController {
             make.right.left.equalTo(resetView).inset(24)
         }
         
-        resetView.addSubview(newPasswordTF)
-        newPasswordTF.snp.makeConstraints { make in
+        resetView.addSubview(stackV)
+        stackV.snp.makeConstraints { make in
             make.top.equalTo(textLbl.snp.bottom).offset(100)
             make.right.left.equalTo(resetView).inset(24)
             make.height.equalTo(48)
         }
         
-        resetView.addSubview(confirmNewPasswordTF)
-        confirmNewPasswordTF.snp.makeConstraints { make in
-            make.top.equalTo(newPasswordTF.snp.bottom).offset(16)
-            make.right.left.equalTo(resetView).inset(24)
-            make.height.equalTo(48)
-        }
+//        resetView.addSubview(confirmNewPasswordTF)
+//        confirmNewPasswordTF.snp.makeConstraints { make in
+//            make.top.equalTo(newPasswordTF.snp.bottom).offset(16)
+//            make.right.left.equalTo(resetView).inset(24)
+//            make.height.equalTo(48)
+//        }
+//        resetView.addSubview(oldPasswordTF)
+//        oldPasswordTF.snp.makeConstraints { make in
+//            make.top.equalTo(confirmNewPasswordTF.snp.bottom).offset(16)
+//            make.right.left.equalTo(resetView).inset(24)
+//            make.height.equalTo(48)
+//        }
         
         resetView.addSubview(confirmBtn)
         confirmBtn.snp.makeConstraints { make in
-            make.top.equalTo(confirmNewPasswordTF.snp.bottom).offset(40)
+            make.top.equalTo(stackV.snp.bottom).offset(40)
             make.right.left.equalTo(resetView).inset(24)
             make.height.equalTo(48)
         }

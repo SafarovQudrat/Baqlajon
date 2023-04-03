@@ -22,6 +22,7 @@ class CourseDetailsVC: UIViewController {
         button.setTitleColor(UIColor.white, for: .normal)
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(.none, action: #selector(btnTapped), for: .touchUpInside)
         return button
     }()
     
@@ -60,8 +61,16 @@ class CourseDetailsVC: UIViewController {
     //    back Button
         @objc func backtapped(){
             self.navigationController?.popViewController(animated: true)
+            HomeVC().backProfileV.isHidden = false
         }
     
+    @objc func btnTapped() {
+        if startLessonAndWriteReviewButton.titleLabel?.text == "Start Course" {
+            navigationController?.pushViewController(VideoDetailsViewController(), animated: true)
+        } else {
+            navigationController?.pushViewController(ReviewVC(), animated: true)
+        }
+    }
     
     
     override func viewDidLayoutSubviews() {
