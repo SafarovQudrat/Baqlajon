@@ -195,6 +195,20 @@ class MyCourseTVC: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func updateCell(course:MyCourseDM) {
+        
+        let data = try? Data(contentsOf:  URL(string: course.videos.image)!)
+
+        if let imageData = data {
+            self.image.image = UIImage(data: imageData)
+        }
+        titleLbl.text = course.videos.title
+        textLbl.text = course.videos.desc
+        starLbl.text = "\(course.videos.viewCount)"
+        eyeLbl.text = "\(course.videos.rating)"
+    }
+    
+    
     
 
 }

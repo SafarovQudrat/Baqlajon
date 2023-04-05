@@ -346,8 +346,13 @@ class EditProfileVC: UIViewController {
         let currentDate = Date()
         var components = DateComponents()
         components.calendar = calendar
+        components.year = 0
+        components.month = 12
         let maxDate = calendar.date(byAdding: components, to: currentDate)!
+        components.year = -60
+        let minDate = calendar.date(byAdding: components, to: currentDate)!
         picker.maximumDate = maxDate
+        picker.minimumDate = minDate
         
     }
     

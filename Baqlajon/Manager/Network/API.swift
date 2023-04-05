@@ -23,6 +23,7 @@ class API {
     static let forgetPassword:String = baseURL + "user/forget"
     static let getAllCourseUrl:String = baseURL + "course"
     static let getMyCourseUrl:String = baseURL + "myCourse/all"
+    static let getMyCourseStatUrl:String = baseURL + "myCourse/status"
     static let giftUrl:String = baseURL + "gift"
 //    MARK: -functions
 //    register

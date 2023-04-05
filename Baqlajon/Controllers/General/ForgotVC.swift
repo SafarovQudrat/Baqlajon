@@ -35,14 +35,14 @@ class ForgotVC: UIViewController {
         tf.textColor = .label
         tf.placeholder = "Phone number"
         tf.keyboardType = .numberPad
-        tf.backgroundColor = .appColor(color: .gray7)
+        tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
 //        tf.borderStyle = .none
 //        tf.leftViewMode = .always
         
         let lview: UIView = {
             let lv = UIView()
-            
+            lv.backgroundColor = .appColor(color: .gray6)
             return lv
         }()
         lview.snp.makeConstraints { make in
@@ -70,7 +70,7 @@ class ForgotVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .appColor(color: .white)
+        view.backgroundColor = .appColor(color: .background)
         navSettings()
         setUIItems()
         if cache.bool(forKey: "changeNumber") {
@@ -140,14 +140,17 @@ extension ForgotVC {
             vc.number = (self.phoneNumberTF.text?.replacingOccurrences(of: " ", with: ""))!
             self.navigationController?.pushViewController(vc, animated: true)
         }else{
-//            Loader.start()
-//            putData { data in
-//                Loader.stop()
-//                if data.success {
+
+            putData { data in
+                if data.success {
                     let vc = ResetPasswordVC()
-                    self.navigationController?.pushViewController(vc, animated: true)
-//                }
-//            }
+                            self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    Alert.showAlert(title: data.message, message: data.message, vc: self)
+                }
+            }
+           
+
         }
     }
     
@@ -158,6 +161,7 @@ extension ForgotVC {
     func putData(complation:@escaping(LoginDM)->Void){
         API.forgetPass(number: (phoneNumberTF.text?.replacingOccurrences(of: " ", with: ""))!) { data in
             complation(data)
+        
         }
     }
 }

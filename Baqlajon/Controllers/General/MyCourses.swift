@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import Alamofire
 import SnapKit
+import SwiftyJSON
 class MyCourses: UIViewController {
     
     
     
 //VARIABLES
+    
 //    category btns
     private var allBtn: UIButton = {
         let b = UIButton()
@@ -196,17 +199,23 @@ class MyCourses: UIViewController {
 //    VIEW DIDLOAD
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         allBtn.layer.borderWidth = 0
         allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
         allBtn.setTitleColor(.white, for: .normal)
-       
         self.view.backgroundColor = .appColor(color: .background)
         setNavController()
         setUpUi()
 //        myStackV.isHidden = true
         myView.isHidden = true
         yellowView.isHidden = true
+        Loader.start()
+        if Reachability.isConnectedToNetwork() {
+            getCourses()
+        }else {
+            Loader.stop()
+            Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
+            
+        }
     }
     
     func setUpUi() {
@@ -291,6 +300,12 @@ class MyCourses: UIViewController {
       
         compBtn.backgroundColor = .clear
         compBtn.layer.borderWidth = 1
+        if Reachability.isConnectedToNetwork() {
+            getCourses()
+        }else {
+            Loader.stop()
+            Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
+        }
     }
     @objc func onTapped() {
         onBtn.layer.borderWidth = 0
@@ -302,6 +317,15 @@ class MyCourses: UIViewController {
         allBtn.layer.borderWidth = 1
         compBtn.backgroundColor = .clear
         compBtn.layer.borderWidth = 1
+        if Reachability.isConnectedToNetwork() {
+            getStat(isstart: "start") { data in
+                self.arr = data
+                self.tableView.reloadData()
+            }
+        }else {
+            Loader.stop()
+            Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
+        }
     }
     @objc func complTapped() {
         compBtn.layer.borderWidth = 0
@@ -313,6 +337,15 @@ class MyCourses: UIViewController {
         onBtn.layer.borderWidth = 1
         allBtn.backgroundColor = .clear
         allBtn.layer.borderWidth = 1
+        if Reachability.isConnectedToNetwork() {
+            getStat(isstart: "finish") { data in
+                self.arr = data
+                self.tableView.reloadData()
+            }
+        }else {
+            Loader.stop()
+            Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
+        }
     }
     
     @objc func btnTapped() {
@@ -326,9 +359,6 @@ class MyCourses: UIViewController {
     
 
 }
-
-
-
 
 //MARK: UITableViewDelegate,UITableViewDataSource
 extension MyCourses:UITableViewDelegate,UITableViewDataSource {
@@ -351,11 +381,35 @@ extension MyCourses:UITableViewDelegate,UITableViewDataSource {
 
 extension MyCourses{
     func getCourses(){
-        Loader.start()
+        
         API.getMyCourse { [self] data in
             Loader.stop()
             arr = data
             tableView.reloadData()
+            
         }
     }
+    
+    func getStat(isstart:String,complation:@escaping ([MyCourseDM])->Void){
+        let headers:HTTPHeaders = [
+            "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
+            "lang":"uz"
+        ]
+        let param:[String:Any] = [
+            "search":"",
+            "status":isstart
+        ]
+        AF.request(API.getMyCourseStatUrl,method:.get,parameters: param, encoding: URLEncoding.default, headers: headers).responseData { response in
+            switch response.result {
+            case.success(let data):
+                let jsonData = JSON(data)
+                let info = jsonData.arrayValue.map{MyCourseDM(json: $0)}
+                complation(info)
+            case.failure(let error):
+                print("error=",error)
+            }
+        }
+    }
+    
+    
 }

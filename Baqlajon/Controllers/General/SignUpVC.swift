@@ -316,7 +316,7 @@ extension SignUpVC {
                 self.sendOtp()
                 vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
             } else {
-                
+                Alert.showAlert(title: data.message, message: data.message, vc: self)
             }
         }
         

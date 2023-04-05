@@ -106,6 +106,8 @@ class OtpVC: UIViewController {
                 let vc = MainTabBarController()
                 vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)
+            } else {
+                Alert.showAlert(title: data.message, message: data.message, vc: self)
             }
         }
         
@@ -178,4 +180,12 @@ extension OtpVC {
             complation(data)
         }
     }
+    
+    func updateNumber() {
+        
+    }
+    
+    
+    
+    
 }

@@ -29,56 +29,26 @@ class ResetPasswordVC: UIViewController {
     
     private lazy var oldPasswordTF: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Password"
+        tf.placeholder = "Old Password"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
-        tf.backgroundColor = .appColor(color: .gray7)
+        tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
-        tf.leftViewMode = .always
-        tf.rightViewMode = .always
-        let lview: UIView = {
-            let lv = UIView()
-            return lv
-        }()
-        lview.snp.makeConstraints { make in
-            make.width.equalTo(15)
+        tf.snp.makeConstraints { make in
+            make.height.equalTo(50)
         }
-        tf.leftView = lview
-        tf.borderStyle = .none
-        tf.isSecureTextEntry = true
-        
-        openNewPasswordBtn.snp.makeConstraints { make in
-            make.height.width.equalTo(48)
-        }
-        tf.rightView = openNewPasswordBtn
         return tf
     }()
     
     //new password textField
     private lazy var newPasswordTF: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Password"
+        tf.placeholder = "New Password"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
-        tf.backgroundColor = .appColor(color: .gray7)
+        tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
-        tf.leftViewMode = .always
-        tf.rightViewMode = .always
-        let lview: UIView = {
-            let lv = UIView()
-            return lv
-        }()
-        lview.snp.makeConstraints { make in
-            make.width.equalTo(15)
-        }
-        tf.leftView = lview
-        tf.borderStyle = .none
-        tf.isSecureTextEntry = true
-        
-        openNewPasswordBtn.snp.makeConstraints { make in
-            make.height.width.equalTo(48)
-        }
-        tf.rightView = openNewPasswordBtn
+    
         return tf
     }()
     
@@ -95,28 +65,12 @@ class ResetPasswordVC: UIViewController {
     //password textField
     private lazy var confirmNewPasswordTF: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Password"
+        tf.placeholder = "Confirm Password"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
-        tf.backgroundColor = .appColor(color: .gray7)
+        tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
-        tf.leftViewMode = .always
-        tf.rightViewMode = .always
-        let lview: UIView = {
-            let lv = UIView()
-            return lv
-        }()
-        lview.snp.makeConstraints { make in
-            make.width.equalTo(15)
-        }
-        tf.leftView = lview
-        tf.borderStyle = .none
-        tf.isSecureTextEntry = true
         
-        openConfirmNewPasswordBtn.snp.makeConstraints { make in
-            make.height.width.equalTo(48)
-        }
-        tf.rightView = openConfirmNewPasswordBtn
         return tf
     }()
     
@@ -131,10 +85,10 @@ class ResetPasswordVC: UIViewController {
     }()
     
     lazy var stackV:UIStackView = {
-        let v = UIStackView(arrangedSubviews: [oldPasswordTF,newPasswordTF,confirmNewPasswordTF])
+        let v = UIStackView(arrangedSubviews: [oldPasswordTF,newPasswordTF,confirmNewPasswordTF,confirmBtn])
         v.spacing = 16
         v.distribution = .fillEqually
-        v.axis = .horizontal
+        v.axis = .vertical
         v.alignment = .fill
         return v
     }()
@@ -154,7 +108,7 @@ class ResetPasswordVC: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .appColor(color: .background)
         setUIItems()
         title = "Reset Password"
         navigationItem.hidesBackButton = true
@@ -168,41 +122,20 @@ class ResetPasswordVC: UIViewController {
     
     //MARK: setting UIItems constraints
     func setUIItems() {
-        view.addSubview(resetView)
-        resetView.snp.makeConstraints { $0.top.right.left.bottom.equalTo(view) }
-        
-        resetView.addSubview(textLbl)
+      
+        view.addSubview(textLbl)
         textLbl.snp.makeConstraints { make in
-            make.top.equalTo(resetView).inset(123)
-            make.right.left.equalTo(resetView).inset(24)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(16)
+            make.right.left.equalToSuperview().inset(24)
         }
         
-        resetView.addSubview(stackV)
+        view.addSubview(stackV)
         stackV.snp.makeConstraints { make in
-            make.top.equalTo(textLbl.snp.bottom).offset(100)
-            make.right.left.equalTo(resetView).inset(24)
-            make.height.equalTo(48)
+            make.top.equalTo(textLbl.snp_bottomMargin).offset(24)
+            make.right.left.equalToSuperview().inset(24)
+            
         }
-        
-//        resetView.addSubview(confirmNewPasswordTF)
-//        confirmNewPasswordTF.snp.makeConstraints { make in
-//            make.top.equalTo(newPasswordTF.snp.bottom).offset(16)
-//            make.right.left.equalTo(resetView).inset(24)
-//            make.height.equalTo(48)
-//        }
-//        resetView.addSubview(oldPasswordTF)
-//        oldPasswordTF.snp.makeConstraints { make in
-//            make.top.equalTo(confirmNewPasswordTF.snp.bottom).offset(16)
-//            make.right.left.equalTo(resetView).inset(24)
-//            make.height.equalTo(48)
-//        }
-        
-        resetView.addSubview(confirmBtn)
-        confirmBtn.snp.makeConstraints { make in
-            make.top.equalTo(stackV.snp.bottom).offset(40)
-            make.right.left.equalTo(resetView).inset(24)
-            make.height.equalTo(48)
-        }
+     
     }
     
 }

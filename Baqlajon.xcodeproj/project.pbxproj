@@ -14,6 +14,8 @@
 		520E7A5129DA138F001C1336 /* ShopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520E7A5029DA138F001C1336 /* ShopVC.swift */; };
 		520E7A5329DA1629001C1336 /* ShopTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520E7A5229DA1629001C1336 /* ShopTVC.swift */; };
 		521AF05D299F3F9F000A2F83 /* BalanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521AF05C299F3F9F000A2F83 /* BalanceVC.swift */; };
+		521B07B529DC34F30091D60D /* Custom Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521B07B429DC34F30091D60D /* Custom Alert.swift */; };
+		521B07B729DD0AD30091D60D /* ShopAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521B07B629DD0AD30091D60D /* ShopAlert.swift */; };
 		5234CFBE29D6A457006E91BC /* CoursesCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5234CFBD29D6A457006E91BC /* CoursesCVC.swift */; };
 		5236F81429D21B0100B07FE6 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5236F81329D21B0100B07FE6 /* OnboardingVC.swift */; };
 		523BA9C829D2E97A005996DD /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BA9C729D2E97A005996DD /* ResetPasswordVC.swift */; };
@@ -84,6 +86,8 @@
 		520E7A5029DA138F001C1336 /* ShopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopVC.swift; sourceTree = "<group>"; };
 		520E7A5229DA1629001C1336 /* ShopTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTVC.swift; sourceTree = "<group>"; };
 		521AF05C299F3F9F000A2F83 /* BalanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceVC.swift; sourceTree = "<group>"; };
+		521B07B429DC34F30091D60D /* Custom Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Custom Alert.swift"; sourceTree = "<group>"; };
+		521B07B629DD0AD30091D60D /* ShopAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAlert.swift; sourceTree = "<group>"; };
 		5234CFBD29D6A457006E91BC /* CoursesCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesCVC.swift; sourceTree = "<group>"; };
 		5236F81329D21B0100B07FE6 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		523BA9C729D2E97A005996DD /* ResetPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
@@ -235,6 +239,8 @@
 				5F9753EC29927E3F00DC6667 /* BNButton.swift */,
 				5F9753EE29927E6700DC6667 /* BNTextField.swift */,
 				5257988729D30F4F005A93AC /* OTPFieldView.swift */,
+				521B07B429DC34F30091D60D /* Custom Alert.swift */,
+				521B07B629DD0AD30091D60D /* ShopAlert.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -489,6 +495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				521B07B729DD0AD30091D60D /* ShopAlert.swift in Sources */,
 				52770B45299A10AD00187F27 /* ProfileVC.swift in Sources */,
 				525798AA29D31878005A93AC /* CourseDetailsVideoTableViewCell.swift in Sources */,
 				529ADA6029D4B187006B4B20 /* LoginDM.swift in Sources */,
@@ -507,6 +514,7 @@
 				521AF05D299F3F9F000A2F83 /* BalanceVC.swift in Sources */,
 				5FDBE7BA2998178100F7DB52 /* Ex+NavigationController.swift in Sources */,
 				5FDBE7B0299816EE00F7DB52 /* ForgotVC.swift in Sources */,
+				521B07B529DC34F30091D60D /* Custom Alert.swift in Sources */,
 				52EDD92A29A359EC00FDE2D5 /* CongratulationVC.swift in Sources */,
 				5FDBE7B72998173B00F7DB52 /* MyCourseTVC.swift in Sources */,
 				520E7A4F29D988D8001C1336 /* MyCourseDM.swift in Sources */,

@@ -39,6 +39,7 @@ class ShopTVC: UITableViewCell {
             make.height.equalTo(28)
             make.width.equalTo(50)
         }
+        b.addTarget(.none, action: #selector(btnTapped), for: .touchUpInside)
         return b
     }()
     private lazy var backV:UIView = {
@@ -97,6 +98,8 @@ class ShopTVC: UITableViewCell {
         titleLbl.text = gift.name
         priceLbl.text = "\(gift.coin)"
     }
-    
+    @objc func btnTapped() {
+        ShopAlert.showAlert(image: UIImage(named: "AlertImage")!, title: "Congratulations!", text: "Your request has been received and we will contact you soon!")
+    }
 
 }

@@ -2,8 +2,6 @@
 //  HomeVC.swift
 //  Baqlajon
 //
-//  Created by Chingiz Jumanov on 07/02/23.
-//
 
 import UIKit
 import SnapKit
@@ -481,9 +479,13 @@ extension HomeVC{
     func getCourse(exUrl:String) {
         API.getAllCourse(exUrl: exUrl) { data in
             Loader.stop()
-            self.arr = data.data
-            self.collectionView.reloadData()
-            print("dataaa = ",data)
+            if data.success {
+                self.arr = data.data
+                self.collectionView.reloadData()
+                
+            }else{
+                
+            }
         }
     }
 }

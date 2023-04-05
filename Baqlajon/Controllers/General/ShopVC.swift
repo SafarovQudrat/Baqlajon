@@ -30,7 +30,12 @@ class ShopVC: UIViewController {
         tableView.register(ShopTVC.self, forCellReuseIdentifier: "ShopTVC")
         configureNavigationBar()
         Loader.start()
-        getGift()
+        if Reachability.isConnectedToNetwork() {
+            getGift()
+        }else {
+            Loader.stop()
+            Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
+        }
     }
     
 //    set Navigation Controller
@@ -68,6 +73,7 @@ extension ShopVC{
             Loader.stop()
             self.arr = data
             self.tableView.reloadData()
+            
         }
     }
 }

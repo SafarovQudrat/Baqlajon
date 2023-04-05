@@ -16,8 +16,10 @@ class Net {
             switch response.result {
             case.success(let data):
                 let jsonData = JSON(data)
+                
                 complation(jsonData)
             case.failure(let error):
+                
                 print("error=",error)
             }
         }
