@@ -9,19 +9,57 @@ import UIKit
 import SnapKit
 class ShopAlert:UIView{
     
-    class func showAlert(image:UIImage,title:String,text:String){
+    class func showAlert(image:UIImage?,title:String,text:String){
         let backV = ShopAlert(frame: UIScreen.main.bounds)
             backV.backgroundColor = .black.withAlphaComponent(0.6)
+        
+        
+        
+        let star1:UIImageView = {
+            let i = UIImageView()
+            i.image = UIImage(named: "starImage")
+            i.snp.makeConstraints { make in
+                make.width.height.equalTo(7)
+            }
+            return i
+        }()
+        let star2:UIImageView = {
+            let i = UIImageView()
+            i.image = UIImage(named: "starImage")
+            i.snp.makeConstraints { make in
+                make.width.height.equalTo(16)
+            }
+            return i
+        }()
+        let star3:UIImageView = {
+            let i = UIImageView()
+            i.image = UIImage(named: "starImage")
+            i.snp.makeConstraints { make in
+                make.width.height.equalTo(10)
+            }
+            return i
+        }()
+        let star4:UIImageView = {
+            let i = UIImageView()
+            i.image = UIImage(named: "starImage")
+            i.snp.makeConstraints { make in
+                make.width.height.equalTo(11)
+            }
+            return i
+        }()
         
         let containerV:UIView = {
             let v = UIView()
             v.backgroundColor = .appColor(color: .white)
+            v.layer.cornerRadius = 8
             return v
         }()
         let image:UIImageView = {
             let i = UIImageView()
             i.contentMode = .scaleAspectFill
-            i.image = UIImage(named: "AlertImage")
+            if let image = image {
+                i.image = image
+            }
             i.snp.makeConstraints { make in
                 make.height.equalTo(150)
             }
@@ -49,10 +87,11 @@ class ShopAlert:UIView{
             b.setTitle("Ok", for: .normal)
             b.backgroundColor = .appColor(color: .mainBlue)
             b.setTitleColor(.white, for: .normal)
+            b.layer.cornerRadius = 8
             b.snp.makeConstraints { make in
                 make.height.equalTo(48)
             }
-            b.addTarget(self, action: #selector(okTapped), for: .touchUpInside)
+            b.addTarget(backV, action: #selector(backV.okTapped), for: .touchUpInside)
             return b
         }()
         
@@ -80,6 +119,27 @@ class ShopAlert:UIView{
             i.distribution = .fill
             return i
         }()
+        
+        containerV.addSubview(star1)
+        star1.snp.makeConstraints { make in
+            make.top.equalTo(62)
+            make.left.equalTo(86)
+        }
+        containerV.addSubview(star2)
+        star2.snp.makeConstraints { make in
+            make.top.equalTo(55)
+            make.right.equalTo(-88)
+        }
+        containerV.addSubview(star3)
+        star3.snp.makeConstraints { make in
+            make.top.equalTo(star1.snp_bottomMargin).inset(-88)
+            make.left.equalTo(67)
+        }
+        containerV.addSubview(star4)
+        star4.snp.makeConstraints { make in
+            make.right.equalTo(-64)
+            make.top.equalTo(star2.snp_bottomMargin).inset(-103)
+        }
         
         containerV.addSubview(imageStackV)
         imageStackV.snp.makeConstraints { make in

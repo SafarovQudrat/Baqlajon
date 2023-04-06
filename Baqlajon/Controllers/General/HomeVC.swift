@@ -283,6 +283,8 @@ class HomeVC: UIViewController {
         collectionView.reloadData()
         setUpUI()
         searchTF.delegate = self
+        myView.isHidden = true
+        yellowView.isHidden = true
     }
 //setUpUI
     func setUpUI(){
@@ -328,7 +330,9 @@ class HomeVC: UIViewController {
         }
         view.addSubview(stackV)
         stackV.snp.makeConstraints { make in
-            make.top.equalTo(yellowView.snp_bottomMargin).inset(-24)
+            
+                make.top.equalTo(searchV.snp_bottomMargin).inset(-24)
+            
             make.left.equalTo(16)
             make.right.equalTo(-16)
         }
@@ -403,7 +407,7 @@ class HomeVC: UIViewController {
             Loader.start()
             getCourse(exUrl: "")
             collectionView.reloadData()
-            
+            searchTF.text = ""
             
         }
         @objc func onTapped() {
@@ -419,6 +423,7 @@ class HomeVC: UIViewController {
             Loader.start()
             getCourse(exUrl: "/popular")
             collectionView.reloadData()
+            searchTF.text = ""
         }
         @objc func complTapped() {
             compBtn.layer.borderWidth = 0
@@ -433,6 +438,7 @@ class HomeVC: UIViewController {
             Loader.start()
             getCourse(exUrl: "/newest")
             collectionView.reloadData()
+            searchTF.text = ""
         }
         
   
@@ -443,7 +449,7 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectio
         navigationController?.pushViewController(CourseDetailsVC(), animated: true)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("arararar==",arr.count)
+        
         return self.arr.count
     }
     

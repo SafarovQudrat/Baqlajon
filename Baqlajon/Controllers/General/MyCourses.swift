@@ -205,9 +205,9 @@ class MyCourses: UIViewController {
         self.view.backgroundColor = .appColor(color: .background)
         setNavController()
         setUpUi()
-//        myStackV.isHidden = true
-        myView.isHidden = true
-        yellowView.isHidden = true
+        myStackV.isHidden = true
+//        myView.isHidden = true
+//        yellowView.isHidden = true
         Loader.start()
         if Reachability.isConnectedToNetwork() {
             getCourses()

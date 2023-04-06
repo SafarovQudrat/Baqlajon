@@ -18,7 +18,7 @@ class ShareReferalCodeVC: UIViewController {
         return i
     }()
     
-    private lazy var lbl:UILabel = {
+     lazy var lbl:UILabel = {
        let l = UILabel()
         l.font = .appFont(ofSize: 18)
         l.textColor = .appColor(color: .mainBlue)
@@ -61,8 +61,8 @@ class ShareReferalCodeVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .appColor(color: .background)
         setNavigationController()
-
-        guard let qrURLImage = URL(string: "fhdjfkfkfkfllflfl".uppercased())?.qrImage(using: #colorLiteral(red: 0.1450980392, green: 0.6078431373, blue: 0.9450980392, alpha: 1)) else { return }
+        lbl.text = cache.string(forKey: "PROMO")
+        guard let qrURLImage = URL(string: lbl.text!.uppercased())?.qrImage(using: #colorLiteral(red: 0.1450980392, green: 0.6078431373, blue: 0.9450980392, alpha: 1)) else { return }
             
             qrImage.image = qrURLImage
         self.view.addSubview(backV)
@@ -96,6 +96,8 @@ class ShareReferalCodeVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @objc func btnTapped() {
-        
+        let vc = CongratulationVC()
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true)
     }
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 class API {
     
@@ -25,6 +26,7 @@ class API {
     static let getMyCourseUrl:String = baseURL + "myCourse/all"
     static let getMyCourseStatUrl:String = baseURL + "myCourse/status"
     static let giftUrl:String = baseURL + "gift"
+    static let promoCodeUrl:String = baseURL + "promocode"
 //    MARK: -functions
 //    register
     static func register(lastName:String,firstName:String,number:String, password:String, complation:@escaping (LoginDM)->Void) {
@@ -132,14 +134,14 @@ class API {
     }
     
 //    GetMyself
-    static func getMySelf(complation:@escaping (LoginDM)->Void){
+    static func getMySelf(complation:@escaping (JSON)->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
             "lang":"uz"
         ]
         Net.sendRequest(to: registerUrl, method: .get, headers: headers, param: nil) { data in
             guard let data = data else{return}
-            complation(LoginDM(json: data))
+            complation(data)
         }
     }
     
@@ -152,7 +154,7 @@ class API {
      
         Net.sendRequest(to: getAllCourseUrl+exUrl, method: .get, headers: headers, param: nil) { data in
             guard let data = data else {return}
-            print("Json data = ",data)
+            
             complation(LoginDM(json: data))
          
         }
@@ -187,7 +189,35 @@ class API {
             complation(info)
         }
     }
-    
+    static func updateUser(name:String,lastname:String,password:String,image:String,number:String,complation:@escaping(JSON)->Void){
+        let headers:HTTPHeaders = [
+            "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
+            "lang":"uz"
+        ]
+        let param:[String:Any] = [
+                "firstName": name,
+                "lastName": lastname,
+                "password": password,
+                "image": image,
+                "phoneNumber": number,
+               
+        ]
+        Net.sendRequest(to: registerUrl, method: .put, headers: headers, param: param) { data in
+            guard let data = data else{return}
+            
+            complation(data)
+        }
+    }
+    static func getPromoCode(complation:@escaping (JSON)->Void) {
+        let headers:HTTPHeaders = [
+            "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
+            "lang":"uz"
+        ]
+        Net.sendRequest(to: promoCodeUrl, method: .get, headers: headers, param: nil) { data in
+            guard let data = data else {return}
+            complation(data)
+        }
+    }
     
     
     

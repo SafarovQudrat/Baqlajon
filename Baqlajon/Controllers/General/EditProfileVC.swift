@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import SwiftyJSON
+import Alamofire
 
 
 class EditProfileVC: UIViewController {
@@ -277,6 +278,7 @@ class EditProfileVC: UIViewController {
         }
         setPickerView()
         setDataPicker()
+        getMySelf()
         self.view.addGestureRecognizer (UITapGestureRecognizer(target: self, action: #selector (hideKeyboard)))
     }
     
@@ -413,15 +415,13 @@ class EditProfileVC: UIViewController {
         
     }
     @objc func saveTapped() {
-        
+        updateData()
     }
     
     
     
 }
 //MARK: - UIPickerViewDelegate, UIPickerViewDataSource
-
-
 extension EditProfileVC:UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -438,3 +438,40 @@ extension EditProfileVC:UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
 }
+extension EditProfileVC{
+    func updateData(){
+        guard let imageData = profileImage.image!.jpegData(compressionQuality: 0.5) else {return}
+       
+        API.updateUser(name: nameTf.text!, lastname: "", password: passwordTf.text!, image:  imageData.base64EncodedString(), number: numberTf.text!) { [self] data in
+            if data["success"].boolValue {
+                nameTf.text = data["data"]["firstName"].stringValue
+                numberTf.text = data["data"]["phoneNumber"].stringValue
+                passwordTf.text = data["data"]["password"].stringValue
+                let data = try? Data(contentsOf:  URL(string: data["data"]["image"].stringValue)!)
+                if let imageData = data {
+                    self.profileImage.image = UIImage(data: imageData)
+                }
+            }else {
+                Alert.showAlert(title: data["message"].stringValue, message: data["message"].stringValue, vc: self)
+            }
+        }
+        
+    }
+    func getMySelf(){
+        API.getMySelf { [self] data in
+            if data["success"].boolValue {
+                nameTf.text = data["data"]["firstName"].stringValue
+                numberTf.text = data["data"]["phoneNumber"].stringValue
+                passwordTf.text = data["data"]["password"].stringValue
+                let data = try? Data(contentsOf:  URL(string: data["data"]["image"].stringValue)!)
+                if let imageData = data {
+                    self.profileImage.image = UIImage(data: imageData)
+                }
+                
+            }else {
+                Alert.showAlert(title: data["message"].stringValue, message: data["message"].stringValue, vc: self)
+            }
+        }
+    }
+}
+

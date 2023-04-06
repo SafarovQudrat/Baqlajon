@@ -99,7 +99,7 @@ class ShopTVC: UITableViewCell {
         priceLbl.text = "\(gift.coin)"
     }
     @objc func btnTapped() {
-        ShopAlert.showAlert(image: UIImage(named: "AlertImage")!, title: "Congratulations!", text: "Your request has been received and we will contact you soon!")
+        ShopAlert.showAlert(image: nil, title: "Congratulations!", text: "Your request has been received and we will contact you soon!")
     }
 
 }

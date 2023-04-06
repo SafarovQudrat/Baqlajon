@@ -495,9 +495,10 @@ class BalanceVC: UIViewController {
         
         setUpUI()
         setNavController()
-        backV.isHidden = false
-        coinBackV.isHidden = true
-        shareBView.isHidden = true
+        backV.isHidden = true
+        coinBackV.isHidden = false
+        shareBView.isHidden = false
+        getPromoCode()
     }
 //    SetUpUi
     func setUpUI() {
@@ -550,14 +551,30 @@ class BalanceVC: UIViewController {
         
     }
     @objc func buyBtnTapped() {
-        backV.isHidden = false
-        coinBackV.isHidden = true
-        shareBView.isHidden = true
-        navigationController?.pushViewController(ShopVC(), animated: true)
+        coinBackV.isHidden = false
+        shareBView.isHidden = false
+        if backV.isHidden {
+            navigationController?.pushViewController(ShopVC(), animated: true)
+        }
+        backV.isHidden = true
     }
     @objc func shareBtnTapped() {
         self.navigationItem.backButtonTitle = ""
         navigationItem.backBarButtonItem?.tintColor = .appColor(color: .black1)
         self.navigationController?.pushViewController(ShareReferalCodeVC(), animated: true)
+    }
+}
+extension BalanceVC {
+    func getPromoCode() {
+        API.getPromoCode { [self] data in
+            
+            if data["success"].boolValue {
+                codeLbl.text = data["data"]["code"].stringValue
+                
+                cache.set(data["data"]["code"].stringValue, forKey: "PROMO")
+            }else {
+                Alert.showAlert(title: data["message"].stringValue, message: data["message"].stringValue, vc: self)
+            }
+        }
     }
 }

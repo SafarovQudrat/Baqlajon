@@ -42,7 +42,8 @@ class VideoDetailsViewController: UIViewController {
        
         return l
     }()
-    
+    var player: AVPlayer!
+       var playerLayer: AVPlayerLayer!
     
     
     override func viewDidLoad() {
@@ -95,11 +96,13 @@ class VideoDetailsViewController: UIViewController {
 
    
     @objc func btnTapped(){
-        
+
         
         let vc = AVPlayerViewController()
-        let url = Bundle.main.url(forResource: "video", withExtension: "MP4")!
+        let url = Bundle.main.url(forResource: "/videos/file-825076d9fd1cf5723f82e1312c116cef.png", withExtension: "mp4")
+        guard let url = url else {return}
         let player = AVPlayer(url:url)
+        vc.player = player
         present(vc, animated: true)
     }
 }
