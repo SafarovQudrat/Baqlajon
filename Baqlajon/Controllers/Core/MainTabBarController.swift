@@ -14,7 +14,8 @@ class MainTabBarController: UITabBarController {
 
         setUPTabbar()
         let appDelegate = UIApplication.shared.windows
-        if !cache.bool(forKey: "isDark") {
+        print("isDARKKKKKKKKKK =====",cache.bool(forKey: "isDark"))
+        if cache.bool(forKey: "isDark") {
             for i in appDelegate {
                 i.overrideUserInterfaceStyle = .dark
             }
@@ -27,22 +28,21 @@ class MainTabBarController: UITabBarController {
             return
             
         }
+        observeLangNotif()
+        setLang()
     }
     
+    let vc1 = UINavigationController(rootViewController: HomeVC())
+    let vc2 = UINavigationController(rootViewController: MyCourses())
+    let vc3 = UINavigationController(rootViewController: BalanceVC())
+    let vc4 = UINavigationController(rootViewController: ProfileVC())
     
     
     func setUPTabbar() {
         
         
-        let vc1 = UINavigationController(rootViewController: HomeVC())
-        let vc2 = UINavigationController(rootViewController: MyCourses())
-        let vc3 = UINavigationController(rootViewController: BalanceVC())
-        let vc4 = UINavigationController(rootViewController: ProfileVC())
-        
-        vc1.title = "Home"
-        vc2.title = "My Courses"
-        vc3.title = "Balance"
-        vc4.title = "Profile"
+        observeLangNotif()
+        setLang()
         
         
         vc1.tabBarItem.image = UIImage(named: "home 1")
@@ -67,5 +67,36 @@ class MainTabBarController: UITabBarController {
         setViewControllers([vc1, vc2, vc3, vc4], animated: true)
         
     }
+    
+    
+    func setLang(){
+        vc1.title = Lang.getString(type: .tabBarHome)
+        vc2.title = Lang.getString(type: .tabBarCourse)
+        vc3.title = Lang.getString(type: .tabBarBalance)
+        vc4.title = Lang.getString(type: .tabbarProfile)
+    }
+    
 
+}
+//MARK: - NnotificationCenter for language changing
+extension MainTabBarController {
+    func observeLangNotif() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changLang), name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: nil)
+        print("NotificationCenter StartVC")
+    }
+    @objc func changLang(_ notification: NSNotification) {
+        guard let lang = notification.object as? Int else { return }
+        switch lang {
+        case 0:
+            Cache.save(appLanguage: .uz)
+            setLang()
+        case 1:
+            Cache.save(appLanguage: .ru)
+            setLang()
+        case 2:
+            Cache.save(appLanguage: .en)
+            setLang()
+        default: break
+        }
+    }
 }

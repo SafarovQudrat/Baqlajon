@@ -25,8 +25,8 @@ class CourseDetailsVC: UIViewController {
         button.addTarget(.none, action: #selector(btnTapped), for: .touchUpInside)
         return button
     }()
-    
-    
+    var reviews:[CommentDM] = []
+    var myC:((Bool) ->Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appColor(color: .background)
@@ -60,8 +60,9 @@ class CourseDetailsVC: UIViewController {
     }
     //    back Button
         @objc func backtapped(){
+            myC?(true)
             self.navigationController?.popViewController(animated: true)
-            HomeVC().backProfileV.isHidden = false
+           
         }
     
     @objc func btnTapped() {
@@ -76,6 +77,7 @@ class CourseDetailsVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
+        getComments()
     }
     
     
@@ -99,7 +101,7 @@ extension CourseDetailsVC: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if videoTableViewCellIsOn { return 5 } else { return 3 }
+        if videoTableViewCellIsOn { return 5 } else { return reviews.count }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -110,8 +112,9 @@ extension CourseDetailsVC: UITableViewDelegate, UITableViewDataSource {
             return videoCell
 
         } else {
-            let reviewsCell = tableView.dequeueReusableCell(withIdentifier: CourseDetailsReviewsTableViewCell.identifier, for: indexPath)
-//            reviewsCell.contentView.backgroundColor = .appColor(color: .white)
+           guard let reviewsCell = tableView.dequeueReusableCell(withIdentifier: CourseDetailsReviewsTableViewCell.identifier, for: indexPath) as? CourseDetailsReviewsTableViewCell else {return UITableViewCell()}
+
+            reviewsCell.updateCell(desc: reviews[indexPath.row])
             return reviewsCell
         }
 
@@ -187,4 +190,12 @@ extension CourseDetailsVC: CourseDetailsTableHeaderViewDelegate {
     }
     
     
+}
+extension CourseDetailsVC {
+    func getComments() {
+        API.getComments { [self] data in
+            reviews = data
+            tableView.reloadData()
+        }
+    }
 }

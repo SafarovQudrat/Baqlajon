@@ -25,6 +25,8 @@ class ChangeLanguageViewController: UIViewController {
         configureConstraints()
         configureNavigationBar()
         configureTableView()
+        observeLangNotif()
+        
     }
     
     
@@ -65,44 +67,80 @@ class ChangeLanguageViewController: UIViewController {
 extension ChangeLanguageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChangeLanguageTableViewCell.identifier, for: indexPath) as? ChangeLanguageTableViewCell else { return UITableViewCell() }
-        if indexPath.section == 1 {
+        if indexPath.row == 1 {
+            postNotif(lang: 1)
+            Cache.save(appLanguage: .uz)
             cell.countryImageView.image = UIImage(named: "rus")
             cell.languageLabel.text = "Русский"
-        } else if indexPath.section == 2 {
+        } else if indexPath.row == 2 {
+            postNotif(lang: 2)
+            Cache.save(appLanguage: .uz)
             cell.countryImageView.image = UIImage(named: "eng")
             cell.languageLabel.text = "English"
         }
-        
+        postNotif(lang: 0)
+        Cache.save(appLanguage: .uz)
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 48
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 8
-    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        print("selected = ",indexPath.section)
+        if indexPath.row == 1 {
+            postNotif(lang: 1)
+            Cache.save(appLanguage: .uz)
+       
+        } else if indexPath.row == 2 {
+            postNotif(lang: 2)
+            Cache.save(appLanguage: .uz)
+           
+        }else {
+            postNotif(lang: 0)
+            Cache.save(appLanguage: .uz)
+        }
         
+        self.navigationController?.popViewController(animated: true)
     }
     
+}
+//MARK: -Lang Notif
+extension ChangeLanguageViewController {
+    func postNotif(lang: Int) {
+        NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: lang, userInfo: nil)
+        print("NotificationCenter LanguageVC \(lang)")
+    }
+}
+
+//MARK: - NnotificationCenter for language changing
+extension ChangeLanguageViewController {
+    func observeLangNotif() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changLang), name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: nil)
+        print("NotificationCenter LanguageVC")
+    }
+    @objc func changLang(_ notification: NSNotification) {
+        guard let lang = notification.object as? Int else { return }
+        switch lang {
+        case 0:
+            Cache.save(appLanguage: .uz)
+           
+        case 1:
+            Cache.save(appLanguage: .ru)
+            
+        case 2:
+            Cache.save(appLanguage: .en)
+         
+        default: break
+        }
+        
+    }
 }

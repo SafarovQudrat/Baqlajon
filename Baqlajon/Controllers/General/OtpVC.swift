@@ -11,7 +11,7 @@ import OTPFieldView
 class OtpVC: UIViewController {
     
     var otpIsCorrect = false
-     var number:String = ""
+    var number:String = ""
     var otp:String = ""
     let lbl: UILabel = {
         let lbl = UILabel()
@@ -49,16 +49,14 @@ class OtpVC: UIViewController {
         return btn
     }()
     
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         uiSettings()
         navDetais()
         setupOtpView()
+        setLang()
+        observeLangNotif()
     }
     
     
@@ -90,15 +88,14 @@ class OtpVC: UIViewController {
         navigationItem.leftBarButtonItem = backBtn
     }
     //    back Button
-        @objc func backtapped(){
-            self.navigationController?.popViewController(animated: true)
-        }
-    
-    
-//    confirmBtn Tapped
+    @objc func backtapped(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    //    confirmBtn Tapped
     @objc func confirmTapped(){
         Loader.start()
-        checkOtp { data in
+        if Reachability.isConnectedToNetwork(){
+            checkOtp { data in
             Loader.stop()
             
             if data.success {
@@ -110,15 +107,14 @@ class OtpVC: UIViewController {
                 Alert.showAlert(title: data.message, message: data.message, vc: self)
             }
         }
-        
-       
-        
-       
+    }else {
+        Alert.showAlert(title: "No Internet", message: "No internet connection", vc: self)
+        Loader.stop()
     }
     
-    
-    
-    
+
+       
+    }
     //MARK: draving UI
     func uiSettings() {
         lbl.text = "Please, enter the code we sent  \(number)"
@@ -147,7 +143,9 @@ class OtpVC: UIViewController {
         
     }
     
-    
+    func setLang(){
+        lbl.text = Lang.getString(type: .otpLbl)
+    }
     
     
 }
@@ -188,4 +186,26 @@ extension OtpVC {
     
     
     
+}
+//MARK: - NnotificationCenter for language changing
+extension OtpVC {
+    func observeLangNotif() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changLang), name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: nil)
+        print("NotificationCenter StartVC")
+    }
+    @objc func changLang(_ notification: NSNotification) {
+        guard let lang = notification.object as? Int else { return }
+        switch lang {
+        case 0:
+            Cache.save(appLanguage: .uz)
+            setLang()
+        case 1:
+            Cache.save(appLanguage: .ru)
+            setLang()
+        case 2:
+            Cache.save(appLanguage: .en)
+            setLang()
+        default: break
+        }
+    }
 }

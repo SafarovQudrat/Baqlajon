@@ -58,12 +58,17 @@ class ChangeLanguageTableViewCell: UITableViewCell {
     private func configureConstraints() {
         
         contentView.addSubview(backgroundedView)
-        NSLayoutConstraint.activate([
-            backgroundedView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            backgroundedView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            backgroundedView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            backgroundedView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
+//        NSLayoutConstraint.activate([
+//            backgroundedView.topAnchor.constraint(equalTo: contentView.topAnchor),
+//            backgroundedView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            backgroundedView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            backgroundedView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+//        ])
+        backgroundedView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(8)
+            make.left.right.equalTo(0)
+            make.height.equalTo(48)
+        }
         
         backgroundedView.addSubview(countryImageView)
         NSLayoutConstraint.activate([

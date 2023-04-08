@@ -114,6 +114,7 @@ class ResetPasswordVC: UIViewController {
         navigationItem.hidesBackButton = true
         let backBtn = UIBarButtonItem(image: UIImage(named: "backBtn"), style: .done, target: self, action: #selector(backtapped))
         navigationItem.leftBarButtonItem = backBtn
+        observeLangNotif()
     }
     //    back Button
         @objc func backtapped(){
@@ -136,6 +137,12 @@ class ResetPasswordVC: UIViewController {
             
         }
      
+    }
+    
+    func setLang(){
+        textLbl.text = Lang.getString(type: .resetPassLbl)
+        newPasswordTF.placeholder = Lang.getString(type: .newPassTf)
+        confirmNewPasswordTF.placeholder = Lang.getString(type: .confirmPassTf)
     }
     
 }
@@ -168,6 +175,28 @@ extension ResetPasswordVC {
     @objc func confirmTapped() {
         if newPasswordTF.text!.count >= 8, newPasswordTF.text!.count <= 16, confirmNewPasswordTF.text!.count >= 8, confirmNewPasswordTF.text!.count <= 16, newPasswordTF.text! == confirmNewPasswordTF.text! {
             print("confirm tapped")
+        }
+    }
+}
+//MARK: - NnotificationCenter for language changing
+extension ResetPasswordVC {
+    func observeLangNotif() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changLang), name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: nil)
+        print("NotificationCenter StartVC")
+    }
+    @objc func changLang(_ notification: NSNotification) {
+        guard let lang = notification.object as? Int else { return }
+        switch lang {
+        case 0:
+            Cache.save(appLanguage: .uz)
+            setLang()
+        case 1:
+            Cache.save(appLanguage: .ru)
+            setLang()
+        case 2:
+            Cache.save(appLanguage: .en)
+            setLang()
+        default: break
         }
     }
 }

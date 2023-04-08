@@ -163,10 +163,16 @@ class CourseDetailsReviewsTableViewCell: UITableViewCell {
         ])
         
     }
+    func updateCell(desc:CommentDM){
+        descriptionLabel.text = desc.text
+    }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
         
     }
     
+    
+   
 }

@@ -14,7 +14,7 @@ class IntroductionCVC: UICollectionViewCell {
   
     private let textLabel: UILabel = {
         let label = UILabel()
-        label.text = "Our new videos make it easy for you to learn anywhere, there are new videos that will be ready to help you"
+        label.text = Lang.getString(type: .startD1)
         label.font = UIFont.appFont(ofSize: 16, weight: FontWeight.regular)
         label.setLineSpacing(lineSpacing: 2)
         label.numberOfLines = 3
@@ -25,7 +25,7 @@ class IntroductionCVC: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Find your favorite course"
+        label.text = Lang.getString(type: .startT1)
         label.font = UIFont.appFont(ofSize: 24, weight: FontWeight.medium)
         label.numberOfLines = 0
         label.textAlignment = .center

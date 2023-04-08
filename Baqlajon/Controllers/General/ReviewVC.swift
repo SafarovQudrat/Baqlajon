@@ -18,7 +18,7 @@ class ReviewVC: UIViewController {
     }()
     
     //text "How was your experience with us?"
-    let textLbl: UILabel = {
+    var textLbl: UILabel = {
         let lbl = UILabel()
         lbl.text = "How was your experience with us?"
         lbl.font = .appFont(ofSize: 14, weight: .medium)
@@ -136,36 +136,46 @@ class ReviewVC: UIViewController {
         return btn
     }()
     
-    
+    let scrollV:UIScrollView = {
+        let s = UIScrollView()
+        s.showsHorizontalScrollIndicator = false
+        s.showsVerticalScrollIndicator = false
+        s.isScrollEnabled = true
+        return s
+    }()
     //MARK: -viewDidLoad-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appColor(color: .background)
         setUpUI()
         IQKeyboardManager.shared().isEnabled = true
+        setNavController()
+        setLang()
+        observeLangNotif()
     }
     
     
     func setUpUI() {
+        
         view.addSubview(review)
         review.snp.makeConstraints { $0.left.right.top.bottom.equalTo(view) }
         
         review.addSubview(textLbl)
         textLbl.snp.makeConstraints { make in
-            make.top.equalTo(review).inset(123)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(24)
             make.right.left.equalTo(review).inset(24)
         }
         
         review.addSubview(smileImg)
         smileImg.snp.makeConstraints { make in
-            make.top.equalTo(textLbl.snp.bottom).offset(44)
+            make.top.equalTo(textLbl.snp.bottom).offset(30)
             make.centerX.equalTo(review)
-            make.height.width.equalTo(120)
+            make.height.width.equalTo(view.frame.height/6)
         }
         
         review.addSubview(sliderView)
         sliderView.snp.makeConstraints { make in
-            make.top.equalTo(smileImg.snp.bottom).offset(92)
+            make.top.equalTo(smileImg.snp.bottom).offset(50)
             make.left.right.equalTo(review).inset(48)
         }
         
@@ -192,30 +202,34 @@ class ReviewVC: UIViewController {
         }
         
         
-        //        sliderView.addSubview(slider)
-        //        slider.snp.makeConstraints { make in
-        //            make.right.left.equalTo(sliderView).inset(1)
-        //            make.top.bottom.equalTo(sliderView).inset(1)
-        //        }
-        
         review.addSubview(commentTextView)
         commentTextView.addDoneButtonOnKeyboard()
         commentTextView.snp.makeConstraints { make in
             make.top.equalTo(sliderView.snp.bottom).offset(40)
             make.right.left.equalTo(review).inset(50)
-            make.height.equalTo(150)
+            make.height.equalTo(view.frame.height/6)
         }
         
         review.addSubview(sendReviewButton)
         sendReviewButton.snp.makeConstraints { make in
-            make.top.equalTo(commentTextView.snp.bottom).offset(25)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(24)
             make.left.right.equalTo(review).inset(24)
             make.height.equalTo(48)
             
         }
         
     }
-    
+    func setNavController() {
+        navigationController?.navigationBar.update(backgroundColor:.appColor(color: .white),titleColor: .appColor(color: .black1),font: .appFont(ofSize: 16,weight: .medium))
+        navigationItem.title = "Reviews"
+        let leftBtn = UIBarButtonItem(image:UIImage(systemName: "chevron.left"), style: .done, target:self , action: #selector(backBtnTapped) )
+        navigationItem.leftBarButtonItem = leftBtn
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
+    }
+    @objc func backBtnTapped(){
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 
@@ -223,7 +237,9 @@ extension ReviewVC {
     
     //send review button tapped
     @objc func sendCommentTapped() {
-        print("comment sent")
+        Loader.start()
+        createComment()
+        commentTextView.text = ""
     }
     
     
@@ -423,5 +439,43 @@ extension ReviewVC {
             commentTextView.textColor = .red
         }
     }
+    
+    
+    func setLang() {
+        textLbl.text = Lang.getString(type: .reviewLbl)
+    }
 }
-
+extension ReviewVC {
+    func createComment() {
+        API.createComment(text: commentTextView.text) { data in
+            Loader.stop()
+            if data["success"].boolValue {
+                
+            }else {
+                Alert.showAlert(title: data["message"].stringValue, message: data["message"].stringValue, vc: self)
+            }
+        }
+    }
+}
+//MARK: - NnotificationCenter for language changing
+extension ReviewVC {
+    func observeLangNotif() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changLang), name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: nil)
+        print("NotificationCenter StartVC")
+    }
+    @objc func changLang(_ notification: NSNotification) {
+        guard let lang = notification.object as? Int else { return }
+        switch lang {
+        case 0:
+            Cache.save(appLanguage: .uz)
+            setLang()
+        case 1:
+            Cache.save(appLanguage: .ru)
+            setLang()
+        case 2:
+            Cache.save(appLanguage: .en)
+            setLang()
+        default: break
+        }
+    }
+}

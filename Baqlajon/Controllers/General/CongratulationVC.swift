@@ -69,6 +69,7 @@ class CongratulationVC: UIViewController {
         b.setTitle("Claim reward", for: .normal)
         b.setTitleColor(.white, for: .normal)
         b.backgroundColor = .appColor(color: .mainBlue)
+        b.addTarget(self, action: #selector(btnTapped), for: .touchUpInside)
         b.snp.makeConstraints { make in
             make.height.equalTo(50)
         }
@@ -152,9 +153,41 @@ class CongratulationVC: UIViewController {
         lastStack.snp.makeConstraints { make in
             make.center.equalTo(view.center)
         }
+        setLang()
+        observeLangNotif()
     }
     
-
+    @objc func btnTapped() {
+        self.dismiss(animated: true)
+    }
   
+    
+    func setLang() {
+        titleLbl.text = Lang.getString(type: .congTitle)
+        textLbl.text = Lang.getString(type: .congText)
+        cLbl.text = Lang.getString(type: .CongCText)
+    }
 
+}
+//MARK: - NnotificationCenter for language changing
+extension CongratulationVC {
+    func observeLangNotif() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changLang), name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: nil)
+        print("NotificationCenter StartVC")
+    }
+    @objc func changLang(_ notification: NSNotification) {
+        guard let lang = notification.object as? Int else { return }
+        switch lang {
+        case 0:
+            Cache.save(appLanguage: .uz)
+            setLang()
+        case 1:
+            Cache.save(appLanguage: .ru)
+            setLang()
+        case 2:
+            Cache.save(appLanguage: .en)
+            setLang()
+        default: break
+        }
+    }
 }

@@ -192,6 +192,9 @@ class SignUpVC: UIViewController {
         textFieldsDoneButton()
         signUpCase()
         setTextField()
+        setLang()
+        observeLangNotif()
+        postNotif(lang: 2)
     }
     
     
@@ -202,8 +205,6 @@ class SignUpVC: UIViewController {
         phoneNumberTFView.addDoneButtonOnKeyboard()
         referalCodeTF.addDoneButtonOnKeyboard()
     }
-    
-    
     
     //MARK: Navigation Settings
     func navSettings() {
@@ -227,6 +228,13 @@ class SignUpVC: UIViewController {
         phoneNumberTFView.spellCheckingType = .yes
         phoneNumberTFView.autocorrectionType = .yes
         
+    }
+    func setLang(){
+        titleLbl.text = Lang.getString(type: .createAcc)
+        nameTF.placeholder = Lang.getString(type: .createNTF)
+        surnameTF.placeholder = Lang.getString(type: .createLNTF)
+        referalCodeTF.placeholder = Lang.getString(type: .createRC)
+        phoneNumberTFView.placeholder = Lang.getString(type: .welcomeNTf)
     }
     
 }
@@ -309,18 +317,22 @@ extension SignUpVC {
     @objc func signUpTapped() {
         let vc = OtpVC()
         Loader.start()
-        signUpRegister { data in
-            Loader.stop()
-            if data.success {
-                self.navigationController?.pushViewController(vc, animated: true)
-                self.sendOtp()
-                vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
-            } else {
-                Alert.showAlert(title: data.message, message: data.message, vc: self)
+        if Reachability.isConnectedToNetwork() {
+            signUpRegister { data in
+                Loader.stop()
+                if data.success {
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.sendOtp()
+                    vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
+                } else {
+                    Alert.showAlert(title: data.message, message: data.message, vc: self)
+                }
             }
+            
+        }else {
+            Alert.showAlert(title: "No Internet", message: "No internet connection", vc: self)
+            Loader.stop()
         }
-        
-        
         
     }
 }
@@ -340,3 +352,34 @@ extension SignUpVC {
         }
     }
 }
+//MARK: - NnotificationCenter for language changing
+extension SignUpVC {
+    func observeLangNotif() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changLang), name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: nil)
+        print("NotificationCenter StartVC")
+    }
+    @objc func changLang(_ notification: NSNotification) {
+        guard let lang = notification.object as? Int else { return }
+        switch lang {
+        case 0:
+            Cache.save(appLanguage: .uz)
+            setLang()
+        case 1:
+            Cache.save(appLanguage: .ru)
+            setLang()
+        case 2:
+            Cache.save(appLanguage: .en)
+            setLang()
+        default: break
+        }
+    }
+}
+
+//MARK: -Lang Notif
+extension SignUpVC {
+    func postNotif(lang: Int) {
+        NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: lang, userInfo: nil)
+        print("NotificationCenter LanguageVC \(lang)")
+    }
+}
+

@@ -72,6 +72,7 @@ class BalanceVC: UIViewController {
         l.font = .appFont(ofSize: 16,weight: .medium)
         l.textColor = .appColor(color: .black1)
         l.text = "How it works"
+        
         return l
     }()
 //    firstLbl
@@ -87,8 +88,8 @@ class BalanceVC: UIViewController {
        let l = UILabel()
         l.text = "You will get 1 coin for signing up"
         l.textColor = .appColor(color: .black3)
-        l.font = .appFont(ofSize: 14)
-        
+        l.font = .appFont(ofSize: 13)
+        l.numberOfLines = 0
         return l
     }()
     private lazy var firstSV: UIStackView = {
@@ -121,8 +122,8 @@ class BalanceVC: UIViewController {
            let l = UILabel()
             l.text = "You earn 1 coin for every buying course"
             l.textColor = .appColor(color: .black3)
-            l.font = .appFont(ofSize: 14)
-            
+            l.font = .appFont(ofSize: 13)
+            l.numberOfLines = 0
             return l
         }()
         private lazy var secondSV: UIStackView = {
@@ -155,8 +156,8 @@ class BalanceVC: UIViewController {
            let l = UILabel()
             l.text = "You will get 1 coin for every invited friend"
             l.textColor = .appColor(color: .black3)
-            l.font = .appFont(ofSize: 14)
-            
+            l.font = .appFont(ofSize: 13)
+            l.numberOfLines = 0
             return l
         }()
         private lazy var thirdSV: UIStackView = {
@@ -179,7 +180,7 @@ class BalanceVC: UIViewController {
 //    lblStack
     private lazy var lblStackV: UIStackView = {
        let s = UIStackView(arrangedSubviews: [lbl,firstV,secondV,thirdV])
-        s.spacing = 16
+        s.spacing = 12
         s.alignment = .fill
         s.distribution = .fill
         s.axis = .vertical
@@ -206,6 +207,9 @@ class BalanceVC: UIViewController {
        let v = UIImageView()
         v.backgroundColor = .clear
         v.image = UIImage(named: "coin")
+        v.snp.makeConstraints { make in
+            make.height.width.equalTo(90)
+        }
         return v
     }()
     lazy var coinLbl: UILabel = {
@@ -217,7 +221,7 @@ class BalanceVC: UIViewController {
     }()
     private lazy var coinStack:UIStackView = {
        let s = UIStackView(arrangedSubviews: [coinImg,coinLbl])
-        s.spacing = 16
+        s.spacing = 0
         s.alignment = .fill
         s.distribution = .fill
         s.axis = .vertical
@@ -257,6 +261,7 @@ class BalanceVC: UIViewController {
         l.textColor = .white
         l.text = "30 coins for registration"
         l.numberOfLines = 0
+        l.numberOfLines = 0
         return l
     }()
     private lazy var rStack: UIStackView = {
@@ -277,7 +282,7 @@ class BalanceVC: UIViewController {
             v.layer.cornerRadius = 2
             return v
         }()
-    private lazy var cV2:UIView = {
+        private lazy var cV2:UIView = {
        let v = UIView()
         v.backgroundColor = .clear
         v.addSubview(cV)
@@ -377,7 +382,7 @@ class BalanceVC: UIViewController {
         s.axis = .horizontal
         s.distribution = .fill
         s.alignment = .fill
-        s.spacing  = 37
+        s.spacing  = 24
         return s
     }()
     private lazy var coinBackV: UIView = {
@@ -385,7 +390,7 @@ class BalanceVC: UIViewController {
         v.backgroundColor = .clear
        
         v.snp.makeConstraints { make in
-            make.height.equalTo(157)
+            make.height.equalTo(160)
         }
        
 
@@ -406,6 +411,7 @@ class BalanceVC: UIViewController {
         l.text = "Share your referral link and earn 5 coins"
         l.font = .appFont(ofSize: 14)
         l.textColor = .appColor(color: .black3)
+        l.numberOfLines = 0
         return l
     }()
     private lazy var shareStack: UIStackView = {
@@ -414,6 +420,10 @@ class BalanceVC: UIViewController {
         s.alignment = .center
         s.distribution = .fill
         s.axis = .vertical
+        shareLbl.snp.makeConstraints { make in
+            make.left.equalTo(16)
+            make.right.equalTo(-16)
+        }
         return s
     }()
 //    shareCodeLblV
@@ -473,9 +483,7 @@ class BalanceVC: UIViewController {
        let v = UIView()
         v.backgroundColor = .appColor(color: .white)
         v.layer.cornerRadius = 8
-        v.snp.makeConstraints { make in
-            make.height.equalTo(140)
-        }
+        
        
         return v
     }()
@@ -499,6 +507,8 @@ class BalanceVC: UIViewController {
         coinBackV.isHidden = false
         shareBView.isHidden = false
         getPromoCode()
+        setLang()
+        observeLangNotif()
     }
 //    SetUpUi
     func setUpUI() {
@@ -507,11 +517,16 @@ class BalanceVC: UIViewController {
         coinBackImageV.snp.makeConstraints { make in
             make.top.left.right.bottom.equalTo(0)
         }
-        coinBackV.addSubview(lastCoinStack)
-        lastCoinStack.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(24)
-            make.left.right.equalToSuperview().inset(20)
+        coinBackV.addSubview(coinV)
+        coinV.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(20)
+            make.left.equalToSuperview().inset(16)
 
+        }
+        coinBackV.addSubview(cLblStack)
+        cLblStack.snp.makeConstraints { make in
+            make.left.equalTo(coinV.snp_rightMargin).offset(24)
+            make.top.equalTo(20)
         }
         shareBView.addSubview(shareLastSV)
         shareLastSV.snp.makeConstraints { make in
@@ -563,6 +578,18 @@ class BalanceVC: UIViewController {
         navigationItem.backBarButtonItem?.tintColor = .appColor(color: .black1)
         self.navigationController?.pushViewController(ShareReferalCodeVC(), animated: true)
     }
+    func setLang() {
+        firstLbl.text = Lang.getString(type: .infoB1)
+        secondLbl.text = Lang.getString(type: .infoB2)
+        thirdLbl.text = Lang.getString(type: .infoB3)
+        shareTLbl.text = Lang.getString(type: .shareTitle)
+        shareLbl.text = Lang.getString(type: .shareText)
+        rLbl.text = Lang.getString(type: .coin1)
+        cLbl.text = Lang.getString(type: .coin2)
+        fLbl.text = Lang.getString(type: .coin3)
+        navigationItem.leftBarButtonItem?.title = Lang.getString(type: .tabBarBalance)
+    }
+    
 }
 extension BalanceVC {
     func getPromoCode() {
@@ -575,6 +602,28 @@ extension BalanceVC {
             }else {
                 Alert.showAlert(title: data["message"].stringValue, message: data["message"].stringValue, vc: self)
             }
+        }
+    }
+}
+//MARK: - NnotificationCenter for language changing
+extension BalanceVC {
+    func observeLangNotif() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changLang), name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: nil)
+        print("NotificationCenter StartVC")
+    }
+    @objc func changLang(_ notification: NSNotification) {
+        guard let lang = notification.object as? Int else { return }
+        switch lang {
+        case 0:
+            Cache.save(appLanguage: .uz)
+            setLang()
+        case 1:
+            Cache.save(appLanguage: .ru)
+            setLang()
+        case 2:
+            Cache.save(appLanguage: .en)
+            setLang()
+        default: break
         }
     }
 }

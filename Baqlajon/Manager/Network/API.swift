@@ -27,6 +27,8 @@ class API {
     static let getMyCourseStatUrl:String = baseURL + "myCourse/status"
     static let giftUrl:String = baseURL + "gift"
     static let promoCodeUrl:String = baseURL + "promocode"
+    static let createCommentUrl:String = baseURL + "comment/63e22938843daa99b6d32708"
+    static let getAllComments:String = baseURL + "comment/All/63e22938843daa99b6d32708"
 //    MARK: -functions
 //    register
     static func register(lastName:String,firstName:String,number:String, password:String, complation:@escaping (LoginDM)->Void) {
@@ -87,6 +89,7 @@ class API {
             cache.set(data["data"]["data"]["_id"].stringValue, forKey: "USER_ID")
             cache.set(data["data"]["data"]["phoneNumber"].stringValue, forKey: "USER_PHONE_NUMBER")
             cache.set(data["data"]["data"]["lastName"].stringValue + " " + data["data"]["data"]["firstName"].stringValue, forKey: "USER_NAME")
+            cache.set(data["data"]["data"]["firstName"].stringValue, forKey: "PROFILENAME")
        
         }
     }
@@ -218,7 +221,40 @@ class API {
             complation(data)
         }
     }
+    static func createComment(text:String, complation:@escaping(JSON)->Void) {
+        let param:[String:Any] = [
+            "text":text
+        ]
+        let headers:HTTPHeaders = [
+            "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
+            "lang":"uz"
+        ]
+        Net.sendRequest(to: createCommentUrl, method: .post, headers: headers, param: param) { data in
+            guard let data = data else{return}
+            complation(data)
+        }
+        
+        
+    }
+    static func getComments(complation:@escaping ([CommentDM])->Void) {
+        let headers:HTTPHeaders = [
+            "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
+            "lang":"uz"
+        ]
+        Net.sendRequest(to: getAllComments, method: .get, headers: headers, param: nil) { data in
+            guard let data = data else {return}
+            let info = data["data"].arrayValue.map{CommentDM(text: $0)}
+            complation(info)
+           
+        }
+    }
     
     
     
+}
+struct CommentDM{
+    var text:String
+    init(text: JSON) {
+        self.text = text["text"].stringValue
+    }
 }

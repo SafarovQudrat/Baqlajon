@@ -78,7 +78,7 @@ class ProfileTVC: UITableViewCell {
         return v
     }()
     
-    var isTapped = false
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backView.addSubview(lastStack)
@@ -114,24 +114,25 @@ class ProfileTVC: UITableViewCell {
     }
     
     @objc func switchTapped() {
-       
         let appDelegate = UIApplication.shared.windows
-       
         if mySwitch.isOn {
+            
+            print("isTapped=====",mySwitch.isOn)
+            cache.set(mySwitch.isOn, forKey: "isDark")
             for i in appDelegate {
                 i.overrideUserInterfaceStyle = .dark
             }
             return
-            
         } else {
+            
+            print("isTapped=====",mySwitch.isOn)
+            cache.set(mySwitch.isOn, forKey: "isDark")
             for i in appDelegate {
                 i.overrideUserInterfaceStyle = .light
             }
             return
-            
         }
-        isTapped = !isTapped
-        cache.set(isTapped, forKey: "isDark")
+        
         
     }
 }

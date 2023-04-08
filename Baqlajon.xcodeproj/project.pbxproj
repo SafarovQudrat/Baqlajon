@@ -16,6 +16,9 @@
 		521AF05D299F3F9F000A2F83 /* BalanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521AF05C299F3F9F000A2F83 /* BalanceVC.swift */; };
 		521B07B529DC34F30091D60D /* Custom Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521B07B429DC34F30091D60D /* Custom Alert.swift */; };
 		521B07B729DD0AD30091D60D /* ShopAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521B07B629DD0AD30091D60D /* ShopAlert.swift */; };
+		5223687129E0B0930086288B /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5223687029E0B0930086288B /* Keys.swift */; };
+		5223687329E0B0A30086288B /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5223687229E0B0A30086288B /* Cache.swift */; };
+		5223687529E0B0B10086288B /* Lang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5223687429E0B0B10086288B /* Lang.swift */; };
 		5234CFBE29D6A457006E91BC /* CoursesCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5234CFBD29D6A457006E91BC /* CoursesCVC.swift */; };
 		5236F81429D21B0100B07FE6 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5236F81329D21B0100B07FE6 /* OnboardingVC.swift */; };
 		523BA9C829D2E97A005996DD /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BA9C729D2E97A005996DD /* ResetPasswordVC.swift */; };
@@ -90,6 +93,10 @@
 		521B07B629DD0AD30091D60D /* ShopAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAlert.swift; sourceTree = "<group>"; };
 		521B4E6E29DEBE9D00FC9ACD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		521B4E6F29DEBEC800FC9ACD /* uz */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uz; path = uz.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		521B4E7029DF007600FC9ACD /* Video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Video.mp4; sourceTree = "<group>"; };
+		5223687029E0B0930086288B /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		5223687229E0B0A30086288B /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		5223687429E0B0B10086288B /* Lang.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lang.swift; sourceTree = "<group>"; };
 		5234CFBD29D6A457006E91BC /* CoursesCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesCVC.swift; sourceTree = "<group>"; };
 		5236F81329D21B0100B07FE6 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		523BA9C729D2E97A005996DD /* ResetPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
@@ -166,6 +173,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5223686F29E0B0820086288B /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				5223687029E0B0930086288B /* Keys.swift */,
+				5223687229E0B0A30086288B /* Cache.swift */,
+				5223687429E0B0B10086288B /* Lang.swift */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
 		5234CFB929D6A3FE006E91BC /* TVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +214,7 @@
 				5F69B7362992297D003BB9D6 /* Products */,
 				D9D11E8F364B770B55D94D63 /* Pods */,
 				99485BC48923A628CEA0FAED /* Frameworks */,
+				521B4E7029DF007600FC9ACD /* Video.mp4 */,
 			);
 			sourceTree = "<group>";
 		};
@@ -228,6 +246,7 @@
 		5F9753C5299263EE00DC6667 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				5223686F29E0B0820086288B /* Language */,
 				5F9753CF2992698700DC6667 /* Network */,
 			);
 			path = Manager;
@@ -503,6 +522,7 @@
 				52770B45299A10AD00187F27 /* ProfileVC.swift in Sources */,
 				525798AA29D31878005A93AC /* CourseDetailsVideoTableViewCell.swift in Sources */,
 				529ADA6029D4B187006B4B20 /* LoginDM.swift in Sources */,
+				5223687129E0B0930086288B /* Keys.swift in Sources */,
 				5236F81429D21B0100B07FE6 /* OnboardingVC.swift in Sources */,
 				5F9753E92992778B00DC6667 /* Ex+UIColor.swift in Sources */,
 				5FDBE7AF299816EE00F7DB52 /* PaymentsVC.swift in Sources */,
@@ -536,10 +556,12 @@
 				525798B229D31A7B005A93AC /* VideoDetailsViewController.swift in Sources */,
 				39A99FFA2994EC7F00D4A09D /* LoginVC.swift in Sources */,
 				525798B629D31AFA005A93AC /* ChangeLanguageTableViewCell.swift in Sources */,
+				5223687529E0B0B10086288B /* Lang.swift in Sources */,
 				520E7A5329DA1629001C1336 /* ShopTVC.swift in Sources */,
 				5FDBE7B2299816EE00F7DB52 /* OtpVC.swift in Sources */,
 				5F9753ED29927E3F00DC6667 /* BNButton.swift in Sources */,
 				5FB51FE229928FE7005E4FDA /* NET.swift in Sources */,
+				5223687329E0B0A30086288B /* Cache.swift in Sources */,
 				529ADA5E29D4AF5D006B4B20 /* API.swift in Sources */,
 				5F9753EF29927E6700DC6667 /* BNTextField.swift in Sources */,
 				525798AE29D319F5005A93AC /* PaymentHistoryViewController.swift in Sources */,

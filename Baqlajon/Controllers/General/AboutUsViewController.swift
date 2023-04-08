@@ -37,7 +37,8 @@ class AboutUsViewController: UIViewController {
         
         configureConstraints()
         configureNavigationBar()
-        
+        setLang()
+        observeLangNotif()
     }
     
 
@@ -53,8 +54,6 @@ class AboutUsViewController: UIViewController {
     @objc func backBtnTapped(){
         self.navigationController?.popViewController(animated: true)
     }
-
-    
     private func configureConstraints() {
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
@@ -68,5 +67,35 @@ class AboutUsViewController: UIViewController {
             textLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             textLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25)
         ])
+    }
+    
+    
+    func setLang(){
+        titleLabel.text = Lang.getString(type: .aboutUsT)
+        textLabel.text = Lang.getString(type: .aboutUsText)
+    }
+    
+    
+}
+//MARK: - NnotificationCenter for language changing
+extension AboutUsViewController {
+    func observeLangNotif() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changLang), name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: nil)
+        print("NotificationCenter StartVC")
+    }
+    @objc func changLang(_ notification: NSNotification) {
+        guard let lang = notification.object as? Int else { return }
+        switch lang {
+        case 0:
+            Cache.save(appLanguage: .uz)
+            setLang()
+        case 1:
+            Cache.save(appLanguage: .ru)
+            setLang()
+        case 2:
+            Cache.save(appLanguage: .en)
+            setLang()
+        default: break
+        }
     }
 }

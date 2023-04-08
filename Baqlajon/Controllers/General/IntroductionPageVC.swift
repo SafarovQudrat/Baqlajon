@@ -11,26 +11,18 @@ let cache = UserDefaults.standard
 class IntroductionPageVC: UIViewController {
     
     private var sizeForItem: CGSize { CGSize(width: view.frame.width, height: 300) }
-    private let dataModel = [
-        Introduction(imageName: "introductionImage1", titleText: "Find your favorite course", introText: "Our new videos make it easy for you to learn anywhere, there are new videos that will be ready to help you"),
-        Introduction(imageName: "introductionImage2", titleText: "Learn with fun", introText: "Our new videos make it easy for you to learn anywhere, there are new videos that will be ready to help you"),
-        Introduction(imageName: "introductionImage3", titleText: "Get good results", introText: "Our new videos make it easy for you to learn anywhere, there are new videos that will be ready to help you")
-    ]
+    
     
     private var currentIndex = 0
     private let shapeLayer = CAShapeLayer()
     var center: CGPoint { CGPoint(x: (view.frame.size.width / 2), y: (view.frame.size.height - 92.5)) }
     private lazy var circularPathForProgress = UIBezierPath(arcCenter: center, radius: 43, startAngle: 0, endAngle: .pi, clockwise: true)
-    
-
     private lazy var progressViewButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "progress"), for: .normal)
         button.addTarget(self, action: #selector(progressDidTap), for: .touchUpInside)
         return button
     }()
-    
-    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -41,7 +33,7 @@ class IntroductionPageVC: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
-    
+    var dataModel:[Introduction] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,9 +44,9 @@ class IntroductionPageVC: UIViewController {
         print(view.frame.size.height)
         view.backgroundColor = .systemBackground
         configureConstraints()
+        observeLangNotif()
+        setLang()
     }
-    
-    
     
     // MARK: - methods
     
@@ -91,9 +83,7 @@ class IntroductionPageVC: UIViewController {
         }
         cache.set(false, forKey: "isTabbar")
     }
-    
-    
-    
+   
     // MARK: - layout
     
     private func configureConstraints() {
@@ -137,6 +127,15 @@ class IntroductionPageVC: UIViewController {
         view.layer.addSublayer(trackLayer)
         view.layer.addSublayer(shapeLayer)
     }
+    
+    func setLang(){
+         dataModel = [
+           Introduction(imageName: "introductionImage1", titleText: Lang.getString(type: .startT1), introText: Lang.getString(type: .startD1)),
+           Introduction(imageName: "introductionImage2", titleText: Lang.getString(type: .startT2), introText: Lang.getString(type: .startD1)),
+           Introduction(imageName: "introductionImage3", titleText: Lang.getString(type: .startT3), introText: Lang.getString(type: .startD1))
+       ]
+    }
+    
 
 }
 
@@ -153,6 +152,7 @@ extension IntroductionPageVC: UICollectionViewDelegate, UICollectionViewDataSour
         
         let model = dataModel[indexPath.item]
         cell.configure(with: model)
+        
         
         return cell
     }
@@ -197,4 +197,26 @@ extension IntroductionPageVC: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     
+}
+//MARK: - NnotificationCenter for language changing
+extension IntroductionPageVC {
+    func observeLangNotif() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changLang), name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: nil)
+        print("NotificationCenter StartVC")
+    }
+    @objc func changLang(_ notification: NSNotification) {
+        guard let lang = notification.object as? Int else { return }
+        switch lang {
+        case 0:
+            Cache.save(appLanguage: .uz)
+            setLang()
+        case 1:
+            Cache.save(appLanguage: .ru)
+            setLang()
+        case 2:
+            Cache.save(appLanguage: .en)
+            setLang()
+        default: break
+        }
+    }
 }

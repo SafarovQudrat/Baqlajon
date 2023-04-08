@@ -40,6 +40,7 @@ class ProfileVC: UIViewController {
         v.addSubview(editButton)
         profileImage.snp.makeConstraints { make in
             make.left.right.top.bottom.equalTo(0)
+            
         }
         editButton.snp.makeConstraints { make in
             make.right.bottom.equalTo(0)
@@ -104,7 +105,15 @@ class ProfileVC: UIViewController {
         }
         return v
     }()
-    
+    private lazy var logOutBtn:UIButton = {
+        let b = UIButton()
+        b.backgroundColor = .clear
+        b.setTitle("Log Out", for: .normal)
+        b.setTitleColor(.red, for: .normal)
+        b.titleLabel?.font = .appFont(ofSize: 20)
+        b.addTarget(self, action: #selector(logOutTapped), for: .touchUpInside)
+        return b
+    }()
     
 //    Payments history ,Language,DarkMode
     lazy var tableView:UITableView = {
@@ -122,29 +131,20 @@ class ProfileVC: UIViewController {
         return t
     }()
     private lazy var lastStack:UIStackView = {
-       let s = UIStackView(arrangedSubviews: [backBackV,tBackV,ttBackV])
+       let s = UIStackView(arrangedSubviews: [backBackV,tBackV,ttBackV,logOutBtn])
         s.axis = .vertical
         s.distribution = .fill
         s.spacing = 16
         s.alignment = .fill
         return s
     }()
-    
+   
 //    Payments history ,Language,DarkMode
-    let arr1:[MyData] = [
-        MyData(img: UIImage(named: "payment")!, title: "Payments history", isSwitchON: false),
-        MyData(img: UIImage(named: "lang")!, title: "Language",text: "English", isSwitchON: false),
-        MyData(img: UIImage(named: "darkM")!, title: "Dark mode", isSwitchON: true)
-    
-    ]
+    var arr1:[MyData] = []
     
     
     //    About us,Share,Help
-    let arr2:[MyData] = [
-        MyData(img: UIImage(named: "alertCircle")!, title: "About us", isSwitchON: false),
-        MyData(img: UIImage(named: "share")!, title: "Share", isSwitchON: false),
-        MyData(img: UIImage(named: "help")!, title: "Help", isSwitchON: false)
-    ]
+    var  arr2:[MyData] = []
     
     
 //    ViewDidload
@@ -152,6 +152,9 @@ class ProfileVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .appColor(color: .background)
         setUpUi()
+        setLang()
+        observeLangNotif()
+        getLang()
     }
 //    edit Tapped
     @objc func editTapped(){
@@ -167,7 +170,7 @@ class ProfileVC: UIViewController {
         backBackV.addSubview(stackV)
         stackV.snp.makeConstraints { make in
             make.top.bottom.right.left.equalToSuperview().inset(16)
-           
+            
         }
 
         tBackV.addSubview(tableView)
@@ -210,6 +213,44 @@ class ProfileVC: UIViewController {
         navigationItem.backBarButtonItem?.tintColor  = .appColor(color: .black1)
     }
 
+    func setLang() {
+        arr1 = [
+            MyData(img: UIImage(named: "payment")!, title: Lang.getString(type: .profilePay), isSwitchON: false),
+            MyData(img: UIImage(named: "lang")!, title: Lang.getString(type: .profileLang),text: "English", isSwitchON: false),
+            MyData(img: UIImage(named: "darkM")!, title: Lang.getString(type: .profileDark), isSwitchON: true)
+        
+        ]
+        arr2 = [
+            MyData(img: UIImage(named: "alertCircle")!, title: Lang.getString(type: .profileAbout), isSwitchON: false),
+            MyData(img: UIImage(named: "share")!, title: Lang.getString(type: .profileShare), isSwitchON: false),
+            MyData(img: UIImage(named: "help")!, title: Lang.getString(type: .profileHelp), isSwitchON: false)
+        ]
+        tableView.reloadData()
+        ttableView.reloadData()
+    }
+    @objc func logOutTapped(){
+        cache.set(false, forKey: "isTabbar")
+        ChangeRootViewController.change(with: UINavigationController(rootViewController: OnboardingVC()))
+    }
+    
+    func getLang(){
+        
+        let lang = Cache.getAppLanguage()
+        switch lang {
+        case .en:
+            arr1[1].text = "English"
+        case .ru:
+            arr1[1].text = "Русский"
+        case .uz:
+            arr1[1].text = "O'zbekcha"
+        }
+        navigationItem.leftBarButtonItem?.title = Lang.getString(type: .tabbarProfile)
+        tableView.reloadData()
+        
+    }
+    
+    
+    
 }
 //MARK: - UITableViewDataSource,UITableViewDelegate
 
@@ -252,4 +293,29 @@ extension ProfileVC:UITableViewDataSource,UITableViewDelegate {
         }
     }
     
+}
+//MARK: - NnotificationCenter for language changing
+extension ProfileVC {
+    func observeLangNotif() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changLang), name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: nil)
+        print("NotificationCenter StartVC")
+    }
+    @objc func changLang(_ notification: NSNotification) {
+        guard let lang = notification.object as? Int else { return }
+        switch lang {
+        case 0:
+            Cache.save(appLanguage: .uz)
+            setLang()
+            getLang()
+        case 1:
+            Cache.save(appLanguage: .ru)
+            setLang()
+            getLang()
+        case 2:
+            Cache.save(appLanguage: .en)
+            setLang()
+            getLang()
+        default: break
+        }
+    }
 }

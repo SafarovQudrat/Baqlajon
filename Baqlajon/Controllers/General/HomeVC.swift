@@ -279,18 +279,30 @@ class HomeVC: UIViewController {
         allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
         allBtn.setTitleColor(.white, for: .normal)
         Loader.start()
-        getCourse(exUrl: "")
-        collectionView.reloadData()
+        if Reachability.isConnectedToNetwork() {
+            
+            getCourse(exUrl: "")
+            collectionView.reloadData()
+        }else {
+            Alert.showAlert(title: "No internet", message: "No internet connection", vc: self)
+            Loader.stop()
+        }
         setUpUI()
         searchTF.delegate = self
         myView.isHidden = true
         yellowView.isHidden = true
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        setUpUI()
+        
     }
 //setUpUI
     func setUpUI(){
+        
         view.addSubview(searchV)
         searchV.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(24)
             make.left.right.equalToSuperview().inset(16)
             make.height.equalTo(50)
         }
@@ -344,24 +356,14 @@ class HomeVC: UIViewController {
         }
         collectionView.delegate = self
         collectionView.dataSource = self
-       
-        setNavController()
+        self.navigationController?.view.addSubview(backProfileV)
+        backProfileV.snp.makeConstraints { make in
+            make.top.left.right.equalTo(0)
+            make.height.equalTo(UIScreen.main.bounds.height/8)
+        }
     }
     
-    //    SetNavController
-        func setNavController() {
-            
-            navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),titleColor: .appColor(color: .black1),font: .appFont(ofSize: 16,weight: .medium))
-            let leftBtn = UIBarButtonItem(image: UIImage(named: "avatarImage"), style: .done, target: self, action: .none)
-            let leftLBtn = UIBarButtonItem(title: cache.string(forKey: "PROFILENAME"), style: .done, target: self, action: .none)
-            let rightButton = UIBarButtonItem(image:UIImage(named: "alert"), style: .done, target: self, action: #selector(alertTapped))
-           
-            navigationItem.rightBarButtonItem = rightButton
-            navigationItem.leftBarButtonItems = [leftBtn,leftLBtn]
-            navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
-            navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
-            
-        }
+    
 
     
     
@@ -405,7 +407,12 @@ class HomeVC: UIViewController {
             compBtn.backgroundColor = .clear
             compBtn.layer.borderWidth = 1
             Loader.start()
-            getCourse(exUrl: "")
+            if Reachability.isConnectedToNetwork() {
+                getCourse(exUrl: "")
+            }else {
+                Alert.showAlert(title: "No internet", message: "No internet connection!", vc: self)
+                Loader.stop()
+            }
             collectionView.reloadData()
             searchTF.text = ""
             
@@ -421,7 +428,13 @@ class HomeVC: UIViewController {
             compBtn.backgroundColor = .clear
             compBtn.layer.borderWidth = 1
             Loader.start()
-            getCourse(exUrl: "/popular")
+            if Reachability.isConnectedToNetwork() {
+                getCourse(exUrl: "/popular")
+            }else {
+                Alert.showAlert(title: "No internet", message: "No internet connection!", vc: self)
+                Loader.stop()
+            }
+            
             collectionView.reloadData()
             searchTF.text = ""
         }
@@ -436,7 +449,13 @@ class HomeVC: UIViewController {
             allBtn.backgroundColor = .clear
             allBtn.layer.borderWidth = 1
             Loader.start()
-            getCourse(exUrl: "/newest")
+            if Reachability.isConnectedToNetwork() {
+                getCourse(exUrl: "/newest")
+            }else {
+                Alert.showAlert(title: "No internet", message: "No internet connection!", vc: self)
+                Loader.stop()
+            }
+           
             collectionView.reloadData()
             searchTF.text = ""
         }
@@ -446,7 +465,13 @@ class HomeVC: UIViewController {
 extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.backProfileV.isHidden = true
-        navigationController?.pushViewController(CourseDetailsVC(), animated: true)
+        let vc = CourseDetailsVC()
+        vc.myC = { [self]data in
+            self.navigationController?.view.addSubview(backProfileV)
+            backProfileV.isHidden = false
+        }
+        navigationController?.pushViewController(vc, animated: true)
+
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         

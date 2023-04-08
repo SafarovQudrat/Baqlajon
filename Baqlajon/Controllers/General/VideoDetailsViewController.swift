@@ -42,16 +42,31 @@ class VideoDetailsViewController: UIViewController {
        
         return l
     }()
+    private lazy var playBtn:UIButton = {
+        let b = UIButton()
+        b.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+        b.tintColor = .white
+        b.addTarget(.none, action: #selector(playBtnTapped), for: .touchUpInside)
+        b.imageView?.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 100)
+        b.snp.makeConstraints { make in
+            make.width.height.equalTo(100)
+        }
+        return b
+    }()
+    var isFullScreen = false
+    let videoPlayerView = UIView()
     var player: AVPlayer!
-       var playerLayer: AVPlayerLayer!
-    
-    
+    var playerLayer:AVPlayerLayer!
     override func viewDidLoad() {
         super.viewDidLoad()
         
        setUpUi()
         configureNavigationBar()
+        
+       
     }
+    
+ 
     private func setUpUi() {
         view.backgroundColor = .appColor(color: .background)
         view.addSubview(btn)
@@ -78,6 +93,13 @@ class VideoDetailsViewController: UIViewController {
             make.top.equalTo(titleLbl.snp_bottomMargin).inset(-16)
             make.left.right.equalToSuperview().inset(16)
         }
+        videoView.addSubview(playBtn)
+        playBtn.snp.makeConstraints { make in
+            make.centerX.equalTo(videoView.snp_centerXWithinMargins).inset(0)
+            make.centerY.equalTo(videoView.snp_centerYWithinMargins).inset(0)
+            
+        }
+        
         
     }
     private func configureNavigationBar() {
@@ -94,14 +116,28 @@ class VideoDetailsViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
 
-   
     @objc func btnTapped(){
 
         
+
+    }
+    @objc func playBtnTapped() {
+        setUpVideoPlayer()
+    }
+
+
+  
+    
+}
+//MARK: Video Player
+extension VideoDetailsViewController {
+    func setUpVideoPlayer() {
+        let url = URL(string: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+        guard let url = url else {
+            return
+        }
+      let player = AVPlayer(url: url)
         let vc = AVPlayerViewController()
-        let url = Bundle.main.url(forResource: "/videos/file-825076d9fd1cf5723f82e1312c116cef.png", withExtension: "mp4")
-        guard let url = url else {return}
-        let player = AVPlayer(url:url)
         vc.player = player
         present(vc, animated: true)
     }

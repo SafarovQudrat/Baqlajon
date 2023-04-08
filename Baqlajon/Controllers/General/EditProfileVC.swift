@@ -463,11 +463,12 @@ extension EditProfileVC{
                 nameTf.text = data["data"]["firstName"].stringValue
                 numberTf.text = data["data"]["phoneNumber"].stringValue
                 passwordTf.text = data["data"]["password"].stringValue
-                let data = try? Data(contentsOf:  URL(string: data["data"]["image"].stringValue)!)
+                let url = URL(string: data["data"]["image"].stringValue)
+                guard let url = url else {return}
+                let data = try? Data(contentsOf: url)
                 if let imageData = data {
                     self.profileImage.image = UIImage(data: imageData)
                 }
-                
             }else {
                 Alert.showAlert(title: data["message"].stringValue, message: data["message"].stringValue, vc: self)
             }

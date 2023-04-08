@@ -18,8 +18,6 @@ class LoginVC: UIViewController {
         v.backgroundColor = .clear
         return v
     }()
-    
-    
     //title Label
     let titleLbl: UILabel = {
         let lbl = UILabel()
@@ -30,8 +28,6 @@ class LoginVC: UIViewController {
         lbl.numberOfLines = 2
         return lbl
     }()
-    
-    
     //stackView for textFields
     let textFieldStackView: UIStackView = {
         let sv = UIStackView()
@@ -41,8 +37,6 @@ class LoginVC: UIViewController {
         sv.axis = .vertical
         return sv
     }()
-    
-    
     //phoneNumber textField
     private let phoneNumberTFView: PhoneNumberTextField = {
         let tf = PhoneNumberTextField()
@@ -65,8 +59,6 @@ class LoginVC: UIViewController {
         
         return tf
     }()
-    
-    
     //password textField
     private lazy var passwordTF: UITextField = {
         let tf = UITextField()
@@ -94,8 +86,6 @@ class LoginVC: UIViewController {
         tf.rightView = openPasswordBtn
         return tf
     }()
-    
-    
     //passwords show/hide (eye) Button
     lazy var openPasswordBtn: UIButton = {
         let btn = UIButton()
@@ -104,8 +94,6 @@ class LoginVC: UIViewController {
         btn.addTarget(self, action: #selector(eyeTapped), for: .touchUpInside)
         return btn
     }()
-    
-    
     //Forgot Password Button
     let forgotPasswordBtn: UIButton = {
         let btn = UIButton()
@@ -115,8 +103,6 @@ class LoginVC: UIViewController {
         btn.addTarget(.none, action: #selector(frogotPasswordTapped), for: .touchUpInside)
         return btn
     }()
-    
-    
     //Sign Up Button
     private let loginBtn: BNButton = {
         let btn = BNButton()
@@ -127,8 +113,6 @@ class LoginVC: UIViewController {
         btn.addTarget(.none, action: #selector(loginTapped), for: .touchUpInside)
         return btn
     }()
-    
-    
     //stackView for items witch switchs to SignUpVC
     let switchDetailStackView: UIStackView = {
         let sv = UIStackView()
@@ -138,8 +122,6 @@ class LoginVC: UIViewController {
         sv.alignment = .fill
         return sv
     }()
-    
-    
     //"Don't have an account?" Label
     let switchToSignUplbl: UILabel = {
         let lbl = UILabel()
@@ -149,8 +131,6 @@ class LoginVC: UIViewController {
         lbl.textColor = .label
         return lbl
     }()
-    
-    
     //Switchs to SignUpVC
     let SwitchToSignUpBtn: UIButton = {
         let btn = UIButton()
@@ -160,8 +140,6 @@ class LoginVC: UIViewController {
         btn.addTarget(.none, action: #selector(switchToSignUpTapped), for: .touchUpInside)
         return btn
     }()
-    
-    
     //MARK: -viewDidLoad-
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -170,9 +148,10 @@ class LoginVC: UIViewController {
         navSettings()
         textFieldsDoneButton()
         setTextField()
+        observeLangNotif()
+        setLang()
+        postNotif(lang: 2)
     }
-    
-    
     //MARK: adds "Done" button to textFields
     func textFieldsDoneButton() {
         phoneNumberTFView.addDoneButtonOnKeyboard()
@@ -193,7 +172,6 @@ class LoginVC: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
     
-    
     //MARK: Number textField
     func setTextField() {
         phoneNumberTFView.backgroundColor = .appColor(color: .gray7)
@@ -204,7 +182,13 @@ class LoginVC: UIViewController {
         phoneNumberTFView.autocorrectionType = .yes
     }
     
-    
+    func setLang() {
+        titleLbl.text = Lang.getString(type: .welcome)
+        phoneNumberTFView.placeholder = Lang.getString(type: .welcomeNTf)
+        passwordTF.placeholder = Lang.getString(type: .welcomeP)
+        forgotPasswordBtn.setTitle(Lang.getString(type: .welcomeFP), for: .normal)
+        switchToSignUplbl.text = Lang.getString(type: .haveAccaunt)
+    }
 }
 
 
@@ -297,19 +281,23 @@ extension LoginVC {
     @objc func loginTapped() {
         let vc = OtpVC()
         Loader.start()
-        getLogin { data in
-            Loader.stop()
-            print("kelgan malumot = ",data)
-            if data.success {
-                self.navigationController?.pushViewController(vc, animated: true)
-                self.sendOtp()
-                vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
-            } else {
-                Alert.showAlert(title: data.message, message: data.message, vc: self)
-                
+        if Reachability.isConnectedToNetwork(){
+            getLogin { data in
+                Loader.stop()
+                print("kelgan malumot = ",data)
+                if data.success {
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.sendOtp()
+                    vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
+                } else {
+                    Alert.showAlert(title: data.message, message: data.message, vc: self)
+                    
+                }
             }
+        }else {
+            Alert.showAlert(title: "No Internet", message: "No internet connection", vc: self)
+            Loader.stop()
         }
-       
     }
     
     //Opens ForgotVC Tapped
@@ -326,12 +314,17 @@ extension LoginVC {
     
 }
 
+
+
+
 //API connect
 extension LoginVC {
     func getLogin(complation:@escaping (LoginDM)->Void){
-        API.getLogin(number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!, password: passwordTF.text!) { data in
-            complation(data)
-        }
+        
+            API.getLogin(number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!, password: passwordTF.text!) { data in
+                complation(data)
+            }
+       
     }
     func sendOtp(){
         API.sendOtp(number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!) { data in
@@ -340,4 +333,34 @@ extension LoginVC {
     }
 }
 
+//MARK: - NnotificationCenter for language changing
+extension LoginVC {
+    func observeLangNotif() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changLang), name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: nil)
+        print("NotificationCenter StartVC")
+    }
+    @objc func changLang(_ notification: NSNotification) {
+        guard let lang = notification.object as? Int else { return }
+        switch lang {
+        case 0:
+            Cache.save(appLanguage: .uz)
+            setLang()
+        case 1:
+            Cache.save(appLanguage: .ru)
+            setLang()
+        case 2:
+            Cache.save(appLanguage: .en)
+            setLang()
+        default: break
+        }
+    }
+}
+
+//MARK: -Lang Notif
+extension LoginVC {
+    func postNotif(lang: Int) {
+        NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: lang, userInfo: nil)
+        print("NotificationCenter LanguageVC \(lang)")
+    }
+}
 
