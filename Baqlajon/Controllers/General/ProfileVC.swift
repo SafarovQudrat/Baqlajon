@@ -214,6 +214,8 @@ class ProfileVC: UIViewController {
     }
 
     func setLang() {
+        logOutBtn.setTitle(Lang.getString(type: .logOut), for: .normal)
+        
         arr1 = [
             MyData(img: UIImage(named: "payment")!, title: Lang.getString(type: .profilePay), isSwitchON: false),
             MyData(img: UIImage(named: "lang")!, title: Lang.getString(type: .profileLang),text: "English", isSwitchON: false),

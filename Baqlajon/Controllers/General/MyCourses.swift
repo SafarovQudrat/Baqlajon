@@ -169,14 +169,14 @@ class MyCourses: UIViewController {
     var fireLbl: UILabel = {
        let l = UILabel()
         l.font = .appFont(ofSize: 14)
-        
+        l.textColor = .black
         l.text = "🔥 Sotib olganlar:"
         return l
     }()
     var countLbl: UILabel = {
        let l = UILabel()
         l.font = .appFont(ofSize: 14,weight: .semiBold)
-        
+        l.textColor = .black
         l.text = "10000"
         return l
     }()

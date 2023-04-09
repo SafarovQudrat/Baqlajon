@@ -76,6 +76,8 @@ class Lang {
                 return "Баланс"
             case .tabbarProfile:
                 return "Профиль"
+            case .logOut:
+                return "выйти"
             }
      
         case .uz:
@@ -143,6 +145,8 @@ class Lang {
                 return "Hisob"
             case .tabbarProfile:
                 return "Profil"
+            case .logOut:
+                return "Chiqish"
             }
         case .en:
             switch type {
@@ -209,6 +213,8 @@ class Lang {
                 return "Balance"
             case .tabbarProfile:
                 return "Profile"
+            case .logOut:
+                return "logOut"
             }
         }
     
@@ -272,7 +278,7 @@ class Lang {
         case tabBarCourse
         case tabBarBalance
         case tabbarProfile
-        
+        case logOut
         
     }
     
