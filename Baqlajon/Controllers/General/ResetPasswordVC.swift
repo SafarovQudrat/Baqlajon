@@ -105,6 +105,7 @@ class ResetPasswordVC: UIViewController {
         btn.addTarget(.none, action: #selector(confirmTapped), for: .touchUpInside)
         return btn
     }()
+    var changPass:((String)->Void)?
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,6 +119,7 @@ class ResetPasswordVC: UIViewController {
     }
     //    back Button
         @objc func backtapped(){
+           
             self.navigationController?.popViewController(animated: true)
         }
     
@@ -173,6 +175,15 @@ extension ResetPasswordVC {
     }
     
     @objc func confirmTapped() {
+        if confirmNewPasswordTF.text!.isEmpty {
+            changPass?("")
+            
+        }else {
+            changPass?(confirmNewPasswordTF.text!)
+        }
+        self.navigationController?.popViewController(animated: true)
+        
+        
         if newPasswordTF.text!.count >= 8, newPasswordTF.text!.count <= 16, confirmNewPasswordTF.text!.count >= 8, confirmNewPasswordTF.text!.count <= 16, newPasswordTF.text! == confirmNewPasswordTF.text! {
             print("confirm tapped")
         }

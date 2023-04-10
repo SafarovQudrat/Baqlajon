@@ -410,12 +410,21 @@ class EditProfileVC: UIViewController {
         
     }
     @objc func changePassTapped() {
-        
-        self.navigationController?.pushViewController(ResetPasswordVC(), animated: true)
+        let vc = ResetPasswordVC()
+        vc.changPass = { data in
+            if data != "" {
+                self.passwordTf.text = data
+            }
+           
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     @objc func saveTapped() {
+        Loader.start()
         updateData()
+        self.navigationController?.popViewController(animated: true)
+        
     }
     
     
@@ -440,6 +449,7 @@ extension EditProfileVC:UIPickerViewDelegate, UIPickerViewDataSource {
 }
 extension EditProfileVC{
     func updateData(){
+        Loader.stop()
         guard let imageData = profileImage.image!.jpegData(compressionQuality: 0.5) else {return}
        
         API.updateUser(name: nameTf.text!, lastname: "", password: passwordTf.text!, image:  imageData.base64EncodedString(), number: numberTf.text!) { [self] data in
