@@ -7,13 +7,12 @@
 
 import UIKit
 import SnapKit
+import Lottie
 class ShopAlert:UIView{
-    
+   
     class func showAlert(image:UIImage?,title:String,text:String){
         let backV = ShopAlert(frame: UIScreen.main.bounds)
             backV.backgroundColor = .black.withAlphaComponent(0.6)
-        
-        
         
         let star1:UIImageView = {
             let i = UIImageView()
@@ -151,12 +150,12 @@ class ShopAlert:UIView{
             make.left.right.equalToSuperview().inset(32)
             make.center.equalTo(backV.center)
         }
+       
         
         containerV.transform = .init(scaleX: 0, y: 0)
         if let window = UIApplication.keyWindow {
             window.addSubview(backV)
         }
-        
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.3, options: [.curveEaseOut]) {
             containerV.transform = .identity
         }

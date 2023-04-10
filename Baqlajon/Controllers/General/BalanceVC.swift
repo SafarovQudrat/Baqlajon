@@ -509,6 +509,8 @@ class BalanceVC: UIViewController {
         getPromoCode()
         setLang()
         observeLangNotif()
+        Loader.start()
+        getMyself()
     }
 //    SetUpUi
     func setUpUI() {
@@ -591,6 +593,7 @@ class BalanceVC: UIViewController {
     }
     
 }
+//API
 extension BalanceVC {
     func getPromoCode() {
         API.getPromoCode { [self] data in
@@ -604,6 +607,16 @@ extension BalanceVC {
             }
         }
     }
+    func getMyself() {
+        API.getMySelf { [self] data in
+            Loader.stop()
+            print("data = ",data)
+            coinLbl.text = "\(data["data"]["coin"]["allCoin"].intValue) coins"
+            cache.set(data["data"]["coin"]["allCoin"].intValue, forKey: "coin")
+        }
+    }
+    
+    
 }
 //MARK: - NnotificationCenter for language changing
 extension BalanceVC {

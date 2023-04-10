@@ -57,7 +57,7 @@ class ShopTVC: UITableViewCell {
         return s
     }()
     
-
+    var coin:Int = 1
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(backV)
@@ -89,6 +89,7 @@ class ShopTVC: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     func updateCell(gift:GetGiftDM){
+        coin = gift.coin
 //        image.sd_setImage(with: URL(string: gift.image))
         let data = try? Data(contentsOf:  URL(string: gift.image)!)
 
@@ -99,7 +100,12 @@ class ShopTVC: UITableViewCell {
         priceLbl.text = "\(gift.coin)"
     }
     @objc func btnTapped() {
-        ShopAlert.showAlert(image: nil, title: "Congratulations!", text: "Your request has been received and we will contact you soon!")
+//        if cache.integer(forKey: "coin") < coin {
+//            ShopAlert.showAlert(image: nil, title: "Oops!", text: "Sorry you don't have enough coins!Collect more coins.")
+//        }else {
+////            ShopAlert.lottieView.isHidden = true
+            ShopAlert.showAlert(image: nil, title: "Congratulations!", text: "Your request has been received and we will contact you soon!")
+//        }
     }
 
 }
