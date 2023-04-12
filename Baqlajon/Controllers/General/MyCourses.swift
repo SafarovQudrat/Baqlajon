@@ -361,6 +361,12 @@ class MyCourses: UIViewController {
         textLbl.text = Lang.getString(type: .payCText)
         fireLbl.text = "🔥 \(Lang.getString(type: .yelloVText))"
         navigationItem.leftBarButtonItem?.title = Lang.getString(type: .tabBarCourse)
+        allBtn.setTitle(Lang.getString(type: .myCourseBtn1), for: .normal)
+        onBtn.setTitle(Lang.getString(type: .myCourseBtn2), for: .normal)
+        compBtn.setTitle(Lang.getString(type: .myCourseBtn3), for: .normal)
+        lbl.text = Lang.getString(type: .homeBuyBtn)
+            
+        
     }
     
     

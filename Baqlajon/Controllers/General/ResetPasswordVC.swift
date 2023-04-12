@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ResetPasswordVC: UIViewController {
     
@@ -48,7 +49,9 @@ class ResetPasswordVC: UIViewController {
         tf.textColor = .label
         tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
-    
+        tf.snp.makeConstraints { make in
+            make.height.equalTo(50)
+        }
         return tf
     }()
     
@@ -106,7 +109,10 @@ class ResetPasswordVC: UIViewController {
         return btn
     }()
     var changPass:((String)->Void)?
- 
+    var number: String = ""
+    var isForgot:Bool = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appColor(color: .background)
@@ -116,6 +122,12 @@ class ResetPasswordVC: UIViewController {
         let backBtn = UIBarButtonItem(image: UIImage(named: "backBtn"), style: .done, target: self, action: #selector(backtapped))
         navigationItem.leftBarButtonItem = backBtn
         observeLangNotif()
+        if isForgot {
+            oldPasswordTF.isHidden = true
+            isForgot = false
+        }else {
+            oldPasswordTF.isHidden = false
+        }
     }
     //    back Button
         @objc func backtapped(){
@@ -175,17 +187,25 @@ extension ResetPasswordVC {
     }
     
     @objc func confirmTapped() {
-        if confirmNewPasswordTF.text!.isEmpty {
-            changPass?("")
-            
-        }else {
-            changPass?(confirmNewPasswordTF.text!)
-        }
-        self.navigationController?.popViewController(animated: true)
-        
+       
         
         if newPasswordTF.text!.count >= 8, newPasswordTF.text!.count <= 16, confirmNewPasswordTF.text!.count >= 8, confirmNewPasswordTF.text!.count <= 16, newPasswordTF.text! == confirmNewPasswordTF.text! {
-            print("confirm tapped")
+            
+            putData { data in
+                
+                if data["success"].boolValue {
+                    self.navigationController?.popToRootViewController(animated: true)
+                } else {
+                    
+                    guard let arr = data["data"].arrayValue.first else {return}
+                    print("dataaa = ",arr["constraints"].arrayValue.first!["value"].stringValue)
+                    Alert.showAlert(title: data["message"].stringValue, message:arr["constraints"].arrayValue.first!["value"].stringValue  ,vc: self)
+                }
+            }
+            
+            
+        }else {
+            Alert.showAlert(title: "Error", message: "Password must be longer than 8 characters", vc: self)
         }
     }
 }
@@ -208,6 +228,17 @@ extension ResetPasswordVC {
             Cache.save(appLanguage: .en)
             setLang()
         default: break
+        }
+    }
+}
+//MARK: -API
+extension ResetPasswordVC {
+    func putData(complation:@escaping(JSON)->Void){
+        print("number=",number)
+        print("OTP=",self.confirmNewPasswordTF.text!)
+        API.forgetPass(number: number,password:self.confirmNewPasswordTF.text!) { data in
+            complation(data)
+        
         }
     }
 }

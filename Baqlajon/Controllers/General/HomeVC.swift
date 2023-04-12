@@ -226,7 +226,10 @@ class HomeVC: UIViewController {
     }()
     private lazy var imageP:UIImageView = {
         let i = UIImageView()
-        i.image = UIImage(named: "avatarImage")
+        i.image = UIImage(systemName: "person.circle")
+        i.clipsToBounds = true
+        i.tintColor = .appColor(color: .gray2)
+        i.layer.cornerRadius = 20
         i.snp.makeConstraints { make in
             make.width.height.equalTo(40)
         }
@@ -275,6 +278,8 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .appColor(color: .background)
+        getMySelf()
+        
         allBtn.layer.borderWidth = 0
         allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
         allBtn.setTitleColor(.white, for: .normal)
@@ -295,7 +300,8 @@ class HomeVC: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         setUpUI()
-        
+        setLang()
+        observeLangNotif()
     }
 //setUpUI
     func setUpUI(){
@@ -459,7 +465,16 @@ class HomeVC: UIViewController {
             collectionView.reloadData()
             searchTF.text = ""
         }
+      
+    func setLang() {
+        searchTF.placeholder = Lang.getString(type: .searchTf)
         
+        allBtn.setTitle(Lang.getString(type: .homeBtn1), for: .normal)
+        onBtn.setTitle(Lang.getString(type: .homeBtn2), for: .normal)
+        compBtn.setTitle(Lang.getString(type: .homeBtn3), for: .normal)
+    }
+    
+    
   
 }
 extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
@@ -517,6 +532,47 @@ extension HomeVC{
             }else{
                 
             }
+        }
+    }
+    func getMySelf(){
+        Loader.start()
+        API.getMySelf { [self] data in
+            Loader.stop()
+            print("data===",data)
+            if data["success"].boolValue {
+                let url = URL(string: API.imgBaseURL + data["data"]["image"].stringValue)
+                if let url = url {
+                    print("URL = = ",url)
+                    self.imageP.sd_setImage(with: url)
+                }else {
+                    
+                    self.imageP.image = UIImage(named: "avatarImage")
+                }
+            }else {
+                Alert.showAlert(title: data["message"].stringValue, message: data["message"].stringValue, vc: self)
+            }
+        }
+    }
+}
+//MARK: - NnotificationCenter for language changing
+extension HomeVC {
+    func observeLangNotif() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changLang), name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: nil)
+        print("NotificationCenter StartVC")
+    }
+    @objc func changLang(_ notification: NSNotification) {
+        guard let lang = notification.object as? Int else { return }
+        switch lang {
+        case 0:
+            Cache.save(appLanguage: .uz)
+            setLang()
+        case 1:
+            Cache.save(appLanguage: .ru)
+            setLang()
+        case 2:
+            Cache.save(appLanguage: .en)
+            setLang()
+        default: break
         }
     }
 }

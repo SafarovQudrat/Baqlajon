@@ -13,7 +13,7 @@ class API {
     
 //    BaseURL
    static let baseURL = "https://baqlajonapi.roundedteam.uz/"
-    
+    static let imgBaseURL: String = "https://baqlajonapi.roundedteam.uz/public"
 //    URLs
     
     static let registerUrl:String = baseURL + "user"
@@ -111,7 +111,7 @@ class API {
     }
     
 //    CheckOtp
-    static func checkOtp(number:String,otp:String,complation:@escaping(LoginDM)->Void){
+    static func checkOtp(number: String,otp: String,complation:@escaping(LoginDM)-> Void){
         let param:[String:Any] = [
             "phoneNumber":number,
             "otp":otp
@@ -126,13 +126,18 @@ class API {
     }
     
 //    Forget Password
-    static func forgetPass(number:String,complation:@escaping(LoginDM)->Void){
+    static func forgetPass(number: String,password: String,complation:@escaping (JSON)-> Void){
         let param:[String:Any] = [
-            "phoneNumber":number
+            "phoneNumber":number,
+            "password":password
         ]
-        Net.sendRequest(to: forgetPassword, method: .put, headers: nil, param: param) { data in
+        let headers:HTTPHeaders = [
+            
+            "lang":"uz"
+        ]
+        Net.sendRequest(to: forgetPassword, method: .put, headers: headers, param: param) { data in
             guard let data = data else {return}
-            complation(LoginDM(json: data))
+            complation(data)
         }
     }
     

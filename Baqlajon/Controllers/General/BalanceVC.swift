@@ -551,7 +551,7 @@ class BalanceVC: UIViewController {
         }
         view.addSubview(lastStack)
         lastStack.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(24)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(16)
             make.right.left.equalToSuperview().inset(16)
             
         }
@@ -590,6 +590,7 @@ class BalanceVC: UIViewController {
         cLbl.text = Lang.getString(type: .coin2)
         fLbl.text = Lang.getString(type: .coin3)
         navigationItem.leftBarButtonItem?.title = Lang.getString(type: .tabBarBalance)
+        buyBtn.setTitle(Lang.getString(type: .balanceBuyBtn), for: .normal)
     }
     
 }

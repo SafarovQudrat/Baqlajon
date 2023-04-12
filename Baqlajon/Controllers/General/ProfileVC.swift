@@ -12,7 +12,10 @@ class ProfileVC: UIViewController {
     
 //    profile Image
     var profileImage:UIImageView = {
-       let i = UIImageView(image: UIImage(named: "avatarImage"))
+       let i = UIImageView()
+        i.image = UIImage(systemName: "person.circle")
+        i.tintColor = .appColor(color: .gray2)
+        i.clipsToBounds = true
         i.snp.makeConstraints { make in
             make.width.height.equalTo(90)
         }
@@ -138,11 +141,10 @@ class ProfileVC: UIViewController {
         s.alignment = .fill
         return s
     }()
-   
+    
 //    Payments history ,Language,DarkMode
     var arr1:[MyData] = []
-    
-    
+
     //    About us,Share,Help
     var  arr2:[MyData] = []
     
@@ -155,6 +157,7 @@ class ProfileVC: UIViewController {
         setLang()
         observeLangNotif()
         getLang()
+        getMySelf()
     }
 //    edit Tapped
     @objc func editTapped(){
@@ -183,12 +186,12 @@ class ProfileVC: UIViewController {
             make.left.top.right.bottom.equalToSuperview().inset(8)
         }
         
-        self.view.addSubview(lastStack)
-        lastStack.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(16)
-            make.left.right.equalToSuperview().inset(16)
-            
-        }
+//        self.view.addSubview(lastStack)
+//        lastStack.snp.makeConstraints { make in
+//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(16)
+//            make.left.right.equalToSuperview().inset(16)
+//
+//        }
         
         ttableView.delegate = self
         ttableView.dataSource = self
@@ -199,6 +202,23 @@ class ProfileVC: UIViewController {
         tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.register(ProfileTVC.self, forCellReuseIdentifier:"ProfileTVC" )
+        let scrollV = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        
+        self.view.addSubview(scrollV)
+        scrollV.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.left.right.equalTo(0)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
+        scrollV.addSubview(lastStack)
+        lastStack.snp.makeConstraints { make in
+            make.top.equalTo(16)
+            make.left.equalTo(16)
+            make.right.equalTo(-16)
+            make.bottom.equalTo(-10)
+            make.width.equalTo(scrollV.frame.width - 32)
+        }
+        
     }
     
     
@@ -318,6 +338,27 @@ extension ProfileVC {
             setLang()
             getLang()
         default: break
+        }
+    }
+}
+//MARK: API
+extension ProfileVC {
+    func getMySelf(){
+        Loader.start()
+        API.getMySelf { [self] data in
+            Loader.stop()
+            if data["success"].boolValue {
+                let url = URL(string: API.imgBaseURL + data["data"]["image"].stringValue)
+                if let url = url {
+                    self.profileImage.sd_setImage(with: url)
+                }else {
+                    self.profileImage.image = UIImage(named: "avatarImage")
+                }
+                
+//
+            }else {
+                Alert.showAlert(title: data["message"].stringValue, message: data["message"].stringValue, vc: self)
+            }
         }
     }
 }

@@ -8,13 +8,17 @@
 import UIKit
 import SwiftyJSON
 import Alamofire
-
+import SDWebImage
 
 class EditProfileVC: UIViewController {
     
     //    profile Image
     var profileImage:UIImageView = {
-        let i = UIImageView(image: UIImage(named: "avatarImage"))
+        let i = UIImageView()
+        i.image = UIImage(systemName: "person.circle")
+        i.tintColor = .appColor(color: .gray2)
+        i.layer.cornerRadius = 50
+        i.clipsToBounds = true
         i.snp.makeConstraints { make in
             make.width.height.equalTo(100)
         }
@@ -28,6 +32,7 @@ class EditProfileVC: UIViewController {
         b.backgroundColor = #colorLiteral(red: 0, green: 0.6406018734, blue: 0.9510455728, alpha: 1)
         b.tintColor = .white
         b.setImage(UIImage(named: "pencil"), for: .normal)
+        b.addTarget(.none, action: #selector(editButtonTapped), for: .touchUpInside)
         b.snp.makeConstraints { make in
             make.width.height.equalTo(30)
         }
@@ -195,6 +200,7 @@ class EditProfileVC: UIViewController {
         let t = UITextField()
         t.font = .appFont(ofSize: 14,weight: .medium)
         t.textColor = .appColor(color: .black1)
+        t.isSecureTextEntry = true
         t.placeholder = "Password"
         return t
     }()
@@ -220,6 +226,7 @@ class EditProfileVC: UIViewController {
         v.addSubview(passwordStack)
         v.backgroundColor = .appColor(color: .gray6)
         v.layer.cornerRadius = 8
+        
         passwordStack.snp.makeConstraints { make in
             make.left.equalTo(16)
             make.right.equalTo(-16)
@@ -378,6 +385,14 @@ class EditProfileVC: UIViewController {
         genderTf.inputView = genderPicker
     }
     
+    @objc func editButtonTapped() {
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = .savedPhotosAlbum
+        image.allowsEditing = true
+        
+        self.present(image, animated: true)
+    }
     
     
     
@@ -422,7 +437,13 @@ class EditProfileVC: UIViewController {
     }
     @objc func saveTapped() {
         Loader.start()
-        updateData()
+        sendSignature { [self] data in
+            guard let data = data  else {return}
+            print("data iMage = ",data)
+            updateData(img: data["data"].stringValue)
+        }
+        
+        
         self.navigationController?.popViewController(animated: true)
         
     }
@@ -447,12 +468,56 @@ extension EditProfileVC:UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
 }
+//MARK:
+extension EditProfileVC:UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let reciveImage = info[.originalImage] as? UIImage
+        let editImage = info[.editedImage] as? UIImage
+        self.profileImage.image = editImage
+        self.dismiss(animated: true)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true)
+    }
+}
+
+extension EditProfileVC {
+    
+    func sendSignature(completion: @escaping (_ data: JSON?) -> ()) {
+        if Reachability.isConnectedToNetwork() {
+            
+            AF.upload(multipartFormData: { [self] multipartFormData in
+                if let imgData = profileImage.image?.jpegData(compressionQuality: 0.6) {
+                    multipartFormData.append(imgData, withName: "file", fileName: "\(Date().timeIntervalSince1970).jpg", mimeType: "image/jpg")
+                }
+            }, to: "https://mobilebirzoom.roundedteam.uz/upload", method: .post).response { (response) in
+                
+                Loader.stop()
+                
+                switch response.result {
+                case .success:
+                    if let data = response.data {
+                        completion(JSON(data))
+                    } else {
+                        completion(nil)
+                    }
+                case .failure:
+
+                    completion(nil)
+                }
+            }
+        } else {
+
+            //Not Connected
+        }
+    }
+}
+
 extension EditProfileVC{
-    func updateData(){
+   
+    func updateData(img:String){
         Loader.stop()
-        guard let imageData = profileImage.image!.jpegData(compressionQuality: 0.5) else {return}
-       
-        API.updateUser(name: nameTf.text!, lastname: "", password: passwordTf.text!, image:  imageData.base64EncodedString(), number: numberTf.text!) { [self] data in
+        API.updateUser(name: nameTf.text!, lastname: "", password: passwordTf.text!, image: img, number: numberTf.text!) { [self] data in
             if data["success"].boolValue {
                 nameTf.text = data["data"]["firstName"].stringValue
                 numberTf.text = data["data"]["phoneNumber"].stringValue
@@ -468,17 +533,24 @@ extension EditProfileVC{
         
     }
     func getMySelf(){
+        Loader.start()
         API.getMySelf { [self] data in
+            Loader.stop()
             if data["success"].boolValue {
                 nameTf.text = data["data"]["firstName"].stringValue
                 numberTf.text = data["data"]["phoneNumber"].stringValue
                 passwordTf.text = data["data"]["password"].stringValue
-                let url = URL(string: data["data"]["image"].stringValue)
-                guard let url = url else {return}
-                let data = try? Data(contentsOf: url)
-                if let imageData = data {
-                    self.profileImage.image = UIImage(data: imageData)
+                let url = URL(string: API.imgBaseURL + data["data"]["image"].stringValue)
+                
+                if let url = url {
+                    self.profileImage.sd_setImage(with: url)
+                }else {
+                    self.profileImage.image = UIImage(named: "avatarImage")
                 }
+//                let data = try? Data(contentsOf: url)
+//                if let imageData = data {
+//                    self.profileImage.image = UIImage(data: imageData)
+//                }
             }else {
                 Alert.showAlert(title: data["message"].stringValue, message: data["message"].stringValue, vc: self)
             }

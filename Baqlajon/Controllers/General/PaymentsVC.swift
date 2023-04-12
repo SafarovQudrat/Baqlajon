@@ -273,7 +273,8 @@ class PaymentsVC: UIViewController {
             containerV.transform = .identity
         }
         self.view.addGestureRecognizer (UITapGestureRecognizer(target: self, action: #selector (hideKeyboard)))
-        
+        setLang()
+        observeLangNotif()
     }
     //MARK: -  hide keyboard
     @objc private func hideKeyboard() {
@@ -303,7 +304,36 @@ class PaymentsVC: UIViewController {
         
     }
     
+    func setLang(){
+        textLbl.text = Lang.getString(type: .alertPLbl)
+        okBtn.setTitle(Lang.getString(type: .continueBtn), for: .normal)
+    }
     
 
    
+}
+//MARK: - NnotificationCenter for language changing
+extension PaymentsVC {
+    func observeLangNotif() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changLang), name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: nil)
+        print("NotificationCenter StartVC")
+    }
+    @objc func changLang(_ notification: NSNotification) {
+        guard let lang = notification.object as? Int else { return }
+        switch lang {
+        case 0:
+            Cache.save(appLanguage: .uz)
+            setLang()
+            
+        case 1:
+            Cache.save(appLanguage: .ru)
+            setLang()
+            
+        case 2:
+            Cache.save(appLanguage: .en)
+            setLang()
+            
+        default: break
+        }
+    }
 }

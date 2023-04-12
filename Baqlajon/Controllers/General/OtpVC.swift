@@ -150,8 +150,6 @@ class OtpVC: UIViewController {
     
 }
 
-
-
 extension OtpVC: OTPFieldViewDelegate {
     
     func shouldBecomeFirstResponderForOTP(otpTextFieldIndex index: Int) -> Bool {
@@ -171,7 +169,7 @@ extension OtpVC: OTPFieldViewDelegate {
     }
     
 }
-//API
+//MARK: - API
 extension OtpVC {
     func checkOtp(complation:@escaping(LoginDM)->Void) {
         API.checkOtp(number: number, otp: otp) { data in

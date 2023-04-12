@@ -25,7 +25,7 @@ class Lang {
             case .createAcc:return "Создавать Счет!"
             case .createNTF :return "Имя*"
             case .createLNTF :return "Фамилия*"
-            case .createRC :return "Промо-код"
+            case .createRC :return "Пароль"
             case .alHaveAcc:return "У вас уже есть аккаунт?"
             case .otpLbl:return "Пожалуйста, введите код, который мы отправили"
             case .forgotPassLbl:return "Пожалуйста, введите зарегистрированный номер телефона, чтобы сбросить пароль!"
@@ -77,7 +77,39 @@ class Lang {
             case .tabbarProfile:
                 return "Профиль"
             case .logOut:
-                return "выйти"
+                return "Выйти"
+            case .homeBuyBtn:
+                return "Купить"
+            case .searchTf:
+                return "Поиск"
+            case .homeBtn1:
+                return "Все"
+            case .homeBtn2:
+                return "Популярный"
+            case .homeBtn3:
+                return "Новейшие"
+            case .continueBtn:
+                return "Продолжать"
+            case .myCourseBtn1:
+                return "Все"
+            case .myCourseBtn2:
+                return "Непрерывный"
+            case .myCourseBtn3:
+                return "Завершенный"
+            case .tLbl:
+                return "Платите и накапливайте баллы,обменивайте накопленные баллы на все, что захотите"
+            case .tBtn:
+                return "Оплата"
+            case .balanceBuyBtn:
+                return "Купить"
+            case .shareRefCode:
+                return "Поделит реферал код"
+            case .ClaimReward:
+                return "Награда претензии"
+            case .save:
+                return "Сохранять"
+            case .send:
+                return "Отправлять"
             }
      
         case .uz:
@@ -94,7 +126,7 @@ class Lang {
             case .createAcc:return "Hisob yaratish!"
             case .createNTF :return "Ism*"
             case .createLNTF :return "Familiya*"
-            case .createRC :return "Referral code"
+            case .createRC :return "Parol"
             case .alHaveAcc:return "Sizda allaqachon hisob bor?"
             case .otpLbl:return "Iltimos, biz yuborgan kodni kiriting"
             case .forgotPassLbl:return "Parolni tiklash uchun ro'yxatdan o'tgan telefon raqamingizni kiriting!"
@@ -147,6 +179,38 @@ class Lang {
                 return "Profil"
             case .logOut:
                 return "Chiqish"
+            case .homeBuyBtn:
+                return "Sotib olish"
+            case .searchTf:
+               return "Qidirish"
+            case .homeBtn1:
+                return "Hammasi"
+            case .homeBtn2:
+                return "Mashhur"
+            case .homeBtn3:
+                return "Yangi"
+            case .continueBtn:
+                return "Davom etish"
+            case .myCourseBtn1:
+                return "Hammasi"
+            case .myCourseBtn2:
+                return "Jarayonda"
+            case .myCourseBtn3:
+                return "Tugallangan"
+            case .tLbl:
+                return "To’lov qiling va ball to’plang,to’lpagan ballaringizni istalgan narsangizga almashtiring"
+            case .tBtn:
+                return "Sotib olish"
+            case .balanceBuyBtn:
+                return "Sotib olish"
+            case .shareRefCode:
+                return "Referal kodni ulashish"
+            case .ClaimReward:
+                return "Mukofotni olish"
+            case .save:
+                return "Saqlash"
+            case .send:
+                return "Yuborish"
             }
         case .en:
             switch type {
@@ -162,7 +226,7 @@ class Lang {
             case .createAcc:return "Create Accaount"
             case .createNTF :return "First name*"
             case .createLNTF :return "Last name*"
-            case .createRC :return "Referral code"
+            case .createRC :return "Password"
             case .alHaveAcc:return "Already have an account? Login "
             case .otpLbl:return "Please, enter the code we sent "
             case .forgotPassLbl:return "Please enter your registered phone number to reset your password!"
@@ -214,7 +278,39 @@ class Lang {
             case .tabbarProfile:
                 return "Profile"
             case .logOut:
-                return "logOut"
+                return "LogOut"
+            case .homeBuyBtn:
+                return "Buy Now"
+            case .searchTf:
+                return "Search"
+            case .homeBtn1:
+                return "All"
+            case .homeBtn2:
+                return "Popular"
+            case .homeBtn3:
+                return "Newest"
+            case .continueBtn:
+                return "Continue"
+            case .myCourseBtn1:
+                return "All"
+            case .myCourseBtn2:
+                return "Ongoing"
+            case .myCourseBtn3:
+                return "Complated"
+            case .tLbl:
+                return "Pay and collect points,exchange your accumulated points for anything you want"
+            case .tBtn:
+                return "Payment"
+            case .balanceBuyBtn:
+                 return "Buy things"
+            case .shareRefCode:
+                return "Share referral code"
+            case .ClaimReward:
+                return "Claim reward"
+            case .save:
+                return "Save"
+            case .send:
+                return "Send"
             }
         }
     
@@ -279,6 +375,23 @@ class Lang {
         case tabBarBalance
         case tabbarProfile
         case logOut
+        case homeBuyBtn
+        case searchTf
+        case homeBtn1
+        case homeBtn2
+        case homeBtn3
+        case continueBtn
+        case myCourseBtn1
+        case myCourseBtn2
+        case myCourseBtn3
+        case tLbl
+        case tBtn
+        case balanceBuyBtn
+        case shareRefCode
+        case ClaimReward
+        case save
+        case send
+        
         
     }
     

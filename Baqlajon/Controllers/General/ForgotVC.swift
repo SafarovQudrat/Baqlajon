@@ -34,11 +34,11 @@ class ForgotVC: UIViewController {
         tf.layer.cornerRadius = 8
         tf.textColor = .label
         tf.placeholder = "Phone number"
-        tf.keyboardType = .numberPad
+        tf.keyboardType = .namePhonePad
         tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
-//        tf.borderStyle = .none
-//        tf.leftViewMode = .always
+        //        tf.borderStyle = .none
+        //        tf.leftViewMode = .always
         
         let lview: UIView = {
             let lv = UIView()
@@ -77,8 +77,8 @@ class ForgotVC: UIViewController {
             title = "Change number"
             textLbl.text = "Please, enter your new phone number"
         } else {
-       title = "Forgot Password"
-       textLbl.text = "Please enter your registered phone number to reset your password!"
+            title = "Forgot Password"
+            textLbl.text = "Please enter your registered phone number to reset your password!"
         }
         setLang()
         observeLangNotif()
@@ -96,9 +96,9 @@ class ForgotVC: UIViewController {
     }
     
     //    back Button
-        @objc func backtapped(){
-            self.navigationController?.popViewController(animated: true)
-        }
+    @objc func backtapped(){
+        self.navigationController?.popViewController(animated: true)
+    }
     
     
     //MARK: setting UI constraints
@@ -143,35 +143,35 @@ extension ForgotVC {
     
     @objc func sendCodeTapped() {
         if cache.bool(forKey: "changeNumber"){
-            let vc = OtpVC()
-            vc.number = (self.phoneNumberTF.text?.replacingOccurrences(of: " ", with: ""))!
-            self.navigationController?.pushViewController(vc, animated: true)
-        }else{
-
-            putData { data in
+            Loader.start()
+            sendOtp { data in
+                Loader.stop()
                 if data.success {
-                    let vc = ResetPasswordVC()
-                            self.navigationController?.pushViewController(vc, animated: true)
-                } else {
-                    Alert.showAlert(title: data.message, message: data.message, vc: self)
+                    let vc = OtpVC()
+                    vc.number = (self.phoneNumberTF.text?.replacingOccurrences(of: " ", with: ""))!
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }else {
+                    Alert.showAlert(title: "Error", message: data.message, vc: self)
                 }
             }
-           
+//            let vc = OtpVC()
+//            vc.number = (self.phoneNumberTF.text?.replacingOccurrences(of: " ", with: ""))!
+//            self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            if phoneNumberTF.text == "" {
+                Alert.showAlert(title: "Error", message: "Please enter phone number", vc: self)
+            }else {
+                let vc = ResetPasswordVC()
+                vc.number = (self.phoneNumberTF.text?.replacingOccurrences(of: " ", with: ""))!
+                vc.isForgot = true
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
+    
+}
 
-        }
-    }
-    
-    
-}
-//MARK: -API
-extension ForgotVC {
-    func putData(complation:@escaping(LoginDM)->Void){
-        API.forgetPass(number: (phoneNumberTF.text?.replacingOccurrences(of: " ", with: ""))!) { data in
-            complation(data)
-        
-        }
-    }
-}
 //MARK: - NnotificationCenter for language changing
 extension ForgotVC {
     func observeLangNotif() {
@@ -191,6 +191,14 @@ extension ForgotVC {
             Cache.save(appLanguage: .en)
             setLang()
         default: break
+        }
+    }
+}
+//API
+extension ForgotVC {
+    func sendOtp(complation:@escaping(LoginDM)->Void) {
+        API.sendOtp(number: phoneNumberTF.text!) { data in
+            complation(data)
         }
     }
 }

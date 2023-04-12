@@ -116,7 +116,7 @@ class SignUpVC: UIViewController {
     //referralCode textField
     let referalCodeTF: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Referral code"
+        tf.placeholder = "Password"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
         tf.backgroundColor = .appColor(color: .gray7)
