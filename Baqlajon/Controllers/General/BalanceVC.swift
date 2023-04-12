@@ -346,7 +346,7 @@ class BalanceVC: UIViewController {
         private lazy var buyTBtn: UIButton = {
             let b = UIButton()
             b.backgroundColor = .white
-            b.setTitle("To'lov qilish", for: .normal)
+            b.setTitle("Payment", for: .normal)
             b.setTitleColor(.appColor(color: .mainBlue), for: .normal)
             b.titleLabel?.font = .appFont(ofSize: 14)
             b.addTarget(.none, action: #selector(buyBtnTapped), for: .touchUpInside)

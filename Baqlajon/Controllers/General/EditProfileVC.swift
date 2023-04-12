@@ -440,6 +440,8 @@ class EditProfileVC: UIViewController {
         sendSignature { [self] data in
             guard let data = data  else {return}
             print("data iMage = ",data)
+            
+            cache.set(data["data"].stringValue, forKey: "PROFILE_IMAGE")
             updateData(img: data["data"].stringValue)
         }
         
@@ -490,7 +492,7 @@ extension EditProfileVC {
                 if let imgData = profileImage.image?.jpegData(compressionQuality: 0.6) {
                     multipartFormData.append(imgData, withName: "file", fileName: "\(Date().timeIntervalSince1970).jpg", mimeType: "image/jpg")
                 }
-            }, to: "https://mobilebirzoom.roundedteam.uz/upload", method: .post).response { (response) in
+            }, to: "https://baqlajonapi.roundedteam.uz/image/upload", method: .post).response { (response) in
                 
                 Loader.stop()
                 

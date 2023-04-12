@@ -190,19 +190,23 @@ extension ResetPasswordVC {
        
         
         if newPasswordTF.text!.count >= 8, newPasswordTF.text!.count <= 16, confirmNewPasswordTF.text!.count >= 8, confirmNewPasswordTF.text!.count <= 16, newPasswordTF.text! == confirmNewPasswordTF.text! {
-            
-            putData { data in
+            if cache.bool(forKey: "changeNumber") {
                 
-                if data["success"].boolValue {
-                    self.navigationController?.popToRootViewController(animated: true)
-                } else {
+                self.navigationController?.popToRootViewController(animated: true)
+                
+            }else{
+                putData { data in
                     
-                    guard let arr = data["data"].arrayValue.first else {return}
-                    print("dataaa = ",arr["constraints"].arrayValue.first!["value"].stringValue)
-                    Alert.showAlert(title: data["message"].stringValue, message:arr["constraints"].arrayValue.first!["value"].stringValue  ,vc: self)
+                    if data["success"].boolValue {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    } else {
+                        
+                        guard let arr = data["data"].arrayValue.first else {return}
+                        print("dataaa = ",arr["constraints"].arrayValue.first!["value"].stringValue)
+                        Alert.showAlert(title: data["message"].stringValue, message:arr["constraints"].arrayValue.first!["value"].stringValue  ,vc: self)
+                    }
                 }
             }
-            
             
         }else {
             Alert.showAlert(title: "Error", message: "Password must be longer than 8 characters", vc: self)
@@ -241,4 +245,5 @@ extension ResetPasswordVC {
         
         }
     }
+    
 }

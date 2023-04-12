@@ -540,7 +540,11 @@ extension HomeVC{
             Loader.stop()
             print("data===",data)
             if data["success"].boolValue {
-                let url = URL(string: API.imgBaseURL + data["data"]["image"].stringValue)
+                cache.set(data["data"]["image"].stringValue, forKey: "PROFILE_IMAGE")
+                let url = URL(string: API.imgBaseURL + cache.string(forKey: "PROFILE_IMAGE")!)
+                
+                
+               
                 if let url = url {
                     print("URL = = ",url)
                     self.imageP.sd_setImage(with: url)
@@ -553,6 +557,7 @@ extension HomeVC{
             }
         }
     }
+ 
 }
 //MARK: - NnotificationCenter for language changing
 extension HomeVC {

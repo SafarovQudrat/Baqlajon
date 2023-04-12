@@ -154,9 +154,7 @@ extension ForgotVC {
                     Alert.showAlert(title: "Error", message: data.message, vc: self)
                 }
             }
-//            let vc = OtpVC()
-//            vc.number = (self.phoneNumberTF.text?.replacingOccurrences(of: " ", with: ""))!
-//            self.navigationController?.pushViewController(vc, animated: true)
+
         }else{
             if phoneNumberTF.text == "" {
                 Alert.showAlert(title: "Error", message: "Please enter phone number", vc: self)
@@ -197,7 +195,7 @@ extension ForgotVC {
 //API
 extension ForgotVC {
     func sendOtp(complation:@escaping(LoginDM)->Void) {
-        API.sendOtp(number: phoneNumberTF.text!) { data in
+        API.registerOtp(number: phoneNumberTF.text!) { data in
             complation(data)
         }
     }

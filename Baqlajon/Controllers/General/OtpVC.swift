@@ -48,7 +48,23 @@ class OtpVC: UIViewController {
         btn.addTarget(.none, action: #selector(confirmTapped), for: .touchUpInside)
         return btn
     }()
+    private lazy var timeLbl:UILabel = {
+       let l = UILabel()
+        l.font = .appFont(ofSize: 14)
+        l.textColor = .appColor(color: .mainBlue)
+        l.text = "Vaqt 0:59"
+        return l
+    }()
+    private lazy var resendButton:UIButton = {
+        let b = UIButton()
+        b.titleLabel?.font = .appFont(ofSize: 14)
+        b.setTitleColor(.appColor(color: .mainBlue), for: .normal)
+        b.setTitle("Resend Code", for: .normal)
+        return b
+    }()
     
+    var timer:Timer?
+    var time: Int = 59
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -58,7 +74,23 @@ class OtpVC: UIViewController {
         setLang()
         observeLangNotif()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(action), userInfo: nil, repeats: true)
+    }
+    @objc func action () {
+        if time <= 0 {
+            timer?.invalidate()
+            timeLbl.isHidden = true
+            resendButton.isHidden = false
+        } else {
+            time = time - 1
+        }
+        if time < 10 {
+            timeLbl.text = "Vaqt: 0:0\(time)"
+        } else {
+            timeLbl.text = "Vaqt: 0:\(time)"
+        }
+    }
     
     //MARK: set textFieldView
     func setupOtpView() {
@@ -140,7 +172,11 @@ class OtpVC: UIViewController {
             make.top.equalTo(otpView.snp_topMargin).inset(100)
             make.height.equalTo(50)
         }
-        
+        view.addSubview(timeLbl)
+        timeLbl.snp.makeConstraints { make in
+            make.top.equalTo(confirmBtn.snp_bottomMargin).offset(12)
+            make.centerX.equalTo(view.snp_centerXWithinMargins)
+        }
     }
     
     func setLang(){

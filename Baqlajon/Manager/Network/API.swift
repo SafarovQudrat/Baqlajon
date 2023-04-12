@@ -13,7 +13,7 @@ class API {
     
 //    BaseURL
    static let baseURL = "https://baqlajonapi.roundedteam.uz/"
-    static let imgBaseURL: String = "https://baqlajonapi.roundedteam.uz/public"
+    static let imgBaseURL: String = "https://baqlajonapi.roundedteam.uz/public/uploads"
 //    URLs
     
     static let registerUrl:String = baseURL + "user"
@@ -29,6 +29,8 @@ class API {
     static let promoCodeUrl:String = baseURL + "promocode"
     static let createCommentUrl:String = baseURL + "comment/63e22938843daa99b6d32708"
     static let getAllComments:String = baseURL + "comment/All/63e22938843daa99b6d32708"
+    static let getImageUrl: String = baseURL + "/public/uploads"
+    static let updatePhone: String = baseURL + "/user/phone"
 //    MARK: -functions
 //    register
     static func register(lastName:String,firstName:String,number:String, password:String, complation:@escaping (LoginDM)->Void) {
@@ -253,8 +255,22 @@ class API {
            
         }
     }
-    
-    
+    static func updatePhoneNumber(number: String,otp: String, complation:@escaping(JSON)->Void){
+        let headers:HTTPHeaders = [
+            "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
+            "lang":"uz"
+        ]
+        let param:[String:Any] = [
+            "phoneNumber": number,
+            "otp":otp
+        ]
+        Net.sendRequest(to: updatePhone , method: .put, headers: headers, param: param) { data in
+            guard let data = data else {return}
+            complation (data)
+        }
+        
+    }
+   
     
 }
 struct CommentDM{
