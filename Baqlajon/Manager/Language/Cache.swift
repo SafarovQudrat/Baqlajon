@@ -27,7 +27,7 @@ class Cache {
         case "uz": return .uz
         case "ru": return .ru
         case "en": return .en
-        default:   return .uz
+        default:   return .en
         }
     }
     

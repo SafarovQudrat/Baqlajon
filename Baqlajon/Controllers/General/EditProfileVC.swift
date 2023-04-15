@@ -304,7 +304,7 @@ class EditProfileVC: UIViewController {
         
         datePicker.locale = Locale(identifier: "uz_UZ")
         
-        datePicker.backgroundColor = .white
+        datePicker.backgroundColor = .clear
         
         setMinMaxDate(picker: datePicker)
         
@@ -401,18 +401,13 @@ class EditProfileVC: UIViewController {
     func setNavController() {
         navigationController?.navigationBar.update(backgroundColor:.appColor(color: .white),titleColor: .appColor(color: .black1),font: .appFont(ofSize: 16,weight: .medium))
         navigationItem.title = "Edit profile"
-        let leftBtn = UIBarButtonItem(image:UIImage(systemName: "chevron.left"), style: .done, target:self , action: #selector(backBtnTapped) )
-        navigationItem.leftBarButtonItem = leftBtn
-        navigationItem.hidesBackButton = true
-        navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
-        navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
+        
     }
-    @objc func backBtnTapped(){
-        self.navigationController?.popViewController(animated: true)
-    }
+   
     
     @objc func changeNumTapped() {
         cache.set(true, forKey: "changeNumber")
+        navigationItem.backButtonTitle = ""
         self.navigationController?.pushViewController(ForgotVC(), animated: true)
         
     }
@@ -432,6 +427,7 @@ class EditProfileVC: UIViewController {
             }
            
         }
+        navigationItem.backButtonTitle = ""
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

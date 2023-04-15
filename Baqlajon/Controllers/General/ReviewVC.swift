@@ -13,7 +13,7 @@ class ReviewVC: UIViewController {
     //main view
     let review: UIView = {
         let v = UIView()
-        v.backgroundColor = .systemBackground
+        v.backgroundColor = .appColor(color: .background)
         return v
     }()
     
@@ -121,7 +121,17 @@ class ReviewVC: UIViewController {
         tv.toolbarPlaceholder = "Write here"
         tv.layer.borderColor = UIColor.appColor(color: .gray7).cgColor
         tv.layer.borderWidth = 1
+        
+        
         return tv
+    }()
+    
+//    textViewBack
+    let txtBackV:UIView = {
+        let v = UIView()
+        v.backgroundColor = .appColor(color: .gray7)
+        v.layer.cornerRadius = 8
+        return v
     }()
     
     //review send Button
@@ -143,6 +153,11 @@ class ReviewVC: UIViewController {
         s.isScrollEnabled = true
         return s
     }()
+    
+    
+
+    
+    
     //MARK: -viewDidLoad-
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -187,12 +202,6 @@ class ReviewVC: UIViewController {
             make.top.bottom.equalTo(sliderView).inset(1)
         }
         
-        sliderView.addSubview(slider)
-        slider.snp.makeConstraints { make in
-            make.right.left.equalTo(sliderView).inset(1)
-            make.top.bottom.equalTo(sliderView).inset(1)
-        }
-        
         sliderView.addSubview(starBtnStackView)
         starBtnStackView.snp.makeConstraints { make in
             make.height.equalTo(46)
@@ -201,14 +210,25 @@ class ReviewVC: UIViewController {
             make.top.bottom.equalTo(sliderView).inset(1)
         }
         
+        sliderView.addSubview(slider)
+        slider.snp.makeConstraints { make in
+            make.right.left.equalTo(sliderView).inset(1)
+            make.top.bottom.equalTo(sliderView).inset(1)
+        }
         
-        review.addSubview(commentTextView)
+        review.addSubview(txtBackV)
         commentTextView.addDoneButtonOnKeyboard()
-        commentTextView.snp.makeConstraints { make in
+        txtBackV.snp.makeConstraints { make in
             make.top.equalTo(sliderView.snp.bottom).offset(40)
             make.right.left.equalTo(review).inset(50)
             make.height.equalTo(view.frame.height/6)
         }
+        txtBackV.addSubview(commentTextView)
+        commentTextView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(12)
+            make.top.bottom.equalToSuperview().inset(8)
+        }
+        
         
         review.addSubview(sendReviewButton)
         sendReviewButton.snp.makeConstraints { make in
@@ -222,14 +242,9 @@ class ReviewVC: UIViewController {
     func setNavController() {
         navigationController?.navigationBar.update(backgroundColor:.appColor(color: .white),titleColor: .appColor(color: .black1),font: .appFont(ofSize: 16,weight: .medium))
         navigationItem.title = "Reviews"
-        let leftBtn = UIBarButtonItem(image:UIImage(systemName: "chevron.left"), style: .done, target:self , action: #selector(backBtnTapped) )
-        navigationItem.leftBarButtonItem = leftBtn
-        navigationItem.hidesBackButton = true
-        navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
+       
     }
-    @objc func backBtnTapped(){
-        self.navigationController?.popViewController(animated: true)
-    }
+   
 }
 
 
@@ -479,3 +494,4 @@ extension ReviewVC {
         }
     }
 }
+

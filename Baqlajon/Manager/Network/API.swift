@@ -10,6 +10,8 @@ import Alamofire
 import SwiftyJSON
 
 class API {
+   static let lang = UserDefaults.standard.string(forKey:Cache.app_langauge)
+    
     
 //    BaseURL
    static let baseURL = "https://baqlajonapi.roundedteam.uz/"
@@ -42,7 +44,7 @@ class API {
             "phoneNumber": number
         ]
         let header:HTTPHeaders = [
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
         
         Net.sendRequest(to: registerUrl, method: .post, headers: header, param: param) { data in
@@ -64,7 +66,7 @@ class API {
             
         ]
         let header:HTTPHeaders = [
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
         Net.sendRequest(to: registerOtpUrl, method: .post, headers: header, param: param) { data in
             guard let data = data else {return}
@@ -80,7 +82,7 @@ class API {
             "password":password
         ]
         let header:HTTPHeaders = [
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
         
         Net.sendRequest(to: signInUrl, method: .post, headers: header, param: param) { data in
@@ -103,7 +105,7 @@ class API {
             
         ]
         let header:HTTPHeaders = [
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
         Net.sendRequest(to: sendOtp, method: .post, headers: header, param: param) { data in
             guard let data = data else {return}
@@ -119,7 +121,7 @@ class API {
             "otp":otp
         ]
         let header:HTTPHeaders = [
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
         Net.sendRequest(to: checkOtp, method: .post, headers: header, param: param) { data in
             guard let data = data else {return}
@@ -135,7 +137,7 @@ class API {
         ]
         let headers:HTTPHeaders = [
             
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
         Net.sendRequest(to: forgetPassword, method: .put, headers: headers, param: param) { data in
             guard let data = data else {return}
@@ -147,7 +149,7 @@ class API {
     static func getMySelf(complation:@escaping (JSON)->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
         Net.sendRequest(to: registerUrl, method: .get, headers: headers, param: nil) { data in
             guard let data = data else{return}
@@ -159,12 +161,11 @@ class API {
     static func getAllCourse(exUrl:String,complation:@escaping (LoginDM)->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
      
         Net.sendRequest(to: getAllCourseUrl+exUrl, method: .get, headers: headers, param: nil) { data in
             guard let data = data else {return}
-            
             complation(LoginDM(json: data))
          
         }
@@ -177,7 +178,7 @@ class API {
     static func getMyCourse(complation:@escaping([MyCourseDM])->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
         Net.sendRequest(to: getMyCourseUrl, method: .get, headers: headers, param: nil) { data in
             guard let data = data else {return}
@@ -190,7 +191,7 @@ class API {
     static func getAllGift(complation:@escaping([GetGiftDM])->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
         Net.sendRequest(to: giftUrl, method: .get, headers: headers, param: nil) { data in
             guard let data = data else {return}
@@ -202,7 +203,7 @@ class API {
     static func updateUser(name:String,lastname:String,password:String,image:String,number:String,complation:@escaping(JSON)->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
         let param:[String:Any] = [
                 "firstName": name,
@@ -221,7 +222,7 @@ class API {
     static func getPromoCode(complation:@escaping (JSON)->Void) {
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
         Net.sendRequest(to: promoCodeUrl, method: .get, headers: headers, param: nil) { data in
             guard let data = data else {return}
@@ -234,7 +235,7 @@ class API {
         ]
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
         Net.sendRequest(to: createCommentUrl, method: .post, headers: headers, param: param) { data in
             guard let data = data else{return}
@@ -246,7 +247,7 @@ class API {
     static func getComments(complation:@escaping ([CommentDM])->Void) {
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
         Net.sendRequest(to: getAllComments, method: .get, headers: headers, param: nil) { data in
             guard let data = data else {return}
@@ -258,7 +259,7 @@ class API {
     static func updatePhoneNumber(number: String,otp: String, complation:@escaping(JSON)->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
-            "lang":"uz"
+            "lang":lang ?? "en"
         ]
         let param:[String:Any] = [
             "phoneNumber": number,

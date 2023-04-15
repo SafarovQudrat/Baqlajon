@@ -89,14 +89,14 @@ class SignUpVC: UIViewController {
     }()
     
     //phoneNumber textField
-    private let phoneNumberTFView: PhoneNumberTextField = {
-        let tf = PhoneNumberTextField()
+    private let phoneNumberTFView: UITextField = {
+        let tf = UITextField()
         
         tf.layer.cornerRadius = 8
         tf.textColor = .label
         tf.placeholder = "Phone number*"
-        tf.keyboardType = .numberPad
-        tf.backgroundColor = .blue
+        tf.keyboardType = .phonePad
+        tf.backgroundColor = .appColor(color: .gray7)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
         tf.borderStyle = .none
         tf.leftViewMode = .always
@@ -113,16 +113,16 @@ class SignUpVC: UIViewController {
         return tf
     }()
     
-    //referralCode textField
-    let referalCodeTF: UITextField = {
+    //password textField
+    private lazy var passwordTF: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Password"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
         tf.backgroundColor = .appColor(color: .gray7)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
-        tf.borderStyle = .none
         tf.leftViewMode = .always
+        tf.rightViewMode = .always
         let lview: UIView = {
             let lv = UIView()
             return lv
@@ -131,11 +131,24 @@ class SignUpVC: UIViewController {
             make.width.equalTo(15)
         }
         tf.leftView = lview
+        tf.borderStyle = .none
+        tf.isSecureTextEntry = true
         
+        openPasswordBtn.snp.makeConstraints { make in
+            make.height.width.equalTo(48)
+        }
+        tf.rightView = openPasswordBtn
         return tf
     }()
-    
-    
+    //passwords show/hide (eye) Button
+    lazy var openPasswordBtn: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(systemName: "eye"), for: .normal)
+        btn.tintColor = .systemGray
+        btn.addTarget(self, action: #selector(eyeTapped), for: .touchUpInside)
+        return btn
+    }()
+
     //Sign Up Button
     private let signUpBtn: BNButton = {
         let btn = BNButton()
@@ -146,9 +159,7 @@ class SignUpVC: UIViewController {
         btn.addTarget(.none, action: #selector(signUpTapped), for: .touchUpInside)
         return btn
     }()
-    
-    
-    
+
     //stackView for items for login case
     let switchToLoginStackView: UIStackView = {
         let sv = UIStackView()
@@ -180,18 +191,14 @@ class SignUpVC: UIViewController {
         return btn
     }()
     
-    
-    
-    
-    
     //MARK: -viewDidLoad-
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .appColor(color: .background)
         navSettings()
         textFieldsDoneButton()
         signUpCase()
-        setTextField()
+        
         setLang()
         observeLangNotif()
         postNotif(lang: 2)
@@ -203,45 +210,34 @@ class SignUpVC: UIViewController {
         nameTF.addDoneButtonOnKeyboard()
         surnameTF.addDoneButtonOnKeyboard()
         phoneNumberTFView.addDoneButtonOnKeyboard()
-        referalCodeTF.addDoneButtonOnKeyboard()
+        passwordTF.addDoneButtonOnKeyboard()
     }
     
     //MARK: Navigation Settings
     func navSettings() {
         title = "Let's Sign Up"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.appFont(ofSize: 16,weight: FontWeight.medium)]
-        navigationItem.hidesBackButton = true
-        let backBtn = UIBarButtonItem(image: UIImage(named: "backBtn"), style: .done, target: self, action: #selector(backtapped))
-        navigationItem.leftBarButtonItem = backBtn
-    }
-    //    back Button
-        @objc func backtapped(){
-            self.navigationController?.popViewController(animated: true)
-        }
-    
-    //MARK: Number textField
-    func setTextField() {
-        phoneNumberTFView.backgroundColor = .appColor(color: .gray7)
-        phoneNumberTFView.defaultRegion = "UZ"
-        phoneNumberTFView.withFlag = true
-        phoneNumberTFView.withExamplePlaceholder = true
-        phoneNumberTFView.spellCheckingType = .yes
-        phoneNumberTFView.autocorrectionType = .yes
         
     }
+    //    back Button
+    @objc func backtapped(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+ 
     func setLang(){
         titleLbl.text = Lang.getString(type: .createAcc)
         nameTF.placeholder = Lang.getString(type: .createNTF)
         surnameTF.placeholder = Lang.getString(type: .createLNTF)
-        referalCodeTF.placeholder = Lang.getString(type: .createRC)
+        passwordTF.placeholder = Lang.getString(type: .createRC)
         phoneNumberTFView.placeholder = Lang.getString(type: .welcomeNTf)
     }
     
 }
-
+//MARK: -SignUp view UI settings-
 extension SignUpVC {
     
-    //MARK: -SignUp view UI settings-
+    
     func signUpCase() {
         view.addSubview(signUpView)
         signUpView.snp.makeConstraints { $0.left.right.top.bottom.equalTo(view) }
@@ -249,7 +245,7 @@ extension SignUpVC {
         signUpView.addSubview(titleLbl)
         titleLbl.snp.makeConstraints { make in
             make.left.equalTo(signUpView).inset(24)
-            make.top.equalTo(signUpView).inset(123)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(24)
         }
         
         signUpView.addSubview(textFieldStackView)
@@ -261,28 +257,28 @@ extension SignUpVC {
         textFieldStackView.addArrangedSubview(nameTF)
         textFieldStackView.addArrangedSubview(surnameTF)
         textFieldStackView.addArrangedSubview(phoneNumberTFView)
-        textFieldStackView.addArrangedSubview(referalCodeTF)
-        referalCodeTF.snp.makeConstraints { $0.height.equalTo(48)}
+        textFieldStackView.addArrangedSubview(passwordTF)
+        passwordTF.snp.makeConstraints { $0.height.equalTo(48)}
         
         signUpView.addSubview(signUpBtn)
         signUpBtn.snp.makeConstraints { make in
             make.height.equalTo(48)
             make.right.left.equalTo(signUpView).inset(24)
-            make.top.equalTo(textFieldStackView.snp.bottom).offset(80)
+            make.top.equalTo(textFieldStackView.snp.bottom).offset(60)
         }
         
         signUpView.addSubview(switchToLoginStackView)
         switchToLoginStackView.snp.makeConstraints { make in
             make.centerX.equalTo(signUpView)
             make.top.equalTo(signUpBtn.snp.bottom).offset(12)
-            make.width.equalTo(260)
+
         }
         
         switchToLoginStackView.addArrangedSubview(switchToLoginDescryptLbl)
         switchToLoginStackView.addArrangedSubview(switchToLoginBtn)
         switchToLoginBtn.snp.makeConstraints { make in
             make.height.equalTo(30)
-            make.width.equalTo(70)
+
         }
         
         
@@ -304,6 +300,15 @@ extension SignUpVC {
         title = "Gesture is tapped"
     }
     
+    @objc func eyeTapped(){
+        if passwordTF.isSecureTextEntry {
+            openPasswordBtn.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+            passwordTF.isSecureTextEntry = false
+        }else {
+            openPasswordBtn.setImage(UIImage(systemName: "eye"), for: .normal)
+            passwordTF.isSecureTextEntry = true
+        }
+    }
     
     
     //MARK: switched to Sign Up
@@ -340,7 +345,7 @@ extension SignUpVC {
 extension SignUpVC {
     func signUpRegister( compilation: @escaping (LoginDM)->Void){
         
-        API.register(lastName: self.surnameTF.text!, firstName: self.nameTF.text!, number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!, password: referalCodeTF.text!) { data in
+        API.register(lastName: self.surnameTF.text!, firstName: self.nameTF.text!, number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!, password: passwordTF.text!) { data in
             compilation(data)
             
         }

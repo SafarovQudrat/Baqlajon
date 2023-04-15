@@ -110,7 +110,8 @@ class ProfileVC: UIViewController {
     }()
     private lazy var logOutBtn:UIButton = {
         let b = UIButton()
-        b.backgroundColor = .clear
+        b.backgroundColor = .appColor(color: .gray7)
+        b.layer.cornerRadius = 8
         b.setTitle("Log Out", for: .normal)
         b.setTitleColor(.red, for: .normal)
         b.titleLabel?.font = .appFont(ofSize: 20)
@@ -139,6 +140,7 @@ class ProfileVC: UIViewController {
         s.distribution = .fill
         s.spacing = 16
         s.alignment = .fill
+        
         return s
     }()
     
@@ -148,7 +150,10 @@ class ProfileVC: UIViewController {
     //    About us,Share,Help
     var  arr2:[MyData] = []
     
-    
+    var scrollV = UIScrollView()
+    let refreshControl = UIRefreshControl()
+    var timer:Timer?
+    var time: Int = 1
 //    ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,41 +163,47 @@ class ProfileVC: UIViewController {
         observeLangNotif()
         getLang()
         getMySelf()
+        refreshControl.attributedTitle = NSAttributedString(string: "")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        scrollV.refreshControl = refreshControl
+        
     }
+    override func viewWillAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(action), userInfo: nil, repeats: true)
+    }
+    
+    @objc func action () {
+        if time <= 0 {
+            timer?.invalidate()
+            refreshControl.endRefreshing()
+        }else {
+            time = time - 1
+        }
+    }
+    
 //    edit Tapped
     @objc func editTapped(){
         let vc = EditProfileVC()
-        navigationItem.hidesBackButton = true
+        navigationItem.backButtonTitle = ""
         self.navigationController?.pushViewController(vc, animated: true)
        
     }
     
 //    SetUpUI - didload da yoziladigan funksiyalar
     func setUpUi() {
-       
         backBackV.addSubview(stackV)
         stackV.snp.makeConstraints { make in
             make.top.bottom.right.left.equalToSuperview().inset(16)
             
         }
-
         tBackV.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.left.top.right.bottom.equalToSuperview().inset(8)
         }
-        
         ttBackV.addSubview(ttableView)
         ttableView.snp.makeConstraints { make in
             make.left.top.right.bottom.equalToSuperview().inset(8)
         }
-        
-//        self.view.addSubview(lastStack)
-//        lastStack.snp.makeConstraints { make in
-//            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(16)
-//            make.left.right.equalToSuperview().inset(16)
-//
-//        }
-        
         ttableView.delegate = self
         ttableView.dataSource = self
         ttableView.separatorStyle = .none
@@ -202,8 +213,7 @@ class ProfileVC: UIViewController {
         tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.register(ProfileTVC.self, forCellReuseIdentifier:"ProfileTVC" )
-        let scrollV = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        
+        scrollV = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         self.view.addSubview(scrollV)
         scrollV.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -252,9 +262,13 @@ class ProfileVC: UIViewController {
     }
     @objc func logOutTapped(){
         cache.set(false, forKey: "isTabbar")
-        ChangeRootViewController.change(with: UINavigationController(rootViewController: OnboardingVC()))
+        let window = UIApplication.keyWindow
+        let vc = UINavigationController(rootViewController: OnboardingVC())
+        window?.rootViewController = vc
     }
-    
+    @objc func refresh(_ sender: AnyObject) {
+       // Code to refresh table view
+    }
     func getLang(){
         
         let lang = Cache.getAppLanguage()
@@ -298,18 +312,21 @@ extension ProfileVC:UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.tableView {
             if indexPath.row == 0 {
+                navigationItem.backButtonTitle = ""
+                navigationItem.backBarButtonItem?.tintColor = .appColor(color: .black1)
                 navigationController?.pushViewController(PaymentHistoryViewController(), animated: true)
-                navigationItem.backButtonTitle = ""
-                navigationItem.backBarButtonItem?.tintColor = .appColor(color: .black1)
+                
             } else if indexPath.row == 1 {
-                navigationController?.pushViewController(ChangeLanguageViewController(), animated: true)
                 navigationItem.backButtonTitle = ""
                 navigationItem.backBarButtonItem?.tintColor = .appColor(color: .black1)
+                navigationController?.pushViewController(ChangeLanguageViewController(), animated: true)
+               
             }
         } else {
             if indexPath.row == 0 {
-                navigationController?.pushViewController(AboutUsViewController(), animated: true)
                 navigationItem.backButtonTitle = ""
+                navigationController?.pushViewController(AboutUsViewController(), animated: true)
+                
                 
             }
         }

@@ -15,6 +15,9 @@ class ShopVC: UIViewController {
         return t
     }()
     var arr:[GetGiftDM] = []
+    let refreshControl = UIRefreshControl()
+    var timer:Timer?
+    var time: Int = 1
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appColor(color: .background)
@@ -28,6 +31,8 @@ class ShopVC: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(ShopTVC.self, forCellReuseIdentifier: "ShopTVC")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
         configureNavigationBar()
         Loader.start()
         if Reachability.isConnectedToNetwork() {
@@ -38,19 +43,32 @@ class ShopVC: UIViewController {
         }
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(action), userInfo: nil, repeats: true)
+    }
+    
+    @objc func action () {
+        if time <= 0 {
+            timer?.invalidate()
+            refreshControl.endRefreshing()
+        }else {
+            time = time - 1
+        }
+    }
+    
+    
 //    set Navigation Controller
     private func configureNavigationBar() {
         title = "Shop"
         navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),titleColor: .appColor(color: .black1))
-        let leftBtn = UIBarButtonItem(image:UIImage(systemName: "chevron.left"), style: .done, target:self , action: #selector(backBtnTapped) )
-        navigationItem.leftBarButtonItem = leftBtn
-        navigationItem.hidesBackButton = true
-        navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
-    }
-    @objc func backBtnTapped(){
-        self.navigationController?.popViewController(animated: true)
+        
     }
     
+    @objc func refresh(_ sender: AnyObject) {
+        getGift()
+        tableView.reloadData()
+    }
 
     
 }

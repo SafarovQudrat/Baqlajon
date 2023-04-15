@@ -261,7 +261,7 @@ class BalanceVC: UIViewController {
         l.textColor = .white
         l.text = "30 coins for registration"
         l.numberOfLines = 0
-        l.numberOfLines = 0
+        
         return l
     }()
     private lazy var rStack: UIStackView = {
@@ -497,12 +497,20 @@ class BalanceVC: UIViewController {
         return s
     }()
   
+    var scrollV = UIScrollView()
+    let refreshControl = UIRefreshControl()
+    var timer:Timer?
+    var time: Int = 1
+    
+    
+    
 //    ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpUI()
         setNavController()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        scrollV.addSubview(refreshControl)
         backV.isHidden = true
         coinBackV.isHidden = false
         shareBView.isHidden = false
@@ -511,7 +519,23 @@ class BalanceVC: UIViewController {
         observeLangNotif()
         Loader.start()
         getMyself()
+        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(action), userInfo: nil, repeats: true)
+    }
+    
+    @objc func action () {
+        if time <= 0 {
+            timer?.invalidate()
+            refreshControl.endRefreshing()
+        }else {
+            time = time - 1
+        }
+    }
+    
+    
 //    SetUpUi
     func setUpUI() {
         self.view.backgroundColor = .appColor(color: .background)
@@ -529,17 +553,15 @@ class BalanceVC: UIViewController {
         cLblStack.snp.makeConstraints { make in
             make.left.equalTo(coinV.snp_rightMargin).offset(24)
             make.top.equalTo(20)
+            
+            
         }
         shareBView.addSubview(shareLastSV)
         shareLastSV.snp.makeConstraints { make in
             make.top.left.equalTo(16)
             make.bottom.right.equalTo(-16)
         }
-        view.addSubview(coinBackV)
-        coinBackV.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(24)
-            make.right.left.equalToSuperview().inset(16)
-        }
+
         backV.addSubview(backImage)
         backImage.snp.makeConstraints { make in
             make.top.left.right.bottom.equalTo(0)
@@ -549,13 +571,22 @@ class BalanceVC: UIViewController {
             make.top.bottom.equalToSuperview().inset(24)
             make.left.right.equalToSuperview().inset(24)
         }
-        view.addSubview(lastStack)
-        lastStack.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(16)
-            make.right.left.equalToSuperview().inset(16)
-            
+       
+        scrollV = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        self.view.addSubview(scrollV)
+        scrollV.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.left.right.equalTo(0)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
-        
+        scrollV.addSubview(lastStack)
+        lastStack.snp.makeConstraints { make in
+            make.top.equalTo(16)
+            make.left.equalTo(16)
+            make.right.equalTo(-16)
+            make.bottom.equalTo(-10)
+            make.width.equalTo(scrollV.frame.width - 32)
+        }
         
     }
 //    setNavController
@@ -571,6 +602,7 @@ class BalanceVC: UIViewController {
         coinBackV.isHidden = false
         shareBView.isHidden = false
         if backV.isHidden {
+            navigationItem.backButtonTitle = "" 
             navigationController?.pushViewController(ShopVC(), animated: true)
         }
         backV.isHidden = true
@@ -580,6 +612,13 @@ class BalanceVC: UIViewController {
         navigationItem.backBarButtonItem?.tintColor = .appColor(color: .black1)
         self.navigationController?.pushViewController(ShareReferalCodeVC(), animated: true)
     }
+    
+    @objc func refresh() {
+        getPromoCode()
+        getMyself()
+        refreshControl.endRefreshing()
+    }
+    
     func setLang() {
         firstLbl.text = Lang.getString(type: .infoB1)
         secondLbl.text = Lang.getString(type: .infoB2)
@@ -591,6 +630,7 @@ class BalanceVC: UIViewController {
         fLbl.text = Lang.getString(type: .coin3)
         navigationItem.leftBarButtonItem?.title = Lang.getString(type: .tabBarBalance)
         buyBtn.setTitle(Lang.getString(type: .balanceBuyBtn), for: .normal)
+        buyTBtn.setTitle(Lang.getString(type: .balanceBuyBtn), for: .normal)
     }
     
 }

@@ -24,6 +24,15 @@ class VideoDetailsViewController: UIViewController {
         let v = UIView()
         v.backgroundColor = .gray
         v.layer.cornerRadius = 8
+        v.addSubview(videoImage)
+        videoImage.snp.makeConstraints { make in
+            make.top.bottom.left.right.equalTo(0)
+        }
+        return v
+    }()
+    private lazy var videoImage:UIImageView = {
+        let v = UIImageView(image: UIImage(named: "courseImage"))
+        v.contentMode = .scaleAspectFill
         return v
     }()
     private lazy var titleLbl:UILabel = {
@@ -48,6 +57,7 @@ class VideoDetailsViewController: UIViewController {
         b.tintColor = .white
         b.addTarget(.none, action: #selector(playBtnTapped), for: .touchUpInside)
         b.imageView?.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 100)
+        b.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 50), forImageIn: .normal)
         b.snp.makeConstraints { make in
             make.width.height.equalTo(100)
         }
@@ -93,6 +103,9 @@ class VideoDetailsViewController: UIViewController {
             make.top.equalTo(titleLbl.snp_bottomMargin).inset(-16)
             make.left.right.equalToSuperview().inset(16)
         }
+        
+        
+        
         videoView.addSubview(playBtn)
         playBtn.snp.makeConstraints { make in
             make.centerX.equalTo(videoView.snp_centerXWithinMargins).inset(0)
@@ -104,17 +117,13 @@ class VideoDetailsViewController: UIViewController {
     }
     private func configureNavigationBar() {
         title = "Video details"
-        navigationItem.hidesBackButton = true
+        
         navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white))
-        let leftBtn = UIBarButtonItem(image:UIImage(systemName: "chevron.left"), style: .done, target:self , action: #selector(backtapped) )
-        navigationItem.leftBarButtonItem = leftBtn
-        navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
-        navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
+        
+        
+
     }
-    //    back Button
-        @objc func backtapped(){
-            self.navigationController?.popViewController(animated: true)
-        }
+    
 
     @objc func btnTapped(){
 

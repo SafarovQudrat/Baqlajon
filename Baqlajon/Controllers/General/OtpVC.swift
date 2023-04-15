@@ -34,7 +34,7 @@ class OtpVC: UIViewController {
     let otpViewController: UIView = {
         let v = UIView()
         v.backgroundColor = #colorLiteral(red: 0, green: 0.961252749, blue: 0.3269677758, alpha: 0.3143335459)
-        v.backgroundColor = .systemBackground
+        v.backgroundColor = .appColor(color: .background)
         return v
     }()
     
@@ -67,7 +67,7 @@ class OtpVC: UIViewController {
     var time: Int = 59
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .appColor(color: .background)
         uiSettings()
         navDetais()
         setupOtpView()
@@ -103,7 +103,7 @@ class OtpVC: UIViewController {
         otpView.cursorColor = UIColor.systemBlue
         otpView.displayType = .roundedCorner
         otpView.fieldBorderWidth = 3
-        otpView.fieldSize = 36
+        otpView.fieldSize = 40
         otpView.separatorSpace = 6
         otpView.layer.shadowColor = UIColor.red.cgColor
         otpView.shouldAllowIntermediateEditing = true
@@ -115,14 +115,8 @@ class OtpVC: UIViewController {
     func navDetais() {
         title = "Verification code"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.appFont(ofSize: 14,weight: FontWeight.medium)]
-        navigationItem.hidesBackButton = true
-        let backBtn = UIBarButtonItem(image: UIImage(named: "backBtn"), style: .done, target: self, action: #selector(backtapped))
-        navigationItem.leftBarButtonItem = backBtn
     }
-    //    back Button
-    @objc func backtapped(){
-        self.navigationController?.popViewController(animated: true)
-    }
+    
     //    confirmBtn Tapped
     @objc func confirmTapped(){
         Loader.start()
@@ -152,7 +146,7 @@ class OtpVC: UIViewController {
         lbl.text = "Please, enter the code we sent  \(number)"
         view.addSubview(otpViewController)
         otpViewController.snp.makeConstraints { make in
-            make.top.bottom.right.left.equalTo(view)
+            make.top.bottom.right.left.equalTo(0)
         }
         otpViewController.addSubview(lbl)
         otpViewController.addSubview(otpView)
@@ -162,8 +156,8 @@ class OtpVC: UIViewController {
         }
         otpView.snp.makeConstraints { make in
             make.top.equalTo(lbl).inset(70)
-            make.left.equalTo(70)
-            make.right.equalTo(-70)
+            make.left.equalTo(40)
+            make.right.equalTo(-40)
             make.height.equalTo(50)
         }
         otpViewController.addSubview(confirmBtn)
@@ -174,7 +168,7 @@ class OtpVC: UIViewController {
         }
         view.addSubview(timeLbl)
         timeLbl.snp.makeConstraints { make in
-            make.top.equalTo(confirmBtn.snp_bottomMargin).offset(12)
+            make.top.equalTo(confirmBtn.snp_bottomMargin).offset(24)
             make.centerX.equalTo(view.snp_centerXWithinMargins)
         }
     }

@@ -28,9 +28,22 @@ class MainTabBarController: UITabBarController {
             return
             
         }
+        setHomeVC()
         observeLangNotif()
         setLang()
     }
+    func setHomeVC(){
+        if self.selectedIndex == 0 {
+            let vc = HomeVC()
+            vc.navigationController?.view.addSubview(vc.backProfileV)
+            vc.backProfileV.isHidden = false
+        }
+    }
+    
+    
+    
+    
+    
     
     let vc1 = UINavigationController(rootViewController: HomeVC())
     let vc2 = UINavigationController(rootViewController: MyCourses())

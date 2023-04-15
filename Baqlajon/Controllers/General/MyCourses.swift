@@ -196,6 +196,12 @@ class MyCourses: UIViewController {
     }()
     var arr:[MyCourseDM] = []
     
+    var scrollV = UIScrollView()
+    let refreshControl = UIRefreshControl()
+    var timer:Timer?
+    var time: Int = 1
+    
+    
 //    VIEW DIDLOAD
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -279,10 +285,7 @@ class MyCourses: UIViewController {
     func setNavController() {
         navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),font: .appFont(ofSize: 16,weight: .medium))
         let leftBtn = UIBarButtonItem(title: "My courses", style: .done, target: self, action: .none)
-        let rightButton = UIBarButtonItem(image:UIImage(named: "alert"), style: .done, target: self, action: #selector(alertTapped))
-        navigationItem.rightBarButtonItem = rightButton
         navigationItem.leftBarButtonItem = leftBtn
-        navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
         navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
         
     }

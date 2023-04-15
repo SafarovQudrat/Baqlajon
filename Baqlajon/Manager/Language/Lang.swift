@@ -17,12 +17,12 @@ class Lang {
             case .startT2: return "Учитесь с удовольствием"
             case .startT3:return "Получите хорошие результаты"
             case .startD1:return "Наши новые видео облегчают вам обучение в любом месте, есть новые видео, которые будут готовы помочь вам"
-            case .welcome:return "Добро пожаловать!"
+            case .welcome:return "Добро \nпожаловать!"
             case .welcomeNTf:return "Номер телефона"
             case .welcomeP: return "Пароль"
             case .welcomeFP:return "Забыли пароль"
             case .haveAccaunt: return "У вас нет аккаунта?"
-            case .createAcc:return "Создавать Счет!"
+            case .createAcc:return "Создавать \nСчет!"
             case .createNTF :return "Имя*"
             case .createLNTF :return "Фамилия*"
             case .createRC :return "Пароль"
@@ -110,6 +110,8 @@ class Lang {
                 return "Сохранять"
             case .send:
                 return "Отправлять"
+            case .hiLbl:
+                return "Привет!"
             }
      
         case .uz:
@@ -118,12 +120,12 @@ class Lang {
             case .startT2: return "Xursandchilik bilan o'rganing"
             case .startT3:return "Yaxshi natijalarga erishing"
             case .startD1:return "Bizning yangi videolarimiz istalgan joyda o'rganishingizni osonlashtiradi, sizga yordam berishga tayyor bo'lgan yangi videolar mavjud"
-            case .welcome:return "xush kelibsiz!"
+            case .welcome:return "xush \nkelibsiz!"
             case .welcomeNTf:return "Telefon raqami"
             case .welcomeP: return "Parol"
             case .welcomeFP:return "Parolni unutdingizmi"
             case .haveAccaunt: return "Hisobingiz yo'qmi?"
-            case .createAcc:return "Hisob yaratish!"
+            case .createAcc:return "Hisob \nyaratish!"
             case .createNTF :return "Ism*"
             case .createLNTF :return "Familiya*"
             case .createRC :return "Parol"
@@ -143,9 +145,9 @@ class Lang {
             case .infoB3:return "Dostingizni taklif qiling va 1 tanga oling"
             case .shareTitle:return "Tangalarni baham ko'ring va oling"
             case .shareText:return "Havolani ulashing va 5 tanga ishlang"
-            case .coin1:return "Ro'yxatdan o'tish uchun 30 tanga"
-            case .coin2:return "Kurslarni sotib olish uchun 60 tanga"
-            case .coin3:return "Do'stlarni taklif qilish uchun 30 tanga"
+            case .coin1:return "Ro'yxatdan o'tish uchun 30 coin"
+            case .coin2:return "Kurs sotib olish uchun 60 coin"
+            case .coin3:return "Do'stizni taklif qilish 30 coin"
             case .congTitle:return "Tabriklaymiz!"
             case .congText:return  "Yangi tangalar"
             case .CongCText:return "endigina topdingiz"
@@ -211,6 +213,8 @@ class Lang {
                 return "Saqlash"
             case .send:
                 return "Yuborish"
+            case .hiLbl:
+                return "Salom!"
             }
         case .en:
             switch type {
@@ -218,12 +222,12 @@ class Lang {
             case .startT2: return "Learn with fun"
             case .startT3:return "Get good results"
             case .startD1:return "Our new videos make it easy for you to learn anywhere, there are new videos that will be ready to help you"
-            case .welcome:return "Welcome Back!"
+            case .welcome:return "Welcome \nBack!"
             case .welcomeNTf:return "Phone number"
             case .welcomeP: return "Password"
             case .welcomeFP:return "Forgot Password"
             case .haveAccaunt: return "Don’t have an account? "
-            case .createAcc:return "Create Accaount"
+            case .createAcc:return "Create \nAccaount"
             case .createNTF :return "First name*"
             case .createLNTF :return "Last name*"
             case .createRC :return "Password"
@@ -311,6 +315,8 @@ class Lang {
                 return "Save"
             case .send:
                 return "Send"
+            case .hiLbl:
+                return "Hello!"
             }
         }
     
@@ -391,7 +397,7 @@ class Lang {
         case ClaimReward
         case save
         case send
-        
+        case hiLbl
         
     }
     

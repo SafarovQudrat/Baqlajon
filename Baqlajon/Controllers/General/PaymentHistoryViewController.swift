@@ -17,6 +17,9 @@ class PaymentHistoryViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    let refreshControl = UIRefreshControl()
+    var timer:Timer?
+    var time: Int = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,20 +29,30 @@ class PaymentHistoryViewController: UIViewController {
         configureNavigationBar()
         configureConstraints()
         configureTableView()
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(action), userInfo: nil, repeats: true)
+    }
+    
+    @objc func action () {
+        if time <= 0 {
+            timer?.invalidate()
+            refreshControl.endRefreshing()
+        }else {
+            time = time - 1
+        }
+    }
     
     private func configureNavigationBar() {
         title = "Payment history"
         navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),titleColor: .appColor(color: .black1))
-        let leftBtn = UIBarButtonItem(image:UIImage(systemName: "chevron.left"), style: .done, target:self , action: #selector(backBtnTapped) )
-        navigationItem.leftBarButtonItem = leftBtn
-        navigationItem.hidesBackButton = true
-        navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
+        
         navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
     }
-    @objc func backBtnTapped(){
-        self.navigationController?.popViewController(animated: true)
+    @objc func refresh(_ sender: AnyObject) {
+        historyTableView.reloadData()
     }
     
     
@@ -48,6 +61,7 @@ class PaymentHistoryViewController: UIViewController {
         historyTableView.delegate = self
         historyTableView.dataSource = self
         historyTableView.separatorStyle = .none
+        historyTableView.refreshControl = refreshControl
     }
     
     

@@ -41,15 +41,10 @@ class ChangeLanguageViewController: UIViewController {
     private func configureNavigationBar() {
         title = "Change language"
         navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),titleColor: .appColor(color: .black1))
-        let leftBtn = UIBarButtonItem(image:UIImage(systemName: "chevron.left"), style: .done, target:self , action: #selector(backBtnTapped) )
-        navigationItem.leftBarButtonItem = leftBtn
-        navigationItem.hidesBackButton = true
-        navigationItem.rightBarButtonItem?.tintColor =  .appColor(color: .black3)
+        
         navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
     }
-    @objc func backBtnTapped(){
-        self.navigationController?.popViewController(animated: true)
-    }
+    
 
     
     private func configureConstraints() {
@@ -77,19 +72,19 @@ extension ChangeLanguageViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ChangeLanguageTableViewCell.identifier, for: indexPath) as? ChangeLanguageTableViewCell else { return UITableViewCell() }
         if indexPath.row == 1 {
-            postNotif(lang: 1)
-            Cache.save(appLanguage: .uz)
             cell.countryImageView.image = UIImage(named: "rus")
             cell.languageLabel.text = "Русский"
+            postNotif(lang: 1)
+            Cache.save(appLanguage: .ru)
         } else if indexPath.row == 2 {
-            postNotif(lang: 2)
-            Cache.save(appLanguage: .uz)
             cell.countryImageView.image = UIImage(named: "eng")
             cell.languageLabel.text = "English"
+            postNotif(lang: 2)
+            Cache.save(appLanguage: .en)
+        }else {
+            postNotif(lang: 0)
+            Cache.save(appLanguage: .uz)
         }
-        postNotif(lang: 0)
-        Cache.save(appLanguage: .uz)
-        
         return cell
     }
     

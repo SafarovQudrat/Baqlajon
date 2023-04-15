@@ -51,7 +51,7 @@ class OnboardingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .appColor(color: .white)
+        self.view.backgroundColor = .appColor(color: .background)
         view.addSubview(image)
         image.snp.makeConstraints { make in
             make.centerX.equalTo(view.center.x)
@@ -68,13 +68,13 @@ class OnboardingVC: UIViewController {
     }
     
     @objc func loginTapped() {
-        
+        navigationItem.backButtonTitle = ""
         self.navigationController?.pushViewController(LoginVC(), animated: true)
         
     }
 
     @objc func signUpTapped() {
-       
+        navigationItem.backButtonTitle = ""
         self.navigationController?.pushViewController(SignUpVC(), animated: true)
         
     }

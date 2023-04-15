@@ -27,22 +27,21 @@ class ForgotVC: UIViewController {
         lbl.textColor = #colorLiteral(red: 0.4, green: 0.4, blue: 0.5294117647, alpha: 1)
         return lbl
     }()
-    
     //phoneNumber textField
-    private let phoneNumberTF: UITextField = {
+    private let phoneNumberTFView: UITextField = {
         let tf = UITextField()
+        
         tf.layer.cornerRadius = 8
         tf.textColor = .label
-        tf.placeholder = "Phone number"
-        tf.keyboardType = .namePhonePad
-        tf.backgroundColor = .appColor(color: .gray6)
+        tf.placeholder = "Phone number*"
+        tf.keyboardType = .phonePad
+        tf.backgroundColor = .appColor(color: .gray7)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
-        //        tf.borderStyle = .none
-        //        tf.leftViewMode = .always
+        tf.borderStyle = .none
+        tf.leftViewMode = .always
         
         let lview: UIView = {
             let lv = UIView()
-            lv.backgroundColor = .appColor(color: .gray6)
             return lv
         }()
         lview.snp.makeConstraints { make in
@@ -90,9 +89,6 @@ class ForgotVC: UIViewController {
         
         navigationItem.backButtonTitle = ""
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.appFont(ofSize: 16,weight: FontWeight.medium)]
-        navigationItem.hidesBackButton = true
-        let backBtn = UIBarButtonItem(image: UIImage(named: "backBtn"), style: .done, target: self, action: #selector(backtapped))
-        navigationItem.leftBarButtonItem = backBtn
     }
     
     //    back Button
@@ -112,8 +108,8 @@ class ForgotVC: UIViewController {
             make.left.right.equalTo(forgotView).inset(24)
         }
         
-        forgotView.addSubview(phoneNumberTF)
-        phoneNumberTF.snp.makeConstraints { make in
+        forgotView.addSubview(phoneNumberTFView)
+        phoneNumberTFView.snp.makeConstraints { make in
             make.top.equalTo(textLbl.snp.bottom).offset(78)
             make.right.left.equalTo(forgotView).inset(24)
             make.height.equalTo(48)
@@ -121,7 +117,7 @@ class ForgotVC: UIViewController {
         
         forgotView.addSubview(sendCodeBtn)
         sendCodeBtn.snp.makeConstraints { make in
-            make.top.equalTo(phoneNumberTF.snp.bottom).offset(40)
+            make.top.equalTo(phoneNumberTFView.snp.bottom).offset(40)
             make.left.right.equalTo(forgotView).inset(24)
             make.height.equalTo(48)
         }
@@ -131,7 +127,7 @@ class ForgotVC: UIViewController {
     
     func setLang(){
         textLbl.text = Lang.getString(type: .forgotPassLbl)
-        phoneNumberTF.placeholder = Lang.getString(type: .welcomeNTf)
+        phoneNumberTFView.placeholder = Lang.getString(type: .welcomeNTf)
     }
     
 }
@@ -148,7 +144,7 @@ extension ForgotVC {
                 Loader.stop()
                 if data.success {
                     let vc = OtpVC()
-                    vc.number = (self.phoneNumberTF.text?.replacingOccurrences(of: " ", with: ""))!
+                    vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
                     self.navigationController?.pushViewController(vc, animated: true)
                 }else {
                     Alert.showAlert(title: "Error", message: data.message, vc: self)
@@ -156,11 +152,11 @@ extension ForgotVC {
             }
 
         }else{
-            if phoneNumberTF.text == "" {
+            if phoneNumberTFView.text == "" {
                 Alert.showAlert(title: "Error", message: "Please enter phone number", vc: self)
             }else {
                 let vc = ResetPasswordVC()
-                vc.number = (self.phoneNumberTF.text?.replacingOccurrences(of: " ", with: ""))!
+                vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
                 vc.isForgot = true
                 self.navigationController?.pushViewController(vc, animated: true)
             }
@@ -195,7 +191,7 @@ extension ForgotVC {
 //API
 extension ForgotVC {
     func sendOtp(complation:@escaping(LoginDM)->Void) {
-        API.registerOtp(number: phoneNumberTF.text!) { data in
+        API.registerOtp(number: phoneNumberTFView.text!) { data in
             complation(data)
         }
     }

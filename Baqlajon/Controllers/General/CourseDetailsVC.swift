@@ -9,11 +9,12 @@ class CourseDetailsVC: UIViewController {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(CourseDetailsVideoTableViewCell.self, forCellReuseIdentifier: CourseDetailsVideoTableViewCell.identifier)
         tableView.register(CourseDetailsReviewsTableViewCell.self, forCellReuseIdentifier: CourseDetailsReviewsTableViewCell.identifier)
-        tableView.backgroundColor = UIColor.appColor(color: .white)
+        tableView.backgroundColor = UIColor.appColor(color: .background)
+        
         return tableView
     }()
     
-    
+   
     private let startLessonAndWriteReviewButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Start Course", for: .normal)
@@ -30,6 +31,9 @@ class CourseDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appColor(color: .background)
+        let ges = UISwipeGestureRecognizer(target: self, action: #selector(backtapped))
+        ges.direction = .right
+        view.addGestureRecognizer(ges)
         configureTableView()
         configureNavigationBar()
         configureConstraints()
@@ -67,18 +71,44 @@ class CourseDetailsVC: UIViewController {
     
     @objc func btnTapped() {
         if startLessonAndWriteReviewButton.titleLabel?.text == "Start Course" {
+            navigationItem.backButtonTitle = ""
             navigationController?.pushViewController(VideoDetailsViewController(), animated: true)
         } else {
+            navigationItem.backButtonTitle = ""
             navigationController?.pushViewController(ReviewVC(), animated: true)
         }
     }
+    
+    let refreshControl = UIRefreshControl()
+    var timer:Timer?
+    var time: Int = 1
     
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
         getComments()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(action), userInfo: nil, repeats: true)
+    }
+    
+    @objc func action () {
+        if time <= 0 {
+            timer?.invalidate()
+            refreshControl.endRefreshing()
+        }else {
+            time = time - 1
+        }
+    }
+    @objc func refresh() {
+        tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+    
     
     
     private func configureConstraints() {
@@ -111,12 +141,13 @@ extension CourseDetailsVC: UITableViewDelegate, UITableViewDataSource {
 
         if videoTableViewCellIsOn {
             guard let videoCell = tableView.dequeueReusableCell(withIdentifier: CourseDetailsVideoTableViewCell.identifier, for: indexPath) as? CourseDetailsVideoTableViewCell else { return UITableViewCell() }
-
+            videoCell.selectionStyle = .none
+            
             return videoCell
 
         } else {
            guard let reviewsCell = tableView.dequeueReusableCell(withIdentifier: CourseDetailsReviewsTableViewCell.identifier, for: indexPath) as? CourseDetailsReviewsTableViewCell else {return UITableViewCell()}
-
+            reviewsCell.selectionStyle = .none
             reviewsCell.updateCell(desc: reviews[indexPath.row])
             return reviewsCell
         }

@@ -21,11 +21,12 @@ class LoginVC: UIViewController {
     //title Label
     let titleLbl: UILabel = {
         let lbl = UILabel()
-        lbl.text = "Welcome\nBack!"
-        lbl.textAlignment = .left
+        lbl.numberOfLines = 0
         lbl.font = UIFont.appFont(ofSize: 28,weight: FontWeight.medium)
-        lbl.textColor = .label
-        lbl.numberOfLines = 2
+        lbl.textColor = .appColor(color: .black1)
+        lbl.text = "Welcome \nBack!"
+        
+       
         return lbl
     }()
     //stackView for textFields
@@ -38,16 +39,16 @@ class LoginVC: UIViewController {
         return sv
     }()
     //phoneNumber textField
-    private let phoneNumberTFView: PhoneNumberTextField = {
-        let tf = PhoneNumberTextField()
+    private let phoneNumberTFView: UITextField = {
+        let tf = UITextField()
         tf.layer.cornerRadius = 8
         tf.textColor = .label
         tf.placeholder = "Phone number"
-        tf.keyboardType = .numberPad
+        tf.keyboardType = .phonePad
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
         tf.borderStyle = .none
         tf.leftViewMode = .always
-        
+        tf.backgroundColor = .appColor(color: .gray7)
         let lview: UIView = {
             let lv = UIView()
             return lv
@@ -140,14 +141,22 @@ class LoginVC: UIViewController {
         btn.addTarget(.none, action: #selector(switchToSignUpTapped), for: .touchUpInside)
         return btn
     }()
+    
+    private lazy var backgroundView:UIView = {
+        let v = UIView()
+        v.backgroundColor = .clear
+        return v
+    }()
+    
+    
     //MARK: -viewDidLoad-
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .appColor(color: .background)
         settingConstraints()
         navSettings()
         textFieldsDoneButton()
-        setTextField()
+//        setTextField()
         observeLangNotif()
         setLang()
         postNotif(lang: 2)
@@ -163,25 +172,11 @@ class LoginVC: UIViewController {
     func navSettings() {
         title = "Let's Sign In"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.appFont(ofSize: 16,weight: FontWeight.medium)]
-        navigationItem.hidesBackButton = true
-        let backBtn = UIBarButtonItem(image: UIImage(named: "backBtn"), style: .done, target: self, action: #selector(backtapped))
-        navigationItem.leftBarButtonItem = backBtn
+        navigationItem.backButtonTitle = ""
+        navigationItem.backBarButtonItem?.image = UIImage(named: "backBtn")
+        navigationItem.backBarButtonItem?.tintColor = .appColor(color: .black1)
     }
-    //    back Button
-        @objc func backtapped(){
-            self.navigationController?.popViewController(animated: true)
-        }
-    
-    //MARK: Number textField
-    func setTextField() {
-        phoneNumberTFView.backgroundColor = .appColor(color: .gray7)
-        phoneNumberTFView.defaultRegion = "UZ"
-        phoneNumberTFView.withFlag = true
-        phoneNumberTFView.withExamplePlaceholder = true
-        phoneNumberTFView.spellCheckingType = .yes
-        phoneNumberTFView.autocorrectionType = .yes
-    }
-    
+
     func setLang() {
         titleLbl.text = Lang.getString(type: .welcome)
         phoneNumberTFView.placeholder = Lang.getString(type: .welcomeNTf)
@@ -199,55 +194,48 @@ extension LoginVC {
     
     //MARK: -Login view UI settings-
     func settingConstraints() {
-        
-        view.addSubview(loginView)
-        loginView.snp.makeConstraints { $0.top.bottom.left.right.equalTo(view) }
-        
-        loginView.addSubview(titleLbl)
+
+        view.addSubview(titleLbl)
         titleLbl.snp.makeConstraints { make in
-            make.top.equalTo(loginView).inset(123)
-            make.left.equalTo(loginView).inset(24)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(24)
+            make.left.equalTo(24)
         }
         
-        loginView.addSubview(textFieldStackView)
+        view.addSubview(textFieldStackView)
         textFieldStackView.snp.makeConstraints { make in
-            make.left.right.equalTo(loginView).inset(24)
+            make.left.right.equalToSuperview().inset(24)
             make.top.equalTo(titleLbl.snp.bottom).offset(36)
         }
-        
+
         textFieldStackView.addArrangedSubview(phoneNumberTFView)
         textFieldStackView.addArrangedSubview(passwordTF)
         passwordTF.snp.makeConstraints { $0.height.equalTo(48) }
-        
-        loginView.addSubview(forgotPasswordBtn)
+
+        view.addSubview(forgotPasswordBtn)
         forgotPasswordBtn.snp.makeConstraints { make in
             make.right.equalTo(textFieldStackView.snp.right)
             make.top.equalTo(textFieldStackView.snp.bottom).offset(8)
             make.height.equalTo(20)
         }
-        
-        loginView.addSubview(loginBtn)
+
+        view.addSubview(loginBtn)
         loginBtn.snp.makeConstraints { make in
             make.height.equalTo(48)
             make.top.equalTo(textFieldStackView.snp.bottom).offset(109)
-            make.left.right.equalTo(loginView).inset(24)
+            make.left.right.equalToSuperview().inset(24)
         }
-        
-        loginView.addSubview(switchDetailStackView)
+
+        view.addSubview(switchDetailStackView)
         switchDetailStackView.snp.makeConstraints { make in
             make.top.equalTo(loginBtn.snp.bottom).offset(12)
             make.centerX.equalTo(loginBtn)
-            make.width.equalTo(240)
+            
         }
-        
+
         switchDetailStackView.addArrangedSubview(switchToSignUplbl)
         switchDetailStackView.addArrangedSubview(SwitchToSignUpBtn)
+
         
-        //        loginView.addSubview(titleLbl)
-        //        titleLbl.snp.makeConstraints { make in
-        //            make.top.equalTo(switchDetailStackView).offset(20)
-        //            make.right.left.equalTo(loginView).inset(30)
-        //        }
         
     }
     

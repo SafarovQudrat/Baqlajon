@@ -87,14 +87,10 @@ class ShareReferalCodeVC: UIViewController {
     func setNavigationController() {
         title = "Share referral code"
         self.navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),titleColor: .appColor(color: .black1),font: .appFont(ofSize: 16,weight: .medium))
-        let leftBtn = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(backBtnTapped))
-        navigationItem.leftBarButtonItem = leftBtn
-        navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
+       
     }
     
-    @objc func backBtnTapped() {
-        self.navigationController?.popViewController(animated: true)
-    }
+   
     @objc func btnTapped() {
         let vc = CongratulationVC()
         vc.modalPresentationStyle = .overFullScreen

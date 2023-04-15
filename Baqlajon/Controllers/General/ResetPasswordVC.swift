@@ -33,31 +33,69 @@ class ResetPasswordVC: UIViewController {
         tf.placeholder = "Old Password"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
-        tf.backgroundColor = .appColor(color: .gray6)
+        tf.backgroundColor = .appColor(color: .gray7)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
-        tf.snp.makeConstraints { make in
-            make.height.equalTo(50)
+        tf.leftViewMode = .always
+        tf.rightViewMode = .always
+        let lview: UIView = {
+            let lv = UIView()
+            return lv
+        }()
+        lview.snp.makeConstraints { make in
+            make.width.equalTo(15)
         }
+        tf.leftView = lview
+        tf.borderStyle = .none
+        tf.isSecureTextEntry = true
+        tf.snp.makeConstraints { make in
+            make.height.equalTo(48)
+        }
+        oldPasswordBtn.snp.makeConstraints { make in
+            make.height.width.equalTo(48)
+        }
+        tf.rightView = oldPasswordBtn
         return tf
+    }()
+    //passwords show/hide (eye) Button
+    lazy var oldPasswordBtn: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(systemName: "eye"), for: .normal)
+        btn.tintColor = .systemGray
+        btn.addTarget(self, action: #selector(oldPasswordEyeTapped), for: .touchUpInside)
+        return btn
     }()
     
     //new password textField
     private lazy var newPasswordTF: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "New Password"
+        tf.placeholder = "New password"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
-        tf.backgroundColor = .appColor(color: .gray6)
+        tf.backgroundColor = .appColor(color: .gray7)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
-        tf.snp.makeConstraints { make in
-            make.height.equalTo(50)
+        tf.leftViewMode = .always
+        tf.rightViewMode = .always
+        let lview: UIView = {
+            let lv = UIView()
+            return lv
+        }()
+        lview.snp.makeConstraints { make in
+            make.width.equalTo(15)
         }
+        tf.leftView = lview
+        tf.borderStyle = .none
+        tf.isSecureTextEntry = true
+        tf.snp.makeConstraints { make in
+            make.height.equalTo(48)
+        }
+        newPasswordBtn.snp.makeConstraints { make in
+            make.height.width.equalTo(48)
+        }
+        tf.rightView = newPasswordBtn
         return tf
     }()
-    
-    
-    //new passwords show/hide (eye) Button
-    lazy var openNewPasswordBtn: UIButton = {
+    //passwords show/hide (eye) Button
+    lazy var newPasswordBtn: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "eye"), for: .normal)
         btn.tintColor = .systemGray
@@ -66,20 +104,34 @@ class ResetPasswordVC: UIViewController {
     }()
     
     //password textField
-    private lazy var confirmNewPasswordTF: UITextField = {
+    private lazy var conifirmNewPasswordTF: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Confirm Password"
+        tf.placeholder = "Confirm password"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
-        tf.backgroundColor = .appColor(color: .gray6)
+        tf.backgroundColor = .appColor(color: .gray7)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
+        tf.leftViewMode = .always
+        tf.rightViewMode = .always
+        let lview: UIView = {
+            let lv = UIView()
+            return lv
+        }()
+        lview.snp.makeConstraints { make in
+            make.width.equalTo(15)
+        }
+        tf.leftView = lview
+        tf.borderStyle = .none
+        tf.isSecureTextEntry = true
         
+        confirmPasswordBtn.snp.makeConstraints { make in
+            make.height.width.equalTo(48)
+        }
+        tf.rightView = confirmPasswordBtn
         return tf
     }()
-    
-    
     //passwords show/hide (eye) Button
-    lazy var openConfirmNewPasswordBtn: UIButton = {
+    lazy var confirmPasswordBtn: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "eye"), for: .normal)
         btn.tintColor = .systemGray
@@ -88,7 +140,7 @@ class ResetPasswordVC: UIViewController {
     }()
     
     lazy var stackV:UIStackView = {
-        let v = UIStackView(arrangedSubviews: [oldPasswordTF,newPasswordTF,confirmNewPasswordTF,confirmBtn])
+        let v = UIStackView(arrangedSubviews: [oldPasswordTF,newPasswordTF,conifirmNewPasswordTF,confirmBtn])
         v.spacing = 16
         v.distribution = .fillEqually
         v.axis = .vertical
@@ -118,9 +170,7 @@ class ResetPasswordVC: UIViewController {
         view.backgroundColor = .appColor(color: .background)
         setUIItems()
         title = "Reset Password"
-        navigationItem.hidesBackButton = true
-        let backBtn = UIBarButtonItem(image: UIImage(named: "backBtn"), style: .done, target: self, action: #selector(backtapped))
-        navigationItem.leftBarButtonItem = backBtn
+        
         observeLangNotif()
         if isForgot {
             oldPasswordTF.isHidden = true
@@ -156,7 +206,7 @@ class ResetPasswordVC: UIViewController {
     func setLang(){
         textLbl.text = Lang.getString(type: .resetPassLbl)
         newPasswordTF.placeholder = Lang.getString(type: .newPassTf)
-        confirmNewPasswordTF.placeholder = Lang.getString(type: .confirmPassTf)
+        conifirmNewPasswordTF.placeholder = Lang.getString(type: .confirmPassTf)
     }
     
 }
@@ -165,31 +215,40 @@ class ResetPasswordVC: UIViewController {
 
 //MARK: - objc functions
 extension ResetPasswordVC {
+    @objc func oldPasswordEyeTapped() {
+        if newPasswordTF.isSecureTextEntry {
+            oldPasswordBtn.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+            oldPasswordTF.isSecureTextEntry = false
+        }else {
+            oldPasswordBtn.setImage(UIImage(systemName: "eye"), for: .normal)
+            oldPasswordTF.isSecureTextEntry = true
+        }
+    }
     
     @objc func newPasswordEyeTapped() {
         if newPasswordTF.isSecureTextEntry {
-            openNewPasswordBtn.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+            newPasswordBtn.setImage(UIImage(systemName: "eye.slash"), for: .normal)
             newPasswordTF.isSecureTextEntry = false
         }else {
-            openNewPasswordBtn.setImage(UIImage(systemName: "eye"), for: .normal)
+            newPasswordBtn.setImage(UIImage(systemName: "eye"), for: .normal)
             newPasswordTF.isSecureTextEntry = true
         }
     }
     
     @objc func confirmPasswordEyeTapped() {
-        if confirmNewPasswordTF.isSecureTextEntry {
-            openConfirmNewPasswordBtn.setImage(UIImage(systemName: "eye.slash"), for: .normal)
-            confirmNewPasswordTF.isSecureTextEntry = false
+        if conifirmNewPasswordTF.isSecureTextEntry {
+            confirmPasswordBtn.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+            conifirmNewPasswordTF.isSecureTextEntry = false
         }else {
-            openConfirmNewPasswordBtn.setImage(UIImage(systemName: "eye"), for: .normal)
-            confirmNewPasswordTF.isSecureTextEntry = true
+            confirmPasswordBtn.setImage(UIImage(systemName: "eye"), for: .normal)
+            conifirmNewPasswordTF.isSecureTextEntry = true
         }
     }
     
     @objc func confirmTapped() {
        
         
-        if newPasswordTF.text!.count >= 8, newPasswordTF.text!.count <= 16, confirmNewPasswordTF.text!.count >= 8, confirmNewPasswordTF.text!.count <= 16, newPasswordTF.text! == confirmNewPasswordTF.text! {
+        if newPasswordTF.text!.count >= 8, newPasswordTF.text!.count <= 16, conifirmNewPasswordTF.text!.count >= 8, conifirmNewPasswordTF.text!.count <= 16, newPasswordTF.text! == conifirmNewPasswordTF.text! {
             if cache.bool(forKey: "changeNumber") {
                 
                 self.navigationController?.popToRootViewController(animated: true)
@@ -239,8 +298,8 @@ extension ResetPasswordVC {
 extension ResetPasswordVC {
     func putData(complation:@escaping(JSON)->Void){
         print("number=",number)
-        print("OTP=",self.confirmNewPasswordTF.text!)
-        API.forgetPass(number: number,password:self.confirmNewPasswordTF.text!) { data in
+        print("OTP=",self.conifirmNewPasswordTF.text!)
+        API.forgetPass(number: number,password:self.conifirmNewPasswordTF.text!) { data in
             complation(data)
         
         }

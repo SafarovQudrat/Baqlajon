@@ -31,6 +31,7 @@ class IntroductionPageVC: UIViewController {
         collectionView.register(IntroductionCVC.self, forCellWithReuseIdentifier: IntroductionCVC.identifier)
         collectionView.isPagingEnabled = true
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .clear
         return collectionView
     }()
     var dataModel:[Introduction] = []
@@ -42,7 +43,7 @@ class IntroductionPageVC: UIViewController {
         collectionView.dataSource = self
 
         print(view.frame.size.height)
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .appColor(color: .background)
         configureConstraints()
         observeLangNotif()
         setLang()
@@ -52,7 +53,9 @@ class IntroductionPageVC: UIViewController {
     
     @objc private func progressDidTap() {
         if currentIndex == dataModel.count - 1 {
-            ChangeRootViewController.change(with: UINavigationController(rootViewController: OnboardingVC()))
+            let vc = UINavigationController(rootViewController: OnboardingVC())
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: true)
             return
         }
         let nextIndex = min(currentIndex + 1, dataModel.count - 1)
@@ -92,6 +95,7 @@ class IntroductionPageVC: UIViewController {
         
         collectionView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
+            
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.height.equalTo(500)
@@ -152,7 +156,7 @@ extension IntroductionPageVC: UICollectionViewDelegate, UICollectionViewDataSour
         
         let model = dataModel[indexPath.item]
         cell.configure(with: model)
-        
+        cell.backgroundColor = .clear
         
         return cell
     }

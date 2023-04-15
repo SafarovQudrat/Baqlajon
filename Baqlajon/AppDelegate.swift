@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let vc = MainTabBarController()
             window?.rootViewController = vc
         }else{
-            let vc = UINavigationController(rootViewController: IntroductionPageVC())
+            let vc = IntroductionPageVC()
             window?.rootViewController = vc
         }
         window?.makeKeyAndVisible()

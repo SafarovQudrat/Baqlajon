@@ -19,13 +19,13 @@ public class Loader {
         customView.translatesAutoresizingMaskIntoConstraints = false
         customView.centerXAnchor.constraint(equalTo: loadV.animationView.centerXAnchor).isActive = true
         customView.centerYAnchor.constraint(equalTo: loadV.animationView.centerYAnchor).isActive = true
-        customView.heightAnchor.constraint(equalToConstant: 160).isActive = true
-        customView.widthAnchor.constraint(equalToConstant: 160).isActive = true
+        customView.heightAnchor.constraint(equalToConstant: 90).isActive = true
+        customView.widthAnchor.constraint(equalToConstant: 90).isActive = true
         
         customView.backgroundColor = .clear
         if let view = UIApplication.keyWindow {
             view.addSubview(loadV)
-            customView.animation = LottieAnimation.named("loading")
+            customView.animation = LottieAnimation.named("pulse")
             customView.animationSpeed = 1.5
             customView.loopMode = .loop
             customView.play()

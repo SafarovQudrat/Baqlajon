@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import IQKeyboardManager
 
 class PaymentsVC: UIViewController {
     
@@ -219,10 +220,23 @@ class PaymentsVC: UIViewController {
         return i
         
     }()
+    
+    private lazy var dismissBtn:UIButton = {
+        let b = UIButton()
+        b.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
+        return b
+    }()
+    
+    
 //    ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black.withAlphaComponent(0.6)
+        view.addSubview(cancelBtn)
+        cancelBtn.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(0)
+        }
+        IQKeyboardManager.shared().isEnabled = true
         containerV.backgroundColor = .clear
         containerV.addSubview(backImageV)
         backImageV.snp.makeConstraints { make in
