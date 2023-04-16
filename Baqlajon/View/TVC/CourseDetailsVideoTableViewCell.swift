@@ -74,12 +74,29 @@ class CourseDetailsVideoTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    private lazy var lessonWatchedNumbersStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [eyeImageView, numberOfWatchedLessonLabel])
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    private lazy var lessonMinutesStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [ clockImageView, timeOfLessonLabel])
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     
     
     private lazy var lessonWatchedNumbersAndLessonMinutesStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [eyeImageView, numberOfWatchedLessonLabel, clockImageView, timeOfLessonLabel])
+        let stackView = UIStackView(arrangedSubviews: [lessonWatchedNumbersStackView,lessonMinutesStackView])
         stackView.axis = .horizontal
         stackView.alignment = .leading
+        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -90,7 +107,7 @@ class CourseDetailsVideoTableViewCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.spacing = 10
-        stackView.alignment = .leading
+        stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -182,6 +199,20 @@ class CourseDetailsVideoTableViewCell: UITableViewCell {
         
     }
     
+    
+    func updateCell(data:GetCourseDM){
+        lessonImageView.sd_setImage(with: URL(string: API.imgBaseURL + data.videoImage))
+        print("URL = ",API.imgBaseURL + data.videoImage)
+        lessonTitleLabel.text = data.title
+        numberOfWatchedLessonLabel.text = "\(data.viewCount)"
+        if data.isFree {
+            lockImageView.image = UIImage(named: "playVideoImage")
+        } else{
+            lockImageView.image = UIImage(named: "lockImageCourseDetails")
+        }
+        
+        
+    }
     
     
 

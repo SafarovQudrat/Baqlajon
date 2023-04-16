@@ -31,7 +31,7 @@ class OnboardingVC: UIViewController {
     }()
     private lazy var signUpBtn:BNButton = {
         let b = BNButton()
-        b.backgroundColor = .appColor(color: .gray7)
+        b.backgroundColor = .appColor(color: .gray6)
         b.setTitle("Sign Up", for: .normal)
         b.setTitleColor(.appColor(color: .black1), for: .normal)
         b.layer.cornerRadius = 8

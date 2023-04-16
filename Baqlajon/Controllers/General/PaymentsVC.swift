@@ -11,6 +11,11 @@ import IQKeyboardManager
 class PaymentsVC: UIViewController {
     
 //constants
+    private lazy var backgroundView:UIView = {
+        let v = UIView()
+        v.backgroundColor = .clear
+        return v
+    }()
     private lazy var containerV:UIView = {
         let containerView = UIView()
         containerView.backgroundColor = .white
@@ -86,7 +91,7 @@ class PaymentsVC: UIViewController {
 //    Referal Code text field
     private lazy var tfView:UIView = {
         let txtView = UIView()
-        txtView.backgroundColor = #colorLiteral(red: 0.9719608426, green: 0.9722560048, blue: 0.9813567996, alpha: 1)
+        txtView.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9803921569, alpha: 1)
         txtView.layer.cornerRadius = 10
         txtView.snp.makeConstraints { make in
             make.height.equalTo(50)
@@ -96,7 +101,8 @@ class PaymentsVC: UIViewController {
     private lazy var txtField:UITextField = {
         let txtField = UITextField()
         txtField.placeholder = "Referral code"
-        txtField.backgroundColor = .clear
+        
+        txtField.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9803921569, alpha: 1)
         txtField.textColor = .black
         return txtField
     }()
@@ -221,19 +227,33 @@ class PaymentsVC: UIViewController {
         
     }()
     
-    private lazy var dismissBtn:UIButton = {
+    var dismissBtn:UIButton = {
         let b = UIButton()
-        b.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
+        b.backgroundColor =  .clear
+        b.addTarget(.none, action: #selector(cancelBackV), for: .touchUpInside)
         return b
     }()
     
+    var continueIsTapped:((Bool)->Void)?
     
 //    ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpUi()
+        self.overrideUserInterfaceStyle = .light
+        
+        
+        
+    }
+    
+    func setUpUi(){
         view.backgroundColor = .black.withAlphaComponent(0.6)
-        view.addSubview(cancelBtn)
-        cancelBtn.snp.makeConstraints { make in
+        view.addSubview(backgroundView)
+        backgroundView.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(0)
+        }
+        backgroundView.addSubview(dismissBtn)
+        dismissBtn.snp.makeConstraints { make in
             make.top.left.right.bottom.equalTo(0)
         }
         IQKeyboardManager.shared().isEnabled = true
@@ -276,20 +296,24 @@ class PaymentsVC: UIViewController {
             make.left.top.equalTo(20)
             make.right.bottom.equalTo(-20)
         }
-        view.addSubview(containerV)
+        backgroundView.addSubview(containerV)
         containerV.snp.makeConstraints { make in
             make.center.equalToSuperview()
 //            make.left.equalTo(16)
 //            make.right.equalTo(-16)
         }
         containerV.transform = .init(scaleX: 0, y: 0)
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.3, options: [.curveEaseOut]) { [self] in
+        UIView.animate(withDuration: 0.3, delay: 3, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.3, options: [.curveEaseOut]) { [self] in
             containerV.transform = .identity
         }
         self.view.addGestureRecognizer (UITapGestureRecognizer(target: self, action: #selector (hideKeyboard)))
         setLang()
         observeLangNotif()
     }
+    
+    
+    
+    
     //MARK: -  hide keyboard
     @objc private func hideKeyboard() {
         self.view.endEditing(true)
@@ -307,7 +331,7 @@ class PaymentsVC: UIViewController {
         
 //    Continue Tapped
     @objc func okTapped() {
-
+        continueIsTapped?(true)
         self.dismiss(animated: false)
         
     }
@@ -316,6 +340,11 @@ class PaymentsVC: UIViewController {
         
         self.dismiss(animated: false)
         
+    }
+    
+    
+    @objc func cancelBackV(){
+        self.dismiss(animated: false)
     }
     
     func setLang(){

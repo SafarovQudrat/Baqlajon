@@ -27,6 +27,9 @@ class CourseDetailsVC: UIViewController {
         return button
     }()
     var reviews:[CommentDM] = []
+    var videos : [GetCourseDM] = []
+    var course:String = ""
+    var headerView = CourseDetailsTableHeaderView()
     var myC:((Bool) ->Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,13 +40,18 @@ class CourseDetailsVC: UIViewController {
         configureTableView()
         configureNavigationBar()
         configureConstraints()
+        getAllVideo()
+        print("Courses ========",course)
     }
     
     
     private func configureTableView() {
         view.addSubview(tableView)
-        let headerView = CourseDetailsTableHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 550))
-        
+         headerView = CourseDetailsTableHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 550))
+//        headerView.courseImageView.sd_setImage(with: URL(string: API.imgBaseURL + (course?.videos.image ?? "") ))
+//        headerView.titleLabel.text = course?.videos.title
+//        headerView.descriptionLabel.text = course?.videos.desc
+//        headerView.numberOfVideosLabel.text = "\(videos.count) Videos"
         headerView.delegate = self
         
         tableView.tableHeaderView = headerView
@@ -71,8 +79,9 @@ class CourseDetailsVC: UIViewController {
     
     @objc func btnTapped() {
         if startLessonAndWriteReviewButton.titleLabel?.text == "Start Course" {
-            navigationItem.backButtonTitle = ""
-            navigationController?.pushViewController(VideoDetailsViewController(), animated: true)
+            
+           startCourse()
+            
         } else {
             navigationItem.backButtonTitle = ""
             navigationController?.pushViewController(ReviewVC(), animated: true)
@@ -87,7 +96,8 @@ class CourseDetailsVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
-        getComments()
+        
+        getAllVideo()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
@@ -105,6 +115,8 @@ class CourseDetailsVC: UIViewController {
         }
     }
     @objc func refresh() {
+        getAllVideo()
+        
         tableView.reloadData()
         refreshControl.endRefreshing()
     }
@@ -126,15 +138,13 @@ class CourseDetailsVC: UIViewController {
     
 }
 
-
+//MARK:  UITableViewDelegate, UITableViewDataSource
 extension CourseDetailsVC: UITableViewDelegate, UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        if videoTableViewCellIsOn { return 3 } else { return 1}
-    }
+  
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if videoTableViewCellIsOn { return 5 } else { return reviews.count }
+        if videoTableViewCellIsOn { return videos.count } else { return reviews.count }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -142,7 +152,7 @@ extension CourseDetailsVC: UITableViewDelegate, UITableViewDataSource {
         if videoTableViewCellIsOn {
             guard let videoCell = tableView.dequeueReusableCell(withIdentifier: CourseDetailsVideoTableViewCell.identifier, for: indexPath) as? CourseDetailsVideoTableViewCell else { return UITableViewCell() }
             videoCell.selectionStyle = .none
-            
+            videoCell.updateCell(data: videos[indexPath.row])
             return videoCell
 
         } else {
@@ -201,12 +211,17 @@ extension CourseDetailsVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        navigationController?.pushViewController(VideoDetailsViewController(), animated: true)
+        if videoTableViewCellIsOn{
+            let vc = VideoDetailsViewController()
+            vc.videoID = self.videos[indexPath.row]._id
+            navigationItem.backButtonTitle = ""
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
 }
 
-
+//MARK: CourseDetailsTableHeaderViewDelegate
 extension CourseDetailsVC: CourseDetailsTableHeaderViewDelegate {
     func videosButtonDidTap() {
         videoTableViewCellIsOn = true
@@ -225,12 +240,39 @@ extension CourseDetailsVC: CourseDetailsTableHeaderViewDelegate {
     
     
 }
+
+//MARK: API
 extension CourseDetailsVC {
-    func getComments() {
-        API.getComments { [self] data in
-            reviews = data
+    func getAllVideo(){
+        API.getCourseByID(id: course) { [self] data in
+            
+            videos = data.freeVideos + data.videos
+            reviews = data.comment
+            headerView.numberOfVideosLabel.text = "\(data.info.videoCount) Videos"
+            headerView.descriptionLabel.text = data.info.desc
+            headerView.titleLabel.text = data.info.title
+            headerView.numberOfReviews.text = "\(data.comment.count) Reviews"
+            headerView.courseImageView.sd_setImage(with: URL(string: API.imgBaseURL + data.info.image))
+            
+            print("_ID = ",course)
+            print("Videos = ",data)
             tableView.reloadData()
         }
     }
+    func startCourse(){
+        API.startCourse(id: course) { data in
+            if data.success {
+                self.navigationItem.backButtonTitle = ""
+                self.navigationController?.pushViewController(VideoDetailsViewController(), animated: true)
+            }else {
+                Alert.showAlert(title: data.message, message: data.message, vc: self)
+            }
+        }
+    }
+    
+    
+    
+    
+    
 }
 

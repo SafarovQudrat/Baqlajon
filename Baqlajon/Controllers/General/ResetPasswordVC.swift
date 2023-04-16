@@ -33,7 +33,7 @@ class ResetPasswordVC: UIViewController {
         tf.placeholder = "Old Password"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
-        tf.backgroundColor = .appColor(color: .gray7)
+        tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
         tf.leftViewMode = .always
         tf.rightViewMode = .always
@@ -71,7 +71,7 @@ class ResetPasswordVC: UIViewController {
         tf.placeholder = "New password"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
-        tf.backgroundColor = .appColor(color: .gray7)
+        tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
         tf.leftViewMode = .always
         tf.rightViewMode = .always
@@ -109,7 +109,7 @@ class ResetPasswordVC: UIViewController {
         tf.placeholder = "Confirm password"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
-        tf.backgroundColor = .appColor(color: .gray7)
+        tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
         tf.leftViewMode = .always
         tf.rightViewMode = .always

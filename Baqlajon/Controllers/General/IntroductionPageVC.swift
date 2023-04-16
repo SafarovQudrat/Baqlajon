@@ -53,7 +53,7 @@ class IntroductionPageVC: UIViewController {
     
     @objc private func progressDidTap() {
         if currentIndex == dataModel.count - 1 {
-            let vc = UINavigationController(rootViewController: OnboardingVC())
+            let vc = UINavigationController(rootViewController: SignUpVC())
             vc.modalPresentationStyle = .overFullScreen
             self.present(vc, animated: true)
             return

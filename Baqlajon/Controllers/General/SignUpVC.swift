@@ -29,7 +29,7 @@ class SignUpVC: UIViewController {
         lbl.textAlignment = .left
         lbl.text = "Create\nAccount!"
         lbl.font = UIFont.appFont(ofSize: 28,weight: FontWeight.medium)
-        lbl.textColor = .label
+        lbl.textColor = .appColor(color: .black1)
         lbl.numberOfLines = 2
         return lbl
     }()
@@ -42,7 +42,7 @@ class SignUpVC: UIViewController {
         tf.placeholder = "First name*"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
-        tf.backgroundColor = .appColor(color: .gray7)
+        tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
         tf.borderStyle = .none
         tf.leftViewMode = .always
@@ -62,7 +62,7 @@ class SignUpVC: UIViewController {
         tf.placeholder = "Last name*"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
-        tf.backgroundColor = .appColor(color: .gray7)
+        tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
         tf.borderStyle = .none
         tf.leftViewMode = .always
@@ -96,7 +96,7 @@ class SignUpVC: UIViewController {
         tf.textColor = .label
         tf.placeholder = "Phone number*"
         tf.keyboardType = .phonePad
-        tf.backgroundColor = .appColor(color: .gray7)
+        tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
         tf.borderStyle = .none
         tf.leftViewMode = .always
@@ -119,7 +119,7 @@ class SignUpVC: UIViewController {
         tf.placeholder = "Password"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
-        tf.backgroundColor = .appColor(color: .gray7)
+        tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
         tf.leftViewMode = .always
         tf.rightViewMode = .always
@@ -313,7 +313,9 @@ extension SignUpVC {
     
     //MARK: switched to Sign Up
     @objc func goSignUpTapped() {
-        ChangeRootViewController.change(with: UINavigationController(rootViewController: LoginVC()))
+        let vc = LoginVC()
+        navigationItem.backButtonTitle = ""
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     

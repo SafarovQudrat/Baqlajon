@@ -29,10 +29,14 @@ class API {
     static let getMyCourseStatUrl:String = baseURL + "myCourse/status"
     static let giftUrl:String = baseURL + "gift"
     static let promoCodeUrl:String = baseURL + "promocode"
-    static let createCommentUrl:String = baseURL + "comment/63e22938843daa99b6d32708"
-    static let getAllComments:String = baseURL + "comment/All/63e22938843daa99b6d32708"
+    static let createCommentUrl:String = baseURL + "comment/"
+    static let getAllComments:String = baseURL + "comment/All/"
     static let getImageUrl: String = baseURL + "/public/uploads"
     static let updatePhone: String = baseURL + "/user/phone"
+    static let startCourseUrl: String = baseURL + "myCourse/start/"
+    static let finishCourseUrl: String = baseURL + "video/finish/"
+    static let allVideoUrl: String = baseURL + "video/"
+    static let getByIDUrl: String = baseURL + "course/"
 //    MARK: -functions
 //    register
     static func register(lastName:String,firstName:String,number:String, password:String, complation:@escaping (LoginDM)->Void) {
@@ -175,19 +179,22 @@ class API {
     }
     
 //    GetMyCourse
-    static func getMyCourse(complation:@escaping([MyCourseDM])->Void){
+    static func getMyCourse(complation:@escaping([MyAllCourseDM])->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
             "lang":lang ?? "en"
         ]
         Net.sendRequest(to: getMyCourseUrl, method: .get, headers: headers, param: nil) { data in
             guard let data = data else {return}
-            let info = data.arrayValue.map{MyCourseDM(json: $0)}
+            let info = data["data"].arrayValue.map{MyAllCourseDM(json: $0)}
             complation(info)
                     
         }
       
     }
+    
+    
+    
     static func getAllGift(complation:@escaping([GetGiftDM])->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
@@ -200,6 +207,7 @@ class API {
             complation(info)
         }
     }
+    
     static func updateUser(name:String,lastname:String,password:String,image:String,number:String,complation:@escaping(JSON)->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
@@ -219,6 +227,7 @@ class API {
             complation(data)
         }
     }
+    
     static func getPromoCode(complation:@escaping (JSON)->Void) {
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
@@ -229,7 +238,8 @@ class API {
             complation(data)
         }
     }
-    static func createComment(text:String, complation:@escaping(JSON)->Void) {
+    
+    static func createComment(id: String,text:String, complation:@escaping(JSON)->Void) {
         let param:[String:Any] = [
             "text":text
         ]
@@ -237,25 +247,27 @@ class API {
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
             "lang":lang ?? "en"
         ]
-        Net.sendRequest(to: createCommentUrl, method: .post, headers: headers, param: param) { data in
+        Net.sendRequest(to: createCommentUrl + id, method: .post, headers: headers, param: param) { data in
             guard let data = data else{return}
             complation(data)
         }
         
         
     }
-    static func getComments(complation:@escaping ([CommentDM])->Void) {
+    
+    static func getComments(id: String,complation:@escaping ([CommentDM])->Void) {
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
             "lang":lang ?? "en"
         ]
-        Net.sendRequest(to: getAllComments, method: .get, headers: headers, param: nil) { data in
+        Net.sendRequest(to: getAllComments + id, method: .get, headers: headers, param: nil) { data in
             guard let data = data else {return}
             let info = data["data"].arrayValue.map{CommentDM(text: $0)}
             complation(info)
            
         }
     }
+    
     static func updatePhoneNumber(number: String,otp: String, complation:@escaping(JSON)->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
@@ -272,11 +284,55 @@ class API {
         
     }
    
+    static func startCourse(id:String, complation:@escaping(LoginDM)->Void){
+        let headers:HTTPHeaders = [
+            "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
+            "lang":lang ?? "en"
+        ]
+        
+        Net.sendRequest(to: startCourseUrl + id, method: .get, headers: headers, param: nil) { data in
+            guard let data = data else {return}
+            let info = LoginDM(json: data)
+            complation(info)
+        }
+        
+    }
+    
+    static func finishCourse(id:String,complation:@escaping(LoginDM)->Void){
+        let headers:HTTPHeaders = [
+            "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
+            "lang":lang ?? "en"
+        ]
+        Net.sendRequest(to: finishCourseUrl + id, method: .get, headers: headers, param: nil) { data in
+            guard let data = data else {return}
+            let info = LoginDM(json: data)
+            complation(info)
+        }
+    }
+    
+    static func getVideoByID(id:String,complation:@escaping(JSON)->Void) {
+        let headers:HTTPHeaders = [
+            "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
+            "lang":lang ?? "en"
+        ]
+        Net.sendRequest(to: allVideoUrl + id, method: .get, headers: headers, param: nil) { data in
+            guard let data = data else {return}
+            
+            complation(data)
+        }
+    }
+    
+    static func getCourseByID(id:String,complation:@escaping(MyCourseDM)->Void){
+        let headers:HTTPHeaders = [
+            "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
+            "lang":lang ?? "en"
+        ]
+        Net.sendRequest(to: getByIDUrl + id, method: .get, headers: headers, param: nil) { data in
+            guard let data = data else {return}
+            complation(MyCourseDM(json: data["data"]))
+            
+        }
+    }
     
 }
-struct CommentDM{
-    var text:String
-    init(text: JSON) {
-        self.text = text["text"].stringValue
-    }
-}
+

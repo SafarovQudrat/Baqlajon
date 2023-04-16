@@ -7,6 +7,7 @@
 
 import UIKit
 import OTPFieldView
+import SwiftyJSON
 
 class OtpVC: UIViewController {
     
@@ -34,7 +35,7 @@ class OtpVC: UIViewController {
     let otpViewController: UIView = {
         let v = UIView()
         v.backgroundColor = #colorLiteral(red: 0, green: 0.961252749, blue: 0.3269677758, alpha: 0.3143335459)
-        v.backgroundColor = .appColor(color: .background)
+        v.backgroundColor = .appColor(color: .white)
         return v
     }()
     
@@ -121,6 +122,15 @@ class OtpVC: UIViewController {
     @objc func confirmTapped(){
         Loader.start()
         if Reachability.isConnectedToNetwork(){
+            if cache.bool(forKey: "changeNumber"){
+                updateNumber { data in
+                    if data["success"].boolValue {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                }
+            }
+            
+            
             checkOtp { data in
             Loader.stop()
             
@@ -207,8 +217,10 @@ extension OtpVC {
         }
     }
     
-    func updateNumber() {
-        
+    func updateNumber(complation:@escaping(JSON)->Void) {
+        API.updatePhoneNumber(number: number, otp: otp) { data in
+            complation(data)
+        }
     }
     
     

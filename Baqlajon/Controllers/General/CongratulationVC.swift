@@ -145,6 +145,8 @@ class CongratulationVC: UIViewController {
 //   ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.overrideUserInterfaceStyle = .light
         view.addSubview(backImageV)
         backImageV.snp.makeConstraints { make in
             make.top.left.right.bottom.equalTo(0)

@@ -33,6 +33,9 @@ class VideoDetailsViewController: UIViewController {
     private lazy var videoImage:UIImageView = {
         let v = UIImageView(image: UIImage(named: "courseImage"))
         v.contentMode = .scaleAspectFill
+        v.snp.makeConstraints { make in
+            make.height.equalTo(200)
+        }
         return v
     }()
     private lazy var titleLbl:UILabel = {
@@ -67,13 +70,13 @@ class VideoDetailsViewController: UIViewController {
     let videoPlayerView = UIView()
     var player: AVPlayer!
     var playerLayer:AVPlayerLayer!
+    var videoID:String = ""
+    var url:URL?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
        setUpUi()
-        configureNavigationBar()
-        
-       
+       configureNavigationBar()
+        getVideoByID()
     }
     
  
@@ -95,7 +98,7 @@ class VideoDetailsViewController: UIViewController {
         }
         view.addSubview(titleLbl)
         titleLbl.snp.makeConstraints { make in
-            make.top.equalTo(videoView.snp_bottomMargin).inset(-16)
+            make.top.equalTo(videoView.snp_bottomMargin).inset(-100)
             make.left.right.equalToSuperview().inset(16)
         }
         view.addSubview(textLbl)
@@ -126,12 +129,13 @@ class VideoDetailsViewController: UIViewController {
     
 
     @objc func btnTapped(){
-
+        Loader.start()
+        finishVideo()
         
 
     }
     @objc func playBtnTapped() {
-        setUpVideoPlayer()
+        setUpVideoPlayer(url: url)
     }
 
 
@@ -140,8 +144,8 @@ class VideoDetailsViewController: UIViewController {
 }
 //MARK: Video Player
 extension VideoDetailsViewController {
-    func setUpVideoPlayer() {
-        let url = URL(string: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+    func setUpVideoPlayer(url:URL?) {
+
         guard let url = url else {
             return
         }
@@ -150,4 +154,36 @@ extension VideoDetailsViewController {
         vc.player = player
         present(vc, animated: true)
     }
+}
+//MARK: - API
+extension VideoDetailsViewController {
+    func finishVideo(){
+        API.finishCourse(id: videoID) { data in
+            Loader.stop()
+            if data.success {
+                Alert.showAlert(title: data.message, message: data.message, vc: self)
+            }else {
+                Alert.showAlert(title: data.message, message: data.message, vc: self)
+            }
+        }
+    }
+    
+    func getVideoByID() {
+        API.getVideoByID(id: videoID) { data in
+            if data["success"].boolValue {
+                print("DATAAAAAA===",data)
+                if data["data"]["isFree"].boolValue {
+                    self.url = URL(string: API.imgBaseURL + data["data"]["videoUrl"].stringValue)
+                    self.videoImage.sd_setImage(with: URL(string: API.imgBaseURL + data["data"]["imageUrl"].stringValue))
+                    self.titleLbl.text = data["data"]["title"].stringValue
+                    self.textLbl.text = data["data"]["description"].stringValue
+                }else {
+                    Alert.showAlert(title: "Error", message: "This video not Free", vc: self)
+                }
+            }else {
+                Alert.showAlert(title: "Error", message: "NO Result!", vc: self)
+            }
+        }
+    }
+    
 }

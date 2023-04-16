@@ -156,7 +156,7 @@ class ReviewVC: UIViewController {
     
     
 
-    
+    var courseID: String = ""
     
     //MARK: -viewDidLoad-
     override func viewDidLoad() {
@@ -462,7 +462,7 @@ extension ReviewVC {
 }
 extension ReviewVC {
     func createComment() {
-        API.createComment(text: commentTextView.text) { data in
+        API.createComment(id: courseID, text: commentTextView.text) { data in
             Loader.stop()
             if data["success"].boolValue {
                 

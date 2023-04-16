@@ -195,7 +195,7 @@ class MyCourseTVC: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateCell(course:MyCourseDM) {
+    func updateCell(course:MyAllCourseDM) {
         
         let data = try? Data(contentsOf:  URL(string: course.videos.image)!)
 

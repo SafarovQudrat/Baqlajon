@@ -35,7 +35,7 @@ class ForgotVC: UIViewController {
         tf.textColor = .label
         tf.placeholder = "Phone number*"
         tf.keyboardType = .phonePad
-        tf.backgroundColor = .appColor(color: .gray7)
+        tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
         tf.borderStyle = .none
         tf.leftViewMode = .always
@@ -91,12 +91,6 @@ class ForgotVC: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.appFont(ofSize: 16,weight: FontWeight.medium)]
     }
     
-    //    back Button
-    @objc func backtapped(){
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    
     //MARK: setting UI constraints
     func setUIItems() {
         
@@ -140,7 +134,7 @@ extension ForgotVC {
     @objc func sendCodeTapped() {
         if cache.bool(forKey: "changeNumber"){
             Loader.start()
-            sendOtp { data in
+            sendRegisterOtp { data in
                 Loader.stop()
                 if data.success {
                     let vc = OtpVC()
@@ -195,4 +189,10 @@ extension ForgotVC {
             complation(data)
         }
     }
+    func sendRegisterOtp(complation:@escaping(LoginDM)->Void) {
+        API.registerOtp(number: phoneNumberTFView.text!) { data in
+            complation(data)
+        }
+    }
+    
 }

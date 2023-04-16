@@ -20,7 +20,7 @@ class CourseDetailsTableHeaderView: UIView {
     
     // MARK: - Properties
     
-    private let courseImageView: UIImageView = {
+     let courseImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "courseImage")
         imageView.contentMode = .scaleAspectFill
@@ -29,7 +29,7 @@ class CourseDetailsTableHeaderView: UIView {
     }()
     
     
-    private let titleLabel: UILabel = {
+     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "3D Design Illustration"
         label.font = UIFont.appFont(ofSize: 20, weight: FontWeight.medium)
@@ -41,7 +41,7 @@ class CourseDetailsTableHeaderView: UIView {
     }()
     
     
-    private let descriptionLabel: UILabel = {
+     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "This course will help others. Excepteur sint occaecat cupidatat non More..."
         label.font = UIFont.appFont(ofSize: 16, weight: FontWeight.regular)
@@ -53,7 +53,7 @@ class CourseDetailsTableHeaderView: UIView {
     }()
     
     
-    private let avatarImageView: UIImageView = {
+     let avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "avatarImage")
         imageView.layer.cornerRadius = imageView.frame.height / 2
@@ -63,7 +63,7 @@ class CourseDetailsTableHeaderView: UIView {
     }()
     
     
-    private let username: UILabel = {
+     let username: UILabel = {
         let label = UILabel()
         label.text = "Alimardon Aliyev"
         label.font = UIFont.appFont(ofSize: 14, weight: FontWeight.medium)
@@ -73,7 +73,7 @@ class CourseDetailsTableHeaderView: UIView {
     }()
     
     
-    private let profession: UILabel = {
+     let profession: UILabel = {
         let label = UILabel()
         label.text = "SMM tutor"
         label.font = UIFont.appFont(ofSize: 12, weight: FontWeight.regular)
@@ -101,7 +101,7 @@ class CourseDetailsTableHeaderView: UIView {
     }()
     
     
-    private let numberOfVideosLabel: UILabel = {
+     let numberOfVideosLabel: UILabel = {
         let label = UILabel()
         label.text = " 14 Videos"
         label.font = UIFont.appFont(ofSize: 14, weight: FontWeight.medium)
@@ -129,7 +129,7 @@ class CourseDetailsTableHeaderView: UIView {
     }()
     
     
-    private let numberOfCoursHours: UILabel = {
+     let numberOfCoursHours: UILabel = {
         let label = UILabel()
         label.text = " 7h 30min"
         label.font = UIFont.appFont(ofSize: 14, weight: FontWeight.medium)
@@ -157,7 +157,7 @@ class CourseDetailsTableHeaderView: UIView {
     }()
     
     
-    private let numberOfReviews: UILabel = {
+     let numberOfReviews: UILabel = {
         let label = UILabel()
         label.text = " 565 Reviews"
         label.font = UIFont.appFont(ofSize: 14, weight: FontWeight.medium)
@@ -194,7 +194,7 @@ class CourseDetailsTableHeaderView: UIView {
     }()
     
     
-    private let numberOfStdentLearnt: UILabel = {
+     let numberOfStdentLearnt: UILabel = {
         let label = UILabel()
         label.text = " 1000+ Student learnt"
         label.font = UIFont.appFont(ofSize: 14, weight: FontWeight.medium)
@@ -300,28 +300,32 @@ class CourseDetailsTableHeaderView: UIView {
     
     private func configureConstraints() {
         
+//        addSubview(courseImageView)
+//        NSLayoutConstraint.activate([
+//            courseImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+//            courseImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+//            courseImageView.widthAnchor.constraint(equalToConstant: screenSize.width - 32),
+//            courseImageView.heightAnchor.constraint(equalToConstant: (screenSize.width) / 16 * 9)
+//        ])
         addSubview(courseImageView)
         NSLayoutConstraint.activate([
-            courseImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            courseImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            courseImageView.widthAnchor.constraint(equalToConstant: screenSize.width - 32),
-            courseImageView.heightAnchor.constraint(equalToConstant: (screenSize.width) / 16 * 9)
-        ])
-        addSubview(courseImageView)
-        NSLayoutConstraint.activate([
-            courseImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            courseImageView.topAnchor.constraint(equalTo: topAnchor, constant: 24),
             courseImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             courseImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            courseImageView.heightAnchor.constraint(equalToConstant: 198)
+            courseImageView.heightAnchor.constraint(equalToConstant: 150)
         ])
         
         addSubview(titleLabel)
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            titleLabel.topAnchor.constraint(equalTo: courseImageView.bottomAnchor, constant: 24),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
-        ])
-        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(courseImageView.snp_bottomMargin).offset(100)
+            make.left.right.equalToSuperview().inset(16)
+        }
+//        NSLayoutConstraint.activate([
+//            titleLabel.leadingAnchor.constraint(equalTo:leadingAnchor, constant: 16),
+//            titleLabel.topAnchor.constraint(equalTo: courseImageView.bottomAnchor, constant: 24),
+//            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+//        ])
+//
         addSubview(descriptionLabel)
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),

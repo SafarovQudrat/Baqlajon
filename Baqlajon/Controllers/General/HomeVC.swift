@@ -304,9 +304,18 @@ class HomeVC: UIViewController {
         return s
     }()
     
+    
+    private lazy var noDataLbl:UILabel = {
+        let l = UILabel()
+        l.text = "No result!"
+        l.textColor = .lightGray
+        l.font = .appFont(ofSize: 20,weight: .medium)
+        return l
+    }()
+    
     var arr:[GetCourseDM] = []
     var arr1:[GetCourseDM] = []
-    
+    let screenSize = UIScreen.main.bounds
     var scrollV = UIScrollView()
     let refreshControl = UIRefreshControl()
     var timer:Timer?
@@ -315,29 +324,8 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .appColor(color: .background)
-        getMySelf()
-        
-        allBtn.layer.borderWidth = 0
-        allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
-        allBtn.setTitleColor(.white, for: .normal)
-        Loader.start()
-        if Reachability.isConnectedToNetwork() {
-            
-            getCourse(exUrl: "")
-            collectionView.reloadData()
-        }else {
-            Alert.showAlert(title: "No internet", message: "No internet connection", vc: self)
-            Loader.stop()
-        }
+      
         setUpUI()
-        searchTF.delegate = self
-        myView.isHidden = true
-        yellowView.isHidden = true
-        
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        scrollV.addSubview(refreshControl)
-
         setLang()
         observeLangNotif()
         
@@ -356,7 +344,28 @@ class HomeVC: UIViewController {
     }
     //setUpUI
     func setUpUI(){
+        self.view.backgroundColor = .appColor(color: .background)
+        getMySelf()
         
+        allBtn.layer.borderWidth = 0
+        allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
+        allBtn.setTitleColor(.white, for: .normal)
+        Loader.start()
+        if Reachability.isConnectedToNetwork() {
+            
+            getCourse(exUrl: "")
+            collectionView.reloadData()
+        }else {
+            Alert.showAlert(title: "No internet", message: "No internet connection", vc: self)
+            Loader.stop()
+        }
+        
+        searchTF.delegate = self
+        myView.isHidden = true
+        yellowView.isHidden = true
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        scrollV.addSubview(refreshControl)
         btnView.addSubview(btnStack)
         btnStack.snp.makeConstraints { make in
             make.right.left.equalToSuperview().inset(16)
@@ -409,6 +418,10 @@ class HomeVC: UIViewController {
             make.width.equalTo(scrollV.frame.width - 32)
             make.height.equalTo(scrollV.frame.height - 32)
         }
+        view.addSubview(noDataLbl)
+        noDataLbl.snp.makeConstraints { make in
+            make.center.equalTo(view.center)
+        }
     }
     
  
@@ -425,7 +438,7 @@ class HomeVC: UIViewController {
         self.tabBarController?.selectedIndex = 3
     }
     
-    
+//    REFRESH func
     @objc func refresh() {
         getMySelf()
         getCourse(exUrl: "")
@@ -517,6 +530,7 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectio
             self.navigationController?.view.addSubview(backProfileV)
             backProfileV.isHidden = false
         }
+        vc.course = arr[indexPath.item]._id
         navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -554,6 +568,11 @@ extension HomeVC:UITextFieldDelegate {
             }
             arr = arr2
         }
+        if self.arr.isEmpty  {
+            self.noDataLbl.isHidden = false
+        }else {
+            self.noDataLbl.isHidden = true
+        }
         collectionView.reloadData()
         
         
@@ -568,6 +587,12 @@ extension HomeVC{
             if data.success {
                 self.arr = data.data
                 self.arr1 = data.data
+                
+                if self.arr.isEmpty  {
+                    self.noDataLbl.isHidden = false
+                }else {
+                    self.noDataLbl.isHidden = true
+                }
                 self.collectionView.reloadData()
                 
             }else{

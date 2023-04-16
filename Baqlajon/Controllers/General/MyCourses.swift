@@ -13,7 +13,7 @@ class MyCourses: UIViewController {
     
     
     
-//VARIABLES
+//MARK: - VARIABLES
     
 //    category btns
     private var allBtn: UIButton = {
@@ -49,7 +49,9 @@ class MyCourses: UIViewController {
         b.addTarget(.none, action: #selector(complTapped), for: .touchUpInside)
         return b
     }()
+    
 //    constants
+    
     private lazy var stackV: UIStackView = {
        let s = UIStackView(arrangedSubviews: [allBtn,onBtn,compBtn])
         s.spacing = 16
@@ -194,39 +196,58 @@ class MyCourses: UIViewController {
         v.layer.cornerRadius = 6
         return v
     }()
-    var arr:[MyCourseDM] = []
+    var arr:[MyAllCourseDM] = []
     
     var scrollV = UIScrollView()
     let refreshControl = UIRefreshControl()
     var timer:Timer?
     var time: Int = 1
+    private lazy var noDataLbl:UILabel = {
+        let l = UILabel()
+        l.text = "No result!"
+        l.textColor = .lightGray
+        l.font = .appFont(ofSize: 20,weight: .medium)
+        return l
+    }()
     
-    
-//    VIEW DIDLOAD
+// MARK: -   VIEW DIDLOAD
     override func viewDidLoad() {
         super.viewDidLoad()
+   
+        setUpUi()
+        setLang()
+        observeLangNotif()
+        getCourses()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    // MARK: -   viewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(action), userInfo: nil, repeats: true)
+    }
+  
+//    SET UP UI
+    func setUpUi() {
+        myStackV.isHidden = true
+        noDataLbl.isHidden = true
         allBtn.layer.borderWidth = 0
         allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
         allBtn.setTitleColor(.white, for: .normal)
         self.view.backgroundColor = .appColor(color: .background)
         setNavController()
-        setUpUi()
-        myStackV.isHidden = true
-//        myView.isHidden = true
-//        yellowView.isHidden = true
         Loader.start()
         if Reachability.isConnectedToNetwork() {
-            getCourses()
+            if myStackV.isHidden {
+                Loader.stop()
+                noDataLbl.isHidden = true
+            }else{
+                getCourses()
+            }
         }else {
             Loader.stop()
             Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
             
         }
-        setLang()
-        observeLangNotif()
-    }
-    
-    func setUpUi() {
         self.view.addSubview(myStackV)
         myStackV.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(16)
@@ -242,7 +263,6 @@ class MyCourses: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-    
         tableView.register(MyCourseTVC.self, forCellReuseIdentifier: MyCourseTVC.identifier)
         btnView.addSubview(btnStack)
         btnStack.snp.makeConstraints { make in
@@ -278,7 +298,22 @@ class MyCourses: UIViewController {
             make.right.equalToSuperview().inset(30)
             make.top.equalTo(myView.snp_bottomMargin).inset(0)
         }
+        view.addSubview(noDataLbl)
+        noDataLbl.snp.makeConstraints { make in
+            make.center.equalTo(view.center)
+        }
+        if cache.bool(forKey: "ISPAYMENT") {
+            myStackV.isHidden = false
+            myView.isHidden = true
+            yellowView.isHidden = true
+        }else{
+            myStackV.isHidden = true
+            myView.isHidden = false
+            yellowView.isHidden = false
+        }
         
+        
+
     }
     
 //    SetNavController
@@ -290,75 +325,8 @@ class MyCourses: UIViewController {
         
     }
     
-    @objc func alertTapped() {
-        
-    }
-//    select category btns
-    @objc func allTapped() {
-        allBtn.layer.borderWidth = 0
-        allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
-        allBtn.setTitleColor(.white, for: .normal)
-         onBtn.setTitleColor(.systemGray2, for: .normal)
-       compBtn.setTitleColor(.systemGray2, for: .normal)
-        onBtn.backgroundColor = .clear
-        onBtn.layer.borderWidth = 1
-      
-        compBtn.backgroundColor = .clear
-        compBtn.layer.borderWidth = 1
-        if Reachability.isConnectedToNetwork() {
-            getCourses()
-        }else {
-            Loader.stop()
-            Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
-        }
-    }
-    @objc func onTapped() {
-        onBtn.layer.borderWidth = 0
-        onBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
-        onBtn.setTitleColor(.white, for: .normal)
-       allBtn.setTitleColor(.systemGray2, for: .normal)
-      compBtn.setTitleColor(.systemGray2, for: .normal)
-        allBtn.backgroundColor = .clear
-        allBtn.layer.borderWidth = 1
-        compBtn.backgroundColor = .clear
-        compBtn.layer.borderWidth = 1
-        if Reachability.isConnectedToNetwork() {
-            getStat(isstart: "start") { data in
-                self.arr = data
-                self.tableView.reloadData()
-            }
-        }else {
-            Loader.stop()
-            Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
-        }
-    }
-    @objc func complTapped() {
-        compBtn.layer.borderWidth = 0
-        compBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
-       compBtn.setTitleColor(.white, for: .normal)
-         onBtn.setTitleColor(.systemGray2, for: .normal)
-        allBtn.setTitleColor(.systemGray2, for: .normal)
-        onBtn.backgroundColor = .clear
-        onBtn.layer.borderWidth = 1
-        allBtn.backgroundColor = .clear
-        allBtn.layer.borderWidth = 1
-        if Reachability.isConnectedToNetwork() {
-            getStat(isstart: "finish") { data in
-                self.arr = data
-                self.tableView.reloadData()
-            }
-        }else {
-            Loader.stop()
-            Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
-        }
-    }
     
-    @objc func btnTapped() {
-        let vc = PaymentsVC()
-        vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: false)
-    }
-    
+//SET LANG
     func setLang() {
         titleLbl.text = Lang.getString(type: .payCTitle)
         textLbl.text = Lang.getString(type: .payCText)
@@ -376,10 +344,106 @@ class MyCourses: UIViewController {
 
 }
 
+
+//MARK: - @objc Functions
+extension MyCourses{
+    //    select category btns
+        @objc func allTapped() {
+            allBtn.layer.borderWidth = 0
+            allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
+            allBtn.setTitleColor(.white, for: .normal)
+             onBtn.setTitleColor(.systemGray2, for: .normal)
+           compBtn.setTitleColor(.systemGray2, for: .normal)
+            onBtn.backgroundColor = .clear
+            onBtn.layer.borderWidth = 1
+          
+            compBtn.backgroundColor = .clear
+            compBtn.layer.borderWidth = 1
+            if Reachability.isConnectedToNetwork() {
+                getCourses()
+            }else {
+                Loader.stop()
+                Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
+            }
+        }
+        @objc func onTapped() {
+            onBtn.layer.borderWidth = 0
+            onBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
+            onBtn.setTitleColor(.white, for: .normal)
+           allBtn.setTitleColor(.systemGray2, for: .normal)
+          compBtn.setTitleColor(.systemGray2, for: .normal)
+            allBtn.backgroundColor = .clear
+            allBtn.layer.borderWidth = 1
+            compBtn.backgroundColor = .clear
+            compBtn.layer.borderWidth = 1
+            if Reachability.isConnectedToNetwork() {
+                getStat(isstart: "start")
+            }else {
+                Loader.stop()
+                Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
+            }
+        }
+        @objc func complTapped() {
+            compBtn.layer.borderWidth = 0
+            compBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
+           compBtn.setTitleColor(.white, for: .normal)
+             onBtn.setTitleColor(.systemGray2, for: .normal)
+            allBtn.setTitleColor(.systemGray2, for: .normal)
+            onBtn.backgroundColor = .clear
+            onBtn.layer.borderWidth = 1
+            allBtn.backgroundColor = .clear
+            allBtn.layer.borderWidth = 1
+            if Reachability.isConnectedToNetwork() {
+                getStat(isstart: "finish")
+            }else {
+                Loader.stop()
+                Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
+            }
+        }
+//        PAYMENT VC OPEN
+        @objc func btnTapped() {
+            let vc = PaymentsVC()
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: false)
+            vc.continueIsTapped = { [self] isTapped in
+                if isTapped {
+                myStackV.isHidden = false
+                myView.isHidden = true
+                yellowView.isHidden = true
+                    cache.set(true, forKey: "ISPAYMENT")
+                }else{
+                    cache.set(false, forKey: "ISPAYMENT")
+                }
+            }
+            
+            
+        }
+//    ACTION TIMER
+    @objc func action () {
+        if time <= 0 {
+            timer?.invalidate()
+            refreshControl.endRefreshing()
+        }else {
+            time = time - 1
+        }
+    }
+    //    REFRESH func
+        @objc func refresh() {
+            getCourses()
+            tableView.reloadData()
+            refreshControl.endRefreshing()
+        }
+    
+    
+    
+}
+
+
 //MARK: UITableViewDelegate,UITableViewDataSource
 extension MyCourses:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = CourseDetailsVC()
+        vc.course = arr[indexPath.row].videos._id
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -394,19 +458,25 @@ extension MyCourses:UITableViewDelegate,UITableViewDataSource {
 
 
 }
-
+//MARK: - API Functions
 extension MyCourses{
     func getCourses(){
         
         API.getMyCourse { [self] data in
             Loader.stop()
             arr = data
+            
+            if arr.isEmpty {
+                noDataLbl.isHidden = false
+            }else {
+                noDataLbl.isHidden = true
+            }
             tableView.reloadData()
             
         }
     }
     
-    func getStat(isstart:String,complation:@escaping ([MyCourseDM])->Void){
+    func getStat(isstart:String){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
             "lang":"uz"
@@ -415,12 +485,18 @@ extension MyCourses{
             "search":"",
             "status":isstart
         ]
-        AF.request(API.getMyCourseStatUrl,method:.get,parameters: param, encoding: URLEncoding.default, headers: headers).responseData { response in
+        AF.request(API.getMyCourseStatUrl,method:.get,parameters: param, encoding: URLEncoding.default, headers: headers).responseData { [self] response in
             switch response.result {
             case.success(let data):
                 let jsonData = JSON(data)
-                let info = jsonData.arrayValue.map{MyCourseDM(json: $0)}
-                complation(info)
+                let info = jsonData["data"].arrayValue.map{MyAllCourseDM(json: $0)}
+                arr = info
+                if arr.isEmpty {
+                    noDataLbl.isHidden = false
+                }else {
+                    noDataLbl.isHidden = true
+                }
+                tableView.reloadData()
             case.failure(let error):
                 print("error=",error)
             }

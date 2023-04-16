@@ -48,7 +48,7 @@ class LoginVC: UIViewController {
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
         tf.borderStyle = .none
         tf.leftViewMode = .always
-        tf.backgroundColor = .appColor(color: .gray7)
+        tf.backgroundColor = .appColor(color: .gray6)
         let lview: UIView = {
             let lv = UIView()
             return lv
@@ -66,7 +66,7 @@ class LoginVC: UIViewController {
         tf.placeholder = "Password"
         tf.layer.cornerRadius = 8
         tf.textColor = .label
-        tf.backgroundColor = .appColor(color: .gray7)
+        tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
         tf.leftViewMode = .always
         tf.rightViewMode = .always
@@ -297,7 +297,8 @@ extension LoginVC {
     
     //Opens SignUpVC Tapped
     @objc func switchToSignUpTapped() {
-        ChangeRootViewController.change(with: UINavigationController(rootViewController: SignUpVC()))
+       
+        self.navigationController?.popViewController(animated: true)
     }
     
 }
