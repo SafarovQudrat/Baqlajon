@@ -269,6 +269,8 @@ extension LoginVC {
     
     //Login Tapped
     @objc func loginTapped() {
+        print("PHONE NUMBER = ",(self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!)
+        
         let vc = OtpVC()
         Loader.start()
         if Reachability.isConnectedToNetwork(){
