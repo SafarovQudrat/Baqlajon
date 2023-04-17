@@ -21,14 +21,14 @@ class MyCourseTVC: UITableViewCell {
     }()
     var titleLbl: UILabel = {
        let l = UILabel()
-       
+        l.font = .appFont(ofSize: 10)
         l.textColor = .systemGray2
         l.text = "Mobilograf"
         return l
     }()
     var textLbl: UILabel = {
        let l = UILabel()
-        l.font = UIFont(name: "System ", size: 14)
+        l.font = .appFont(ofSize: 12)
         l.text = "Social media marketing"
         return l
     }()
@@ -49,8 +49,9 @@ class MyCourseTVC: UITableViewCell {
     }()
     var taskLbl: UILabel = {
        let l = UILabel()
-        
+        l.textColor = .appColor(color: .white)
         l.text = "10/14"
+        l.font = .appFont(ofSize: 14)
         return l
     }()
     private lazy var stackV: UIStackView = {
@@ -70,30 +71,30 @@ class MyCourseTVC: UITableViewCell {
          i.image = UIImage(systemName: "star.fill")
         i.tintColor = #colorLiteral(red: 0.9998322129, green: 0.6800814271, blue: 0.1177380309, alpha: 1)
         i.snp.makeConstraints { make in
-            make.height.width.equalTo(16)
+            make.height.width.equalTo(12)
         }
          return i
      }()
     var starLbl: UILabel = {
        let l = UILabel()
-        l.font = UIFont(name: "System ", size: 12)
-        l.textColor = #colorLiteral(red: 0.475826025, green: 0.4803363681, blue: 0.6001288295, alpha: 1)
+        l.font = .appFont(ofSize: 12)
+        l.textColor = .appColor(color: .gray5)
         l.text = "4.5"
         return l
     }()
     lazy var  eyeImage: UIImageView = {
         let i = UIImageView()
          i.image = UIImage(systemName: "eye")
-        i.tintColor = #colorLiteral(red: 0.4, green: 0.4, blue: 0.5294117647, alpha: 1)
+        i.tintColor = .appColor(color: .gray5)
         i.snp.makeConstraints { make in
-            make.height.width.equalTo(16)
+            make.height.width.equalTo(12)
         }
          return i
      }()
     var eyeLbl: UILabel = {
        let l = UILabel()
-        l.font = UIFont(name: "System ", size: 12)
-        l.textColor = #colorLiteral(red: 0.475826025, green: 0.4803363681, blue: 0.6001288295, alpha: 1)
+        l.font = .appFont(ofSize: 12)
+        l.textColor = .appColor(color: .gray5)
         l.text = "6k"
         return l
     }()
@@ -144,7 +145,7 @@ class MyCourseTVC: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         titleLbl.font = .appFont(ofSize: 10)
         textLbl.font = .appFont(ofSize: 14)
-        taskLbl.font = .appFont(ofSize: 14)
+        
         backV.snp.makeConstraints { make in
             make.height.equalTo(12)
             make.width.equalTo(contentView.frame.width/2 - 16)
@@ -156,12 +157,12 @@ class MyCourseTVC: UITableViewCell {
         myBackV.addSubview(image)
         image.snp.makeConstraints { make in
             make.top.left.bottom.equalTo(0)
-            make.width.equalTo(120)
+            make.width.equalTo(90)
             make.height.equalTo(100)
         }
         backV.addSubview(progressV)
-        backV.backgroundColor = #colorLiteral(red: 0.964705646, green: 0.9647061229, blue: 0.9776162505, alpha: 1)
-        progressV.backgroundColor = #colorLiteral(red: 0, green: 0.5753021836, blue: 0.9667152762, alpha: 1)
+        backV.backgroundColor = .appColor(color: .gray6)
+        progressV.backgroundColor = .appColor(color: .mainBlue)
         myBackV.addSubview(titleLbl)
         titleLbl.snp.makeConstraints { make in
             make.top.equalTo(12)
@@ -171,11 +172,13 @@ class MyCourseTVC: UITableViewCell {
         textLbl.snp.makeConstraints { make in
             make.top.equalTo(titleLbl.snp_bottomMargin).inset(-10)
             make.left.equalTo(image.snp_rightMargin).inset(-12)
+            make.right.equalTo(-10)
         }
         myBackV.addSubview(stackV)
         stackV.snp.makeConstraints { make in
             make.left.equalTo(image.snp_rightMargin).inset(-12)
             make.top.equalTo(textLbl.snp_bottomMargin).inset(-12)
+            make.right.equalTo(-12)
         }
         myBackV.addSubview(eSstackV)
         eSstackV.snp.makeConstraints { make in
@@ -197,13 +200,10 @@ class MyCourseTVC: UITableViewCell {
     
     func updateCell(course:MyAllCourseDM) {
         
-        let data = try? Data(contentsOf:  URL(string: course.videos.image)!)
-
-        if let imageData = data {
-            self.image.image = UIImage(data: imageData)
-        }
+        image.sd_setImage(with: URL(string: API.imgBaseURL + course.videos.image)!)
         titleLbl.text = course.videos.title
         textLbl.text = course.videos.desc
+        taskLbl.text = "\(course.videos.viewCount)/\(course.videos.videoCount)"
         starLbl.text = "\(course.videos.viewCount)"
         eyeLbl.text = "\(course.videos.rating)"
     }

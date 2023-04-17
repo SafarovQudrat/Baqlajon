@@ -23,7 +23,7 @@ class OtpVC: UIViewController {
         lbl.textAlignment = .center
         return lbl
     }()
-    
+    var isForgot = false
     //View for OTP textField
     let otpView: OTPFieldView = {
         let v = OTPFieldView()
@@ -66,6 +66,7 @@ class OtpVC: UIViewController {
     
     var timer:Timer?
     var time: Int = 59
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appColor(color: .background)
@@ -125,24 +126,34 @@ class OtpVC: UIViewController {
             if cache.bool(forKey: "changeNumber"){
                 updateNumber { data in
                     if data["success"].boolValue {
+                        Alert.showAlert(title: "", message: "Phone number changed", vc: self)
                         self.navigationController?.popToRootViewController(animated: true)
                     }
                 }
+            }else if isForgot {
+                    checkOtp { [self] data in
+                        Loader.stop()
+                        if data.success {
+                            let vc = ResetPasswordVC()
+                            vc.number = number
+                            vc.isForgot = isForgot
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+            }else {
+                checkOtp { data in
+                    Loader.stop()
+                    
+                    if data.success {
+                        cache.set(true, forKey: "isTabbar")
+                        let vc = MainTabBarController()
+                        vc.modalPresentationStyle = .fullScreen
+                        self.present(vc, animated: true)
+                    } else {
+                        Alert.showAlert(title: data.message, message: data.message, vc: self)
+                    }
+                }
             }
-            
-            
-            checkOtp { data in
-            Loader.stop()
-            
-            if data.success {
-                cache.set(true, forKey: "isTabbar")
-                let vc = MainTabBarController()
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
-            } else {
-                Alert.showAlert(title: data.message, message: data.message, vc: self)
-            }
-        }
     }else {
         Alert.showAlert(title: "No Internet", message: "No internet connection", vc: self)
         Loader.stop()

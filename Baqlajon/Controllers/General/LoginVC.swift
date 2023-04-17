@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import PhoneNumberKit
+import SwiftPhoneNumberFormatter
 import Alamofire
 
 class LoginVC: UIViewController {
@@ -39,11 +39,13 @@ class LoginVC: UIViewController {
         return sv
     }()
     //phoneNumber textField
-    private let phoneNumberTFView: UITextField = {
-        let tf = UITextField()
+    private let phoneNumberTFView: PhoneFormattedTextField = {
+        let tf = PhoneFormattedTextField()
         tf.layer.cornerRadius = 8
         tf.textColor = .label
         tf.placeholder = "Phone number"
+        tf.config.defaultConfiguration = PhoneFormat(defaultPhoneFormat: "## ### ## ##")
+        tf.prefix = "+998 "
         tf.keyboardType = .phonePad
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
         tf.borderStyle = .none
@@ -298,7 +300,9 @@ extension LoginVC {
     //Opens SignUpVC Tapped
     @objc func switchToSignUpTapped() {
        
-        self.navigationController?.popViewController(animated: true)
+        let vc = SignUpVC()
+        navigationItem.backButtonTitle = ""
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

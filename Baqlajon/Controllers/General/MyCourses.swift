@@ -213,7 +213,7 @@ class MyCourses: UIViewController {
 // MARK: -   VIEW DIDLOAD
     override func viewDidLoad() {
         super.viewDidLoad()
-   
+        Loader.start()
         setUpUi()
         setLang()
         observeLangNotif()
@@ -360,6 +360,7 @@ extension MyCourses{
             compBtn.backgroundColor = .clear
             compBtn.layer.borderWidth = 1
             if Reachability.isConnectedToNetwork() {
+                Loader.start()
                 getCourses()
             }else {
                 Loader.stop()
@@ -377,6 +378,7 @@ extension MyCourses{
             compBtn.backgroundColor = .clear
             compBtn.layer.borderWidth = 1
             if Reachability.isConnectedToNetwork() {
+                Loader.start()
                 getStat(isstart: "start")
             }else {
                 Loader.stop()
@@ -394,6 +396,7 @@ extension MyCourses{
             allBtn.backgroundColor = .clear
             allBtn.layer.borderWidth = 1
             if Reachability.isConnectedToNetwork() {
+                Loader.start()
                 getStat(isstart: "finish")
             }else {
                 Loader.stop()
@@ -429,6 +432,7 @@ extension MyCourses{
     }
     //    REFRESH func
         @objc func refresh() {
+            Loader.start()
             getCourses()
             tableView.reloadData()
             refreshControl.endRefreshing()
@@ -452,7 +456,8 @@ extension MyCourses:UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MyCourseTVC.identifier, for: indexPath) as? MyCourseTVC else {return UITableViewCell()}
-        cell.backgroundColor = .clear
+        cell.updateCell(course: arr[indexPath.row])
+        cell.selectionStyle = .none
         return cell
     }
 
@@ -461,7 +466,7 @@ extension MyCourses:UITableViewDelegate,UITableViewDataSource {
 //MARK: - API Functions
 extension MyCourses{
     func getCourses(){
-        
+        Loader.stop()
         API.getMyCourse { [self] data in
             Loader.stop()
             arr = data
@@ -477,6 +482,7 @@ extension MyCourses{
     }
     
     func getStat(isstart:String){
+        
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
             "lang":"uz"
@@ -486,6 +492,7 @@ extension MyCourses{
             "status":isstart
         ]
         AF.request(API.getMyCourseStatUrl,method:.get,parameters: param, encoding: URLEncoding.default, headers: headers).responseData { [self] response in
+            Loader.stop()
             switch response.result {
             case.success(let data):
                 let jsonData = JSON(data)

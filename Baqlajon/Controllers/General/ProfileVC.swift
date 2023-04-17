@@ -263,9 +263,9 @@ class ProfileVC: UIViewController {
     @objc func logOutTapped(){
         cache.set(false, forKey: "isTabbar")
         cache.set("", forKey: "PROFILE_IMAGE")
-        cache.set(false, forKey: "isDark")
+        cache.set(true, forKey: "isDark")
         let window = UIApplication.keyWindow
-        let vc = UINavigationController(rootViewController: SignUpVC())
+        let vc = UINavigationController(rootViewController: LoginVC())
         window?.rootViewController = vc
     }
     @objc func refresh(_ sender: AnyObject) {

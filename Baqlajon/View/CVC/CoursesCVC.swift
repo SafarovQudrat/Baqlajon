@@ -153,11 +153,12 @@ class CoursesCVC: UICollectionViewCell {
     
     func updateCell(course:GetCourseDM) {
         
-        let data = try? Data(contentsOf:  URL(string: course.image)!)
-
-        if let imageData = data {
-            self.image.image = UIImage(data: imageData)
-        }
+//        let data = try? Data(contentsOf:  URL(string: API.imgBaseURL + course.image)!)
+//
+//        if let imageData = data {
+//            self.image.image = UIImage(data: imageData)
+//        }
+        image.sd_setImage(with: URL(string: API.imgBaseURL + course.image)!)
         titleLbl.text = course.title
         textLbl.text = course.desc
         starLbl.text = "\(course.viewCount)"

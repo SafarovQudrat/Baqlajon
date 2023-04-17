@@ -26,11 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = vc
         }
         window?.makeKeyAndVisible()
-        if cache.bool(forKey: "isDark") {
-            window?.overrideUserInterfaceStyle = .dark
-        } else {
-            window?.overrideUserInterfaceStyle = .light
-        }
+        window?.overrideUserInterfaceStyle = .dark
         return true
     }
 }

@@ -148,7 +148,7 @@ class ResetPasswordVC: UIViewController {
         return v
     }()
     
-  
+    
     //confirm Button
     let confirmBtn: UIButton = {
         let btn = UIButton()
@@ -180,14 +180,14 @@ class ResetPasswordVC: UIViewController {
         }
     }
     //    back Button
-        @objc func backtapped(){
-           
-            self.navigationController?.popViewController(animated: true)
-        }
+    @objc func backtapped(){
+        
+        self.navigationController?.popViewController(animated: true)
+    }
     
     //MARK: setting UIItems constraints
     func setUIItems() {
-      
+        
         view.addSubview(textLbl)
         textLbl.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(16)
@@ -200,7 +200,7 @@ class ResetPasswordVC: UIViewController {
             make.right.left.equalToSuperview().inset(24)
             
         }
-     
+        
     }
     
     func setLang(){
@@ -246,7 +246,7 @@ extension ResetPasswordVC {
     }
     
     @objc func confirmTapped() {
-       
+        
         
         if newPasswordTF.text!.count >= 8, newPasswordTF.text!.count <= 16, conifirmNewPasswordTF.text!.count >= 8, conifirmNewPasswordTF.text!.count <= 16, newPasswordTF.text! == conifirmNewPasswordTF.text! {
             if cache.bool(forKey: "changeNumber") {
@@ -258,10 +258,10 @@ extension ResetPasswordVC {
                     
                     if data["success"].boolValue {
                         self.navigationController?.popToRootViewController(animated: true)
+                        Alert.showAlert(title: "", message: "Password Changed", vc: self)
                     } else {
                         
                         guard let arr = data["data"].arrayValue.first else {return}
-                        print("dataaa = ",arr["constraints"].arrayValue.first!["value"].stringValue)
                         Alert.showAlert(title: data["message"].stringValue, message:arr["constraints"].arrayValue.first!["value"].stringValue  ,vc: self)
                     }
                 }
@@ -301,7 +301,7 @@ extension ResetPasswordVC {
         print("OTP=",self.conifirmNewPasswordTF.text!)
         API.forgetPass(number: number,password:self.conifirmNewPasswordTF.text!) { data in
             complation(data)
-        
+            
         }
     }
     

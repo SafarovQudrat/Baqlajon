@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftPhoneNumberFormatter
 
 class ForgotVC: UIViewController {
     
@@ -28,12 +29,14 @@ class ForgotVC: UIViewController {
         return lbl
     }()
     //phoneNumber textField
-    private let phoneNumberTFView: UITextField = {
-        let tf = UITextField()
+    private let phoneNumberTFView: PhoneFormattedTextField = {
+        let tf = PhoneFormattedTextField()
         
         tf.layer.cornerRadius = 8
         tf.textColor = .label
         tf.placeholder = "Phone number*"
+        tf.config.defaultConfiguration = PhoneFormat(defaultPhoneFormat: "## ### ## ##")
+        tf.prefix = "+998 "
         tf.keyboardType = .phonePad
         tf.backgroundColor = .appColor(color: .gray6)
         tf.font = UIFont.appFont(ofSize: 16, weight: .regular)
@@ -149,10 +152,20 @@ extension ForgotVC {
             if phoneNumberTFView.text == "" {
                 Alert.showAlert(title: "Error", message: "Please enter phone number", vc: self)
             }else {
-                let vc = ResetPasswordVC()
-                vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
-                vc.isForgot = true
-                self.navigationController?.pushViewController(vc, animated: true)
+                Loader.start()
+                sendOtp { data in
+                    Loader.stop()
+                    if data.success {
+                        let vc = OtpVC()
+                        vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
+                        vc.isForgot = true
+                        
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }else {
+                        Alert.showAlert(title: data.message, message: data.message, vc: self)
+                    }
+                }
+               
             }
         }
     }
@@ -185,7 +198,7 @@ extension ForgotVC {
 //API
 extension ForgotVC {
     func sendOtp(complation:@escaping(LoginDM)->Void) {
-        API.registerOtp(number: phoneNumberTFView.text!) { data in
+        API.sendOtp(number: phoneNumberTFView.text!) { data in
             complation(data)
         }
     }
