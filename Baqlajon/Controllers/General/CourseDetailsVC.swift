@@ -14,7 +14,7 @@ class CourseDetailsVC: UIViewController {
         return tableView
     }()
     
-   
+    
     private let startLessonAndWriteReviewButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Start Course", for: .normal)
@@ -40,18 +40,16 @@ class CourseDetailsVC: UIViewController {
         configureTableView()
         configureNavigationBar()
         configureConstraints()
+        Loader.start()
         getAllVideo()
+        
         print("Courses ========",course)
     }
     
     
     private func configureTableView() {
         view.addSubview(tableView)
-         headerView = CourseDetailsTableHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 550))
-//        headerView.courseImageView.sd_setImage(with: URL(string: API.imgBaseURL + (course?.videos.image ?? "") ))
-//        headerView.titleLabel.text = course?.videos.title
-//        headerView.descriptionLabel.text = course?.videos.desc
-//        headerView.numberOfVideosLabel.text = "\(videos.count) Videos"
+        headerView = CourseDetailsTableHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 550))
         headerView.delegate = self
         
         tableView.tableHeaderView = headerView
@@ -71,20 +69,29 @@ class CourseDetailsVC: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
     }
     //    back Button
-        @objc func backtapped(){
-            myC?(true)
-            self.navigationController?.popViewController(animated: true)
-           
-        }
+    @objc func backtapped(){
+        myC?(true)
+        self.navigationController?.popViewController(animated: true)
+        
+    }
     
     @objc func btnTapped() {
         if startLessonAndWriteReviewButton.titleLabel?.text == "Start Course" {
-            
-           startCourse()
+            let vc = VideoDetailsViewController()
+            startCourse()
+            self.navigationItem.backButtonTitle = ""
+            if ((cache.string(forKey: "VIDEO_ID")?.isEmpty) != nil) {
+                vc.videoID = videos.first?._id ?? ""
+            }else {
+                vc.videoID = cache.string(forKey: "VIDEO_ID")!
+            }
+            navigationController?.pushViewController(vc, animated: true)
             
         } else {
+            let vc = ReviewVC()
             navigationItem.backButtonTitle = ""
-            navigationController?.pushViewController(ReviewVC(), animated: true)
+            vc.courseID = videos.first?._id ?? ""
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -115,6 +122,7 @@ class CourseDetailsVC: UIViewController {
         }
     }
     @objc func refresh() {
+       
         getAllVideo()
         
         tableView.reloadData()
@@ -133,7 +141,7 @@ class CourseDetailsVC: UIViewController {
         ])
     }
     
-   
+    
     
     
 }
@@ -141,64 +149,64 @@ class CourseDetailsVC: UIViewController {
 //MARK:  UITableViewDelegate, UITableViewDataSource
 extension CourseDetailsVC: UITableViewDelegate, UITableViewDataSource {
     
-  
-
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if videoTableViewCellIsOn { return videos.count } else { return reviews.count }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         if videoTableViewCellIsOn {
             guard let videoCell = tableView.dequeueReusableCell(withIdentifier: CourseDetailsVideoTableViewCell.identifier, for: indexPath) as? CourseDetailsVideoTableViewCell else { return UITableViewCell() }
             videoCell.selectionStyle = .none
             videoCell.updateCell(data: videos[indexPath.row])
             return videoCell
-
+            
         } else {
-           guard let reviewsCell = tableView.dequeueReusableCell(withIdentifier: CourseDetailsReviewsTableViewCell.identifier, for: indexPath) as? CourseDetailsReviewsTableViewCell else {return UITableViewCell()}
+            guard let reviewsCell = tableView.dequeueReusableCell(withIdentifier: CourseDetailsReviewsTableViewCell.identifier, for: indexPath) as? CourseDetailsReviewsTableViewCell else {return UITableViewCell()}
             reviewsCell.selectionStyle = .none
             reviewsCell.updateCell(desc: reviews[indexPath.row])
             return reviewsCell
         }
-
+        
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
+        
         if videoTableViewCellIsOn {
             let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 46))
-
+            
             let titleLabel = UILabel()
             titleLabel.text = "Section 1 - Introduction"
             titleLabel.textColor = UIColor.appColor(color: Colors.gray1)
             titleLabel.font = UIFont.appFont(ofSize: 14, weight: FontWeight.medium)
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
-
+            
             let lessonTimeLabel = UILabel()
             lessonTimeLabel.text = "25 mins"
             lessonTimeLabel.textColor = UIColor.appColor(color: .mainBlue)
             lessonTimeLabel.font = UIFont.appFont(ofSize: 14, weight: FontWeight.medium)
             lessonTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-
+            
             header.addSubview(titleLabel)
             NSLayoutConstraint.activate([
                 titleLabel.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 16),
                 titleLabel.centerYAnchor.constraint(equalTo: header.centerYAnchor)
             ])
-
+            
             header.addSubview(lessonTimeLabel)
             NSLayoutConstraint.activate([
                 lessonTimeLabel.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -16),
                 lessonTimeLabel.centerYAnchor.constraint(equalTo: header.centerYAnchor)
             ])
-
+            
             return header
         }
-
+        
         return nil
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let result: CGFloat = videoTableViewCellIsOn ? 46 : 0
         return result
@@ -208,7 +216,7 @@ extension CourseDetailsVC: UITableViewDelegate, UITableViewDataSource {
         if videoTableViewCellIsOn { return 100 } else { return tableView.rowHeight }
     }
     
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if videoTableViewCellIsOn{
@@ -245,14 +253,17 @@ extension CourseDetailsVC: CourseDetailsTableHeaderViewDelegate {
 extension CourseDetailsVC {
     func getAllVideo(){
         API.getCourseByID(id: course) { [self] data in
-            
+            Loader.stop()
             videos = data.freeVideos + data.videos
             reviews = data.comment
             headerView.numberOfVideosLabel.text = "\(data.info.videoCount) Videos"
             headerView.descriptionLabel.text = data.info.desc
             headerView.titleLabel.text = data.info.title
             headerView.numberOfReviews.text = "\(data.comment.count) Reviews"
-            headerView.courseImageView.sd_setImage(with: URL(string: API.imgBaseURL + data.info.image))
+            DispatchQueue.main.async {
+                self.headerView.courseImageView.sd_setImage(with: URL(string: API.imgBaseURL + data.info.image))
+                       }
+           
             
             print("_ID = ",course)
             print("Videos = ",data)
@@ -261,9 +272,9 @@ extension CourseDetailsVC {
     }
     func startCourse(){
         API.startCourse(id: course) { data in
+            Loader.stop()
             if data.success {
-                self.navigationItem.backButtonTitle = ""
-                self.navigationController?.pushViewController(VideoDetailsViewController(), animated: true)
+                
             }else {
                 Alert.showAlert(title: data.message, message: data.message, vc: self)
             }

@@ -51,7 +51,7 @@ class VideoDetailsViewController: UIViewController {
         l.textColor = .appColor(color: .gray1)
         l.numberOfLines = 0
         l.text = "This course will help others. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-       
+        
         return l
     }()
     private lazy var playBtn:UIButton = {
@@ -74,12 +74,13 @@ class VideoDetailsViewController: UIViewController {
     var url:URL?
     override func viewDidLoad() {
         super.viewDidLoad()
-       setUpUi()
-       configureNavigationBar()
+        setUpUi()
+        configureNavigationBar()
+        Loader.start()
         getVideoByID()
     }
     
- 
+    
     private func setUpUi() {
         view.backgroundColor = .appColor(color: .background)
         view.addSubview(btn)
@@ -98,7 +99,7 @@ class VideoDetailsViewController: UIViewController {
         }
         view.addSubview(titleLbl)
         titleLbl.snp.makeConstraints { make in
-            make.top.equalTo(videoView.snp_bottomMargin).inset(-100)
+            make.top.equalTo(videoView.snp_bottomMargin).offset(70)
             make.left.right.equalToSuperview().inset(16)
         }
         view.addSubview(textLbl)
@@ -124,32 +125,33 @@ class VideoDetailsViewController: UIViewController {
         navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white))
         
         
-
+        
     }
     
-
+    
     @objc func btnTapped(){
         Loader.start()
         finishVideo()
         
-
+        
     }
     @objc func playBtnTapped() {
+        cache.set(videoID, forKey: "VIDEO_ID")
         setUpVideoPlayer(url: url)
     }
-
-
-  
+    
+    
+    
     
 }
 //MARK: Video Player
 extension VideoDetailsViewController {
     func setUpVideoPlayer(url:URL?) {
-
+        
         guard let url = url else {
             return
         }
-      let player = AVPlayer(url: url)
+        let player = AVPlayer(url: url)
         let vc = AVPlayerViewController()
         vc.player = player
         present(vc, animated: true)
@@ -170,6 +172,7 @@ extension VideoDetailsViewController {
     
     func getVideoByID() {
         API.getVideoByID(id: videoID) { data in
+            Loader.stop()
             if data["success"].boolValue {
                 print("DATAAAAAA===",data)
                 if data["data"]["isFree"].boolValue {

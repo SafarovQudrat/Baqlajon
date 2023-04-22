@@ -5,10 +5,24 @@
 //  Created by MacBook Pro on 27/03/23.
 //
 
+
+//MARK: -BU Page hech qayerda ishlatilmagan Ishlatilmagan 
+
+
+
+
+
+
+
+
+
+
+
+
 import UIKit
 import SnapKit
 class OnboardingVC: UIViewController {
-
+    
     private lazy var image: UIImageView = {
         let i = UIImageView(image: UIImage(named: "OnBoard"))
         i.snp.makeConstraints { make in
@@ -50,7 +64,7 @@ class OnboardingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.view.backgroundColor = .appColor(color: .background)
         view.addSubview(image)
         image.snp.makeConstraints { make in
@@ -72,11 +86,11 @@ class OnboardingVC: UIViewController {
         self.navigationController?.pushViewController(LoginVC(), animated: true)
         
     }
-
+    
     @objc func signUpTapped() {
         navigationItem.backButtonTitle = ""
         self.navigationController?.pushViewController(SignUpVC(), animated: true)
         
     }
-
+    
 }

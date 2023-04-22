@@ -150,7 +150,7 @@ class SignUpVC: UIViewController {
         btn.addTarget(self, action: #selector(eyeTapped), for: .touchUpInside)
         return btn
     }()
-
+    
     //Sign Up Button
     private let signUpBtn: BNButton = {
         let btn = BNButton()
@@ -161,7 +161,7 @@ class SignUpVC: UIViewController {
         btn.addTarget(.none, action: #selector(signUpTapped), for: .touchUpInside)
         return btn
     }()
-
+    
     //stackView for items for login case
     let switchToLoginStackView: UIStackView = {
         let sv = UIStackView()
@@ -226,7 +226,7 @@ class SignUpVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
- 
+    
     func setLang(){
         titleLbl.text = Lang.getString(type: .createAcc)
         nameTF.placeholder = Lang.getString(type: .createNTF)
@@ -273,14 +273,14 @@ extension SignUpVC {
         switchToLoginStackView.snp.makeConstraints { make in
             make.centerX.equalTo(signUpView)
             make.top.equalTo(signUpBtn.snp.bottom).offset(12)
-
+            
         }
         
         switchToLoginStackView.addArrangedSubview(switchToLoginDescryptLbl)
         switchToLoginStackView.addArrangedSubview(switchToLoginBtn)
         switchToLoginBtn.snp.makeConstraints { make in
             make.height.equalTo(30)
-
+            
         }
         
         
@@ -315,7 +315,7 @@ extension SignUpVC {
     
     //MARK: switched to Sign Up
     @objc func goSignUpTapped() {
-       
+        
         self.navigationController?.popViewController(animated: true)
     }
     

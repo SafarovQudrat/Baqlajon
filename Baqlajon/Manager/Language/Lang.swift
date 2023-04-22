@@ -300,7 +300,7 @@ class Lang {
             case .myCourseBtn2:
                 return "Ongoing"
             case .myCourseBtn3:
-                return "Complated"
+                return "Completed"
             case .tLbl:
                 return "Pay and collect points,exchange your accumulated points for anything you want"
             case .tBtn:

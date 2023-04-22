@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftyJSON
+import PKHUD
 
 class ResetPasswordVC: UIViewController {
     
@@ -27,7 +28,7 @@ class ResetPasswordVC: UIViewController {
         lbl.textAlignment = .center
         return lbl
     }()
-    
+    //    OOld passwordTF
     private lazy var oldPasswordTF: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Old Password"
@@ -164,7 +165,7 @@ class ResetPasswordVC: UIViewController {
     var number: String = ""
     var isForgot:Bool = false
     
-    
+    //    MARK: View Didload
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appColor(color: .background)
@@ -183,6 +184,9 @@ class ResetPasswordVC: UIViewController {
     @objc func backtapped(){
         
         self.navigationController?.popViewController(animated: true)
+        
+        
+        
     }
     
     //MARK: setting UIItems constraints
@@ -251,14 +255,22 @@ extension ResetPasswordVC {
         if newPasswordTF.text!.count >= 8, newPasswordTF.text!.count <= 16, conifirmNewPasswordTF.text!.count >= 8, conifirmNewPasswordTF.text!.count <= 16, newPasswordTF.text! == conifirmNewPasswordTF.text! {
             if cache.bool(forKey: "changeNumber") {
                 
-                self.navigationController?.popToRootViewController(animated: true)
+                HUD.flash(.progress, delay: 1.0){ ad in
+                    HUD.flash(.success, delay: 1.0)
+                    self.navigationController?.popViewController(animated: true)
+                    
+                }
                 
             }else{
                 putData { data in
                     
                     if data["success"].boolValue {
-                        self.navigationController?.popToRootViewController(animated: true)
-                        Alert.showAlert(title: "", message: "Password Changed", vc: self)
+                        HUD.flash(.progress, delay: 1.0){ ad in
+                            HUD.flash(.success, delay: 1.0)
+                            self.navigationController?.popToRootViewController(animated: true)
+                            
+                        }
+                        
                     } else {
                         
                         guard let arr = data["data"].arrayValue.first else {return}

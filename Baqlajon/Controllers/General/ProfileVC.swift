@@ -10,12 +10,13 @@ import UIKit
 
 class ProfileVC: UIViewController {
     
-//    profile Image
+    //    profile Image
     var profileImage:UIImageView = {
-       let i = UIImageView()
+        let i = UIImageView()
         i.image = UIImage(systemName: "person.circle")
         i.tintColor = .appColor(color: .gray2)
         i.clipsToBounds = true
+        i.contentMode = .scaleAspectFill
         i.snp.makeConstraints { make in
             make.width.height.equalTo(90)
         }
@@ -23,9 +24,9 @@ class ProfileVC: UIViewController {
         return i
     }()
     
-//    set Image
+    //    set Image
     private lazy var editButton:UIButton = {
-       let b = UIButton()
+        let b = UIButton()
         b.backgroundColor = #colorLiteral(red: 0, green: 0.6406018734, blue: 0.9510455728, alpha: 1)
         b.tintColor = .white
         b.setImage(UIImage(named: "pencil"), for: .normal)
@@ -37,7 +38,7 @@ class ProfileVC: UIViewController {
         return b
     }()
     private lazy var imgBackView:UIView = {
-       let v = UIView()
+        let v = UIView()
         v.backgroundColor = .clear
         v.addSubview(profileImage)
         v.addSubview(editButton)
@@ -51,25 +52,25 @@ class ProfileVC: UIViewController {
         return v
     }()
     
-//    Username
+    //    Username
     var nameLbl:UILabel = {
-    let l = UILabel()
-    l.font = .appFont(ofSize: 18,weight: .medium)
-    l.textColor = UIColor(named: "black 1")
+        let l = UILabel()
+        l.font = .appFont(ofSize: 18,weight: .medium)
+        l.textColor = UIColor(named: "black 1")
         l.text = cache.string(forKey: "USER_NAME")
-    return l
-}()
+        return l
+    }()
     
-//    userNumber
+    //    userNumber
     var numberLbl:UILabel = {
-    let l = UILabel()
-    l.font = .appFont(ofSize: 16)
-    l.textColor = UIColor(named: "gray 1")
+        let l = UILabel()
+        l.font = .appFont(ofSize: 16)
+        l.textColor = UIColor(named: "gray 1")
         l.text = cache.string(forKey: "USER_PHONE_NUMBER")
-    return l
-}()
+        return l
+    }()
     private lazy var lblStackV:UIStackView = {
-       let s = UIStackView(arrangedSubviews: [nameLbl,numberLbl])
+        let s = UIStackView(arrangedSubviews: [nameLbl,numberLbl])
         s.alignment = .center
         s.spacing = 0
         s.distribution = .fill
@@ -77,7 +78,7 @@ class ProfileVC: UIViewController {
         return s
     }()
     private lazy var stackV:UIStackView = {
-       let s = UIStackView(arrangedSubviews: [imgBackView,lblStackV])
+        let s = UIStackView(arrangedSubviews: [imgBackView,lblStackV])
         s.axis = .vertical
         s.distribution = .fill
         s.spacing = 6
@@ -85,13 +86,13 @@ class ProfileVC: UIViewController {
         return s
     }()
     private lazy var backBackV:UIView = {
-       let v = UIView()
+        let v = UIView()
         v.backgroundColor = .appColor(color: .white)
         v.layer.cornerRadius = 12
         return v
     }()
     private let tBackV:UIView = {
-       let v = UIView()
+        let v = UIView()
         v.backgroundColor = .appColor(color: .white)
         v.layer.cornerRadius = 12
         v.snp.makeConstraints { make in
@@ -100,7 +101,7 @@ class ProfileVC: UIViewController {
         return v
     }()
     private let ttBackV:UIView = {
-       let v = UIView()
+        let v = UIView()
         v.backgroundColor = .appColor(color: .white)
         v.layer.cornerRadius = 12
         v.snp.makeConstraints { make in
@@ -119,23 +120,23 @@ class ProfileVC: UIViewController {
         return b
     }()
     
-//    Payments history ,Language,DarkMode
+    //    Payments history ,Language,DarkMode
     lazy var tableView:UITableView = {
-       let t = UITableView()
+        let t = UITableView()
         t.isScrollEnabled = false
         return t
     }()
     
     
-//    About us,Share,Help
+    //    About us,Share,Help
     lazy var ttableView:UITableView = {
-       let t = UITableView()
+        let t = UITableView()
         t.isScrollEnabled = false
         
         return t
     }()
     private lazy var lastStack:UIStackView = {
-       let s = UIStackView(arrangedSubviews: [backBackV,tBackV,ttBackV,logOutBtn])
+        let s = UIStackView(arrangedSubviews: [backBackV,tBackV,ttBackV,logOutBtn])
         s.axis = .vertical
         s.distribution = .fill
         s.spacing = 16
@@ -144,9 +145,9 @@ class ProfileVC: UIViewController {
         return s
     }()
     
-//    Payments history ,Language,DarkMode
+    //    Payments history ,Language,DarkMode
     var arr1:[MyData] = []
-
+    
     //    About us,Share,Help
     var  arr2:[MyData] = []
     
@@ -154,7 +155,7 @@ class ProfileVC: UIViewController {
     let refreshControl = UIRefreshControl()
     var timer:Timer?
     var time: Int = 1
-//    ViewDidload
+    //    ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appColor(color: .background)
@@ -181,15 +182,15 @@ class ProfileVC: UIViewController {
         }
     }
     
-//    edit Tapped
+    //    edit Tapped
     @objc func editTapped(){
         let vc = EditProfileVC()
         navigationItem.backButtonTitle = ""
         self.navigationController?.pushViewController(vc, animated: true)
-       
+        
     }
     
-//    SetUpUI - didload da yoziladigan funksiyalar
+    //    SetUpUI - didload da yoziladigan funksiyalar
     func setUpUi() {
         backBackV.addSubview(stackV)
         stackV.snp.makeConstraints { make in
@@ -233,7 +234,7 @@ class ProfileVC: UIViewController {
     
     
     
-//    setNavigation Controller
+    //    setNavigation Controller
     func setNavController() {
         navigationController?.navigationBar.update(backgroundColor:.appColor(color: .white),titleColor: .appColor(color: .black1),font: .appFont(ofSize: 16,weight: .medium))
         let leftBtn = UIBarButtonItem(title: "Profile", style: .done, target: .none, action: .none )
@@ -242,7 +243,7 @@ class ProfileVC: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
         navigationItem.backBarButtonItem?.tintColor  = .appColor(color: .black1)
     }
-
+    
     func setLang() {
         logOutBtn.setTitle(Lang.getString(type: .logOut), for: .normal)
         
@@ -250,7 +251,7 @@ class ProfileVC: UIViewController {
             MyData(img: UIImage(named: "payment")!, title: Lang.getString(type: .profilePay), isSwitchON: false),
             MyData(img: UIImage(named: "lang")!, title: Lang.getString(type: .profileLang),text: "English", isSwitchON: false),
             MyData(img: UIImage(named: "darkM")!, title: Lang.getString(type: .profileDark), isSwitchON: true)
-        
+            
         ]
         arr2 = [
             MyData(img: UIImage(named: "alertCircle")!, title: Lang.getString(type: .profileAbout), isSwitchON: false),
@@ -269,7 +270,7 @@ class ProfileVC: UIViewController {
         window?.rootViewController = vc
     }
     @objc func refresh(_ sender: AnyObject) {
-       // Code to refresh table view
+        // Code to refresh table view
     }
     func getLang(){
         
@@ -322,7 +323,7 @@ extension ProfileVC:UITableViewDataSource,UITableViewDelegate {
                 navigationItem.backButtonTitle = ""
                 navigationItem.backBarButtonItem?.tintColor = .appColor(color: .black1)
                 navigationController?.pushViewController(ChangeLanguageViewController(), animated: true)
-               
+                
             }
         } else {
             if indexPath.row == 0 {
@@ -374,7 +375,7 @@ extension ProfileVC {
                     self.profileImage.image = UIImage(named: "avatarImage")
                 }
                 
-//
+                //
             }else {
                 Alert.showAlert(title: data["message"].stringValue, message: data["message"].stringValue, vc: self)
             }

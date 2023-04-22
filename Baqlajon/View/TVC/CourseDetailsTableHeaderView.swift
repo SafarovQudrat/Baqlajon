@@ -20,9 +20,8 @@ class CourseDetailsTableHeaderView: UIView {
     
     // MARK: - Properties
     
-     let courseImageView: UIImageView = {
+    lazy var courseImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "courseImage")
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView

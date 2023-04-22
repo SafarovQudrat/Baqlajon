@@ -403,7 +403,7 @@ class EditProfileVC: UIViewController {
         navigationItem.title = "Edit profile"
         
     }
-   
+    
     
     @objc func changeNumTapped() {
         cache.set(true, forKey: "changeNumber")
@@ -425,7 +425,7 @@ class EditProfileVC: UIViewController {
             if data != "" {
                 self.passwordTf.text = data
             }
-           
+            
         }
         navigationItem.backButtonTitle = ""
         self.navigationController?.pushViewController(vc, animated: true)
@@ -495,24 +495,25 @@ extension EditProfileVC {
                 switch response.result {
                 case .success:
                     if let data = response.data {
+                        
                         completion(JSON(data))
                     } else {
                         completion(nil)
                     }
                 case .failure:
-
+                    
                     completion(nil)
                 }
             }
         } else {
-
+            
             //Not Connected
         }
     }
 }
 
 extension EditProfileVC{
-   
+    
     func updateData(img:String){
         Loader.stop()
         API.updateUser(name: nameTf.text!, lastname: "", password: passwordTf.text!, image: img, number: numberTf.text!) { [self] data in
@@ -520,8 +521,11 @@ extension EditProfileVC{
                 nameTf.text = data["data"]["firstName"].stringValue
                 numberTf.text = data["data"]["phoneNumber"].stringValue
                 passwordTf.text = data["data"]["password"].stringValue
+                cache.set(data["data"]["image"].stringValue, forKey: "PROFILE_IMAGE")
                 let data = try? Data(contentsOf:  URL(string: data["data"]["image"].stringValue)!)
+               
                 if let imageData = data {
+                    
                     self.profileImage.image = UIImage(data: imageData)
                 }
             }else {
@@ -545,10 +549,10 @@ extension EditProfileVC{
                 }else {
                     self.profileImage.image = UIImage(named: "avatarImage")
                 }
-//                let data = try? Data(contentsOf: url)
-//                if let imageData = data {
-//                    self.profileImage.image = UIImage(data: imageData)
-//                }
+                //                let data = try? Data(contentsOf: url)
+                //                if let imageData = data {
+                //                    self.profileImage.image = UIImage(data: imageData)
+                //                }
             }else {
                 Alert.showAlert(title: data["message"].stringValue, message: data["message"].stringValue, vc: self)
             }

@@ -13,9 +13,9 @@ class MyCourses: UIViewController {
     
     
     
-//MARK: - VARIABLES
+    //MARK: - VARIABLES
     
-//    category btns
+    //    category btns
     private var allBtn: UIButton = {
         let b = UIButton()
         b.setTitle("All courses", for: .normal)
@@ -40,7 +40,7 @@ class MyCourses: UIViewController {
     }()
     private var compBtn: UIButton = {
         let b = UIButton()
-        b.setTitle("Complate", for: .normal)
+        b.setTitle("Completed", for: .normal)
         b.setTitleColor(.systemGray2, for: .normal)
         b.titleLabel?.font = UIFont(name: "Poppins", size: 14)
         b.layer.borderWidth = 1
@@ -50,10 +50,10 @@ class MyCourses: UIViewController {
         return b
     }()
     
-//    constants
+    //    constants
     
     private lazy var stackV: UIStackView = {
-       let s = UIStackView(arrangedSubviews: [allBtn,onBtn,compBtn])
+        let s = UIStackView(arrangedSubviews: [allBtn,onBtn,compBtn])
         s.spacing = 16
         s.axis = .horizontal
         s.alignment = .fill
@@ -64,15 +64,15 @@ class MyCourses: UIViewController {
         return s
     }()
     private lazy var tableView: UITableView = {
-       let tv = UITableView()
-
+        let tv = UITableView()
+        
         tv.backgroundColor = .clear
-
-
+        
+        
         return tv
     }()
     private lazy var myStackV:UIStackView = {
-       let s = UIStackView(arrangedSubviews: [stackV,tableView])
+        let s = UIStackView(arrangedSubviews: [stackV,tableView])
         s.spacing = 16
         s.axis = .vertical
         s.alignment = .fill
@@ -80,26 +80,26 @@ class MyCourses: UIViewController {
         
         
         return s
-         
+        
     }()
     private var myView:UIView = {
-       let v = UIView()
+        let v = UIView()
         v.snp.makeConstraints { make in
             make.height.equalTo(170)
         }
         v.backgroundColor = .clear
         return v
     }()
-//    course payment view
+    //    course payment view
     private lazy var imageV:UIImageView = {
-       let i = UIImageView(image: UIImage(named: "Background 1"))
+        let i = UIImageView(image: UIImage(named: "Background 1"))
         i.contentMode = .scaleAspectFill
         i.clipsToBounds = true
         i.layer.cornerRadius = 10
         return i
     }()
     var titleLbl:UILabel = {
-       let l = UILabel()
+        let l = UILabel()
         l.text = "Lorem ipsum set"
         l.textColor = .white
         l.font = .appFont(ofSize: 22, weight: .medium)
@@ -108,7 +108,7 @@ class MyCourses: UIViewController {
         return l
     }()
     var textLbl:UILabel = {
-       let l = UILabel()
+        let l = UILabel()
         
         l.textColor = .white
         l.numberOfLines = 0
@@ -117,7 +117,7 @@ class MyCourses: UIViewController {
         return l
     }()
     lazy var lblStack:UIStackView = {
-       let s = UIStackView(arrangedSubviews: [titleLbl,textLbl])
+        let s = UIStackView(arrangedSubviews: [titleLbl,textLbl])
         s.distribution = .fill
         s.axis = .vertical
         s.spacing = 8
@@ -134,21 +134,21 @@ class MyCourses: UIViewController {
         return b
     }()
     private var lbl:UILabel = {
-       let l = UILabel()
-       
+        let l = UILabel()
+        
         l.textColor = .systemBlue
         l.text = "Buy Now"
         l.font = .appFont(ofSize: 14,weight: .medium)
         return l
     }()
     private var img:UIImageView = {
-       let i = UIImageView()
+        let i = UIImageView()
         i.image = UIImage(systemName: "chevron.right",withConfiguration: UIImage.SymbolConfiguration(pointSize: 16))
         
         return i
     }()
     private lazy var btnStack:UIStackView = {
-       let s = UIStackView(arrangedSubviews: [lbl,img])
+        let s = UIStackView(arrangedSubviews: [lbl,img])
         s.alignment = .center
         s.spacing = 8
         s.axis = .horizontal
@@ -156,12 +156,12 @@ class MyCourses: UIViewController {
         return s
     }()
     var btn:UIButton = {
-       let b = UIButton()
+        let b = UIButton()
         b.addTarget(.none, action: #selector(btnTapped), for: .touchUpInside)
         return b
     }()
     lazy var lblBStack:UIStackView = {
-       let s = UIStackView(arrangedSubviews: [lblStack,btnView])
+        let s = UIStackView(arrangedSubviews: [lblStack,btnView])
         s.distribution = .fill
         s.axis = .vertical
         s.spacing = 16
@@ -169,21 +169,21 @@ class MyCourses: UIViewController {
         return s
     }()
     var fireLbl: UILabel = {
-       let l = UILabel()
+        let l = UILabel()
         l.font = .appFont(ofSize: 14)
         l.textColor = .black
         l.text = "🔥 Sotib olganlar:"
         return l
     }()
     var countLbl: UILabel = {
-       let l = UILabel()
+        let l = UILabel()
         l.font = .appFont(ofSize: 14,weight: .semiBold)
         l.textColor = .black
         l.text = "10000"
         return l
     }()
     lazy var yellowStack:UIStackView = {
-       let s = UIStackView(arrangedSubviews: [fireLbl,countLbl])
+        let s = UIStackView(arrangedSubviews: [fireLbl,countLbl])
         s.distribution = .fill
         s.axis = .horizontal
         s.spacing = 8
@@ -191,7 +191,7 @@ class MyCourses: UIViewController {
         return s
     }()
     var yellowView:UIView = {
-       let v = UIView()
+        let v = UIView()
         v.backgroundColor = #colorLiteral(red: 0.7612490654, green: 0.9437683225, blue: 0.3503981233, alpha: 1)
         v.layer.cornerRadius = 6
         return v
@@ -210,13 +210,14 @@ class MyCourses: UIViewController {
         return l
     }()
     
-// MARK: -   VIEW DIDLOAD
+    // MARK: -   VIEW DIDLOAD
     override func viewDidLoad() {
         super.viewDidLoad()
         Loader.start()
         setUpUi()
         setLang()
         observeLangNotif()
+        Loader.start()
         getCourses()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
@@ -225,8 +226,8 @@ class MyCourses: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(action), userInfo: nil, repeats: true)
     }
-  
-//    SET UP UI
+    
+    //    SET UP UI
     func setUpUi() {
         myStackV.isHidden = true
         noDataLbl.isHidden = true
@@ -302,21 +303,21 @@ class MyCourses: UIViewController {
         noDataLbl.snp.makeConstraints { make in
             make.center.equalTo(view.center)
         }
-        if cache.bool(forKey: "ISPAYMENT") {
-            myStackV.isHidden = false
-            myView.isHidden = true
-            yellowView.isHidden = true
-        }else{
-            myStackV.isHidden = true
-            myView.isHidden = false
-            yellowView.isHidden = false
-        }
+//        if cache.bool(forKey: "ISPAYMENT") {
+//            myStackV.isHidden = false
+//            myView.isHidden = true
+//            yellowView.isHidden = true
+//        }else{
+//            myStackV.isHidden = true
+//            myView.isHidden = false
+//            yellowView.isHidden = false
+//        }
         
         
-
+        
     }
     
-//    SetNavController
+    //    SetNavController
     func setNavController() {
         navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),font: .appFont(ofSize: 16,weight: .medium))
         let leftBtn = UIBarButtonItem(title: "My courses", style: .done, target: self, action: .none)
@@ -326,7 +327,7 @@ class MyCourses: UIViewController {
     }
     
     
-//SET LANG
+    //SET LANG
     func setLang() {
         titleLbl.text = Lang.getString(type: .payCTitle)
         textLbl.text = Lang.getString(type: .payCText)
@@ -336,92 +337,92 @@ class MyCourses: UIViewController {
         onBtn.setTitle(Lang.getString(type: .myCourseBtn2), for: .normal)
         compBtn.setTitle(Lang.getString(type: .myCourseBtn3), for: .normal)
         lbl.text = Lang.getString(type: .homeBuyBtn)
-            
+        
         
     }
     
     
-
+    
 }
 
 
 //MARK: - @objc Functions
 extension MyCourses{
     //    select category btns
-        @objc func allTapped() {
-            allBtn.layer.borderWidth = 0
-            allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
-            allBtn.setTitleColor(.white, for: .normal)
-             onBtn.setTitleColor(.systemGray2, for: .normal)
-           compBtn.setTitleColor(.systemGray2, for: .normal)
-            onBtn.backgroundColor = .clear
-            onBtn.layer.borderWidth = 1
-          
-            compBtn.backgroundColor = .clear
-            compBtn.layer.borderWidth = 1
-            if Reachability.isConnectedToNetwork() {
-                Loader.start()
-                getCourses()
-            }else {
-                Loader.stop()
-                Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
-            }
+    @objc func allTapped() {
+        allBtn.layer.borderWidth = 0
+        allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
+        allBtn.setTitleColor(.white, for: .normal)
+        onBtn.setTitleColor(.systemGray2, for: .normal)
+        compBtn.setTitleColor(.systemGray2, for: .normal)
+        onBtn.backgroundColor = .clear
+        onBtn.layer.borderWidth = 1
+        
+        compBtn.backgroundColor = .clear
+        compBtn.layer.borderWidth = 1
+        if Reachability.isConnectedToNetwork() {
+            Loader.start()
+            getCourses()
+        }else {
+            Loader.stop()
+            Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
         }
-        @objc func onTapped() {
-            onBtn.layer.borderWidth = 0
-            onBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
-            onBtn.setTitleColor(.white, for: .normal)
-           allBtn.setTitleColor(.systemGray2, for: .normal)
-          compBtn.setTitleColor(.systemGray2, for: .normal)
-            allBtn.backgroundColor = .clear
-            allBtn.layer.borderWidth = 1
-            compBtn.backgroundColor = .clear
-            compBtn.layer.borderWidth = 1
-            if Reachability.isConnectedToNetwork() {
-                Loader.start()
-                getStat(isstart: "start")
-            }else {
-                Loader.stop()
-                Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
-            }
+    }
+    @objc func onTapped() {
+        onBtn.layer.borderWidth = 0
+        onBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
+        onBtn.setTitleColor(.white, for: .normal)
+        allBtn.setTitleColor(.systemGray2, for: .normal)
+        compBtn.setTitleColor(.systemGray2, for: .normal)
+        allBtn.backgroundColor = .clear
+        allBtn.layer.borderWidth = 1
+        compBtn.backgroundColor = .clear
+        compBtn.layer.borderWidth = 1
+        if Reachability.isConnectedToNetwork() {
+            Loader.start()
+            getStat(isstart: "start")
+        }else {
+            Loader.stop()
+            Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
         }
-        @objc func complTapped() {
-            compBtn.layer.borderWidth = 0
-            compBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
-           compBtn.setTitleColor(.white, for: .normal)
-             onBtn.setTitleColor(.systemGray2, for: .normal)
-            allBtn.setTitleColor(.systemGray2, for: .normal)
-            onBtn.backgroundColor = .clear
-            onBtn.layer.borderWidth = 1
-            allBtn.backgroundColor = .clear
-            allBtn.layer.borderWidth = 1
-            if Reachability.isConnectedToNetwork() {
-                Loader.start()
-                getStat(isstart: "finish")
-            }else {
-                Loader.stop()
-                Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
-            }
+    }
+    @objc func complTapped() {
+        compBtn.layer.borderWidth = 0
+        compBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
+        compBtn.setTitleColor(.white, for: .normal)
+        onBtn.setTitleColor(.systemGray2, for: .normal)
+        allBtn.setTitleColor(.systemGray2, for: .normal)
+        onBtn.backgroundColor = .clear
+        onBtn.layer.borderWidth = 1
+        allBtn.backgroundColor = .clear
+        allBtn.layer.borderWidth = 1
+        if Reachability.isConnectedToNetwork() {
+            Loader.start()
+            getStat(isstart: "finish")
+        }else {
+            Loader.stop()
+            Alert.showAlert(title: "No Internet!!!", message: "No Internet!!!", vc: self)
         }
-//        PAYMENT VC OPEN
-        @objc func btnTapped() {
-            let vc = PaymentsVC()
-            vc.modalPresentationStyle = .overFullScreen
-            self.present(vc, animated: false)
-            vc.continueIsTapped = { [self] isTapped in
-                if isTapped {
+    }
+    //        PAYMENT VC OPEN
+    @objc func btnTapped() {
+        let vc = PaymentsVC()
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: false)
+        vc.continueIsTapped = { [self] isTapped in
+            if isTapped {
                 myStackV.isHidden = false
                 myView.isHidden = true
                 yellowView.isHidden = true
-                    cache.set(true, forKey: "ISPAYMENT")
-                }else{
-                    cache.set(false, forKey: "ISPAYMENT")
-                }
+                cache.set(true, forKey: "ISPAYMENT")
+            }else{
+                cache.set(false, forKey: "ISPAYMENT")
             }
-            
-            
         }
-//    ACTION TIMER
+        
+        
+    }
+    //    ACTION TIMER
     @objc func action () {
         if time <= 0 {
             timer?.invalidate()
@@ -431,12 +432,12 @@ extension MyCourses{
         }
     }
     //    REFRESH func
-        @objc func refresh() {
-            Loader.start()
-            getCourses()
-            tableView.reloadData()
-            refreshControl.endRefreshing()
-        }
+    @objc func refresh() {
+        Loader.start()
+        getCourses()
+        tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
     
     
     
@@ -460,8 +461,8 @@ extension MyCourses:UITableViewDelegate,UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-
-
+    
+    
 }
 //MARK: - API Functions
 extension MyCourses{

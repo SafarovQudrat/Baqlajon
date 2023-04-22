@@ -193,7 +193,7 @@ class API {
       
     }
     
-    
+//    GetAllGift
     
     static func getAllGift(complation:@escaping([GetGiftDM])->Void){
         let headers:HTTPHeaders = [
@@ -207,7 +207,7 @@ class API {
             complation(info)
         }
     }
-    
+//    UpdateUser
     static func updateUser(name:String,lastname:String,password:String,image:String,number:String,complation:@escaping(JSON)->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
@@ -227,7 +227,7 @@ class API {
             complation(data)
         }
     }
-    
+//    GetPromoCode
     static func getPromoCode(complation:@escaping (JSON)->Void) {
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
@@ -238,7 +238,7 @@ class API {
             complation(data)
         }
     }
-    
+//    CreateComment
     static func createComment(id: String,text:String, complation:@escaping(JSON)->Void) {
         let param:[String:Any] = [
             "text":text
@@ -254,7 +254,7 @@ class API {
         
         
     }
-    
+//    Get Comment
     static func getComments(id: String,complation:@escaping ([CommentDM])->Void) {
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
@@ -267,7 +267,7 @@ class API {
            
         }
     }
-    
+//    UpdatePhone Number
     static func updatePhoneNumber(number: String,otp: String, complation:@escaping(JSON)->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
@@ -283,7 +283,7 @@ class API {
         }
         
     }
-   
+//   Start Course
     static func startCourse(id:String, complation:@escaping(LoginDM)->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
@@ -297,7 +297,7 @@ class API {
         }
         
     }
-    
+//    Finish Course
     static func finishCourse(id:String,complation:@escaping(LoginDM)->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
@@ -309,7 +309,7 @@ class API {
             complation(info)
         }
     }
-    
+//    GetVideoByID
     static func getVideoByID(id:String,complation:@escaping(JSON)->Void) {
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
@@ -321,7 +321,7 @@ class API {
             complation(data)
         }
     }
-    
+//    GetCourseByID
     static func getCourseByID(id:String,complation:@escaping(MyCourseDM)->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",

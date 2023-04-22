@@ -20,10 +20,10 @@ class PaymentHistoryViewController: UIViewController {
     let refreshControl = UIRefreshControl()
     var timer:Timer?
     var time: Int = 1
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = UIColor.appColor(color: Colors.background)
         
         configureNavigationBar()
@@ -74,7 +74,7 @@ class PaymentHistoryViewController: UIViewController {
             historyTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
+    
 }
 
 

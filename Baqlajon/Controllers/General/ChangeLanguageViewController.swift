@@ -16,10 +16,10 @@ class ChangeLanguageViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = UIColor.appColor(color: Colors.background)
         
         configureConstraints()
@@ -45,7 +45,7 @@ class ChangeLanguageViewController: UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
     }
     
-
+    
     
     private func configureConstraints() {
         view.addSubview(languageTableView)
@@ -94,11 +94,11 @@ extension ChangeLanguageViewController: UITableViewDelegate, UITableViewDataSour
         if indexPath.row == 1 {
             postNotif(lang: 1)
             Cache.save(appLanguage: .uz)
-       
+            
         } else if indexPath.row == 2 {
             postNotif(lang: 2)
             Cache.save(appLanguage: .uz)
-           
+            
         }else {
             postNotif(lang: 0)
             Cache.save(appLanguage: .uz)
@@ -127,13 +127,13 @@ extension ChangeLanguageViewController {
         switch lang {
         case 0:
             Cache.save(appLanguage: .uz)
-           
+            
         case 1:
             Cache.save(appLanguage: .ru)
             
         case 2:
             Cache.save(appLanguage: .en)
-         
+            
         default: break
         }
         

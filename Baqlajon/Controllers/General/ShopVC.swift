@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 class ShopVC: UIViewController {
-   
+    
     private lazy var tableView:UITableView = {
         let t = UITableView()
         t.backgroundColor = .clear
@@ -58,7 +58,7 @@ class ShopVC: UIViewController {
     }
     
     
-//    set Navigation Controller
+    //    set Navigation Controller
     private func configureNavigationBar() {
         title = "Shop"
         navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),titleColor: .appColor(color: .black1))
@@ -69,7 +69,7 @@ class ShopVC: UIViewController {
         getGift()
         tableView.reloadData()
     }
-
+    
     
 }
 //MARK: UITableViewDelegate,UITableViewDataSource
@@ -82,7 +82,7 @@ extension ShopVC:UITableViewDelegate,UITableViewDataSource {
         cell.backgroundColor = .clear
         cell.updateCell(gift: arr[indexPath.row])
         return cell
-                
+        
     }
 }
 extension ShopVC{

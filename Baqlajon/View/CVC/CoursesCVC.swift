@@ -13,7 +13,7 @@ class CoursesCVC: UICollectionViewCell {
     static let identifier = "CoursesCVC"
     lazy var  image: UIImageView = {
         let i = UIImageView()
-         i.image = UIImage(named: "courseImage")
+         
         i.clipsToBounds = true
         i.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
         i.layer.cornerRadius = 8
@@ -153,16 +153,14 @@ class CoursesCVC: UICollectionViewCell {
     
     func updateCell(course:GetCourseDM) {
         
-//        let data = try? Data(contentsOf:  URL(string: API.imgBaseURL + course.image)!)
-//
-//        if let imageData = data {
-//            self.image.image = UIImage(data: imageData)
-//        }
-        image.sd_setImage(with: URL(string: API.imgBaseURL + course.image)!)
+        DispatchQueue.main.async {
+            self.image.sd_setImage(with: URL(string: API.imgBaseURL + course.image)!)
+        }
+        
         titleLbl.text = course.title
         textLbl.text = course.desc
-        starLbl.text = "\(course.viewCount)"
-        eyeLbl.text = "\(course.rating)"
+        starLbl.text = "\(course.rating)"
+        eyeLbl.text = "\(course.viewCount)"
     }
     
     

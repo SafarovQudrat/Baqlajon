@@ -13,7 +13,7 @@ class MyCourseTVC: UITableViewCell {
 
    lazy var  image: UIImageView = {
        let i = UIImageView()
-        i.image = UIImage(named: "courseImage")
+       i.contentMode = .scaleAspectFill
        i.clipsToBounds = true
        i.layer.maskedCorners = [.layerMinXMinYCorner,.layerMinXMaxYCorner]
        i.layer.cornerRadius = 8
@@ -49,7 +49,7 @@ class MyCourseTVC: UITableViewCell {
     }()
     var taskLbl: UILabel = {
        let l = UILabel()
-        l.textColor = .appColor(color: .white)
+        l.textColor = .appColor(color: .black1)
         l.text = "10/14"
         l.font = .appFont(ofSize: 14)
         return l
@@ -178,7 +178,7 @@ class MyCourseTVC: UITableViewCell {
         stackV.snp.makeConstraints { make in
             make.left.equalTo(image.snp_rightMargin).inset(-12)
             make.top.equalTo(textLbl.snp_bottomMargin).inset(-12)
-            make.right.equalTo(-12)
+            
         }
         myBackV.addSubview(eSstackV)
         eSstackV.snp.makeConstraints { make in
@@ -199,13 +199,15 @@ class MyCourseTVC: UITableViewCell {
     }
     
     func updateCell(course:MyAllCourseDM) {
+        DispatchQueue.main.async {
+            self.image.sd_setImage(with: URL(string: API.imgBaseURL + course.videos.image)!)
+        }
         
-        image.sd_setImage(with: URL(string: API.imgBaseURL + course.videos.image)!)
         titleLbl.text = course.videos.title
         textLbl.text = course.videos.desc
-        taskLbl.text = "\(course.videos.viewCount)/\(course.videos.videoCount)"
-        starLbl.text = "\(course.videos.viewCount)"
-        eyeLbl.text = "\(course.videos.rating)"
+        
+        starLbl.text = "\(course.videos.rating)"
+        eyeLbl.text = "\(course.videos.viewCount)"
     }
     
     

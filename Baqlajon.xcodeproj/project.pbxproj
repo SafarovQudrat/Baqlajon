@@ -32,6 +32,7 @@
 		525798B429D31AD5005A93AC /* ChangeLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525798B329D31AD5005A93AC /* ChangeLanguageViewController.swift */; };
 		525798B629D31AFA005A93AC /* ChangeLanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525798B529D31AFA005A93AC /* ChangeLanguageTableViewCell.swift */; };
 		525798B829D31B27005A93AC /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525798B729D31B27005A93AC /* AboutUsViewController.swift */; };
+		5260A61229EE99CC00F454F2 /* pulseRed.json in Resources */ = {isa = PBXBuildFile; fileRef = 5260A61129EE99CC00F454F2 /* pulseRed.json */; };
 		52770B43299A109C00187F27 /* ProfileTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B42299A109C00187F27 /* ProfileTVC.swift */; };
 		52770B45299A10AD00187F27 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B44299A10AD00187F27 /* ProfileVC.swift */; };
 		52770B47299A19B400187F27 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52770B46299A19B400187F27 /* EditProfileVC.swift */; };
@@ -109,6 +110,7 @@
 		525798B329D31AD5005A93AC /* ChangeLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageViewController.swift; sourceTree = "<group>"; };
 		525798B529D31AFA005A93AC /* ChangeLanguageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageTableViewCell.swift; sourceTree = "<group>"; };
 		525798B729D31B27005A93AC /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
+		5260A61129EE99CC00F454F2 /* pulseRed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pulseRed.json; sourceTree = "<group>"; };
 		526CAD2629E3CDA9005CBC9E /* not_money.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = not_money.json; sourceTree = "<group>"; };
 		52770B42299A109C00187F27 /* ProfileTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTVC.swift; sourceTree = "<group>"; };
 		52770B44299A10AD00187F27 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				52A55B6329D448AC002994F4 /* Reachibility.swift */,
 				52A55B6529D448CC002994F4 /* Loader.swift */,
 				52DD348D29E7D5A500FEBE1C /* pulse.json */,
+				5260A61129EE99CC00F454F2 /* pulseRed.json */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F69B7452992297E003BB9D6 /* LaunchScreen.storyboard in Resources */,
+				5260A61229EE99CC00F454F2 /* pulseRed.json in Resources */,
 				5F9753DB29926F1000DC6667 /* Poppins-Light.ttf in Resources */,
 				5F69B7422992297E003BB9D6 /* Assets.xcassets in Resources */,
 				5F9753E029926F1000DC6667 /* Poppins-Bold.ttf in Resources */,
@@ -717,7 +721,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = L4PP343Y28;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Baqlajon/Info.plist;
@@ -747,7 +751,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = L4PP343Y28;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Baqlajon/Info.plist;

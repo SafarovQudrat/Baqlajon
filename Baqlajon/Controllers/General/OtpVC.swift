@@ -35,7 +35,7 @@ class OtpVC: UIViewController {
     let otpViewController: UIView = {
         let v = UIView()
         v.backgroundColor = #colorLiteral(red: 0, green: 0.961252749, blue: 0.3269677758, alpha: 0.3143335459)
-        v.backgroundColor = .appColor(color: .white)
+        v.backgroundColor = .appColor(color: .background)
         return v
     }()
     
@@ -50,7 +50,7 @@ class OtpVC: UIViewController {
         return btn
     }()
     private lazy var timeLbl:UILabel = {
-       let l = UILabel()
+        let l = UILabel()
         l.font = .appFont(ofSize: 14)
         l.textColor = .appColor(color: .mainBlue)
         l.text = "Vaqt 0:59"
@@ -69,7 +69,7 @@ class OtpVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .appColor(color: .background)
+        view.backgroundColor = .appColor(color: .white)
         uiSettings()
         navDetais()
         setupOtpView()
@@ -131,15 +131,15 @@ class OtpVC: UIViewController {
                     }
                 }
             }else if isForgot {
-                    checkOtp { [self] data in
-                        Loader.stop()
-                        if data.success {
-                            let vc = ResetPasswordVC()
-                            vc.number = number
-                            vc.isForgot = isForgot
-                            self.navigationController?.pushViewController(vc, animated: true)
-                        }
+                checkOtp { [self] data in
+                    Loader.stop()
+                    if data.success {
+                        let vc = ResetPasswordVC()
+                        vc.number = number
+                        vc.isForgot = isForgot
+                        self.navigationController?.pushViewController(vc, animated: true)
                     }
+                }
             }else {
                 checkOtp { data in
                     Loader.stop()
@@ -154,13 +154,13 @@ class OtpVC: UIViewController {
                     }
                 }
             }
-    }else {
-        Alert.showAlert(title: "No Internet", message: "No internet connection", vc: self)
-        Loader.stop()
-    }
-    
-
-       
+        }else {
+            Alert.showAlert(title: "No Internet", message: "No internet connection", vc: self)
+            Loader.stop()
+        }
+        
+        
+        
     }
     //MARK: draving UI
     func uiSettings() {
@@ -200,7 +200,7 @@ class OtpVC: UIViewController {
     
     
 }
-
+//MARK: OTPFieldViewDelegate
 extension OtpVC: OTPFieldViewDelegate {
     
     func shouldBecomeFirstResponderForOTP(otpTextFieldIndex index: Int) -> Bool {

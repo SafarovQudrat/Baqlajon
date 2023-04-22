@@ -69,7 +69,7 @@ class ForgotVC: UIViewController {
     }()
     
     
-    
+    //    View Didload
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appColor(color: .background)
@@ -121,7 +121,7 @@ class ForgotVC: UIViewController {
         
     }
     
-    
+    //    Set Lang
     func setLang(){
         textLbl.text = Lang.getString(type: .forgotPassLbl)
         phoneNumberTFView.placeholder = Lang.getString(type: .welcomeNTf)
@@ -147,7 +147,7 @@ extension ForgotVC {
                     Alert.showAlert(title: "Error", message: data.message, vc: self)
                 }
             }
-
+            
         }else{
             if phoneNumberTFView.text == "" {
                 Alert.showAlert(title: "Error", message: "Please enter phone number", vc: self)
@@ -165,7 +165,7 @@ extension ForgotVC {
                         Alert.showAlert(title: data.message, message: data.message, vc: self)
                     }
                 }
-               
+                
             }
         }
     }

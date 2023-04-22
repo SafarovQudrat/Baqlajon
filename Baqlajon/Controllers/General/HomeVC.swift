@@ -259,6 +259,7 @@ class HomeVC: UIViewController {
         let v = UIView()
         v.backgroundColor = .clear
         v.addSubview(imageP)
+        
         imageP.snp.makeConstraints { make in
             make.top.left.right.bottom.equalTo(0)
         }
@@ -294,7 +295,7 @@ class HomeVC: UIViewController {
         s.spacing = 0
         return s
     }()
-   
+    
     private lazy var lastStack:UIStackView = {
         let s = UIStackView(arrangedSubviews: [searchV,stackV,collectionView])
         s.axis = .vertical
@@ -324,7 +325,7 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
         setUpUI()
         setLang()
         observeLangNotif()
@@ -425,7 +426,7 @@ class HomeVC: UIViewController {
         }
     }
     
- 
+    
     
     //    btnTapped
     @objc func btnTapped(){
@@ -439,7 +440,7 @@ class HomeVC: UIViewController {
         self.tabBarController?.selectedIndex = 3
     }
     
-//    REFRESH func
+    //    REFRESH func
     @objc func refresh() {
         getMySelf()
         getCourse(exUrl: "")
@@ -523,6 +524,7 @@ class HomeVC: UIViewController {
     
     
 }
+//MARK: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout 
 extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.backProfileV.isHidden = true
@@ -551,6 +553,7 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectio
     }
     
 }
+//MARK: UITextFieldDelegate
 extension HomeVC:UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -580,7 +583,7 @@ extension HomeVC:UITextFieldDelegate {
     }
 }
 
-//MARK:
+//MARK: API
 extension HomeVC{
     func getCourse(exUrl:String) {
         API.getAllCourse(exUrl: exUrl) { data in

@@ -13,5 +13,6 @@ target 'Baqlajon' do
   pod 'SwiftyJSON'
   pod 'lottie-ios', '3.5'
   pod 'IQKeyboardManager'
-pod 'SDWebImage'
+  pod 'SDWebImage'
+  pod 'PKHUD'
 end

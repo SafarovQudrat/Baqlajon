@@ -126,7 +126,7 @@ class ReviewVC: UIViewController {
         return tv
     }()
     
-//    textViewBack
+    //    textViewBack
     let txtBackV:UIView = {
         let v = UIView()
         v.backgroundColor = .appColor(color: .gray7)
@@ -155,7 +155,7 @@ class ReviewVC: UIViewController {
     }()
     
     
-
+    
     var courseID: String = ""
     
     //MARK: -viewDidLoad-
@@ -242,9 +242,9 @@ class ReviewVC: UIViewController {
     func setNavController() {
         navigationController?.navigationBar.update(backgroundColor:.appColor(color: .white),titleColor: .appColor(color: .black1),font: .appFont(ofSize: 16,weight: .medium))
         navigationItem.title = "Reviews"
-       
+        
     }
-   
+    
 }
 
 
@@ -463,9 +463,10 @@ extension ReviewVC {
 extension ReviewVC {
     func createComment() {
         API.createComment(id: courseID, text: commentTextView.text) { data in
+            print("Comment = ",data)
             Loader.stop()
             if data["success"].boolValue {
-                
+                self.navigationController?.popViewController(animated: true)
             }else {
                 Alert.showAlert(title: data["message"].stringValue, message: data["message"].stringValue, vc: self)
             }

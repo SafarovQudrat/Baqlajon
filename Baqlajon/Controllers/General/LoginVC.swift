@@ -26,7 +26,7 @@ class LoginVC: UIViewController {
         lbl.textColor = .appColor(color: .black1)
         lbl.text = "Welcome \nBack!"
         
-       
+        
         return lbl
     }()
     //stackView for textFields
@@ -158,7 +158,7 @@ class LoginVC: UIViewController {
         settingConstraints()
         navSettings()
         textFieldsDoneButton()
-//        setTextField()
+        //        setTextField()
         observeLangNotif()
         setLang()
         postNotif(lang: 2)
@@ -178,7 +178,7 @@ class LoginVC: UIViewController {
         navigationItem.backBarButtonItem?.image = UIImage(named: "backBtn")
         navigationItem.backBarButtonItem?.tintColor = .appColor(color: .black1)
     }
-
+    //Set lang
     func setLang() {
         titleLbl.text = Lang.getString(type: .welcome)
         phoneNumberTFView.placeholder = Lang.getString(type: .welcomeNTf)
@@ -196,7 +196,7 @@ extension LoginVC {
     
     //MARK: -Login view UI settings-
     func settingConstraints() {
-
+        
         view.addSubview(titleLbl)
         titleLbl.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(24)
@@ -208,35 +208,35 @@ extension LoginVC {
             make.left.right.equalToSuperview().inset(24)
             make.top.equalTo(titleLbl.snp.bottom).offset(36)
         }
-
+        
         textFieldStackView.addArrangedSubview(phoneNumberTFView)
         textFieldStackView.addArrangedSubview(passwordTF)
         passwordTF.snp.makeConstraints { $0.height.equalTo(48) }
-
+        
         view.addSubview(forgotPasswordBtn)
         forgotPasswordBtn.snp.makeConstraints { make in
             make.right.equalTo(textFieldStackView.snp.right)
             make.top.equalTo(textFieldStackView.snp.bottom).offset(8)
             make.height.equalTo(20)
         }
-
+        
         view.addSubview(loginBtn)
         loginBtn.snp.makeConstraints { make in
             make.height.equalTo(48)
             make.top.equalTo(textFieldStackView.snp.bottom).offset(109)
             make.left.right.equalToSuperview().inset(24)
         }
-
+        
         view.addSubview(switchDetailStackView)
         switchDetailStackView.snp.makeConstraints { make in
             make.top.equalTo(loginBtn.snp.bottom).offset(12)
             make.centerX.equalTo(loginBtn)
             
         }
-
+        
         switchDetailStackView.addArrangedSubview(switchToSignUplbl)
         switchDetailStackView.addArrangedSubview(SwitchToSignUpBtn)
-
+        
         
         
     }
@@ -269,14 +269,12 @@ extension LoginVC {
     
     //Login Tapped
     @objc func loginTapped() {
-        print("PHONE NUMBER = ",(self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!)
-        
         let vc = OtpVC()
         Loader.start()
         if Reachability.isConnectedToNetwork(){
             getLogin { data in
                 Loader.stop()
-                print("kelgan malumot = ",data)
+                
                 if data.success {
                     self.navigationController?.pushViewController(vc, animated: true)
                     self.sendOtp()
@@ -301,7 +299,7 @@ extension LoginVC {
     
     //Opens SignUpVC Tapped
     @objc func switchToSignUpTapped() {
-       
+        
         let vc = SignUpVC()
         navigationItem.backButtonTitle = ""
         self.navigationController?.pushViewController(vc, animated: true)
@@ -314,16 +312,17 @@ extension LoginVC {
 
 //API connect
 extension LoginVC {
+    
     func getLogin(complation:@escaping (LoginDM)->Void){
         
-            API.getLogin(number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!, password: passwordTF.text!) { data in
-                complation(data)
-            }
-       
+        API.getLogin(number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!, password: passwordTF.text!) { data in
+            complation(data)
+        }
+        
     }
     func sendOtp(){
         API.sendOtp(number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!) { data in
-//
+            //
         }
     }
 }

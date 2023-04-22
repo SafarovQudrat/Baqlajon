@@ -25,7 +25,11 @@ public class Loader {
         customView.backgroundColor = .clear
         if let view = UIApplication.keyWindow {
             view.addSubview(loadV)
-            customView.animation = LottieAnimation.named("pulse")
+            if cache.bool(forKey: "isDark") {
+                customView.animation = LottieAnimation.named("pulse")
+            }else {
+                customView.animation = LottieAnimation.named("pulseRed")
+            }
             customView.animationSpeed = 1.5
             customView.loopMode = .loop
             customView.play()

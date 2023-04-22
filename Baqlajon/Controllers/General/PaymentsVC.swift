@@ -10,7 +10,7 @@ import IQKeyboardManager
 
 class PaymentsVC: UIViewController {
     
-//constants
+    //constants
     private lazy var backgroundView:UIView = {
         let v = UIView()
         v.backgroundColor = .clear
@@ -18,7 +18,7 @@ class PaymentsVC: UIViewController {
     }()
     private lazy var containerV:UIView = {
         let containerView = UIView()
-        containerView.backgroundColor = .white
+        containerView.backgroundColor = .appColor(color: .background)
         containerView.layer.cornerRadius = 8
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.snp.makeConstraints { make in
@@ -32,14 +32,17 @@ class PaymentsVC: UIViewController {
         titleLbl.font = .appFont(ofSize: 16,weight: .medium)
         titleLbl.text = "Payment"
         titleLbl.textAlignment = .center
-        titleLbl.textColor = #colorLiteral(red: 0.1727883816, green: 0.1765024364, blue: 0.2653855383, alpha: 1)
+        titleLbl.textColor = .appColor(color: .black1)
         return titleLbl
     }()
     private lazy var cancelBtn:UIButton = {
         let cancelBtn = UIButton()
         cancelBtn.setImage(UIImage(systemName: "xmark"), for: .normal)
-        cancelBtn.tintColor = #colorLiteral(red: 0.7062321305, green: 0.7086142898, blue: 0.7779026031, alpha: 1)
+        cancelBtn.tintColor = .appColor(color: .gray3)
         cancelBtn.addTarget(.none, action: #selector(cancelTapped), for: .touchUpInside)
+        cancelBtn.snp.makeConstraints { make in
+            make.width.height.equalTo(30)
+        }
         return cancelBtn
     }()
     private lazy var pStackV:UIStackView = {
@@ -65,7 +68,7 @@ class PaymentsVC: UIViewController {
         backImage.tintColor = .black
         return backImage
     }()
-//    course cost
+    //    course cost
     private lazy var summLbl:UILabel = {
         let messLbl = UILabel()
         messLbl.text = "99.000"
@@ -88,10 +91,10 @@ class PaymentsVC: UIViewController {
         lblStack.distribution = .fill
         return lblStack
     }()
-//    Referal Code text field
+    //    Referal Code text field
     private lazy var tfView:UIView = {
         let txtView = UIView()
-        txtView.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9803921569, alpha: 1)
+        txtView.backgroundColor = .appColor(color: .gray7)
         txtView.layer.cornerRadius = 10
         txtView.snp.makeConstraints { make in
             make.height.equalTo(50)
@@ -102,14 +105,14 @@ class PaymentsVC: UIViewController {
         let txtField = UITextField()
         txtField.placeholder = "Referral code"
         
-        txtField.backgroundColor = #colorLiteral(red: 0.9725490196, green: 0.9725490196, blue: 0.9803921569, alpha: 1)
+        txtField.backgroundColor = .clear
         txtField.textColor = .black
         return txtField
     }()
-//    Continue Btn
+    //    Continue Btn
     private lazy var okBtn:UIButton = {
         let okBtn = UIButton()
-        okBtn.backgroundColor = .systemBlue
+        okBtn.backgroundColor = .appColor(color: .mainBlue)
         okBtn.setTitle("Continue", for: .normal)
         okBtn.titleLabel?.font = .appFont(ofSize: 16,weight: .medium)
         okBtn.setTitleColor(.white, for: .normal)
@@ -120,33 +123,33 @@ class PaymentsVC: UIViewController {
         }
         return okBtn
     }()
-//    Payments Method
+    //    Payments Method
     private lazy var paymeV:UIView = {
-       let v = UIView()
-        v.backgroundColor = #colorLiteral(red: 0.9719608426, green: 0.9722560048, blue: 0.9813567996, alpha: 1)
+        let v = UIView()
+        v.backgroundColor = .appColor(color: .gray7)
         v.layer.cornerRadius = 10
         return v
     }()
     private var clickV:UIView = {
-       let v = UIView()
-        v.backgroundColor = #colorLiteral(red: 0.9719608426, green: 0.9722560048, blue: 0.9813567996, alpha: 1)
+        let v = UIView()
+        v.backgroundColor = .appColor(color: .gray7)
         v.layer.cornerRadius = 10
         return v
     }()
     private var paymeIM:UIImageView = {
-       let i = UIImageView(image: UIImage(named: "Pay me"))
+        let i = UIImageView(image: UIImage(named: "Pay me"))
         return i
     }()
     private var clickIM:UIImageView = {
-       let i = UIImageView(image: UIImage(named: "Click"))
+        let i = UIImageView(image: UIImage(named: "Click"))
         return i
     }()
     private var paymeSIM:UIImageView = {
-       let i = UIImageView(image: UIImage(named: "false"))
+        let i = UIImageView(image: UIImage(named: "false"))
         return i
     }()
     private var clickSIM:UIImageView = {
-       let i = UIImageView(image: UIImage(named: "false"))
+        let i = UIImageView(image: UIImage(named: "false"))
         return i
     }()
     private lazy var paymeStack:UIStackView = {
@@ -166,7 +169,7 @@ class PaymentsVC: UIViewController {
         return s
     }()
     private lazy var sttackV:UIStackView = {
-       let s = UIStackView(arrangedSubviews: [paymeV,clickV])
+        let s = UIStackView(arrangedSubviews: [paymeV,clickV])
         
         s.alignment = .fill
         s.spacing = 16
@@ -176,14 +179,14 @@ class PaymentsVC: UIViewController {
         
         return s
     }()
-//    Payment selection Btn
+    //    Payment selection Btn
     private var isPayme:UIButton = {
-       let b = UIButton()
+        let b = UIButton()
         b.addTarget(.none, action: #selector(isPaymeTapped), for: .touchUpInside)
         return b
     }()
     private var isClick:UIButton = {
-       let b = UIButton()
+        let b = UIButton()
         b.addTarget(.none, action: #selector(IsClickTapped), for: .touchUpInside)
         return b
     }()
@@ -197,7 +200,7 @@ class PaymentsVC: UIViewController {
     }()
     private lazy var btnStackV:UIStackView = {
         let btnStackV = UIStackView(arrangedSubviews: [containerStackV,okBtn])
-        btnStackV.spacing = 24
+        btnStackV.spacing = 16
         btnStackV.distribution = .fill
         btnStackV.alignment = .fill
         btnStackV.axis = .vertical
@@ -213,15 +216,15 @@ class PaymentsVC: UIViewController {
     }()
     private lazy var lastStack:UIStackView = {
         let lastStack = UIStackView(arrangedSubviews: [pStack,btnStackV])
-      lastStack.spacing = 24
-      lastStack.distribution = .fill
-      lastStack.alignment = .fill
-      lastStack.axis = .vertical
+        lastStack.spacing = 16
+        lastStack.distribution = .fill
+        lastStack.alignment = .fill
+        lastStack.axis = .vertical
         return lastStack
     }()
-//    background Image
+    //    background Image
     private lazy var backImageV:UIImageView = {
-       let i = UIImageView(image: UIImage(named: "cornerBack"))
+        let i = UIImageView(image: UIImage(named: "cornerBack"))
         i.contentMode = .scaleAspectFill
         return i
         
@@ -236,18 +239,28 @@ class PaymentsVC: UIViewController {
     
     var continueIsTapped:((Bool)->Void)?
     
-//    ViewDidload
+    //    ViewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUi()
-        self.overrideUserInterfaceStyle = .light
-        
-        
-        
+        view.backgroundColor = .black.withAlphaComponent(0.6)
+        containerV.transform = .init(scaleX: 0, y: 0)
+        if cache.bool(forKey: "isDark") {
+            backImageV.image = UIImage(named: "cornerBackDark")
+            tfView.backgroundColor = #colorLiteral(red: 0.3662130833, green: 0.3764758408, blue: 0.4282612205, alpha: 1)
+            paymeV.backgroundColor = #colorLiteral(red: 0.3662130833, green: 0.3764758408, blue: 0.4282612205, alpha: 1)
+            clickV.backgroundColor = #colorLiteral(red: 0.3662130833, green: 0.3764758408, blue: 0.4282612205, alpha: 1)
+        }else {
+            backImageV.image = UIImage(named: "cornerBack")
+        }
+   
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    
     func setUpUi(){
-        view.backgroundColor = .black.withAlphaComponent(0.6)
+        
         view.addSubview(backgroundView)
         backgroundView.snp.makeConstraints { make in
             make.top.left.right.bottom.equalTo(0)
@@ -299,12 +312,8 @@ class PaymentsVC: UIViewController {
         backgroundView.addSubview(containerV)
         containerV.snp.makeConstraints { make in
             make.center.equalToSuperview()
-//            make.left.equalTo(16)
-//            make.right.equalTo(-16)
-        }
-        containerV.transform = .init(scaleX: 0, y: 0)
-        UIView.animate(withDuration: 0.3, delay: 3, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.3, options: [.curveEaseOut]) { [self] in
-            containerV.transform = .identity
+            //            make.left.equalTo(16)
+            //            make.right.equalTo(-16)
         }
         self.view.addGestureRecognizer (UITapGestureRecognizer(target: self, action: #selector (hideKeyboard)))
         setLang()
@@ -314,11 +323,50 @@ class PaymentsVC: UIViewController {
     
     
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.3, options: .curveEaseOut) { [self] in
+            containerV.transform = .identity
+        }
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo, let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        
+        // Calculate the amount to adjust the view's height
+        let adjustmentHeight = keyboardFrame.height
+        
+        // Animate the adjustment
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.size.height -= 2 * adjustmentHeight/3
+        }
+    }
+
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        guard let userInfo = notification.userInfo, let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        
+        // Calculate the amount to adjust the view's height
+        let adjustmentHeight = keyboardFrame.height
+        
+        // Animate the adjustment
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.size.height += 2 * adjustmentHeight/3
+        }
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
     //MARK: -  hide keyboard
     @objc private func hideKeyboard() {
         self.view.endEditing(true)
     }
-//    Select payments Method btn
+    //    Select payments Method btn
     @objc func isPaymeTapped() {
         paymeSIM.image = UIImage(named: "true")
         clickSIM.image = UIImage(named: "false")
@@ -328,14 +376,14 @@ class PaymentsVC: UIViewController {
         paymeSIM.image = UIImage(named: "false")
         clickSIM.image = UIImage(named: "true")
     }
-        
-//    Continue Tapped
+    
+    //    Continue Tapped
     @objc func okTapped() {
         continueIsTapped?(true)
         self.dismiss(animated: false)
         
     }
-//    X tapped
+    //    X tapped
     @objc func cancelTapped() {
         
         self.dismiss(animated: false)
@@ -352,8 +400,8 @@ class PaymentsVC: UIViewController {
         okBtn.setTitle(Lang.getString(type: .continueBtn), for: .normal)
     }
     
-
-   
+    
+    
 }
 //MARK: - NnotificationCenter for language changing
 extension PaymentsVC {

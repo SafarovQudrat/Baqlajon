@@ -29,10 +29,10 @@ class AboutUsViewController: UIViewController {
         return label
     }()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = UIColor.appColor(color: Colors.background)
         
         configureConstraints()
@@ -41,14 +41,14 @@ class AboutUsViewController: UIViewController {
         observeLangNotif()
     }
     
-
+    
     private func configureNavigationBar() {
         title = "About us"
         navigationController?.navigationBar.update(backgroundColor: .appColor(color: .white),titleColor: .appColor(color: .black1))
-       
+        
         navigationItem.leftBarButtonItem?.tintColor = .appColor(color: .black1)
     }
-   
+    
     private func configureConstraints() {
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([

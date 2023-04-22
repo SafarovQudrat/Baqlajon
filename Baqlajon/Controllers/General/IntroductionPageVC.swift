@@ -35,13 +35,13 @@ class IntroductionPageVC: UIViewController {
         return collectionView
     }()
     var dataModel:[Introduction] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.delegate = self
         collectionView.dataSource = self
-
+        
         print(view.frame.size.height)
         view.backgroundColor = .appColor(color: .background)
         configureConstraints()
@@ -86,7 +86,7 @@ class IntroductionPageVC: UIViewController {
         }
         cache.set(false, forKey: "isTabbar")
     }
-   
+    
     // MARK: - layout
     
     private func configureConstraints() {
@@ -133,14 +133,14 @@ class IntroductionPageVC: UIViewController {
     }
     
     func setLang(){
-         dataModel = [
-           Introduction(imageName: "introductionImage1", titleText: Lang.getString(type: .startT1), introText: Lang.getString(type: .startD1)),
-           Introduction(imageName: "introductionImage2", titleText: Lang.getString(type: .startT2), introText: Lang.getString(type: .startD1)),
-           Introduction(imageName: "introductionImage3", titleText: Lang.getString(type: .startT3), introText: Lang.getString(type: .startD1))
-       ]
+        dataModel = [
+            Introduction(imageName: "introductionImage1", titleText: Lang.getString(type: .startT1), introText: Lang.getString(type: .startD1)),
+            Introduction(imageName: "introductionImage2", titleText: Lang.getString(type: .startT2), introText: Lang.getString(type: .startD1)),
+            Introduction(imageName: "introductionImage3", titleText: Lang.getString(type: .startT3), introText: Lang.getString(type: .startD1))
+        ]
     }
     
-
+    
 }
 
 
