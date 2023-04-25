@@ -80,13 +80,8 @@ class CourseDetailsVC: UIViewController {
             let vc = VideoDetailsViewController()
             startCourse()
             self.navigationItem.backButtonTitle = ""
-            if ((cache.string(forKey: "VIDEO_ID")?.isEmpty) != nil) {
-                vc.videoID = videos.first?._id ?? ""
-            }else {
                 vc.videoID = cache.string(forKey: "VIDEO_ID")!
-            }
             navigationController?.pushViewController(vc, animated: true)
-            
         } else {
             let vc = ReviewVC()
             navigationItem.backButtonTitle = ""
@@ -255,6 +250,7 @@ extension CourseDetailsVC {
         API.getCourseByID(id: course) { [self] data in
             Loader.stop()
             videos = data.freeVideos + data.videos
+            cache.set(videos.first?._id, forKey: "VIDEO_ID")
             reviews = data.comment
             headerView.numberOfVideosLabel.text = "\(data.info.videoCount) Videos"
             headerView.descriptionLabel.text = data.info.desc

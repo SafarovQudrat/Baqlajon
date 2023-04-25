@@ -15,4 +15,5 @@ target 'Baqlajon' do
   pod 'IQKeyboardManager'
   pod 'SDWebImage'
   pod 'PKHUD'
+  pod 'Hero'
 end

@@ -7,7 +7,7 @@
 
 import UIKit
 import IQKeyboardManager
-
+import Hero
 class PaymentsVC: UIViewController {
     
     //constants
@@ -233,7 +233,7 @@ class PaymentsVC: UIViewController {
     var dismissBtn:UIButton = {
         let b = UIButton()
         b.backgroundColor =  .clear
-        b.addTarget(.none, action: #selector(cancelBackV), for: .touchUpInside)
+        b.addTarget(.none, action: #selector(cancelTapped), for: .touchUpInside)
         return b
     }()
     
@@ -244,7 +244,6 @@ class PaymentsVC: UIViewController {
         super.viewDidLoad()
         setUpUi()
         view.backgroundColor = .black.withAlphaComponent(0.6)
-        containerV.transform = .init(scaleX: 0, y: 0)
         if cache.bool(forKey: "isDark") {
             backImageV.image = UIImage(named: "cornerBackDark")
             tfView.backgroundColor = #colorLiteral(red: 0.3662130833, green: 0.3764758408, blue: 0.4282612205, alpha: 1)
@@ -253,13 +252,18 @@ class PaymentsVC: UIViewController {
         }else {
             backImageV.image = UIImage(named: "cornerBack")
         }
-   
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        self.hero.isEnabled = true
+        containerV.heroID = "btnView"
+        containerV.backgroundColor = .clear
+        containerV.hero.modifiers = [.scale(100)]
     }
     
-    
+//    Set Up UI
     func setUpUi(){
+        
         
         view.addSubview(backgroundView)
         backgroundView.snp.makeConstraints { make in
@@ -319,17 +323,13 @@ class PaymentsVC: UIViewController {
         setLang()
         observeLangNotif()
     }
-    
-    
-    
-    
-    
+//    viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.3, options: .curveEaseOut) { [self] in
-            containerV.transform = .identity
-        }
+     
+
+
     }
-    
+//    keyboardWillShow
     @objc private func keyboardWillShow(_ notification: Notification) {
         guard let userInfo = notification.userInfo, let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
         
@@ -341,7 +341,7 @@ class PaymentsVC: UIViewController {
             self.view.frame.size.height -= 2 * adjustmentHeight/3
         }
     }
-
+//    keyboardWillHide
     @objc private func keyboardWillHide(_ notification: Notification) {
         guard let userInfo = notification.userInfo, let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
         
@@ -354,14 +354,6 @@ class PaymentsVC: UIViewController {
         }
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
     //MARK: -  hide keyboard
     @objc private func hideKeyboard() {
         self.view.endEditing(true)
@@ -380,21 +372,16 @@ class PaymentsVC: UIViewController {
     //    Continue Tapped
     @objc func okTapped() {
         continueIsTapped?(true)
-        self.dismiss(animated: false)
+        self.dismiss(animated: true)
         
     }
     //    X tapped
     @objc func cancelTapped() {
         
-        self.dismiss(animated: false)
+        self.dismiss(animated: true)
         
     }
-    
-    
-    @objc func cancelBackV(){
-        self.dismiss(animated: false)
-    }
-    
+//    setLang
     func setLang(){
         textLbl.text = Lang.getString(type: .alertPLbl)
         okBtn.setTitle(Lang.getString(type: .continueBtn), for: .normal)

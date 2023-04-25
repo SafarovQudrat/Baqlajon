@@ -40,6 +40,7 @@
 		529ADA6029D4B187006B4B20 /* LoginDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529ADA5F29D4B187006B4B20 /* LoginDM.swift */; };
 		52A55B6429D448AC002994F4 /* Reachibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A55B6329D448AC002994F4 /* Reachibility.swift */; };
 		52A55B6629D448CC002994F4 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A55B6529D448CC002994F4 /* Loader.swift */; };
+		52C2CB6029F52F6100924232 /* PaymentAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C2CB5F29F52F6100924232 /* PaymentAlert.swift */; };
 		52DD348E29E7D5A500FEBE1C /* pulse.json in Resources */ = {isa = PBXBuildFile; fileRef = 52DD348D29E7D5A500FEBE1C /* pulse.json */; };
 		52EDD92829A3534400FDE2D5 /* Ex + URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD92729A3534400FDE2D5 /* Ex + URL.swift */; };
 		52EDD92A29A359EC00FDE2D5 /* CongratulationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EDD92929A359EC00FDE2D5 /* CongratulationVC.swift */; };
@@ -119,6 +120,7 @@
 		529ADA5F29D4B187006B4B20 /* LoginDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDM.swift; sourceTree = "<group>"; };
 		52A55B6329D448AC002994F4 /* Reachibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachibility.swift; sourceTree = "<group>"; };
 		52A55B6529D448CC002994F4 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		52C2CB5F29F52F6100924232 /* PaymentAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAlert.swift; sourceTree = "<group>"; };
 		52DD348D29E7D5A500FEBE1C /* pulse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pulse.json; sourceTree = "<group>"; };
 		52EDD92729A3534400FDE2D5 /* Ex + URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ex + URL.swift"; sourceTree = "<group>"; };
 		52EDD92929A359EC00FDE2D5 /* CongratulationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulationVC.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				5F9753EE29927E6700DC6667 /* BNTextField.swift */,
 				5257988729D30F4F005A93AC /* OTPFieldView.swift */,
 				521B07B429DC34F30091D60D /* Custom Alert.swift */,
+				52C2CB5F29F52F6100924232 /* PaymentAlert.swift */,
 				521B07B629DD0AD30091D60D /* ShopAlert.swift */,
 				526CAD2629E3CDA9005CBC9E /* not_money.json */,
 			);
@@ -559,6 +562,7 @@
 				5FDBE7B3299816EE00F7DB52 /* MyCourses.swift in Sources */,
 				525798B229D31A7B005A93AC /* VideoDetailsViewController.swift in Sources */,
 				39A99FFA2994EC7F00D4A09D /* LoginVC.swift in Sources */,
+				52C2CB6029F52F6100924232 /* PaymentAlert.swift in Sources */,
 				525798B629D31AFA005A93AC /* ChangeLanguageTableViewCell.swift in Sources */,
 				5223687529E0B0B10086288B /* Lang.swift in Sources */,
 				520E7A5329DA1629001C1336 /* ShopTVC.swift in Sources */,

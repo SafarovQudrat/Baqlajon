@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import SnapKit
 import SwiftyJSON
+import Hero
 class MyCourses: UIViewController {
     
     
@@ -221,6 +222,10 @@ class MyCourses: UIViewController {
         getCourses()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
+        self.hero.isEnabled = true
+//        myView.heroID = "MyView"
+//        btnView.heroID = "btnView"
+        btn.heroID = "btnView"
     }
     // MARK: -   viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
@@ -303,15 +308,15 @@ class MyCourses: UIViewController {
         noDataLbl.snp.makeConstraints { make in
             make.center.equalTo(view.center)
         }
-//        if cache.bool(forKey: "ISPAYMENT") {
-//            myStackV.isHidden = false
-//            myView.isHidden = true
-//            yellowView.isHidden = true
-//        }else{
-//            myStackV.isHidden = true
-//            myView.isHidden = false
-//            yellowView.isHidden = false
-//        }
+        if cache.bool(forKey: "ISPAYMENT") {
+            myStackV.isHidden = false
+            myView.isHidden = true
+            yellowView.isHidden = true
+        }else{
+            myStackV.isHidden = true
+            myView.isHidden = false
+            yellowView.isHidden = false
+        }
         
         
         
@@ -340,6 +345,8 @@ class MyCourses: UIViewController {
         
         
     }
+    
+    
     
     
     
@@ -408,7 +415,7 @@ extension MyCourses{
     @objc func btnTapped() {
         let vc = PaymentsVC()
         vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: false)
+        self.present(vc, animated: true)
         vc.continueIsTapped = { [self] isTapped in
             if isTapped {
                 myStackV.isHidden = false
@@ -419,7 +426,10 @@ extension MyCourses{
                 cache.set(false, forKey: "ISPAYMENT")
             }
         }
-        
+//        ClickJobsAlert.showAlert { isDismiss, isClick in
+//            guard let isClick = isClick else {return}
+//
+//        }
         
     }
     //    ACTION TIMER
@@ -442,7 +452,6 @@ extension MyCourses{
     
     
 }
-
 
 //MARK: UITableViewDelegate,UITableViewDataSource
 extension MyCourses:UITableViewDelegate,UITableViewDataSource {
@@ -535,3 +544,7 @@ extension MyCourses {
         }
     }
 }
+
+
+
+

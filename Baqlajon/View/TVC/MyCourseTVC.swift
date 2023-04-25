@@ -78,14 +78,14 @@ class MyCourseTVC: UITableViewCell {
     var starLbl: UILabel = {
        let l = UILabel()
         l.font = .appFont(ofSize: 12)
-        l.textColor = .appColor(color: .gray5)
+        l.textColor = .appColor(color: .gray1)
         l.text = "4.5"
         return l
     }()
     lazy var  eyeImage: UIImageView = {
         let i = UIImageView()
          i.image = UIImage(systemName: "eye")
-        i.tintColor = .appColor(color: .gray5)
+        i.tintColor = .appColor(color: .gray1)
         i.snp.makeConstraints { make in
             make.height.width.equalTo(12)
         }
@@ -94,7 +94,7 @@ class MyCourseTVC: UITableViewCell {
     var eyeLbl: UILabel = {
        let l = UILabel()
         l.font = .appFont(ofSize: 12)
-        l.textColor = .appColor(color: .gray5)
+        l.textColor = .appColor(color: .gray1)
         l.text = "6k"
         return l
     }()
