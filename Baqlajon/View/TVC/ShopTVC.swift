@@ -100,12 +100,10 @@ class ShopTVC: UITableViewCell {
         priceLbl.text = "\(gift.coin)"
     }
     @objc func btnTapped() {
-//        if cache.integer(forKey: "coin") < coin {
-//            ShopAlert.showAlert(image: nil, title: "Oops!", text: "Sorry you don't have enough coins!Collect more coins.")
-//        }else {
-////            ShopAlert.lottieView.isHidden = true
+
+        ShopAlert.lottieView.play()
             ShopAlert.showAlert(image: nil, title: "Congratulations!", text: "Your request has been received and we will contact you soon!")
-//        }
+
     }
 
 }

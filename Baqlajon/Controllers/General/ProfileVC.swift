@@ -265,6 +265,7 @@ class ProfileVC: UIViewController {
         cache.set(false, forKey: "isTabbar")
         cache.set("", forKey: "PROFILE_IMAGE")
         cache.set(true, forKey: "isDark")
+        cache.set(false, forKey: "changeNumber")
         let window = UIApplication.keyWindow
         let vc = UINavigationController(rootViewController: LoginVC())
         window?.rootViewController = vc

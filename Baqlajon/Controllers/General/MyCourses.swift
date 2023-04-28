@@ -234,8 +234,10 @@ class MyCourses: UIViewController {
     
     //    SET UP UI
     func setUpUi() {
-        myStackV.isHidden = true
-        noDataLbl.isHidden = true
+        myStackV.isHidden = false
+        myView.isHidden = true
+        yellowView.isHidden = true
+        noDataLbl.isHidden = false
         allBtn.layer.borderWidth = 0
         allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
         allBtn.setTitleColor(.white, for: .normal)
@@ -308,15 +310,15 @@ class MyCourses: UIViewController {
         noDataLbl.snp.makeConstraints { make in
             make.center.equalTo(view.center)
         }
-        if cache.bool(forKey: "ISPAYMENT") {
-            myStackV.isHidden = false
-            myView.isHidden = true
-            yellowView.isHidden = true
-        }else{
-            myStackV.isHidden = true
-            myView.isHidden = false
-            yellowView.isHidden = false
-        }
+//        if cache.bool(forKey: "ISPAYMENT") {
+//            myStackV.isHidden = false
+//            myView.isHidden = true
+//            yellowView.isHidden = true
+//        }else{
+//            myStackV.isHidden = true
+//            myView.isHidden = false
+//            yellowView.isHidden = false
+//        }
         
         
         

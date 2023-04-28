@@ -216,7 +216,7 @@ class BalanceVC: UIViewController {
         let l = UILabel()
         l.font = .appFont(ofSize: 18,weight: .medium)
         l.textColor = .white
-        l.text = "120 coins"
+        
         return l
     }()
     private lazy var coinStack:UIStackView = {

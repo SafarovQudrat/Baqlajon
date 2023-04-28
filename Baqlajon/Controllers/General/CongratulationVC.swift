@@ -107,7 +107,7 @@ class CongratulationVC: UIViewController {
     }()
     private lazy var coinV: UIView = {
         let v = UIView()
-        v.backgroundColor = .appColor(color: .white)
+        
         v.layer.cornerRadius = 8
         v.snp.makeConstraints { make in
             make.height.equalTo(407)
@@ -157,7 +157,11 @@ class CongratulationVC: UIViewController {
         }
         setLang()
         observeLangNotif()
+       
+       
+        
     }
+    
     
     @objc func btnTapped() {
         self.dismiss(animated: true)

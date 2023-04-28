@@ -324,6 +324,7 @@ extension SignUpVC {
     
     @objc func signUpTapped() {
         let vc = OtpVC()
+        vc.isForgot = false
         Loader.start()
         if Reachability.isConnectedToNetwork() {
             signUpRegister { data in

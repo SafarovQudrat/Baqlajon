@@ -31,6 +31,8 @@ class CourseDetailsVC: UIViewController {
     var course:String = ""
     var headerView = CourseDetailsTableHeaderView()
     var myC:((Bool) ->Void)?
+    var status = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .appColor(color: .background)
@@ -78,11 +80,14 @@ class CourseDetailsVC: UIViewController {
     @objc func btnTapped() {
         if startLessonAndWriteReviewButton.titleLabel?.text == "Start Course" {
             let vc = VideoDetailsViewController()
+            
             startCourse()
             self.navigationItem.backButtonTitle = ""
                 vc.videoID = cache.string(forKey: "VIDEO_ID")!
             navigationController?.pushViewController(vc, animated: true)
-        } else {
+        } else if startLessonAndWriteReviewButton.titleLabel?.text == "Finish Course" {
+            finishCourse()
+        }else {
             let vc = ReviewVC()
             navigationItem.backButtonTitle = ""
             vc.courseID = videos.first?._id ?? ""
@@ -229,13 +234,20 @@ extension CourseDetailsVC: CourseDetailsTableHeaderViewDelegate {
     func videosButtonDidTap() {
         videoTableViewCellIsOn = true
         tableView.reloadData()
+        if status == "pending" {
+            startLessonAndWriteReviewButton.setTitle("Start Course", for: .normal)
+        }else if status == "start" {
+            startLessonAndWriteReviewButton.setTitle("Finish Course", for: .normal)
+        }else {
+            startLessonAndWriteReviewButton.isHidden = true
+        }
         
-        startLessonAndWriteReviewButton.setTitle("Start Course", for: .normal)
+        
     }
     
     func reviewsButtonDidTap() {
         videoTableViewCellIsOn = false
-        
+        startLessonAndWriteReviewButton.isHidden = false
         tableView.reloadData()
         
         startLessonAndWriteReviewButton.setTitle("Write a review", for: .normal)
@@ -252,6 +264,7 @@ extension CourseDetailsVC {
             videos = data.freeVideos + data.videos
             cache.set(videos.first?._id, forKey: "VIDEO_ID")
             reviews = data.comment
+            status = data.status
             headerView.numberOfVideosLabel.text = "\(data.info.videoCount) Videos"
             headerView.descriptionLabel.text = data.info.desc
             headerView.titleLabel.text = data.info.title
@@ -277,6 +290,16 @@ extension CourseDetailsVC {
         }
     }
     
+    func finishCourse(){
+        API.finishCourse(id: course) { data in
+            Loader.stop()
+            if data.success {
+                
+            }else {
+                Alert.showAlert(title: data.message, message: data.message, vc: self)
+            }
+        }
+    }
     
     
     

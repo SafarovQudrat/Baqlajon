@@ -9,10 +9,28 @@ import UIKit
 import SnapKit
 import Lottie
 class ShopAlert:UIView{
-   
+    static var lottieView:LottieAnimationView = {
+        let v = LottieAnimationView()
+        v.backgroundColor = .clear
+        v.loopMode = .loop
+        v.animation = LottieAnimation.named("not_money")
+        
+       return v
+    }()
+    
     class func showAlert(image:UIImage?,title:String,text:String){
         let backV = ShopAlert(frame: UIScreen.main.bounds)
             backV.backgroundColor = .black.withAlphaComponent(0.6)
+        
+        let dismissBtn: UIButton = {
+           let b = UIButton()
+            b.addTarget(.none, action: #selector(backV.okTapped), for: .touchUpInside)
+            return b
+        }()
+        backV.addSubview(dismissBtn)
+        dismissBtn.snp.makeConstraints { make in
+            make.top.left.right.bottom.equalTo(0)
+        }
         
         let star1:UIImageView = {
             let i = UIImageView()
@@ -119,6 +137,9 @@ class ShopAlert:UIView{
             return i
         }()
         
+        
+        
+        
         containerV.addSubview(star1)
         star1.snp.makeConstraints { make in
             make.top.equalTo(62)
@@ -138,6 +159,12 @@ class ShopAlert:UIView{
         star4.snp.makeConstraints { make in
             make.right.equalTo(-64)
             make.top.equalTo(star2.snp_bottomMargin).inset(-103)
+        }
+        containerV.addSubview(lottieView)
+        lottieView.snp.makeConstraints { make in
+            make.height.width.equalTo(180)
+            make.top.equalTo(12)
+            make.left.right.equalToSuperview().inset(66)
         }
         
         containerV.addSubview(imageStackV)

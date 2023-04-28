@@ -270,15 +270,17 @@ extension LoginVC {
     //Login Tapped
     @objc func loginTapped() {
         let vc = OtpVC()
+        vc.isForgot = false
         Loader.start()
         if Reachability.isConnectedToNetwork(){
             getLogin { data in
                 Loader.stop()
                 
                 if data.success {
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    
                     self.sendOtp()
                     vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
+                    self.navigationController?.pushViewController(vc, animated: true)
                 } else {
                     Alert.showAlert(title: data.message, message: data.message, vc: self)
                     

@@ -14,11 +14,13 @@ struct MyCourseDM{
     var freeVideos:[GetCourseDM]
     var videos:[GetCourseDM]
     var comment:[CommentDM]
+    var status:String
     init(json: JSON) {
         self.info = GetCourseDM(json: json)
         self.videos = json["video"].arrayValue.map{GetCourseDM(json: $0)}
         self.freeVideos = json["freeVideo"].arrayValue.map{GetCourseDM(json: $0)}
         self.comment = json["comment"].arrayValue.map{CommentDM(text: $0)}
+        self.status = json["ReviewCourse"]["status"].stringValue
     }
 }
 

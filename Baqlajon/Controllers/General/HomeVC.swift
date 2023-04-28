@@ -314,6 +314,7 @@ class HomeVC: UIViewController {
         return l
     }()
     
+    
     var arr:[GetCourseDM] = []
     var arr1:[GetCourseDM] = []
     let screenSize = UIScreen.main.bounds
@@ -329,6 +330,7 @@ class HomeVC: UIViewController {
         setUpUI()
         setLang()
         observeLangNotif()
+//        collectionView.isScrollEnabled = false
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -367,7 +369,8 @@ class HomeVC: UIViewController {
         yellowView.isHidden = true
         
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        scrollV.addSubview(refreshControl)
+        scrollV.refreshControl = refreshControl
+//        scrollV.addSubview(refreshControl)
         btnView.addSubview(btnStack)
         btnStack.snp.makeConstraints { make in
             make.right.left.equalToSuperview().inset(16)
@@ -403,7 +406,7 @@ class HomeVC: UIViewController {
         imgPBtn.snp.makeConstraints { make in
             make.bottom.right.left.top.equalTo(0)
         }
-        scrollV = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        scrollV = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height-120))
         
         self.view.addSubview(scrollV)
         scrollV.snp.makeConstraints { make in
@@ -542,6 +545,7 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectio
         return self.arr.count
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoursesCVC", for: indexPath) as? CoursesCVC else {return UICollectionViewCell()}
         cell.backgroundColor = .clear
@@ -551,6 +555,7 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource,UICollectio
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (self.collectionView.frame.width - 16)/2, height: 190)
     }
+
     
 }
 //MARK: UITextFieldDelegate
