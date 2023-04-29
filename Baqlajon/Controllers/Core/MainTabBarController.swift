@@ -10,6 +10,20 @@ import UIKit
 class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var lang:Int = 0
+    
+        if Cache.getAppLanguage() == .uz {
+            lang = 0
+        }else if Cache.getAppLanguage() == .ru {
+            lang = 1
+        }else {
+            lang = 2
+        }
+        NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: lang , userInfo: nil)
+        print("NotificationCenter LanguageVC \(String(describing: lang))")
+        
+        
 
         setUPTabbar()
         let appDelegate = UIApplication.shared.windows

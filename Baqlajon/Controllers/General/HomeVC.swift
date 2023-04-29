@@ -622,7 +622,11 @@ extension HomeVC{
                 
                 if let url = url {
                     print("URL = = ",url)
-                    self.imageP.sd_setImage(with: url)
+                    if cache.string(forKey: "PROFILE_IMAGE")! == "" {
+                        self.imageP.image = UIImage(systemName: "person.circle")
+                    }else {
+                        self.imageP.sd_setImage(with: url)
+                    }
                 }else {
                     
                     self.imageP.image = UIImage(named: "avatarImage")

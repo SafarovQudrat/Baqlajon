@@ -111,6 +111,7 @@ extension ChangeLanguageViewController: UITableViewDelegate, UITableViewDataSour
 //MARK: -Lang Notif
 extension ChangeLanguageViewController {
     func postNotif(lang: Int) {
+        cache.set(lang, forKey: "lang")
         NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: lang, userInfo: nil)
         print("NotificationCenter LanguageVC \(lang)")
     }

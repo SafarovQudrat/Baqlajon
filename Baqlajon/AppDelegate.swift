@@ -25,6 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let vc = IntroductionPageVC()
             window?.rootViewController = vc
         }
+        
+            
+        NotificationCenter.default.post(name: NSNotification.Name.init(rawValue: "LANGNOTIFICATION"), object: cache.integer(forKey: "lang") , userInfo: nil)
+            print("NotificationCenter LanguageVC \(String(describing: cache.integer(forKey: "lang")))")
+            
+        
+        
         window?.makeKeyAndVisible()
         if cache.bool(forKey: "isDark") {
             window?.overrideUserInterfaceStyle = .dark

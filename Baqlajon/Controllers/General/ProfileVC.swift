@@ -371,7 +371,12 @@ extension ProfileVC {
             if data["success"].boolValue {
                 let url = URL(string: API.imgBaseURL + data["data"]["image"].stringValue)
                 if let url = url {
-                    self.profileImage.sd_setImage(with: url)
+                    if cache.string(forKey: "PROFILE_IMAGE")! == "" {
+                        self.profileImage.image = UIImage(systemName: "person.circle")
+                    }else {
+                        self.profileImage.sd_setImage(with: url)
+                    }
+                    
                 }else {
                     self.profileImage.image = UIImage(named: "avatarImage")
                 }

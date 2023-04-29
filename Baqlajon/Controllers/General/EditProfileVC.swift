@@ -81,6 +81,7 @@ class EditProfileVC: UIViewController {
         t.font = .appFont(ofSize: 14,weight: .medium)
         t.textColor = .appColor(color: .black1)
         t.placeholder = "Phone Number"
+        t.inputView = UIView()
         return t
     }()
     lazy var changeNumberBtn:UIButton = {
@@ -120,6 +121,7 @@ class EditProfileVC: UIViewController {
         t.font = .appFont(ofSize: 16)
         t.textColor = .appColor(color: .black1)
         t.placeholder = "Gender"
+        t.inputView = UIPickerView()
         return t
     }()
     
@@ -170,7 +172,7 @@ class EditProfileVC: UIViewController {
         b.backgroundColor = .clear
         b.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         b.tintColor = .appColor(color: .gray2)
-        b.addTarget(.none, action: #selector(selectGenderTapped), for: .touchUpInside)
+        b.addTarget(.none, action: #selector(selectDateTapped), for: .touchUpInside)
         return b
     }()
     private lazy var dateStack:UIStackView = {
@@ -202,6 +204,7 @@ class EditProfileVC: UIViewController {
         t.textColor = .appColor(color: .black1)
         t.isSecureTextEntry = true
         t.placeholder = "Password"
+        t.inputView = UIView()
         return t
     }()
     lazy var changePassBtn:UIButton = {
@@ -317,8 +320,6 @@ class EditProfileVC: UIViewController {
     }
     @objc func changeDatePicker() {
         
-        print("datepicer date = ", datePicker.date)
-        
         dateTf.text = convertDateToString(datePicker.date)
         
     }
@@ -327,8 +328,6 @@ class EditProfileVC: UIViewController {
         let cancel = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelTapped))
         
         let done = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneTapped))
-        
-        
         
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
         
@@ -413,11 +412,9 @@ class EditProfileVC: UIViewController {
     }
     @objc func selectGenderTapped() {
         genderTf.becomeFirstResponder()
-        genderTf.inputView = UIPickerView()
-        
     }
     @objc func selectDateTapped() {
-        
+        dateTf.becomeFirstResponder()
     }
     @objc func changePassTapped() {
         let vc = ResetPasswordVC()
@@ -523,7 +520,7 @@ extension EditProfileVC{
                 passwordTf.text = data["data"]["password"].stringValue
                 cache.set(data["data"]["image"].stringValue, forKey: "PROFILE_IMAGE")
                 let data = try? Data(contentsOf:  URL(string: data["data"]["image"].stringValue)!)
-               
+                
                 if let imageData = data {
                     
                     self.profileImage.image = UIImage(data: imageData)
@@ -542,17 +539,19 @@ extension EditProfileVC{
                 nameTf.text = data["data"]["firstName"].stringValue
                 numberTf.text = data["data"]["phoneNumber"].stringValue
                 passwordTf.text = data["data"]["password"].stringValue
-                let url = URL(string: API.imgBaseURL + data["data"]["image"].stringValue)
+                let url = URL(string: API.imgBaseURL + cache.string(forKey: "PROFILE_IMAGE")!)
                 
                 if let url = url {
-                    self.profileImage.sd_setImage(with: url)
+                    if cache.string(forKey: "PROFILE_IMAGE")! == "" {
+                        self.profileImage.image = UIImage(systemName: "person.circle")
+                    }else {
+                        self.profileImage.sd_setImage(with: url)
+                    }
+                    
                 }else {
                     self.profileImage.image = UIImage(named: "avatarImage")
                 }
-                //                let data = try? Data(contentsOf: url)
-                //                if let imageData = data {
-                //                    self.profileImage.image = UIImage(data: imageData)
-                //                }
+                
             }else {
                 Alert.showAlert(title: data["message"].stringValue, message: data["message"].stringValue, vc: self)
             }
