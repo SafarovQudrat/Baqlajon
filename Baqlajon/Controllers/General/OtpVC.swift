@@ -24,6 +24,7 @@ class OtpVC: UIViewController {
         return lbl
     }()
     var isForgot = false
+    var isLogin = false
     //View for OTP textField
     let otpView: OTPFieldView = {
         let v = OTPFieldView()
@@ -66,6 +67,9 @@ class OtpVC: UIViewController {
     
     var timer:Timer?
     var time: Int = 59
+    var lastName:String = ""
+    var firstName:String = ""
+    var password:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,6 +132,8 @@ class OtpVC: UIViewController {
                     if data["success"].boolValue {
                         Alert.showAlert(title: "", message: "Phone number changed", vc: self)
                         self.navigationController?.popToRootViewController(animated: true)
+                    }else {
+                        Alert.showAlert(title: data["message"].stringValue, message: data["message"].stringValue, vc: self)
                     }
                 }
             }else if isForgot {
@@ -138,19 +144,34 @@ class OtpVC: UIViewController {
                         vc.number = number
                         vc.isForgot = isForgot
                         self.navigationController?.pushViewController(vc, animated: true)
+                    }else {
+                        Alert.showAlert(title: "", message: data.message, vc: self)
                     }
                 }
-            }else {
+            }else if isLogin {
                 checkOtp { data in
-                    Loader.stop()
-                    
                     if data.success {
                         cache.set(true, forKey: "isTabbar")
                         let vc = MainTabBarController()
                         vc.modalPresentationStyle = .fullScreen
                         self.present(vc, animated: true)
+                    }else {
+                        Alert.showAlert(title: "Error", message: data.message, vc: self)
+                    }
+                }
+            }else {
+                checkOtp { [self] data in
+                    Loader.stop()
+                    
+                    if data.success {
+                        signUpRegister { data in
+                            cache.set(true, forKey: "isTabbar")
+                            let vc = MainTabBarController()
+                            vc.modalPresentationStyle = .fullScreen
+                            self.present(vc, animated: true)
+                        }
                     } else {
-                        Alert.showAlert(title: data.message, message: data.message, vc: self)
+                        Alert.showAlert(title: "Error", message: data.message, vc: self)
                     }
                 }
             }
@@ -160,7 +181,7 @@ class OtpVC: UIViewController {
         }
         
         
-        
+      
     }
     //MARK: draving UI
     func uiSettings() {
@@ -234,6 +255,14 @@ extension OtpVC {
         }
     }
     
+    func signUpRegister( compilation: @escaping (LoginDM)->Void){
+        
+        API.register(lastName: lastName, firstName: firstName, number: number, password: password) { data in
+            compilation(data)
+            
+        }
+        
+    }
     
     
     

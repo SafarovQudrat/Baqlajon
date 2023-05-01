@@ -16,36 +16,43 @@ class CustomAlert: UIView {
         
         
         let backgroudView = CustomAlert(frame: UIScreen.main.bounds)
-        backgroudView.backgroundColor = .gray.withAlphaComponent(0.6)
+        backgroudView.backgroundColor = .black.withAlphaComponent(0.6)
         backgroudView.completion = completion
+        
+        let dismissBtn = UIButton()
+        dismissBtn.addTarget(.none, action: #selector(CustomAlert.cancelTapped), for: .touchUpInside)
+        backgroudView.addSubview(dismissBtn)
+        dismissBtn.snp.makeConstraints { make in
+            make.top.left.bottom.right.equalTo(0)
+        }
 
         // containerView
         let containerView = UIView()
 
-        containerView.backgroundColor = .white
+        containerView.backgroundColor = .appColor(color: .white)
         containerView.layer.cornerRadius = 10
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
         // titleLbl
         let titleLbl = UILabel()
-        titleLbl.font = .boldSystemFont(ofSize: 22)
+        titleLbl.font = .appFont(ofSize: 20,weight: .medium)
         titleLbl.text = title
         titleLbl.textAlignment = .center
-        titleLbl.textColor = .black
+        titleLbl.textColor = .appColor(color: .black1)
         
         // messageLbl
         let messLbl = UILabel()
         messLbl.text = message
-        messLbl.textColor = .black
+        messLbl.textColor = .appColor(color: .black1)
         messLbl.textAlignment = .center
-        messLbl.font = .systemFont(ofSize: 20)
+        messLbl.font = .appFont(ofSize: 18)
         messLbl.numberOfLines = 0
         messLbl.snp.contentCompressionResistanceVerticalPriority = .greatestFiniteMagnitude
         // okBtn
         let okBtn = UIButton()
         okBtn.backgroundColor = .systemBlue
         okBtn.setTitle("Ok", for: .normal)
-        okBtn.titleLabel?.font = .boldSystemFont(ofSize: 20)
+        okBtn.titleLabel?.font = .appFont(ofSize: 18,weight: .medium)
         okBtn.setTitleColor(.white, for: .normal)
         okBtn.addTarget(backgroudView, action: #selector(backgroudView.okTapped), for: .touchUpInside)
         okBtn.layer.cornerRadius = 10
@@ -54,7 +61,7 @@ class CustomAlert: UIView {
         let cancelBtn = UIButton()
         cancelBtn.backgroundColor = .systemGray
         cancelBtn.setTitle("Cancel", for: .normal)
-        cancelBtn.titleLabel?.font = .boldSystemFont(ofSize: 20)
+        cancelBtn.titleLabel?.font = .appFont(ofSize: 18,weight: .medium)
         cancelBtn.setTitleColor(.white, for: .normal)
         cancelBtn.addTarget(backgroudView, action: #selector(backgroudView.cancelTapped), for: .touchUpInside)
         cancelBtn.layer.cornerRadius = 10

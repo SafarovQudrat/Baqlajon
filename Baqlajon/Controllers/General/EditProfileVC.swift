@@ -328,10 +328,14 @@ class EditProfileVC: UIViewController {
         let cancel = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelTapped))
         
         let done = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneTapped))
+        var spaceView = UIBarButtonItem()
+        if #available(iOS 14.0, *) {
+             spaceView = UIBarButtonItem(systemItem: .flexibleSpace)
+        }
         
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
         
-        toolBar.items = [cancel,done]
+        toolBar.items = [cancel,spaceView,done]
         
         dateTf.inputAccessoryView = toolBar
         
@@ -433,7 +437,7 @@ class EditProfileVC: UIViewController {
         sendSignature { [self] data in
             guard let data = data  else {return}
             print("data iMage = ",data)
-            
+            cache.set(nameTf.text!, forKey: "USER_NAME")
             cache.set(data["data"].stringValue, forKey: "PROFILE_IMAGE")
             updateData(img: data["data"].stringValue)
         }

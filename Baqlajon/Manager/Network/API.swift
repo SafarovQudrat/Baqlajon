@@ -34,9 +34,10 @@ class API {
     static let getImageUrl: String = baseURL + "/public/uploads"
     static let updatePhone: String = baseURL + "/user/phone"
     static let startCourseUrl: String = baseURL + "myCourse/start/"
-    static let finishCourseUrl: String = baseURL + "video/finish/"
+    static let finishVideoUrl: String = baseURL + "video/finish/"
     static let allVideoUrl: String = baseURL + "video/"
     static let getByIDUrl: String = baseURL + "course/"
+    static let finishCourseUrl:String = baseURL + "myCourse/finish/"
 //    MARK: -functions
 //    register
     static func register(lastName:String,firstName:String,number:String, password:String, complation:@escaping (LoginDM)->Void) {
@@ -297,13 +298,27 @@ class API {
         }
         
     }
-//    Finish Course
-    static func finishCourse(id:String,complation:@escaping(LoginDM)->Void){
+    //   Finish Course
+        static func finishCourse(id:String, complation:@escaping(LoginDM)->Void){
+            let headers:HTTPHeaders = [
+                "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
+                "lang":lang ?? "en"
+            ]
+            
+            Net.sendRequest(to: finishCourseUrl + id, method: .get, headers: headers, param: nil) { data in
+                guard let data = data else {return}
+                let info = LoginDM(json: data)
+                complation(info)
+            }
+            
+        }
+//    Finish Video
+    static func finishVideo(id:String,complation:@escaping(LoginDM)->Void){
         let headers:HTTPHeaders = [
             "Authorization": "Bearer \(cache.string(forKey: "TOKEN") ?? "")",
             "lang":lang ?? "en"
         ]
-        Net.sendRequest(to: finishCourseUrl + id, method: .get, headers: headers, param: nil) { data in
+        Net.sendRequest(to: finishVideoUrl + id, method: .get, headers: headers, param: nil) { data in
             guard let data = data else {return}
             let info = LoginDM(json: data)
             complation(info)

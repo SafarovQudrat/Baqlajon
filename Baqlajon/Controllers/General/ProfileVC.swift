@@ -171,6 +171,7 @@ class ProfileVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(action), userInfo: nil, repeats: true)
+        self.profileImage.sd_setImage(with: URL(string: API.imgBaseURL + cache.string(forKey: "PROFILE_IMAGE")!))
     }
     
     @objc func action () {
@@ -262,13 +263,18 @@ class ProfileVC: UIViewController {
         ttableView.reloadData()
     }
     @objc func logOutTapped(){
-        cache.set(false, forKey: "isTabbar")
-        cache.set("", forKey: "PROFILE_IMAGE")
-        cache.set(true, forKey: "isDark")
-        cache.set(false, forKey: "changeNumber")
-        let window = UIApplication.keyWindow
-        let vc = UINavigationController(rootViewController: LoginVC())
-        window?.rootViewController = vc
+        CustomAlert.showAlert(title: "Log Out", message: "Siz rostdan ham chiqishni xohlaysizmi") { isLogOut in
+            if isLogOut {
+                cache.set(false, forKey: "isTabbar")
+                cache.set("", forKey: "PROFILE_IMAGE")
+                cache.set(true, forKey: "isDark")
+                cache.set(false, forKey: "changeNumber")
+                let window = UIApplication.keyWindow
+                let vc = UINavigationController(rootViewController: LoginVC())
+                window?.rootViewController = vc
+            }
+        }
+        
     }
     @objc func refresh(_ sender: AnyObject) {
         // Code to refresh table view

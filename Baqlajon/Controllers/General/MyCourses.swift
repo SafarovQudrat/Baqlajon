@@ -446,6 +446,15 @@ extension MyCourses{
     //    REFRESH func
     @objc func refresh() {
         Loader.start()
+        allBtn.layer.borderWidth = 0
+        allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
+        allBtn.setTitleColor(.white, for: .normal)
+        onBtn.setTitleColor(.systemGray2, for: .normal)
+        compBtn.setTitleColor(.systemGray2, for: .normal)
+        compBtn.backgroundColor = .clear
+        compBtn.layer.borderWidth = 1
+        onBtn.backgroundColor = .clear
+        onBtn.layer.borderWidth = 1
         getCourses()
         tableView.reloadData()
         refreshControl.endRefreshing()

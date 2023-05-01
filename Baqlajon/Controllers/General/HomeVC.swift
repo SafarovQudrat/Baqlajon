@@ -334,9 +334,31 @@ class HomeVC: UIViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
+        self.imageP.sd_setImage(with: URL(string: API.imgBaseURL + cache.string(forKey: "PROFILE_IMAGE")!))
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(action), userInfo: nil, repeats: true)
         backProfileV.isHidden = false
     }
+    
+//    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+//        if motion == .motionShake {
+//            let appDelegate = UIApplication.shared.windows
+//            UINotificationFeedbackGenerator().notificationOccurred(.success)
+//            if cache.bool(forKey: "isDark") {
+//                for i in appDelegate {
+//                    i.overrideUserInterfaceStyle = .dark
+//                }
+//                cache.set(false, forKey: "isDark")
+//
+//
+//            } else {
+//                for i in appDelegate {
+//                    i.overrideUserInterfaceStyle = .light
+//                }
+//                cache.set(true, forKey: "isDark")
+//            }
+//        }
+//    }
+    
     
     @objc func action () {
         if time <= 0 {
@@ -445,6 +467,15 @@ class HomeVC: UIViewController {
     
     //    REFRESH func
     @objc func refresh() {
+        allBtn.layer.borderWidth = 0
+        allBtn.backgroundColor = #colorLiteral(red: 0.0493427515, green: 0.5654236078, blue: 0.937621057, alpha: 1)
+        allBtn.setTitleColor(.white, for: .normal)
+        onBtn.setTitleColor(.appColor(color: .gray2), for: .normal)
+        compBtn.setTitleColor(.appColor(color: .gray2), for: .normal)
+        onBtn.backgroundColor = .clear
+        onBtn.layer.borderWidth = 1
+        compBtn.backgroundColor = .clear
+        compBtn.layer.borderWidth = 1
         getMySelf()
         getCourse(exUrl: "")
         collectionView.reloadData()

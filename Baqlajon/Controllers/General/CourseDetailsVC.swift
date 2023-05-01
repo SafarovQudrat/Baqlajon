@@ -1,4 +1,5 @@
 import UIKit
+import PKHUD
 
 class CourseDetailsVC: UIViewController {
     
@@ -85,8 +86,10 @@ class CourseDetailsVC: UIViewController {
             self.navigationItem.backButtonTitle = ""
                 vc.videoID = cache.string(forKey: "VIDEO_ID")!
             navigationController?.pushViewController(vc, animated: true)
+            startLessonAndWriteReviewButton.setTitle("Finish Course", for: .normal)
         } else if startLessonAndWriteReviewButton.titleLabel?.text == "Finish Course" {
             finishCourse()
+            startLessonAndWriteReviewButton.setTitle("Write a review", for: .normal)
         }else {
             let vc = ReviewVC()
             navigationItem.backButtonTitle = ""
@@ -294,6 +297,7 @@ extension CourseDetailsVC {
         API.finishCourse(id: course) { data in
             Loader.stop()
             if data.success {
+                HUD.flash(.success, delay: 1.0)
                 
             }else {
                 Alert.showAlert(title: data.message, message: data.message, vc: self)

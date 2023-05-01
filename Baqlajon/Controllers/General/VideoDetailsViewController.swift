@@ -9,6 +9,7 @@ import UIKit
 import AVKit
 import AVFoundation
 import SnapKit
+import PKHUD
 class VideoDetailsViewController: UIViewController {
     
     private lazy var btn:UIButton = {
@@ -160,10 +161,10 @@ extension VideoDetailsViewController {
 //MARK: - API
 extension VideoDetailsViewController {
     func finishVideo(){
-        API.finishCourse(id: videoID) { data in
+        API.finishVideo(id: videoID) { data in
             Loader.stop()
             if data.success {
-                Alert.showAlert(title: data.message, message: data.message, vc: self)
+                HUD.flash(.success, delay: 1.0)
             }else {
                 Alert.showAlert(title: data.message, message: data.message, vc: self)
             }

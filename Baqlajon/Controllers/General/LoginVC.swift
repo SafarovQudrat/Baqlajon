@@ -280,6 +280,7 @@ extension LoginVC {
                     
                     self.sendOtp()
                     vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
+                    vc.isLogin = true
                     self.navigationController?.pushViewController(vc, animated: true)
                 } else {
                     Alert.showAlert(title: data.message, message: data.message, vc: self)

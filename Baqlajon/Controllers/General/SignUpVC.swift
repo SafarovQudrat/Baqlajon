@@ -323,21 +323,9 @@ extension SignUpVC {
     
     
     @objc func signUpTapped() {
-        let vc = OtpVC()
-        vc.isForgot = false
         Loader.start()
         if Reachability.isConnectedToNetwork() {
-            signUpRegister { data in
-                Loader.stop()
-                if data.success {
-                    self.navigationController?.pushViewController(vc, animated: true)
-                    self.sendOtp()
-                    vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
-                } else {
-                    Alert.showAlert(title: data.message, message: data.message, vc: self)
-                }
-            }
-            
+      sendOtp()
         }else {
             Alert.showAlert(title: "No Internet", message: "No internet connection", vc: self)
             Loader.stop()
@@ -347,17 +335,22 @@ extension SignUpVC {
 }
 
 extension SignUpVC {
-    func signUpRegister( compilation: @escaping (LoginDM)->Void){
-        
-        API.register(lastName: self.surnameTF.text!, firstName: self.nameTF.text!, number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!, password: passwordTF.text!) { data in
-            compilation(data)
-            
-        }
-        
-    }
+
     func sendOtp(){
-        API.sendOtp(number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!) { data in
-            //
+        let vc = OtpVC()
+        API.registerOtp(number: (phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!) { [self] data in
+            Loader.stop()
+            if data.success {
+                vc.isForgot = false
+                vc.number = (self.phoneNumberTFView.text?.replacingOccurrences(of: " ", with: ""))!
+                vc.firstName = nameTF.text!
+                vc.lastName = surnameTF.text!
+                vc.password = passwordTF.text!
+                vc.navigationItem.backButtonTitle = ""
+                self.navigationController?.pushViewController(vc, animated: true)
+            }else {
+                Alert.showAlert(title: "Error", message: data.message, vc: self)
+            }
         }
     }
 }
